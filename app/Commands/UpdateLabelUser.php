@@ -1,0 +1,38 @@
+<?php namespace App\Commands;
+
+use App\Commands\Command;
+
+use Illuminate\Contracts\Bus\SelfHandling;
+
+class UpdateLabelUser extends Command implements SelfHandling {
+
+	/**
+	 * Create a new command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct($edit, $label ,LabelWorker $interface)
+	{
+        $this->label      = $label;
+        $this->interface  = $interface;
+        $this->edit       = $edit;
+	}
+
+	/**
+	 * Execute the command.
+	 *
+	 * @return void
+	 */
+	public function handle()
+	{
+        $user = \Auth::user();
+
+        if(!empty($this->edit))
+        {
+            $this->interface->updateLabels($this->edit, $user->id);
+        }
+
+        $this->interface->createLabels($this->label, $user->id);
+	}
+
+}

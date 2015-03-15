@@ -1,0 +1,345 @@
+.lasted-riiinglink{
+    line-height: 30px;
+}
+
+.lasted-riiinglink .media-heading{
+    margin-bottom: 0;
+}
+
+.panel-label{
+    margin-bottom: 2px;
+}
+
+.panel-label p{
+    margin-bottom: 0;
+}
+
+.panel-small{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 0;
+}
+
+.panel-small .panel-body{
+    padding: 3px;
+}
+
+.panel-label .panel-body{
+    padding: 5px;
+    min-height: 30px;
+}
+
+.panel-group{
+    margin-bottom: 5px;
+    margin-top: 20px;
+    border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+.panel-group .panel-body{
+    padding: 5px;
+}
+
+.partage .chat li .chat-body{
+    padding-bottom: 10px;
+}
+
+.partage .chat li .chat-msg {
+    margin-bottom: 5px;
+}
+
+.chat-msg .panel-small .panel-body {
+    padding:4px 5px;
+}
+
+.chat-msg-item{
+    clear: both;
+    margin: 2px 0;
+}
+
+.chat-msg-item:last-child{
+    margin-bottom: 0;
+}
+
+.chat-msg-title{
+    display: block;
+    float: left;
+    width: 33%;
+    padding: 4px 8px;
+}
+
+.chat-msg-content{
+    display: block;
+    float: left;
+    width: 59%;
+    padding: 4px 8px;
+    min-height: 28px;
+}
+
+.chat-msg-switch{
+    display: block;
+    float: left;
+    cursor: pointer;
+    width: 8%;
+    text-align: right;
+    line-height: 28px;
+    min-height: 28px;
+}
+
+.chat-msg-switch label{
+    margin-bottom: 0;
+}
+
+.linked .chat-msg-content{
+    background: #f2f2f2;
+}
+
+.bg-grey{
+    background: #e7e7e7;
+}
+
+.linked.used .chat-msg-content{
+    background: #fff;
+}
+
+.riiinglink{
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.isEditable .used {
+    background: #f5f5f5;
+}
+
+.panel .list-group .list-group-item:first-child {
+    border-top: 1px solid #f1f2f3;
+}
+
+.element-item{
+    line-height: 50px;
+}
+
+.element-item span img{
+    margin-right: 10px;
+}
+
+.panel .list-group{
+    margin-bottom: 11px;
+}
+
+.isEditable .linked:not(.used) {
+    background: #ffe9e9;
+}
+
+.isEditable .linked:not(.used):hover {
+    background: #ffcfcf;
+}
+
+.finishRiiinglink{
+    display: none;
+}
+
+.btn-riiinglink{
+    padding: 15px 8px 0 0;
+}
+
+fieldset .form-group {
+    margin-bottom: 5px;
+}
+
+.partage .panel-body{
+    padding: 10px 5px;
+}
+
+.chat.row .left{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.chat-header h4{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.chat-header , .chat-header h5{
+    margin-bottom:0;
+}
+
+.chat-img{
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.chat{
+    margin: 0px;
+    padding: 0;
+}
+
+.chat li {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.chat li .chat-msg{
+    padding: 5px;
+}
+
+.chat .link{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.link .chat-header button{
+    margin-top: 5px;
+}
+
+.link .chat-img{
+    margin-right: 10px;
+}
+
+.navbar-nav > li > a {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.navbar-form {
+    margin: 0;
+}
+
+.navbar-form .form-control {
+    margin-top: 5px;
+}
+
+.navbar-nav a{
+    cursor: pointer;
+}
+
+
+.uploadBtn{
+    margin-top: 10px;
+}
+
+.ui-front{
+    z-index: 1000;
+}
+
+#partage{
+    margin-top: 10px;
+}
+
+#partage h4{
+    margin-bottom: 15px;
+}
+
+.app .panel.panel-grey{
+    border:none;
+}
+
+.app .panel.panel-grey .panel-heading{
+    background: #f2f2f2;
+}
+
+form .nav-tabs > li > a,
+form .nav-tabs > li.active > a {
+    padding: 5px 15px;
+    font-size: 12px;
+}
+
+form .tab-content {
+    border: none ;
+    padding:20px 0 0 0;
+}
+
+form .nav-tabs > li {
+    padding: 0;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav > li {
+    display: block;
+    position: relative;
+}
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+.nav > li {
+    display: block;
+    position: relative;
+}
+* {
+    box-sizing: border-box;
+}
+* {
+    box-sizing: border-box;
+}
+.nav {
+    list-style: outside none none;
+}
+.nav {
+    list-style: outside none none;
+}
+body {
+    color: #585f69;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 1.52857;
+}
+body {
+    color: #333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+html {
+    direction: ltr;
+}
+html {
+    font-size: 10px;
+}
+html {
+    font-family: sans-serif;
+}
+html {
+    font-size: 10px;
+}
+
+.c-checkbox, .c-radio{
+    width: 100%;
+    display: block;
+    min-height: 40px;
+    margin-bottom: 5px;
+}
+.c-checkbox p{
+    left: 35px;
+    position: absolute;
+    top: 0;
+    font-size: 13px;
+}
+
+.clear{
+    clear: both;
+}
+
+.app .alert > p{
+    font-size: 12px;
+    line-height: 14px;
+}
+
+/* ---- isotope ---- */
+
+.isotope {
+
+}
+
+/* clear fix */
+.isotope:after {
+    content: '';
+    display: block;
+    clear: both;
+}
