@@ -62,7 +62,8 @@
 
                             <?php
                                 $email = base64_encode($invite->email);
-                                $url   = \URL::route('invite', array('token' => $invite->token, 'ref' => $email));
+                                //$url   = \URL::route('invite', array('token' => $invite->token, 'ref' => $email));
+                                $url   = url('invite?token='.$invite->token.'&ref='.$email.'');
                             ?>
 
                             <a style="text-align:center;font-size:13px;font-family:arial,sans-serif;font-weight: normal;

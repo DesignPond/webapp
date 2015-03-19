@@ -1,8 +1,12 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-use Riiingme\User\Repo\UserInterface;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class SearchController extends \BaseController {
+use App\Riiingme\User\Repo\UserInterface;
+
+class SearchController extends Controller {
 
 	protected $user;
 
@@ -11,10 +15,10 @@ class SearchController extends \BaseController {
 		$this->user = $user;
 	}
 
-	public function search()
+	public function search(Request $request)
 	{
 
-		$results = $this->user->search(Input::get('term'));
+		$results = $this->user->search($request->input('term'));
 
 		return $this->convertAutocomplete($results);
 

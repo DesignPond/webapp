@@ -1,8 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
 use App\Riiingme\Invite\Repo\InviteInterface;
 use App\Riiingme\User\Repo\UserInterface;
 
+use Request;
 use App\Http\Requests\TokenRequest;
 use App\Http\Requests\InviteRequest;
 use App\Http\Requests\SendInviteRequest;
@@ -15,7 +19,7 @@ class DispatchController extends Controller {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
 	/**
@@ -39,9 +43,21 @@ class DispatchController extends Controller {
      */
     public function invite(InviteRequest $request)
     {
-        $this->dispatch(new ConfirmInvite($request->token, $request->ref));
 
-        return redirect('/user')->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
+        $result = $this->dispatch(new ConfirmInvite($request->token, $request->ref));
+
+        if($result['status'] == 'confirmed')
+        {
+            return redirect('/user')->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
+        }
+        elseif($result['status'] == 'register')
+        {
+            return redirect('auth/register')->with(array('email' => $result['email'], 'invite_id' => $result['invite_id'] ));
+        }
+        else{
+            return redirect('/')->with(array('error' => 'Problem avec le jeton'));
+        }
+
 
     }
 

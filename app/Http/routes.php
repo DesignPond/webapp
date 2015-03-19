@@ -11,7 +11,7 @@ Route::get('about', array('as' => 'about', 'uses' => 'WelcomeController@about'))
 Route::get('contact', array('as' => 'contact', 'uses' => 'WelcomeController@contact'));
 
 Route::get('activation', array('as' => 'activation', 'uses' => 'DispatchController@activation'));
-Route::get('invite/{token}/{ref}', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
+Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
 Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
 // Ajax
 Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
@@ -27,6 +27,9 @@ Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@me
 Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
 
 Route::resource('user', 'UserController');
+
+// Search
+Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));
 
 Route::controllers([
 	'auth'     => 'Auth\AuthController',

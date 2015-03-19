@@ -3,6 +3,8 @@
 use App\Commands\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Http\Request;
+use App\Http\Requests\UpdateUserRequest;
 
 class UpdateUser extends Command implements SelfHandling {
 

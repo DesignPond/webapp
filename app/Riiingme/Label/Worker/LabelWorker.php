@@ -91,14 +91,12 @@ class LabelWorker{
 
     public function labelForUser($partage,$user){
 
-        $metas = [];
-
-        $partage = unserialize($partage);
-
-        if(!empty($partage)){
-            foreach($partage as $groupe => $types){
-                foreach($types as $type){
-
+        if(!empty($partage))
+        {
+            foreach($partage as $groupe => $types)
+            {
+                foreach($types as $type)
+                {
                     $label = $this->label->findByUserGroupeType($user,$groupe,$type);
 
                     if(!$label->isEmpty())
@@ -109,7 +107,7 @@ class LabelWorker{
             }
         }
 
-        return $metas;
+        return ($metas ? $metas : []);
     }
 
 }

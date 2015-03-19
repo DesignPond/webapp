@@ -89,16 +89,25 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
     public function create(array $data){
 
-        $riiinglink = $this->riiinglink->create([
+        $hosted = $this->riiinglink->create([
             'host_id'    => $data['host_id'],
             'invited_id' => $data['invited_id']
         ]);
 
-        if(!$riiinglink){
+        if(!$hosted){
             return false;
         }
 
-        return $riiinglink;
+        $invited = $this->riiinglink->create([
+            'host_id'    => $data['invited_id'],
+            'invited_id' => $data['host_id']
+        ]);
+
+        if(!$invited){
+            return false;
+        }
+
+        return [$hosted,$invited];
     }
 
     public function delete($id){

@@ -1,10 +1,13 @@
 <?php namespace App\Commands;
 
 use App\Commands\Command;
-
+use App\Commands\CreateRiiinglink;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 
 class ConfirmInvite extends Command implements SelfHandling {
+
+    use DispatchesCommands;
 
     protected $invite;
     protected $user;
@@ -25,6 +28,7 @@ class ConfirmInvite extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
+        
         // validate token
         $invite = $this->invite->validate($this->token);
         $invite = (!$invite->isEmpty() ? $invite->first() : null);
@@ -39,19 +43,22 @@ class ConfirmInvite extends Command implements SelfHandling {
         // Token checks out
         if($invite && $user)
         {
-            // User is registred
-            $this->execute('Riiingme\Command\CreateRiiinglinkCommand', array('invite' => $invite, 'user' => $user));
+            // User is registred create riiinglink
+            $this->dispatch(new CreateRiiinglink($user,$invite));
 
-            return Redirect::to('user');
+            // Log in the user
+            \Auth::login($user);
+
+            return ['status' => 'confirmed'];
         }
         elseif($invite && !$user)
         {
             // It's not a user yet, redirect to register form with from invitation id and email used
-            return Redirect::to('register')->with(array('email' => $email, 'invite_id' => $invite->id ));
+            return ['status' => 'register','email' => $email, 'invite_id' => $invite->id];
         }
         else
         {
-            return Redirect::to('/')->with(array('error' => 'Problem avec le jeton'));
+            return ['status' => 'error'];
         }
 
     }
