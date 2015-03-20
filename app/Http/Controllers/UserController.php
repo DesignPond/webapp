@@ -142,6 +142,9 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
+        echo '<pre>';
+        print_r($request->all());
+        echo '</pre>';exit;
 
         $info  = (isset($request->info)  ? $request->info  : []);
         $edit  = (isset($request->edit)  ? $request->edit  : []);
