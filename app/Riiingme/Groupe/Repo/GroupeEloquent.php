@@ -9,9 +9,20 @@ class GroupeEloquent implements GroupeInterface {
         $this->groupe = $groupe;
     }
 
-    public function getAll(){
+    public function getAll($type = null){
 
-        return $this->groupe->with(array('groupe_type'))->get();
+        $groupe = $this->groupe->with(['groupe_type']);
+
+        if($type){
+
+            $groupe->whereHas('user_types', function($q) use($type)
+            {
+                $q->where('user_type_id', '=', $type);
+
+            });
+        }
+
+        return $groupe->get();
     }
 
     public function find($id){

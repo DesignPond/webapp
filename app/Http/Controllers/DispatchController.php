@@ -58,9 +58,7 @@ class DispatchController extends Controller {
             return redirect('/')->with(array('error' => 'Problem avec le jeton'));
         }
 
-
     }
-
 
     /**
      * Activate newsletter abo

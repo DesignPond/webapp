@@ -30,8 +30,6 @@ class UserController extends Controller {
 	public function __construct(UserInterface $user, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActivityWorker $activity)
 	{
 
-        $this->middleware('auth');
-
 		$this->user       = $user;
 		$this->riiinglink = $riiinglink;
 		$this->meta       = $meta;
@@ -44,14 +42,16 @@ class UserController extends Controller {
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
 
-		$groupes     = $this->groupe->getAll()->lists('titre','id');
-        $status      = $this->groupe->getAll()->lists('status','id');
-		$groupe_type = $this->groupe->getAll()->toArray();
-		$types       = $this->type->getAll()->lists('titre','id');
+		$groupes       = $this->groupe->getAll()->lists('titre','id');
+        $status        = $this->groupe->getAll()->lists('status','id');
+		$groupe_type   = $this->groupe->getAll($this->auth->user_type)->toArray();
+		$types         = $this->type->getAll()->lists('titre','id');
+        $groupes_user  = $this->groupe->getAll($this->auth->user_type)->lists('titre','id');
 
 		\View::share('groupes', $groupes);
         \View::share('status', $status);
 		\View::share('groupe_type', $groupe_type);
+        \View::share('groupes_user', $groupes_user);
 		\View::share('types', $types);
 
 	}
@@ -89,42 +89,6 @@ class UserController extends Controller {
 		return view('dashboard.partage')->with(array('invites' => $invites));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /user
-     * @param  $request
-	 * @return Response
-	 */
-	public function store(Request $request)
-	{
-
-		$invite_id = Request::input('invite_id', '');
-
-		$data = [
-			'email'      => Request::input('email'),
-			'first_name' => Request::input('first_name', null),
-			'last_name'  => Request::input('last_name',null),
-            'company'    => Request::input('company',null),
-            'user_type'  => Request::input('user_type'),
-			'invite_id'  => $invite_id,
-			'password'   => Request::input('password'),
-			'password_confirmation' => Request::input('password_confirmation')
-		];
-
-		$user = $this->execute('Riiingme\Command\CreateUserCommand',$data);
-
-		if(isset($invite_id) && !empty($invite_id))
-		{
-			// find invite
-			$invite = $this->invite->find($invite_id);
-			$invite = ($invite ? $invite->first() : null);
-
-			$this->execute('Riiingme\Command\CreateRiiinglinkCommand', array('invite' => $invite, 'user' => $user));
-
-		}
-
-		return redirect('/user')->with(array('status' => 'success', 'message' => '<strong>Merci pour votre inscription!</strong>'));
-	}
 
 	/**
 	 * Display the specified resource.
@@ -167,10 +131,28 @@ class UserController extends Controller {
 
 		$labels    = $this->riiinglink->convertToGroupLabel();
 
-		//return view('dashboard.test')->with(array('ringlink' => $ringlink, 'metas' => $metas , 'labels' => $labels));
         return view('dashboard.link')->with(array('ringlink' => $ringlink, 'metas' => $metas , 'labels' => $labels));
 	}
 
+    /**
+     * Update labels
+     * PUT /user/labels
+     *
+     * @return Response
+     */
+    public function labels(UpdateUserRequest $request)
+    {
+
+        $info  = (isset($request->info)  ? $request->info  : []);
+        $edit  = (isset($request->edit)  ? $request->edit  : []);
+        $label = (isset($request->label) ? $request->label : []);
+
+        $this->dispatch(new UpdateUser($info,$this->label));
+        $this->dispatch(new UpdateLabelUser($edit,$label,$this->label));
+
+        return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
+
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -195,26 +177,6 @@ class UserController extends Controller {
 		$labels = $this->label->labelByGroupeType($id);
 
 		return view('dashboard.edit')->with(array('labels' => $labels));
-	}
-
-	/**
-	 * Update labels
-	 * PUT /user/labels
-	 *
-	 * @return Response
-	 */
-	public function labels(UpdateUserRequest $request)
-	{
-
-        $info  = (isset($request->info)  ? $request->info  : []);
-        $edit  = (isset($request->edit)  ? $request->edit  : []);
-        $label = (isset($request->label) ? $request->label : []);
-
-        $this->dispatch(new UpdateUser($info,$this->label));
-        $this->dispatch(new UpdateLabelUser($edit,$label,$this->label));
-
-		return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
-
 	}
 
 	/**

@@ -2,6 +2,6 @@
 
 interface GroupeInterface {
 
-    public function getAll();
+    public function getAll($type = null);
     public function find($id);
 }

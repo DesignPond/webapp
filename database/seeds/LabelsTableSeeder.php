@@ -2,7 +2,7 @@
 
 use Faker\Factory as Faker;
 
-class LabelsTableSeeder extends Seeder {
+class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 
 	public function run()
 	{
@@ -73,7 +73,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($info as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas1[$index],
 				'user_id'   => 1,
 				'type_id'   => $index,
@@ -83,7 +83,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($prive as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas1[$index],
 				'user_id'   => 1,
 				'type_id'   => $index,
@@ -93,7 +93,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($prof as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas2[$index],
 				'user_id'   => 1,
 				'type_id'   => $index,
@@ -103,7 +103,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($info as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas3[$index],
 				'user_id'   => 2,
 				'type_id'   => $index,
@@ -113,7 +113,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($prive as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas3[$index],
 				'user_id'   => 2,
 				'type_id'   => $index,
@@ -123,7 +123,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($info as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas4[$index],
 				'user_id'   => 3,
 				'type_id'   => $index,
@@ -133,7 +133,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($prive as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas4[$index],
 				'user_id'   => 3,
 				'type_id'   => $index,
@@ -144,7 +144,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($info as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas5[$index],
 				'user_id'   => 4,
 				'type_id'   => $index,
@@ -154,7 +154,7 @@ class LabelsTableSeeder extends Seeder {
 
 		foreach($prive as $index)
 		{
-			Riiingme\Label\Entities\Label::create([
+            App\Riiingme\Label\Entities\Label::create([
 				'label'     => $metas5[$index],
 				'user_id'   => 4,
 				'type_id'   => $index,
@@ -183,7 +183,8 @@ class LabelsTableSeeder extends Seeder {
 			foreach($info as $index){
 
 				$ext = ($index == 13 ? '.jpg' : '');
-				Riiingme\Label\Entities\Label::create([
+
+                App\Riiingme\Label\Entities\Label::create([
 					'label'     => $faker->$types[$index].$ext,
 					'user_id'   => $x,
 					'type_id'   => $index,
@@ -192,7 +193,7 @@ class LabelsTableSeeder extends Seeder {
 			}
 
 			foreach($prive as $index){
-				Riiingme\Label\Entities\Label::create([
+                App\Riiingme\Label\Entities\Label::create([
 					'label'     => $faker->$types[$index],
 					'user_id'   => $x,
 					'type_id'   => $index,
@@ -202,7 +203,7 @@ class LabelsTableSeeder extends Seeder {
 
 			foreach($prof as $index)
 			{
-				Riiingme\Label\Entities\Label::create([
+                App\Riiingme\Label\Entities\Label::create([
 					'label'     => $faker->$types[$index],
 					'user_id'   => $x,
 					'type_id'   => $index,

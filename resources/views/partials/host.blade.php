@@ -25,17 +25,18 @@
 
                                 @foreach($labels as $groupe_id => $groupe)
 
-                                    @if(isset($host[$groupe_id]))
+                                    @if(isset($host[$groupe_id]) && isset($groupes_user[$groupe_id]))
                                         <div class="chat-msg">
                                             <div class="panel bg-info panel-small">
                                                 <div class="panel-body text-center">
-                                                    {{ $groupes[$groupe_id] }}
+                                                    {{ $groupes_user[$groupe_id] }}
                                                 </div>
                                             </div>
 
                                             @foreach($groupe as $label)
                                                 @include('partials.label-host')
                                             @endforeach
+
                                         </div>
                                     @endif
                                 @endforeach

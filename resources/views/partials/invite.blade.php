@@ -27,16 +27,18 @@
                     </div>
 
                     @foreach($invited as $group => $groupe_label)
-                        <div class="chat-msg">
-                            <div class="panel bg-info panel-small">
-                                <div class="panel-body text-center">
-                                    {{ $groupes[$group] }}
+                        @if(isset($groupes[$group]))
+                            <div class="chat-msg">
+                                <div class="panel bg-info panel-small">
+                                    <div class="panel-body text-center">
+                                        {{ $groupes[$group] }}
+                                    </div>
                                 </div>
+                                @foreach($groupe_label as $type_id => $label)
+                                    @include('partials.label-invite')
+                                @endforeach
                             </div>
-                            @foreach($groupe_label as $type_id => $label)
-                                @include('partials.label-invite')
-                            @endforeach
-                        </div>
+                        @endif
                     @endforeach
 
                 </li>

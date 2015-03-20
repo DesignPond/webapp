@@ -5,6 +5,9 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Http\Request;
+use App\Commands\CreateRiiinglink;
+
 class AuthController extends Controller {
 
 	/*
@@ -67,6 +70,42 @@ class AuthController extends Controller {
     protected function getFailedLoginMesssage()
     {
         return 'Les identifiants email / mot de passe sont incorrects !';
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->registrar->validator($request->all());
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException( $request, $validator );
+        }
+
+        $user = $this->registrar->create($request->all());
+
+        \Auth::login($user);
+
+        $invite_id = $request->input('invite_id');
+
+        if(isset($invite_id) && !empty($invite_id))
+        {
+            // find invite
+            $invite = $this->invite->find($invite_id);
+
+            // update with new user id
+            $invite->update(['invited_id' => $user->id]);
+
+            // Create riiinglink between users
+            $this->dispatch(new CreateRiiinglink($user,$invite));
+        }
+
+        return redirect($this->redirectPath());
     }
 
 }

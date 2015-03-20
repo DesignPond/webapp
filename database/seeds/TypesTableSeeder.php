@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Seeder;
-
-class TypesTableSeeder extends Seeder {
+class TypesTableSeeder extends \Illuminate\Database\Seeder  {
 
 	public function run()
 	{

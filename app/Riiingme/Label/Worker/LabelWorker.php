@@ -91,6 +91,8 @@ class LabelWorker{
 
     public function labelForUser($partage,$user){
 
+        $metas = [];
+
         if(!empty($partage))
         {
             foreach($partage as $groupe => $types)
@@ -107,7 +109,7 @@ class LabelWorker{
             }
         }
 
-        return ($metas ? $metas : []);
+        return (!empty($metas) ? $metas : []);
     }
 
 }

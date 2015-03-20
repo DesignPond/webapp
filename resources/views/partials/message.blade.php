@@ -1,6 +1,7 @@
 @if( $errors->has() || Session::has('status'))
 
-    <div class="alert alert-dismissable alert-{{ Session::get('status') }}">
+    <?php $class = ($errors->has() ? 'warning' : Session::get('status')); ?>
+    <div class="alert alert-dismissable alert-{{ $class }}">
 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 

@@ -3,12 +3,13 @@
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
 
-class GroupeTypeTableSeeder extends Seeder {
+class GroupeTypeTableSeeder extends \Illuminate\Database\Seeder  {
 
 	public function run()
 	{
 		DB::table('groupe_type')->truncate();
 
+        //  $table->enum('user_type', array('private', 'company'));
 
 		$groupe_type = array(
 			array( 'groupe_id' => 1, 'type_id' => 1 ),

@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('RiiinglinksTableSeeder');
         $this->call('MetasTableSeeder');
 		$this->call('GroupeTypeTableSeeder');
-
+        $this->call('UserTypesGroupesTableSeeder');
+        $this->call('UserTypesTableSeeder');
 	}
 
 }

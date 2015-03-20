@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('first_name')->nullable();
 			$table->string('last_name')->nullable();
             $table->string('company')->nullable();
-            $table->enum('user_type', array('private', 'company'));
+            $table->integer('user_type');
 			$table->string('password', 60);
 			$table->timestamp('activated_at')->nullable();
 			$table->string('activation_token', 100)->nullable();

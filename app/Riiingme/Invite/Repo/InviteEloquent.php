@@ -57,6 +57,22 @@ class InviteEloquent implements InviteInterface {
         return $invite;
     }
 
+    public function update(array $data){
+
+        $invite = $this->invite->findOrFail($data['id']);
+
+        if( ! $invite )
+        {
+            return false;
+        }
+
+        $invite->invited_id = $data['invited_id'];
+
+        $invite->save();
+
+        return $invite;
+    }
+
     public function delete($id){
 
         $invite = $this->invite->find($id);

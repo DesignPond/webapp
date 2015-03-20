@@ -18,6 +18,7 @@ class CreateInvitesTable extends Migration {
 			$table->string('email');
 			$table->string('token');
 			$table->integer('user_id');
+            $table->integer('invited_id')->nullable();
 			$table->text('partage_host');
 			$table->text('partage_invited');
 			$table->timestamps();
