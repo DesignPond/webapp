@@ -36,6 +36,9 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+        if ($e instanceof \App\Exceptions\UpdateFailException)
+            return \Redirect::back()->with(array('status' => 'danger' , 'message' => 'Veuillez indiquer les informations pour l\'adresse temporaire'))->withInput();
+
 		return parent::render($request, $e);
 	}
 

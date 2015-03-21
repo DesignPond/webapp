@@ -10,6 +10,7 @@ class HelperTest extends TestCase {
 
         $this->helper = new \App\Riiingme\Helpers\Helper;
     }
+
 	/**
 	 * A basic functional test example.
 	 *
@@ -24,10 +25,30 @@ class HelperTest extends TestCase {
             6 => []
         ];
 
-        $actual  = $this->helper->isNonEmpty($array);
+        $actual  = $this->helper->isNotEmpty($array);
         $expect  = false;
 
         $this->assertEquals($expect, $actual);
 	}
+
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testIsNotEmpty()
+    {
+        $array = [
+            3 => [1 => 'item'],
+            4 => [],
+            5 => [],
+            6 => []
+        ];
+
+        $actual  = $this->helper->isNotEmpty($array);
+        $expect  = true;
+
+        $this->assertEquals($expect, $actual);
+    }
 
 }

@@ -141,7 +141,7 @@
                                                 ?>
                                                 <input value="{{ $label }}" type="text" name="edit[{{$id}}]" class="form-control {{$class}}">
                                             @else
-                                                <input value="" type="text" name="label[{{ $types['pivot']['groupe_id'] }}][{{ $types['pivot']['type_id'] }}][]" class="form-control {{$class}}">
+                                                <input value="" type="text" name="label[{{ $types['pivot']['groupe_id'] }}][{{ $types['pivot']['type_id'] }}]" class="form-control {{$class}}">
                                             @endif
                                         </div>
                                     </div>

@@ -145,15 +145,16 @@ class UserController extends Controller {
     public function labels(UpdateUserRequest $request)
     {
         $four = $request->all();
-        $four = $four['label'][4];
+        //$four = $four['label'][4];
 
         echo '<pre>';
-        print_r($this->helper->arrayNonEmpty($four));
+        print_r($four);
+        //print_r($this->helper->isNotEmpty($four));
         echo '</pre>';
         exit;
 
         $this->dispatch(new UpdateUser($request->info));
-        $this->dispatch(new UpdateLabelUser($request->edit,$request->label));
+        $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
 
         return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
 

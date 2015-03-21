@@ -90,19 +90,20 @@ class Helper{
         return $non_empty_items;
     }
 
-    public function isNonEmpty($input) {
+    public function isNotEmpty($input) {
 
         if(is_array($input))
         {
-            foreach ($input as $value) {
-                // Ignore empty cells
-                if(!empty($value)) {
+            foreach ($input as $value)
+            {
+                $value = array_filter($value);
+                if(!empty($value))
+                {
                    return true;
                 }
             }
         }
 
-        // Finally return the array without empty items
         return false;
     }
 

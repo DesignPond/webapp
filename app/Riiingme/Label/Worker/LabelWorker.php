@@ -9,12 +9,14 @@ class LabelWorker{
     protected $label;
     protected $groupe;
     protected $type;
+    protected $helper;
 
     public function __construct(LabelInterface $label, GroupeInterface $groupe, TypeInterface $type)
     {
         $this->label  = $label;
         $this->groupe = $groupe;
         $this->type   = $type;
+        $this->helper = new \App\Riiingme\Helpers\Helper;
     }
 
     public function labelByGroupeType($id){
@@ -35,22 +37,16 @@ class LabelWorker{
 
     }
 
-    public function convertLabels($inputs,$user_id){
+    public function convertLabels($inputs, $user_id, $groupe, $date = null){
 
         $data = [];
 
         if(!empty($inputs))
         {
-            foreach($inputs as $groupe_id => $groupe)
+            foreach($inputs as $type_id => $text)
             {
-                foreach($groupe as $type_id => $label)
-                {
-                    foreach($label as $text)
-                    {
-                        if(!empty($text) && $text != ''){
-                            $data[] = ['label' => $text, 'user_id' => $user_id, 'groupe_id' => $groupe_id, 'type_id' => $type_id];
-                        }
-                    }
+                if(!empty($text) && $text != ''){
+                    $data[] = ['label' => $text, 'user_id' => $user_id, 'groupe_id' => $groupe, 'type_id' => $type_id];
                 }
             }
         }
@@ -59,19 +55,13 @@ class LabelWorker{
 
     }
 
-    public function createLabels($inputs,$user_id){
+    public function createLabels($inputs, $user_id, $groupe, $date = null){
 
-        if(isset($inputs) && !empty($inputs))
+        $labels = $this->convertLabels($inputs, $user_id, $groupe, $date);
+
+        foreach($labels as $label)
         {
-            $labels = $this->convertLabels($inputs,$user_id);
-
-            if(!empty($labels))
-            {
-                foreach($labels as $label)
-                {
-                    $this->label->create($label);
-                }
-            }
+            $this->label->create($label);
         }
 
         return true;
@@ -86,7 +76,6 @@ class LabelWorker{
                 $this->label->update(array('id' => $id, 'label' => $label));
             }
         }
-
     }
 
     public function labelForUser($partage,$user){
