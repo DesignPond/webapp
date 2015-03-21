@@ -70,7 +70,41 @@ class Helper{
 
     }
 
+    public function arrayNonEmpty($input) {
+        // If it is an element, then just return it
+        if (!is_array($input)) {
+            return $input;
+        }
 
+        $non_empty_items = array();
+
+        foreach ($input as $key => $value) {
+        // Ignore empty cells
+            if($value) {
+        // Use recursion to evaluate cells
+                $non_empty_items[$key] = $this->arrayNonEmpty($value);
+            }
+        }
+
+        // Finally return the array without empty items
+        return $non_empty_items;
+    }
+
+    public function isNonEmpty($input) {
+
+        if(is_array($input))
+        {
+            foreach ($input as $value) {
+                // Ignore empty cells
+                if(!empty($value)) {
+                   return true;
+                }
+            }
+        }
+
+        // Finally return the array without empty items
+        return false;
+    }
 
 }
 

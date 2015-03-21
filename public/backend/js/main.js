@@ -57,27 +57,12 @@
         language: 'fr'
     });
 
-    $('input[name="daterange_4"]').daterangepicker({
+    $('.daterange').daterangepicker({
         format: 'YYYY-MM-DD',
-        separator: '|',
+        separator: ' | ',
         locale: {
             applyLabel: 'Appliquer',
-            cancelLabel: 'Clear',
-            fromLabel: 'De',
-            toLabel: 'A',
-            customRangeLabel: 'Custom',
-            daysOfWeek: ['Dim', 'Lu', 'Ma', 'Me', 'Je', 'Ve','Sa'],
-            monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-            firstDay: 1
-        }
-    });
-
-    $('input[name="daterange_5"]').daterangepicker({
-        format: 'YYYY-MM-DD',
-        separator: '|',
-        locale: {
-            applyLabel: 'Appliquer',
-            cancelLabel: 'Clear',
+            cancelLabel: 'Annuler',
             fromLabel: 'De',
             toLabel: 'A',
             customRangeLabel: 'Custom',

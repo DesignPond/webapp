@@ -4,7 +4,6 @@ use App\Commands\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserRequest;
 
 class UpdateUser extends Command implements SelfHandling {
 
@@ -26,8 +25,18 @@ class UpdateUser extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
+        $validator = \Validator::make(
+            $this->infos , [
+                'first_name' => 'required_if:user_type,private',
+                'last_name'  => 'required_if:user_type,private',
+                'company'    => 'required_if:user_type,company'
+            ]
+        );
 
-        $this->validator->validate($this->infos);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator->errors());
+        }
 
         $user = $this->user->find($this->infos['id']);
 
@@ -37,7 +46,7 @@ class UpdateUser extends Command implements SelfHandling {
 
             if(!$used->isEmpty())
             {
-                throw new FormValidationException('Validation failed', array('error' => 'Cet E-mail est déjà utilisé'));
+                return redirect()->back()->with( array('status' => 'error' , 'message' => 'Cet email est déjà utilisé') );
             }
             else
             {
@@ -46,9 +55,6 @@ class UpdateUser extends Command implements SelfHandling {
         }
 
         $user = $this->user->update($this->infos);
-
-        return $user;
-
 
     }
 

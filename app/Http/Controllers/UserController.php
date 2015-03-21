@@ -26,10 +26,12 @@ class UserController extends Controller {
 	protected $activity;
 	protected $invite;
     protected $auth;
+    protected $helper;
 
 	public function __construct(UserInterface $user, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActivityWorker $activity)
 	{
 
+        $this->helper     = new \App\Riiingme\Helpers\Helper;
 		$this->user       = $user;
 		$this->riiinglink = $riiinglink;
 		$this->meta       = $meta;
@@ -72,7 +74,7 @@ class UserController extends Controller {
 			$ringlinks = array_slice($ringlinks['data'],0,6);
 		}
 
-		return view('dashboard.index')->with(array('ringlinks' => $ringlinks, 'activity' => $activity));
+		return view('backend.index')->with(array('ringlinks' => $ringlinks, 'activity' => $activity));
 
 	}
 
@@ -86,7 +88,7 @@ class UserController extends Controller {
 	{
 		$invites = $this->activity->getInvites($this->auth->id);
 
-		return view('dashboard.partage')->with(array('invites' => $invites));
+		return view('backend.partage')->with(array('invites' => $invites));
 	}
 
 
@@ -102,7 +104,7 @@ class UserController extends Controller {
 
 		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
-		return view('dashboard.show')->with(array('ringlink' => $ringlink, 'items' => $items));
+		return view('backend.show')->with(array('ringlink' => $ringlink, 'items' => $items));
 	}
 
 	/**
@@ -131,7 +133,7 @@ class UserController extends Controller {
 
 		$labels    = $this->riiinglink->convertToGroupLabel();
 
-        return view('dashboard.link')->with(array('ringlink' => $ringlink, 'metas' => $metas , 'labels' => $labels));
+        return view('backend.link')->with(array('ringlink' => $ringlink, 'metas' => $metas , 'labels' => $labels));
 	}
 
     /**
@@ -142,16 +144,16 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
+        $four = $request->all();
+        $four = $four['label'][4];
+
         echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';exit;
+        print_r($this->helper->arrayNonEmpty($four));
+        echo '</pre>';
+        exit;
 
-        $info  = (isset($request->info)  ? $request->info  : []);
-        $edit  = (isset($request->edit)  ? $request->edit  : []);
-        $label = (isset($request->label) ? $request->label : []);
-
-        $this->dispatch(new UpdateUser($info,$this->label));
-        $this->dispatch(new UpdateLabelUser($edit,$label,$this->label));
+        $this->dispatch(new UpdateUser($request->info));
+        $this->dispatch(new UpdateLabelUser($request->edit,$request->label));
 
         return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
 
@@ -165,7 +167,7 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		return view('dashboard.create');
+		return view('backend.create');
 	}
 
 	/**
@@ -179,7 +181,7 @@ class UserController extends Controller {
 	{
 		$labels = $this->label->labelByGroupeType($id);
 
-		return view('dashboard.edit')->with(array('labels' => $labels));
+		return view('backend.edit')->with(array('labels' => $labels));
 	}
 
 	/**

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth.layouts.master')
 @section('content')
 
     {{ Form::open(array('method'=> 'POST', 'action' => 'RemindersController@postReset')) }}

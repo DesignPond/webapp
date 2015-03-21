@@ -10,7 +10,7 @@
 
 if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript requires jQuery'); }
 
-var App = angular.module('singular', ['ngImgCrop','ngRoute', 'ngAnimate', 'flow', 'ngStorage', 'ngCookies', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'cfp.loadingBar', 'ui.utils'] , function($interpolateProvider)
+var App = angular.module('singular', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCookies', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'cfp.loadingBar', 'ui.utils'] , function($interpolateProvider)
 {
   $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 
@@ -131,8 +131,8 @@ App.controller('AppController',
  * App routes and resources configuration
  =========================================================*/
 
-App.config(['flowFactoryProvider','$stateProvider','$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'appDependencies',
-    function (flowFactoryProvider,$stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, appDependencies) {
+App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'appDependencies',
+    function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, appDependencies) {
       'use strict';
 
       App.controller = $controllerProvider.register;
@@ -155,16 +155,6 @@ App.config(['flowFactoryProvider','$stateProvider','$urlRouterProvider', '$contr
       // default route to dashboard
       $urlRouterProvider.otherwise('');
 
-      var url  = location.protocol + "//" + location.host+"/";
-
-      flowFactoryProvider.defaults = {
-          target: url + 'upload',
-          testChunks:false,
-          query:{_token: $("meta[name='token']").attr('content')},
-          singleFile: true,
-          permanentErrors: [404, 500, 501],
-          simultaneousUploads: 4
-      };
       // 
       // App Routes
       // -----------------------------------   
@@ -177,7 +167,6 @@ App.config(['flowFactoryProvider','$stateProvider','$urlRouterProvider', '$contr
         .state('app.dashboard', {
             url: '/dashboard'
         });
-
 
         // Change here your views base path
         function basepath(uri) {
@@ -230,28 +219,6 @@ App.config(['flowFactoryProvider','$stateProvider','$urlRouterProvider', '$contr
 
 }]).controller('NullController', function() {});
 
-App.controller("CropController",['$scope', function($scope){
-
-    $scope.myImage = '';
-    $scope.myCroppedImage = '';
-
-    var handleFileSelect = function(evt) {
-
-        var file   = evt.currentTarget.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function (evt) {
-            $scope.$apply(function($scope){
-                $scope.myImage = evt.target.result;
-            });
-        };
-
-        reader.readAsDataURL(file);
-    };
-
-    angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-
-}]);
 
 /**=========================================================
  * Module: constants.js

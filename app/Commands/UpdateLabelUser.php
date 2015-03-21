@@ -11,10 +11,10 @@ class UpdateLabelUser extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function __construct($edit, $label ,LabelWorker $interface)
+	public function __construct($edit, $label)
 	{
         $this->label      = $label;
-        $this->interface  = $interface;
+        $this->interface  = \App::make('App\Riiingme\Label\Worker\LabelWorker');
         $this->edit       = $edit;
 	}
 
