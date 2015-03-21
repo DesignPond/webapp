@@ -82,4 +82,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('App\Riiingme\Riiinglink\Entities\Riiinglink', 'users', 'host_id', 'invited_id');
     }
 
+    /**
+     * Group belongs to user
+     *
+     * @var query
+     */
+    public function user_groups(){
+
+        return $this->belongsToMany('App\Riiingme\Groupe\Entities\Groupe', 'user_groups', 'user_id', 'groupe_id')->withPivot('start_at','end_at');
+    }
+
 }

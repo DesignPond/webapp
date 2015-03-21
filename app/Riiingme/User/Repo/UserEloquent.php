@@ -21,7 +21,7 @@ class UserEloquent implements UserInterface {
 
     public function find($id){
 
-        return $this->user->with(array('labels'))->findOrFail($id);
+        return $this->user->with(array('labels','user_groups'))->findOrFail($id);
     }
 
     public function search($term){
@@ -95,7 +95,7 @@ class UserEloquent implements UserInterface {
 
         $user = $this->user->find($id);
 
-        return $user->delete();
+        return $user->delete($id);
 
     }
 

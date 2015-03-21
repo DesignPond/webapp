@@ -17,8 +17,6 @@ class CreateGroupesTable extends Migration {
 			$table->increments('id');
             $table->string('titre');
             $table->enum('status', array('principal', 'temporaire'));
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
 		});
 	}
 

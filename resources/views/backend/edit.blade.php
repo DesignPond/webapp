@@ -3,7 +3,11 @@
 
     <?php $helper = new \App\Riiingme\Helpers\Helper(); ?>
 
-
+        <?php
+          echo '<pre>';
+          print_r($user->user_groups->toArray());
+          echo '</pre>';
+        ?>
         <div class="row">
             <div class="col-md-12">
 
