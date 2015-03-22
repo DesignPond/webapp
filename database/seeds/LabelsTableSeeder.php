@@ -69,7 +69,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 		$metas5 = array('','libelulle867@bluewin.ch', '', 'Vendeuse','',
 			'Rue du collège 34','2735','Bévilard','Suisse',
 			'032 492 21 20','079 345 06 23',
-			'1984-05-20','','celine.jpg');
+			'1984-05-20','','');
 
 		foreach($info as $index)
 		{
@@ -121,6 +121,10 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 			]);
 		}
 
+        /*
+         * For testing labels metas
+         * */
+
 		foreach($info as $index)
 		{
             App\Riiingme\Label\Entities\Label::create([
@@ -131,15 +135,30 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 			]);
 		}
 
-		foreach($prive as $index)
-		{
-            App\Riiingme\Label\Entities\Label::create([
-				'label'     => $metas4[$index],
-				'user_id'   => 3,
-				'type_id'   => $index,
-				'groupe_id' => 2
-			]);
-		}
+        App\Riiingme\Label\Entities\Label::create([
+            'label'     => 'label 1',
+            'user_id'   => 3,
+            'type_id'   => 4,
+            'groupe_id' => 2
+        ]);
+
+        App\Riiingme\Label\Entities\Label::create([
+            'label'     => 'label 2',
+            'user_id'   => 3,
+            'type_id'   => 5,
+            'groupe_id' => 2
+        ]);
+
+        App\Riiingme\Label\Entities\Label::create([
+            'label'     => 'label 3',
+            'user_id'   => 3,
+            'type_id'   => 6,
+            'groupe_id' => 2
+        ]);
+
+        /*
+         * End test
+         * */
 
 
 		foreach($info as $index)

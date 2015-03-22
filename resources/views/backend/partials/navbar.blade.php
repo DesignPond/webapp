@@ -31,7 +31,7 @@
                     <li class="<?php echo (Request::is('user/'.$user->id.'/edit') ? 'active' : '' ); ?>">
                         <a title="Dashboard" href="{{ url('user/'.$user->id.'/edit') }}">
                             <em class="sidebar-item-icon icon-box"></em>
-                            <span class="ng-scope ng-binding">Données</span>
+                            <span class="ng-scope ng-binding">Mes données</span>
                         </a>
                     </li>
                     <li class="<?php echo (Request::is('user/'.$user->id) ? 'active' : '' ); ?>">

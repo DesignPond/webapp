@@ -12,7 +12,13 @@ class LabelEloquent implements LabelInterface {
 
     public function find($id){
 
-        return $this->label->with(array('type','groupe'))->find($id);
+        $label = $this->label->where('id','=',$id)->with(array('type','groupe'));
+
+        if(!$label){
+            return false;
+        }
+
+        return $label->first();
     }
 
     public function findByUser($user){
@@ -23,6 +29,18 @@ class LabelEloquent implements LabelInterface {
     public function findByUserGroupeType($user,$groupe,$type){
 
         return $this->label->where('user_id','=',$user)->where('groupe_id','=',$groupe)->where('type_id','=',$type)->get();
+    }
+
+    public function findPhotoByUser($user){
+
+        $photo  = $this->label->where('user_id','=',$user)->where('type_id','=',13)->get();
+
+        if(!$photo)
+        {
+            return false;
+        }
+
+        return $photo->first();
     }
 
     public function findInfosByUser($user){

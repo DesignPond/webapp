@@ -4,10 +4,14 @@
     <?php $helper = new \App\Riiingme\Helpers\Helper(); ?>
 
         <?php
-          echo '<pre>';
-          print_r($user->user_groups->toArray());
-          echo '</pre>';
+            if(isset($user->user_groups)){
+                foreach($user->user_groups as $user_group){
+                    $groupe_dates[$user_group->id]['start'] = $user_group->start;
+                    $groupe_dates[$user_group->id]['end']   = $user_group->end;
+                }
+            }
         ?>
+
         <div class="row">
             <div class="col-md-12">
 
@@ -34,7 +38,7 @@
                                     $image    = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['label'];
                                     $image_id = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['id'];
                                     ?>
-                                    <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" value="">
+                                    <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" value="{{$image}}">
                                 @else
                                     <?php $image = 'avatar.jpg';?>
                                     <input type="hidden" name="label[1][13][]" id="flow-img">
@@ -101,26 +105,26 @@
 
                         @foreach($groupe_type as $groupe)
 
-                            <?php $temp = ($status[$groupe['id']] == 'temporaire' ? true : false); ?>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @if($temp)
-                                        <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $groupe['id'] }}" aria-expanded="false" aria-controls="collapseExample">
-                                            Indiquer une {{ $groupe['titre'] }} temporaire
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
+                            <?php
+                                $temp = ($status[$groupe['id']] == 'temporaire' ? true : false);
+                                $daterange = '';
+                                $exist     = false;
+                                if(isset($groupe_dates[$groupe['id']]))
+                                {
+                                    $daterange = $groupe_dates[$groupe['id']]['start'].' | '.$groupe_dates[$groupe['id']]['end'];
+                                    $exist     = true;
+                                }
+                            ?>
 
                             @if($temp)
-                                <fieldset class="row collapse" id="collapse_{{ $groupe['id'] }}">
-                                    <h4 class="title-adresse">{{ $groupe['titre'] }}</h4>
+
+                               <fieldset class="row accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $groupe['id'] }}">
+                                    <h4 class="title-adresse">{{ $groupe['titre'] }} <small class="text-danger">Temporaire</small></h4>
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" for="exampleInputEmail1">Pour la période</label>
                                             <div class="col-sm-8">
-                                                <input value="" type="text" name="date[{{ $groupe['id'] }}]" class="form-control daterange">
+                                                <input value="{{ $daterange }}" type="text" name="date[{{ $groupe['id'] }}]" class="form-control daterange">
                                             </div>
                                         </div>
                             @else
@@ -151,12 +155,19 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="col-md-4">
+                                @if(!$temp && !$exist)
+                                    <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $groupe['id'] + 2 }}" aria-expanded="false" aria-controls="collapseExample">
+                                       Indiquer une <span>{{ $groupe['titre'] }}</span> temporaire
+                                    </a>
+                                @endif
+                            </div>
 
                             </fieldset>
                         @endforeach
 
                     </div>
-                    <div class="panel-footer"><button class="btn btn-primary" type="submit">Envoyer</button></div>
+                    <div class="panel-footer"><button class="btn btn-primary" type="submit">Enregistrer</button></div>
                 </div>
                 {!! Form::close() !!}
 

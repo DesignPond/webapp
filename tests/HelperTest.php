@@ -51,4 +51,19 @@ class HelperTest extends TestCase {
         $this->assertEquals($expect, $actual);
     }
 
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testConvertDateRange()
+    {
+        $date = '2015-03-22 | 2015-05-31';
+
+        $actual  = $this->helper->convertDateRange($date);
+        $expect  = ['start_at' => '2015-03-22', 'end_at' => '2015-05-31'];
+
+        $this->assertEquals($expect, $actual);
+    }
+
 }

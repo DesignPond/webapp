@@ -18,6 +18,9 @@ class LabelWorker extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+        \Artisan::call('migrate:refresh');
+        \Artisan::call('db:seed');
+
     }
 
 	/**

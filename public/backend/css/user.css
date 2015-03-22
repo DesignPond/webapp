@@ -364,8 +364,20 @@ html {
 }
 
 .btn-collapse{
-    width: 100%;
-    margin-bottom: 20px;
+    display: block;
+    height: auto;
+    line-height: 20px;
+    min-height: 40px;
+    text-align: center;
+    width: 80%;
+    font-size: 13px;
+    white-space: normal;
+}
+
+.btn-collapse span{
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 fieldset {

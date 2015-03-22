@@ -11,7 +11,7 @@ print_r($host);
 echo '</pre>';
 
 echo '<pre>';
-print_r($host);
+print_r($invited);
 echo '</pre>';*/
 
 ?>

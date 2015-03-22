@@ -3,6 +3,7 @@
 use App\Riiingme\Label\Repo\LabelInterface;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
+use App\Riiingme\User\Repo\UserInterface;
 
 class LabelWorker{
 
@@ -10,12 +11,14 @@ class LabelWorker{
     protected $groupe;
     protected $type;
     protected $helper;
+    protected $user;
 
-    public function __construct(LabelInterface $label, GroupeInterface $groupe, TypeInterface $type)
+    public function __construct(UserInterface $user, LabelInterface $label, GroupeInterface $groupe, TypeInterface $type)
     {
         $this->label  = $label;
         $this->groupe = $groupe;
         $this->type   = $type;
+        $this->user   = $user;
         $this->helper = new \App\Riiingme\Helpers\Helper;
     }
 
@@ -37,7 +40,7 @@ class LabelWorker{
 
     }
 
-    public function convertLabels($inputs, $user_id, $groupe, $date = null){
+    public function convertLabels($inputs, $user_id, $groupe){
 
         $data = [];
 
@@ -45,7 +48,8 @@ class LabelWorker{
         {
             foreach($inputs as $type_id => $text)
             {
-                if(!empty($text) && $text != ''){
+                if(!empty($text) && $text != '')
+                {
                     $data[] = ['label' => $text, 'user_id' => $user_id, 'groupe_id' => $groupe, 'type_id' => $type_id];
                 }
             }
@@ -57,7 +61,15 @@ class LabelWorker{
 
     public function createLabels($inputs, $user_id, $groupe, $date = null){
 
-        $labels = $this->convertLabels($inputs, $user_id, $groupe, $date);
+        $labels = $this->convertLabels($inputs, $user_id, $groupe);
+
+        if($date)
+        {
+            $user = $this->user->find($user_id);
+            $daterange = $this->helper->convertDateRange($date);
+            
+            $user->user_groups()->sync([$groupe => $daterange]);
+        }
 
         foreach($labels as $label)
         {
@@ -67,7 +79,20 @@ class LabelWorker{
         return true;
     }
 
-    public function updateLabels($label){
+    public function updateLabels($label,$user_id,$date){
+
+        if($date)
+        {
+            $user = $this->user->find($user_id);
+            $date = array_filter($date);
+
+            foreach($date as $groupe => $range)
+            {
+                $daterange = $this->helper->convertDateRange($range);
+
+                $user->user_groups()->sync([$groupe => $daterange]);
+            }
+        }
 
         if(!empty($label))
         {

@@ -11,6 +11,19 @@ class Groupe extends Model{
      */
     protected $fillable = array('titre', 'status');
 
+
+    public function getStartAttribute()
+    {
+        $date = \Carbon\Carbon::parse($this->pivot->start_at)->toDateString();
+        return $date;
+    }
+
+    public function getEndAttribute()
+    {
+        $date = \Carbon\Carbon::parse($this->pivot->end_at)->toDateString();
+        return $date;
+    }
+
     /**
      * types belongs to groupes
      */

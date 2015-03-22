@@ -84,7 +84,14 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
      */
     public function findByHostAndInvited($invited_id,$host_id){
 
-        return $this->riiinglink->where('host_id','=',$invited_id)->where('invited_id','=',$host_id)->with(array('labels'))->get()->first();
+        $riiinglink = $this->riiinglink->where('host_id','=',$invited_id)->where('invited_id','=',$host_id)->with(array('labels'))->get();
+
+        if(!$riiinglink)
+        {
+            return false;
+        }
+
+        return $riiinglink->first();
     }
 
     public function create(array $data){

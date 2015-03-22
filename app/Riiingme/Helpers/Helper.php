@@ -107,6 +107,14 @@ class Helper{
         return false;
     }
 
+    public function convertDateRange($date){
+
+        $dates =  array_map('trim', explode('|', $date));
+
+        return ['start_at' => $dates[0], 'end_at' => $dates[1]];
+
+    }
+
 }
 
 

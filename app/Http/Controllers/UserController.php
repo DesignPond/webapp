@@ -144,14 +144,14 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-        $four = $request->all();
+       // $four = $request->all();
         //$four = $four['label'][4];
 
-        echo '<pre>';
+/*        echo '<pre>';
         print_r($four);
         //print_r($this->helper->isNotEmpty($four));
         echo '</pre>';
-        exit;
+        exit;*/
 
         $this->dispatch(new UpdateUser($request->info));
         $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));

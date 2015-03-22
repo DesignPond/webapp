@@ -19,18 +19,6 @@ class Meta extends Model{
     protected $fillable = array('riiinglink_id', 'label_id', 'labels');
 
     /**
-     * Validation rules
-     */
-    protected static $rules = array(
-    );
-
-    /**
-     * Validation messages
-     */
-    protected static $messages = array(
-    );
-
-    /**
      * Metas belongs to one label
      *
      * @var query

@@ -50,7 +50,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getNameAttribute()
     {
-
         if(isset($this->company) && !empty($this->company))
         {
             return $this->company;
@@ -59,7 +58,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         {
             return $this->first_name.' '.$this->last_name;
         }
-
     }
 
     /**

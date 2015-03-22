@@ -8,9 +8,15 @@ use League\Fractal;
 class RiiinglinkTransformer extends Fractal\TransformerAbstract
 {
 
+    protected $user;
+    protected $link;
+    protected $label;
+
     public function __construct()
     {
-        $this->user = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->link  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+        $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
     }
 
     /**
@@ -35,9 +41,14 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         ];
     }
 
+    public function getUser($user_id)
+    {
+        return $this->user->find($user_id);
+    }
+
     public function getName($user_id)
     {
-        $user = $this->user->find($user_id);
+        $user = $this->getUser($user_id);
 
         return (isset($user->company) && !empty($user->company) ? $user->company : $user->first_name.' '.$user->last_name );
 
@@ -52,9 +63,9 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
     public function getPhoto($user_id)
     {
-        $photo  = Label::where('user_id','=',$user_id)->where('type_id','=',13)->get();
+        $photo  = $this->label->findPhotoByUser($user_id);
 
-        return (isset($photo[0]) ? $photo[0]->label : 'avatar.jpg');
+        return (isset($photo) && !empty($photo->label) ? $photo->label : 'avatar.jpg');
     }
 
     public function getInvited($riiinglink)
@@ -62,7 +73,8 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         $host_id    = $riiinglink->host_id;
         $invited_id = $riiinglink->invited_id;
 
-        return Riiinglink::where('host_id','=',$invited_id)->where('invited_id','=',$host_id)->get();
+        return $this->link->findByHostAndInvited($invited_id,$host_id);
+
     }
 
     public function getHostLabels($riiinglink){
@@ -81,7 +93,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         $link = $this->getInvited($riiinglink);
 
-        if(!$link->isEmpty()){
+        if($link){
 
             $link = $link->first();
 
@@ -95,11 +107,11 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
     public function getLabelItem($id){
 
-        $label =  \App\Riiingme\Label\Entities\Label::where('id','=',$id)->get();
+        $label = $this->label->find($id);
 
-        if(!$label->isEmpty()){
+        if( $label && !empty($label->label)){
 
-            return $label->first()->label;
+            return $label->label;
         }
 
         return '';
