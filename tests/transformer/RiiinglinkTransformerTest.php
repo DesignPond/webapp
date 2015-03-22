@@ -10,6 +10,7 @@ class RiiinglinkTransformerTest extends TestCase {
     protected $label;
     protected $link;
     protected $link2;
+    protected $link3;
 
     public function setUp()
     {
@@ -21,6 +22,7 @@ class RiiinglinkTransformerTest extends TestCase {
         $this->label       = \App::make('App\Riiingme\Label\Repo\LabelInterface');
         $this->link        = $this->riiinglink->find(1);
         $this->link2       = $this->riiinglink->find(5);
+        $this->link3       = $this->riiinglink->find(2);
     }
 
     public function tearDown()
@@ -32,11 +34,16 @@ class RiiinglinkTransformerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testBasicExample()
+	public function testTransform()
 	{
-        $this->riiinglink->id = 1;
+        $riiinglink = $this->transformer->transform($this->link2->first());
 
-        $this->assertEquals(1, $this->riiinglink->id);
+        $id      = $riiinglink['id'];
+        $invited = $riiinglink['invited_id'];
+
+        $this->assertEquals(5, $id);
+        $this->assertEquals(1, $invited);
+
 	}
 
     public function testGetName()
@@ -86,6 +93,32 @@ class RiiinglinkTransformerTest extends TestCase {
         $this->assertEquals($expected, $labels);
     }
 
+    public function testGetInvitedLabels()
+    {
+
+        $expected = [
+            1 => [
+                13 => 'cindy.jpg'
+            ],
+            2 => [
+                4 => '2520',
+                5 => 'La Neuveville',
+                6 => 'Suisse'
+            ]
+        ];
+
+        $labels = $this->transformer->getInvitedLabels($this->link2->first());
+
+        $this->assertEquals($expected, $labels);
+    }
+
+    public function testGetInvitedRiinglink()
+    {
+        $riiinglink = $this->transformer->getInvited($this->link2->first());
+
+        $this->assertEquals(2, $riiinglink->id);
+
+    }
 
     public function testLabel()
     {
@@ -93,4 +126,5 @@ class RiiinglinkTransformerTest extends TestCase {
 
         $this->assertEquals('cyril.jpg', $label);
     }
+
 }

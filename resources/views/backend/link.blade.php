@@ -4,16 +4,6 @@
 <?php
     $host    = $ringlink['label'];
     $invited = $ringlink['invited_labels'];
-
-/*
-echo '<pre>';
-print_r($host);
-echo '</pre>';
-
-echo '<pre>';
-print_r($invited);
-echo '</pre>';*/
-
 ?>
 
 <div class="row">
@@ -39,10 +29,10 @@ echo '</pre>';*/
 
 <div class="row">
     <div class="col-md-6 col-xs-12 partage">
-        @include('backend.partials.host')
+        @include('backend.partials.invite')
     </div>
     <div class="col-md-6 col-xs-12 partage">
-        @include('backend.partials.invite')
+        @include('backend.partials.host')
     </div>
 </div>
 

@@ -21,10 +21,26 @@ class MetasTableSeeder extends \Illuminate\Database\Seeder  {
             'labels'        => serialize($user1_labels)
         ]);
 
+        /*
+         * Test
+         * */
+        $test_labels = [
+            1 => [ 13 => 1 ] ,
+            2 => [
+                4 => 4,
+                5 => 5,
+                6 => 6
+            ]
+        ];
+
         App\Riiingme\Meta\Entities\Meta::create([
             'riiinglink_id' => 2,
-            'labels'        => serialize($user1_labels)
+            'labels'        => serialize($test_labels)
         ]);
+
+        /*
+         * Test
+         * */
 
 		$user_2 = App\Riiingme\Label\Entities\Label::where('user_id','=',2)->get();
 

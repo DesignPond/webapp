@@ -7,7 +7,7 @@
                 <!-- START sidebar buttons-->
                 <div class="sidebar-buttons">
                     <div class="">
-                        <img class="mb center-block img-circle img-responsive thumb64" alt="" src="{{ asset('users/'.$user->user_photo) }}">
+                        <img id="userPhoto" class="mb center-block img-circle img-responsive thumb64" alt="" src="{{ asset('users/'.$user->user_photo) }}">
                         <div class="text-center">
                             <h4 class="text-bold m0 ng-binding">{{ $user->name }}</h4>
                         </div>
@@ -34,7 +34,7 @@
                             <span class="ng-scope ng-binding">Mes données</span>
                         </a>
                     </li>
-                    <li class="<?php echo (Request::is('user/'.$user->id) ? 'active' : '' ); ?>">
+                    <li class="<?php echo ( Request::is('user/'.$user->id) ||  Request::is('user/link/*') ? 'active' : '' ); ?>">
                         <a title="Components" href="{{ url('/user/'.$user->id) }}">
                             <em class="sidebar-item-icon icon-book"></em>
                             <span class="ng-scope ng-binding">Contacts</span>

@@ -29,7 +29,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
     {
         return [
             'id'             => (int) $riiinglink->id,
-            'invited_id'     => $riiinglink->invited_id ,
+            'invited_id'     => (int) $riiinglink->invited_id ,
             'host_photo'     => $this->getPhoto($riiinglink->host_id),
             'host_name'      => $this->getName($riiinglink->host_id),
             'host_email'     => $this->getEmail($riiinglink->host_id),
@@ -93,10 +93,8 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         $link = $this->getInvited($riiinglink);
 
-        if($link){
-
-            $link = $link->first();
-
+        if($link)
+        {
             $data = unserialize($link->usermetas->labels);
 
             return $this->getLabels($data);

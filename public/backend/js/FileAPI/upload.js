@@ -18,8 +18,8 @@ $('#userpic').fileapi({
         var file = uiEvt.file;
         $("#flow-img").val(file.name);
         var path = url + 'users/' + file.name;
-        $("#userpic").css({ "background-image" : '' });
-        $("#userpic").css({ "background-image" : 'url("' + path + '")' });
+        $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '")' });
+        $("#userPhoto").attr("src",path);
 
         console.log(path);
     },
