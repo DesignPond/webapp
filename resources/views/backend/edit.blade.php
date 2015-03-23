@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                {!! Form::open(array( 'url' => 'user/labels' , 'class' => 'form-horizontal')) !!}
+                {!! Form::open(array( 'url' => 'user/labels' , 'class' => 'form-horizontal form-edit')) !!}
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -63,11 +63,11 @@
                                 </div>
 
                             </div>
+
                         </fieldset>
 
-                        <h4>Informations</h4>
-
-                        <fieldset class="row">
+                        <fieldset class="row border">
+                            <h4>Informations</h4>
                             <div class="col-md-8">
                                 @if($user->user_type == '1')
                                     <div class="form-group">
@@ -101,6 +101,7 @@
                                 <input type="hidden" name="info[id]" value="{{ $user->id }}">
                                 <input type="hidden" name="info[user_type]" value="{{ $user->user_type }}">
                             </div>
+                            <button class="btn btn-primary btn-sm btn-save" type="submit">Enregistrer</button>
                         </fieldset>
 
                         @foreach($groupe_type as $groupe)
@@ -118,7 +119,7 @@
 
                             @if($temp)
 
-                               <fieldset class="row accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $groupe['id'] }}">
+                               <fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $groupe['id'] }}">
                                     <h4 class="title-adresse">{{ $groupe['titre'] }} <small class="text-danger">Temporaire</small></h4>
                                     <div class="col-md-8">
                                         <div class="form-group">
@@ -128,7 +129,7 @@
                                             </div>
                                         </div>
                             @else
-                                <fieldset class="row">
+                                <fieldset class="row border">
                                     <h4 class="title-adresse">{{ $groupe['titre'] }}</h4>
                                     <div class="col-md-8">
                             @endif
@@ -162,12 +163,11 @@
                                     </a>
                                 @endif
                             </div>
-
+                            <button class="btn btn-primary btn-sm btn-save" type="submit">Enregistrer</button>
                             </fieldset>
                         @endforeach
 
                     </div>
-                    <div class="panel-footer"><button class="btn btn-primary" type="submit">Enregistrer</button></div>
                 </div>
                 {!! Form::close() !!}
 

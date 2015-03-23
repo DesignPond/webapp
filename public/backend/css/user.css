@@ -380,10 +380,26 @@ html {
     font-size: 15px;
 }
 
+.form-edit fieldset{
+    position: relative;
+}
+
+.btn-save{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
 fieldset {
-    border-bottom: 1px dashed #eee;
-    margin-bottom: 20px;
+    border-bottom: none;
+    margin-bottom: 0px;
     padding:0px 20px 20px 20px;
+}
+
+fieldset.border {
+    border-top: 1px dashed #eee;
+    margin-top: 20px;
+    padding-top: 20px;
 }
 
 /* ---- isotope ---- */

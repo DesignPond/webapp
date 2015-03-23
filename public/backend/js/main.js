@@ -83,7 +83,7 @@
     //$(this).data('daterangepicker').setEndDate('2014-03-31');
 
 
-    $('.mask_tel').inputmask({"mask": "999 999 99 99"});  //static mask
+    $('.mask_tel').inputmask({"mask": "[9999] [9]99 999 99 99"});  //static mask
 
     $(".mask_web").blur(function() {
         var input = $(this);
