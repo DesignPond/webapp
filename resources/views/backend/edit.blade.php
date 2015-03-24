@@ -35,10 +35,10 @@
 
                                 @if(isset($labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['label']))
                                     <?php
-                                    $image    = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['label'];
-                                    $image_id = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['id'];
+                                        $image    = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['label'];
+                                        $image_id = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['id'];
                                     ?>
-                                    <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" value="{{$image}}">
+                                    <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" data-label="{{$image_id}}" value="{{$image}}">
                                 @else
                                     <?php $image = 'avatar.jpg';?>
                                     <input type="hidden" name="label[1][13][]" id="flow-img">

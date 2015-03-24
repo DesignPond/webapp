@@ -3,7 +3,7 @@ var url  = location.protocol + "//" + location.host+"/";
 $('#userpic').fileapi({
     url: url + 'upload',
     accept: 'image/*',
-    data:{_token: $("meta[name='token']").attr('content')},
+    data:{ _token: $("meta[name='token']").attr('content') , token_id: $("meta[name='token_id']").attr('content'), label: $("#flow-img").data('label')},
     imageSize: { minWidth: 200, minHeight: 200 },
     elements: {
         active: { show: '.js-upload', hide: '.js-browse' },
@@ -18,6 +18,7 @@ $('#userpic').fileapi({
         var file = uiEvt.file;
         $("#flow-img").val(file.name);
         var path = url + 'users/' + file.name;
+
         $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '")' });
         $("#userPhoto").attr("src",path);
 

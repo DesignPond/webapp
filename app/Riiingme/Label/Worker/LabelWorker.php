@@ -126,4 +126,21 @@ class LabelWorker{
         return (!empty($metas) ? $metas : []);
     }
 
+    public function updatePhoto($user_id,$label,$id){
+
+        if($id)
+        {
+            return $this->label->update(array('id' => $id, 'label' => $label));
+        }
+        else{
+            $this->label->create([
+                'label'     => $label,
+                'user_id'   => $user_id,
+                'type_id'   => 13,
+                'groupe_id' => 1
+            ]);
+        }
+
+    }
+
 }

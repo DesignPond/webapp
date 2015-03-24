@@ -13,6 +13,16 @@ class LabelWorker extends TestCase {
 
         $this->worker = \App::make('App\Riiingme\Label\Worker\LabelWorker');
 
+        $this->mock   = $this->mock('App\Riiingme\Label\Worker\LabelInterface');
+    }
+
+    public function mock($class)
+    {
+        $mock = Mockery::mock($class);
+
+        $this->app->instance($class, $mock);
+
+        return $mock;
     }
 
     public function tearDown()
@@ -46,5 +56,17 @@ class LabelWorker extends TestCase {
         $this->assertEquals($expected, $actual);
 
 	}
+
+    public function testAssignPhotoUser()
+    {
+        $user_id = 1;
+        $label   = 'cindy.jpg';
+        $id      = 1;
+
+        $this->worker->updatePhoto($user_id,$label,$id);
+
+        $this->mock->shouldReceive('update')->with($user_id,$label,$id)->once();
+
+    }
 
 }
