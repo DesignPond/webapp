@@ -20,32 +20,34 @@ class UploadController extends Controller {
         $this->label  = $label;
     }
 
+    public function updatePhoto(Request $request)
+    {
+        $file = $this->upload($request);
+
+        if($file)
+        {
+            $user_id  = base64_decode($request->input('token_id'));
+            $photo    = $file['name'];
+            $label_id = $request->input('label_id',null);
+
+/*            $file['user_id']  = $user_id;
+            $file['photo']    = $photo;
+            $file['label_id'] = $label_id;*/
+
+            return $this->label->updatePhoto($user_id,$photo,$label_id);
+        }
+    }
+
     public function upload(Request $request)
     {
-
         $files = $this->upload->upload( $request->file('file') , 'users' );
 
         if($files)
         {
-            return \Response::json(array(
-                'success' => true,
-                'files'   => $files['name'],
-                'get'     => $request->all(),
-                'post'    => $request->all()
-            ), 200 );
-
-            $user_id = base64_decode($request->input('token_id'));
-            $photo   = $files['name'];
-            $label   = $request->input('label',null);
-
-
+            return $files;
         }
 
         return false;
-    }
-
-    public function photo($user_id,$photo,$label = null){
-
     }
 
 }

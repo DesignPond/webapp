@@ -132,8 +132,9 @@ class LabelWorker{
         {
             return $this->label->update(array('id' => $id, 'label' => $label));
         }
-        else{
-            $this->label->create([
+        else
+        {
+            return $this->label->create([
                 'label'     => $label,
                 'user_id'   => $user_id,
                 'type_id'   => 13,

@@ -1,6 +1,6 @@
 <?php
 
-class LabelWorker extends TestCase {
+class LabelWorkerTest extends TestCase {
 
     protected $mock;
     protected $command;
@@ -13,7 +13,7 @@ class LabelWorker extends TestCase {
 
         $this->worker = \App::make('App\Riiingme\Label\Worker\LabelWorker');
 
-        $this->mock   = $this->mock('App\Riiingme\Label\Worker\LabelInterface');
+        $this->mock   = $this->mock('App\Riiingme\Label\Worker\LabelWorker');
     }
 
     public function mock($class)
@@ -28,9 +28,6 @@ class LabelWorker extends TestCase {
     public function tearDown()
     {
         Mockery::close();
-        \Artisan::call('migrate:refresh');
-        \Artisan::call('db:seed');
-
     }
 
 	/**
@@ -63,9 +60,10 @@ class LabelWorker extends TestCase {
         $label   = 'cindy.jpg';
         $id      = 1;
 
-        $this->worker->updatePhoto($user_id,$label,$id);
+       // $this->mock->updatePhoto($user_id,$label,$id);
+        $response = $this->call('POST', 'upload', [ 'user_id'  => 1 , '_token' => Session::token() , 'photo' => 'cindy.jpg', 'label_id' => 1 ]);
 
-        $this->mock->shouldReceive('update')->with($user_id,$label,$id)->once();
+        $this->mock->shouldReceive('updatePhoto')->with($user_id,$label,$id)->once();
 
     }
 

@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
 
     // Upload
-    Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@upload'));
+    Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@updatePhoto'));
 
     // Search
     Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));

@@ -3,7 +3,7 @@ var url  = location.protocol + "//" + location.host+"/";
 $('#userpic').fileapi({
     url: url + 'upload',
     accept: 'image/*',
-    data:{ _token: $("meta[name='token']").attr('content') , token_id: $("meta[name='token_id']").attr('content'), label: $("#flow-img").data('label')},
+    data:{ _token: $("meta[name='token']").attr('content') , token_id: $("meta[name='token_id']").attr('content'), label_id: $("#flow-img").data('label_id')},
     imageSize: { minWidth: 200, minHeight: 200 },
     elements: {
         active: { show: '.js-upload', hide: '.js-browse' },

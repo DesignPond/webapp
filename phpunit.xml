@@ -16,6 +16,9 @@
         <testsuite name="transformer">
             <directory>./tests/transformer/</directory>
         </testsuite>
+        <testsuite name="Label">
+            <directory>./tests/label/</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>
