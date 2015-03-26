@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if(isset($this->labels))
         {
             $photo = $this->labels->filter(function($item) {
-                return $item->type_id == 13;
+                return $item->type_id == 12;
             })->first();
         }
 

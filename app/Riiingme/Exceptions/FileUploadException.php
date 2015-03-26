@@ -1,4 +1,4 @@
-<?php namespace Droit\Exceptions;
+<?php namespace App\Riiingme\Exceptions;
 
 class FileUploadException extends \Exception {
 

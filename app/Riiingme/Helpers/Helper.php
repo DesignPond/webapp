@@ -52,14 +52,14 @@ class Helper{
             case 1:
                 $class = 'mask_email';
                 break;
+            case 8:
             case 9:
-            case 10:
                 $class = 'mask_tel';
                 break;
-            case 11:
+            case 10:
                 $class = 'mask_date';
                 break;
-            case 12:
+            case 11:
                 $class = 'mask_web';
                 break;
             default:
@@ -68,6 +68,22 @@ class Helper{
 
         return $class;
 
+    }
+
+    public function generateInput($type, $groupe, $exist, $data = null){
+
+        $class = $this->labelClass($type);
+        $id    = ($class == 'mask_tel' ? 'placeholder="032 555 55 55"' : '');
+
+        if($exist)
+        {
+            $content = '<input value="'.$data['text'].'" '.$id.' type="text" name="edit['.$data['id'].']" class="form-control '.$class.'">';
+        }
+        else{
+            $content = '<input value="" '.$id.' type="text" name="label['.$groupe.']['.$type.']" class="form-control '.$class.'">';
+        }
+
+        return $content;
     }
 
     public function arrayNonEmpty($input) {

@@ -11,7 +11,6 @@ class TypesTableSeeder extends \Illuminate\Database\Seeder  {
             array( 'titre' => 'Email'),
             array( 'titre' => 'Entreprise'),
             array( 'titre' => 'Profession'),
-            array( 'titre' => 'c/o'),
             array( 'titre' => 'Rue et Numéro'),
             array( 'titre' => 'NPA'),
             array( 'titre' => 'Ville'),

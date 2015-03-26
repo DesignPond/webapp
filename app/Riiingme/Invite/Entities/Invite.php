@@ -10,16 +10,6 @@ class Invite extends \Eloquent{
     protected $fillable = array('email','user_id','partage_host','partage_invited');
 
     /**
-     * Validation rules
-     */
-    protected static $rules = array();
-
-    /**
-     * Validation messages
-     */
-    protected static $messages = array();
-
-    /**
      * Labels belongs to user
      *
      * @var query

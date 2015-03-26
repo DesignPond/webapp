@@ -14,15 +14,14 @@ class UploadController extends Controller {
 
     public function __construct( UploadWorker $upload, LabelWorker $label )
     {
-        $this->middleware('auth');
-
         $this->upload = $upload;
         $this->label  = $label;
     }
 
     public function updatePhoto(Request $request)
     {
-        $file = $this->upload($request);
+
+        $file = $this->upload($request->file('file'));
 
         if($file)
         {
@@ -30,17 +29,14 @@ class UploadController extends Controller {
             $photo    = $file['name'];
             $label_id = $request->input('label_id',null);
 
-/*            $file['user_id']  = $user_id;
-            $file['photo']    = $photo;
-            $file['label_id'] = $label_id;*/
+            $this->label->updatePhoto($user_id,$photo,$label_id);
 
-            return $this->label->updatePhoto($user_id,$photo,$label_id);
         }
     }
 
-    public function upload(Request $request)
+    public function upload($file)
     {
-        $files = $this->upload->upload( $request->file('file') , 'users' );
+        $files = $this->upload->upload( $file , 'users' );
 
         if($files)
         {

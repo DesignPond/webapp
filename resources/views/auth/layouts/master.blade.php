@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('backend/css/user.css') }}">
     <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
-
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -43,7 +42,7 @@
         @include('partials.footer')
 
     </div>
-    <script src="<?php echo asset('backend/js/main.js');?>"></script>
+
 </body>
 
 </html>

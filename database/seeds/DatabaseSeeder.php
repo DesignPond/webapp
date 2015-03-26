@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GroupeTypeTableSeeder');
         $this->call('UserTypesGroupesTableSeeder');
         $this->call('UserTypesTableSeeder');
+
+        $this->call('CountryTableSeeder');
 	}
 
 }

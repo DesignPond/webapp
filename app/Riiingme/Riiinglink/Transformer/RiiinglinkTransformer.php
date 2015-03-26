@@ -93,7 +93,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         $link = $this->getInvited($riiinglink);
 
-        if($link)
+        if(isset($link->usermetas))
         {
             $data = unserialize($link->usermetas->labels);
 

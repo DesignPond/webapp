@@ -1,5 +1,8 @@
 <?php
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
+
 class LabelWorkerTest extends TestCase {
 
     protected $mock;
@@ -14,6 +17,8 @@ class LabelWorkerTest extends TestCase {
         $this->worker = \App::make('App\Riiingme\Label\Worker\LabelWorker');
 
         $this->mock   = $this->mock('App\Riiingme\Label\Worker\LabelWorker');
+
+        VfsStream::setup('users');
     }
 
     public function mock($class)
@@ -56,15 +61,28 @@ class LabelWorkerTest extends TestCase {
 
     public function testAssignPhotoUser()
     {
-        $user_id = 1;
-        $label   = 'cindy.jpg';
+/*        $user_id = 1;
         $id      = 1;
-
-       // $this->mock->updatePhoto($user_id,$label,$id);
-        $response = $this->call('POST', 'upload', [ 'user_id'  => 1 , '_token' => Session::token() , 'photo' => 'cindy.jpg', 'label_id' => 1 ]);
-
+        $label   = 'test.jpg';
+        
         $this->mock->shouldReceive('updatePhoto')->with($user_id,$label,$id)->once();
 
+        $path     = dirname(dirname(dirname(dirname(__FILE__)))) . '/test/'; ;
+        $filename = 'test.jpg';;
+
+        $file = new \Symfony\Component\HttpFoundation\File\UploadedFile (
+            $path.$filename, $filename, 'image/jpeg', '351106'
+        );
+
+        $response = $this->call('POST', 'upload', [ 'user_id'  => 1 , '_token' => csrf_token() , 'photo' => 'avatar.jpg', 'label_id' => 1 ] ,[], ['file' => $file]);
+
+        //call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
+
+        echo '<pre>';
+        print_r($response->getContent());
+        echo '</pre>';exit;
+
+        $this->assertTrue($response->isOk());*/
     }
 
 }

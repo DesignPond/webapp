@@ -23,7 +23,7 @@ class Label extends Model{
     {
         setlocale(LC_ALL, 'fr_FR.UTF-8');
 
-        return ( isset($this->type_id) && $this->type_id == 11 ? \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y') : $this->label );
+        return ( isset($this->type_id) && $this->type_id == 10 ? \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y') : $this->label );
     }
 
     /**

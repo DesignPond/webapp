@@ -14,15 +14,18 @@ class UploadWorker implements UploadInterface {
         {
             $name = $file->getClientOriginalName();
             $ext  = $file->getClientOriginalExtension();
+
             // Get the name first because after moving, the file doesn't exist anymore
             $new  = $file->move($destination,$name);
+
             $size = $new->getSize();
             $mime = $new->getMimeType();
             $path = $new->getRealPath();
 
             $image_name =  basename($name,'.'.$ext);
             //resize
-            if($type){
+            if($type)
+            {
                 $sizes = \Config::get('size.'.$type);
                 $this->resize( $path, $image_name, $sizes['width'], $sizes['height']);
             }
@@ -31,10 +34,11 @@ class UploadWorker implements UploadInterface {
             $newfile = array( 'name' => $name ,'ext' => $ext ,'size' => $size ,'mime' => $mime ,'path' => $path  );
 
             return $newfile;
+
         }
         catch(Exception $e)
         {
-            throw new \Droit\Exceptions\FileUploadException('Upload failed', $e->getError() );
+            throw new \App\Riiingme\Exceptions\FileUploadException('Upload failed', $e->getError() );
         }
 
 	}

@@ -80,10 +80,8 @@
     });
 
     // $(this).data('daterangepicker').setStartDate('2014-03-01');
-    //$(this).data('daterangepicker').setEndDate('2014-03-31');
+    // $(this).data('daterangepicker').setEndDate('2014-03-31');
 
-
-    $('.mask_tel').inputmask({"mask": "[9999] [9]99 999 99 99"});  //static mask
 
     $(".mask_web").blur(function() {
         var input = $(this);
@@ -92,7 +90,6 @@
             input.val('http://' + val);
         }
     });
-
 
     $(".accordion-body").on("shown.bs.collapse", function () {
         var selected = $(this);
@@ -104,5 +101,6 @@
 
         return false;
     });
+
 
 })(jQuery);

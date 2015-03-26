@@ -18,7 +18,7 @@ if(isset($host[$groupe_id][$label]['id']) && isset($metas[$groupe_id]))
         </div>
         <div class="chat-msg-content">
             @if(isset($host[$groupe_id][$label]['id']))
-                <?php $label_name = ($label == 11 ? \Carbon\Carbon::parse($host[$groupe_id][$label]['label'])->formatLocalized('%d %B %Y') : $host[$groupe_id][$label]['label']); ?>
+                <?php $label_name = ($label == 10 ? \Carbon\Carbon::parse($host[$groupe_id][$label]['label'])->formatLocalized('%d %B %Y') : $host[$groupe_id][$label]['label']); ?>
                 {{ $label_name }}
             @endif
         </div>

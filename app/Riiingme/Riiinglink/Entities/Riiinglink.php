@@ -11,16 +11,6 @@ class Riiinglink extends Model{
      */
     protected $fillable = array('host_id', 'invited_id');
 
-    /**
-     * Validation rules
-     */
-    protected static $rules = array();
-
-    /**
-     * Validation messages
-     */
-    protected static $messages = array();
-
     public function scopeHosted($query,$id)
     {
         return $query->where('host_id','=',$id)->with(array('labels'));

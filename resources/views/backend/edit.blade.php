@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                {!! Form::open(array( 'url' => 'user/labels' , 'class' => 'form-horizontal form-edit')) !!}
+                {!! Form::open(array( 'url' => 'user/labels' , 'id' => 'editForm',  'class' => 'form-horizontal form-edit')) !!}
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -141,16 +141,12 @@
                                         <div class="col-sm-8">
                                             <?php
                                                 $type  = $types['pivot']['type_id'];
-                                                $class = $helper->labelClass($type);
+                                                $group = $types['pivot']['groupe_id'];
                                             ?>
-                                            @if(isset($labels[$types['pivot']['groupe_id']][$types['pivot']['type_id']]['label']))
-                                                <?php
-                                                    $label = $labels[$types['pivot']['groupe_id']][$types['pivot']['type_id']]['label'];
-                                                    $id    = $labels[$types['pivot']['groupe_id']][$types['pivot']['type_id']]['id'];
-                                                ?>
-                                                <input value="{{ $label }}" type="text" name="edit[{{$id}}]" class="form-control {{$class}}">
+                                            @if(isset($labels[$group][$type]['label']))
+                                                <?php echo $helper->generateInput($type, $group ,true,['id' => $labels[$group][$type]['id'] , 'text' => $labels[$group][$type]['label'] ]); ?>
                                             @else
-                                                <input value="" type="text" name="label[{{ $types['pivot']['groupe_id'] }}][{{ $types['pivot']['type_id'] }}]" class="form-control {{$class}}">
+                                                <?php echo $helper->generateInput($type, $group ,false); ?>
                                             @endif
                                         </div>
                                     </div>

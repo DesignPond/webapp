@@ -25,7 +25,7 @@ class MetasTableSeeder extends \Illuminate\Database\Seeder  {
          * Test
          * */
         $test_labels = [
-            1 => [ 13 => 1 ] ,
+            1 => [ 12 => 1 ] ,
             2 => [
                 4 => 4,
                 5 => 5,

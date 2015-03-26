@@ -9,6 +9,7 @@ use App\Riiingme\Type\Entities\Type;
 use App\Riiingme\Groupe\Entities\Groupe;
 use App\Riiingme\Riiinglink\Entities\Riiinglink;
 use App\Riiingme\Invite\Entities\Invite;
+use App\Riiingme\Country\Entities\Country;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider {
 	{
 
         $this->registerUserService();
+        $this->registerCountryService();
         $this->registerMetaService();
         $this->registerLabelService();
         $this->registerTypeService();
@@ -41,6 +43,17 @@ class AppServiceProvider extends ServiceProvider {
     protected function registerAuthService(){
 
         $this->app->bind( 'Illuminate\Contracts\Auth\Registrar', 'App\Services\Registrar');
+    }
+
+    /**
+     * Country
+     */
+    protected function registerCountryService(){
+
+        $this->app->bind('\App\Riiingme\Country\Repo\CountryInterface', function()
+        {
+            return new \App\Riiingme\Country\Repo\CountryEloquent(new Country);
+        });
     }
 
     /**

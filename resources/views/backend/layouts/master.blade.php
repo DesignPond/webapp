@@ -23,6 +23,7 @@
     <link href="{{ asset('backend/js/FileAPI/jcrop/jquery.Jcrop.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/intlTelInput.css') }}" rel="stylesheet">
 
 </head>
 
@@ -50,15 +51,17 @@
     </div>
 
     <script src="<?php echo asset('backend/js/base.js');?>"></script>
+    {{--
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="<?php echo asset('backend/js/bootstrap/bootstrap.file-input.js');?>"></script>
-    <script src="<?php echo asset('backend/js/jquery/jquery.inputmask.bundle.min.js');?>"></script>
+    --}}
     <script src="<?php echo asset('backend/js/moment.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>
+    <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/app.js');?>"></script>
-    <script src="<?php echo asset('backend/js/main.js');?>"></script>
+
     <!-- Filter -->
     <script src="<?php echo asset('backend/vendor/isotope/isotope.js');?>"></script>
     <script src="<?php echo asset('backend/js/filter/filter.js');?>"></script>
@@ -73,6 +76,21 @@
             debug: false ,
             staticPath: 'backend/js/jquery.fileapi/FileAPI/'
         };
+    </script>
+    <script>
+        (function($) {
+
+            var inputs = $(".mask_tel");
+
+            inputs.intlTelInput({
+                defaultCountry: "auto",
+                autoFormat:true,
+                utilsScript: "../../backend/js/utils.js"
+            });
+
+
+        })(jQuery);
+
     </script>
     <script src="<?php echo asset('backend/js/FileAPI/FileAPI.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/FileAPI/FileAPI.exif.js');?>"></script>

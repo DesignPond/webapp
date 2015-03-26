@@ -685,3 +685,8 @@ fieldset.border {
     margin: 10px 10px 5px;
 }
 
+.intl-tel-input input,
+.intl-tel-input input[type="text"],
+.intl-tel-input input[type="tel"]{
+
+}

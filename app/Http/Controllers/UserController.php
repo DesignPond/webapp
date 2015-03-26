@@ -8,6 +8,7 @@ use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
 use App\Riiingme\Service\Activity\ActivityWorker;
 use App\Riiingme\Invite\Repo\InviteInterface;
+use App\Riiingme\Country\Repo\CountryInterface;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Commands\UpdateUser;
@@ -27,8 +28,9 @@ class UserController extends Controller {
 	protected $invite;
     protected $auth;
     protected $helper;
+    protected $country;
 
-	public function __construct(UserInterface $user, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActivityWorker $activity)
+	public function __construct(UserInterface $user,CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActivityWorker $activity)
 	{
 
         $this->helper     = new \App\Riiingme\Helpers\Helper;
@@ -40,6 +42,7 @@ class UserController extends Controller {
 		$this->type       = $type;
 		$this->activity   = $activity;
 		$this->invite     = $invite;
+        $this->country    = $country;
 
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
@@ -144,14 +147,11 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-       // $four = $request->all();
+       $four = $request->all();
         //$four = $four['label'][4];
-
-/*        echo '<pre>';
+        echo '<pre>';
         print_r($four);
-        //print_r($this->helper->isNotEmpty($four));
-        echo '</pre>';
-        exit;*/
+        echo '</pre>';exit;
 
         $this->dispatch(new UpdateUser($request->info));
         $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
@@ -180,9 +180,11 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$labels = $this->label->labelByGroupeType($id);
 
-		return view('backend.edit')->with(array('labels' => $labels));
+		$labels  = $this->label->labelByGroupeType($id);
+        $country = $this->country->getAll()->lists('phonecode','id');
+
+		return view('backend.edit')->with(array('labels' => $labels, 'country' => $country));
 	}
 
 	/**
