@@ -132,4 +132,41 @@ class HelperTest extends TestCase {
 
         $this->assertEquals($expect, $actual);
     }
+
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testGetUsedMetas()
+    {
+        $id     = 1;
+        $groupe = 2;
+        $metas  = [
+            2 => [1,2,3]
+        ];
+
+        $actual = $this->helper->getUsedMetas($id, $metas,$groupe);
+
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testGetNotUsedMetas()
+    {
+        $id     = 1;
+        $groupe = 2;
+        $metas  = [
+            2 => [2,3]
+        ];
+
+        $actual = $this->helper->getUsedMetas($id, $metas,$groupe);
+
+        $this->assertFalse($actual);
+    }
+
 }

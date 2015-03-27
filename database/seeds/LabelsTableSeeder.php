@@ -99,10 +99,19 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
             'http://wwww.hne.ch',
             'cyril.jpg');
 
-		$metas5 = array('','libelulle867@bluewin.ch', '', 'Vendeuse',
-			'Rue du collège 34','2735','Bévilard','Suisse',
-			'032 492 21 20','079 345 06 23',
-			'1984-05-20','','');
+		$metas5 = array('',
+            'libelulle867@bluewin.ch',
+            '',
+            'Vendeuse',
+			'Rue du collège 34',
+            '2735',
+            'Bévilard',
+            'Suisse',
+			'032 492 21 20',
+            '079 345 06 23',
+			'1984-05-20',
+            '',
+            '');
 
 		foreach($info as $index)
 		{
@@ -214,20 +223,20 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 			]);
 		}
 
-		$types = array(
-			1 => 'email',
-			2 => 'company',
-			3 => 'word',
-			4 => 'streetAddress',
-			5 => 'postcode',
-			6 => 'city',
-			7 => 'country',
-			8 => 'phoneNumber',
-			9 => 'phoneNumber',
-			10 => 'date',
-			11 => 'url',
-			12 => 'randomDigit'
-		);
+        $types = array(
+            1 => 'email',
+            2 => 'company',
+            3 => 'citySuffix',
+            4 => 'streetAddress',
+            5 => 'postcode',
+            6 => 'city',
+            7 => 'country',
+            8 => 'phoneNumber',
+            9 => 'phoneNumber',
+            10 => 'date',
+            11 => 'url',
+            12 => 'randomDigit'
+        );
 
 		for( $x = 5 ; $x < 24; $x++ )
 		{

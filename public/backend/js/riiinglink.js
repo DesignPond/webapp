@@ -24,7 +24,7 @@
 
                 $check.toggleClass("used");
 
-                var color = $check.find('.chat-msg-title');
+                var color = $check.find('.chat-msg-content');
                 color.toggleClass("bg-turquoise bg-grey");
 
                 saving();

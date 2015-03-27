@@ -33,7 +33,7 @@ class LabelEloquent implements LabelInterface {
 
     public function findPhotoByUser($user){
 
-        $photo  = $this->label->where('user_id','=',$user)->where('type_id','=',13)->get();
+        $photo  = $this->label->where('user_id','=',$user)->where('type_id','=',12)->get();
 
         if(!$photo)
         {
@@ -48,7 +48,7 @@ class LabelEloquent implements LabelInterface {
         return $this->label->where('user_id','=',$user)
             ->where(function($query)
             {
-                $query->where('type_id','=',15)->orWhere('type_id', '=', 1)->orWhere('type_id', '=', 2);
+                $query->where('type_id','=',12)->orWhere('type_id', '=', 1)->orWhere('type_id', '=', 2);
 
             })->get();
     }

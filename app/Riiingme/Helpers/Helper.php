@@ -131,6 +131,16 @@ class Helper{
 
     }
 
+    public function getUsedMetas($id, $metas,$groupe){
+
+        // if we have a label in that group and some metas in that group test if this label is used those metas
+        if(isset($id) && isset($metas[$groupe]))
+        {
+            return (in_array($id, $metas[$groupe]) ? true : false);
+        }
+
+        return false;
+    }
 }
 
 

@@ -1,30 +1,18 @@
 <?php
-
-// Label is passed
-setlocale(LC_ALL, 'fr_FR.UTF-8');
-$used = '';
-
-// if we have a label in that group and some metas in that group test if this label is used those metas
-if(isset($host[$groupe_id][$label]['id']) && isset($metas[$groupe_id]))
-{
-    $used = (in_array($host[$groupe_id][$label]['id'], $metas[$groupe_id]) ? true : false);
-}
-
+    $used       = $helper->getUsedMetas($host[$groupe_id][$label]['id'], $metas,$groupe_id);
+    $label_text = (isset($host[$groupe_id][$label]['label']) && $host[$groupe_id][$label]['label'] != '' ? $host[$groupe_id][$label]['label'] : false);
+    $label_id   = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : '');
 ?>
-@if( isset($host[$groupe_id][$label]['label']) && $host[$groupe_id][$label]['label'] != '')
+
+@if($label_text)
     <div class="chat-msg-item riiinglink linked <?php echo ($used ? 'used' : ''); ?>">
-        <div class="chat-msg-title bg-<?php echo ($used ? 'turquoise' : 'grey'); ?> text-left">
-            {{ $types[$label] }}
-        </div>
-        <div class="chat-msg-content">
-            @if(isset($host[$groupe_id][$label]['id']))
-                <?php $label_name = ($label == 10 ? \Carbon\Carbon::parse($host[$groupe_id][$label]['label'])->formatLocalized('%d %B %Y') : $host[$groupe_id][$label]['label']); ?>
-                {{ $label_name }}
-            @endif
+        <div class="chat-msg-content bg-<?php echo ($used ? 'turquoise' : 'grey'); ?>">
+            <label class="text-left">{{ $types[$label] }}</label>
+            <p>{{ $label_text }}</p>
         </div>
         <div class="chat-msg-switch">
             <label class="switch switch-turquoise switch-sm">
-                <input type="checkbox" name="metas[{{$groupe_id}}][]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $host[$groupe_id][$label]['id'] or '' }}">
+                <input type="checkbox" name="metas[{{$groupe_id}}][]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
                 <span></span>
             </label>
         </div>

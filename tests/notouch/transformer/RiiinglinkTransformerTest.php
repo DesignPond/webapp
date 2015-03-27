@@ -79,7 +79,7 @@ class RiiinglinkTransformerTest extends TestCase {
 
         $expected = [
             1 => [
-                13 => 'cyril.jpg'
+                12 => 'cyril.jpg'
             ],
             2 => [
                 4 => 'label 1',
@@ -98,12 +98,12 @@ class RiiinglinkTransformerTest extends TestCase {
 
         $expected = [
             1 => [
-                13 => 'cindy.jpg'
+                12 => 'cindy.jpg'
             ],
             2 => [
-                4 => '2520',
-                5 => 'La Neuveville',
-                6 => 'Suisse'
+                5 => '2520',
+                6 => 'La Neuveville',
+                7 => 'Suisse'
             ]
         ];
 
@@ -122,7 +122,7 @@ class RiiinglinkTransformerTest extends TestCase {
 
     public function testLabel()
     {
-        $label = $this->transformer->getLabelItem(31);
+        $label = $this->transformer->getLabelItem(29);
 
         $this->assertEquals('cyril.jpg', $label);
     }

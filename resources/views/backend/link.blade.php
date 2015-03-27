@@ -1,10 +1,11 @@
 @extends('backend.layouts.master')
 @section('content')
 
-<?php
-    $host    = $ringlink['label'];
-    $invited = $ringlink['invited_labels'];
-?>
+    <?php
+        $host    = $ringlink['label'];
+        $invited = $ringlink['invited_labels'];
+        $helper  = new \App\Riiingme\Helpers\Helper;
+    ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -28,10 +29,10 @@
 <?php unset($groupes[1]); ?>
 
 <div class="row">
-    <div class="col-md-6 col-xs-12 partage">
+    <div class="col-md-7 col-xs-12 partage">
         @include('backend.partials.invite')
     </div>
-    <div class="col-md-6 col-xs-12 partage">
+    <div class="col-md-5 col-xs-12 partage">
         @include('backend.partials.host')
     </div>
 </div>

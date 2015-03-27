@@ -93,14 +93,19 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         $link = $this->getInvited($riiinglink);
 
-        if(isset($link->usermetas))
+        if($link)
         {
-            $data = unserialize($link->usermetas->labels);
+            if(isset($link->usermetas->labels))
+            {
+                $data = unserialize($link->usermetas->labels);
+                return $this->getLabels($data);
+            }
 
-            return $this->getLabels($data);
+            return [];
         }
 
         return [];
+
     }
 
     public function getLabelItem($id){
@@ -109,7 +114,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         if( $label && !empty($label->label)){
 
-            return $label->label;
+            return $label->label_text;
         }
 
         return '';

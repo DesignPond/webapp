@@ -13,11 +13,8 @@
         <testsuite name="Application Test Suite">
             <directory>./tests/</directory>
         </testsuite>
-        <testsuite name="transformer">
-            <directory>./tests/transformer/</directory>
-        </testsuite>
-        <testsuite name="Label">
-            <directory>./tests/label/</directory>
+        <testsuite name="notouch">
+            <directory>./tests/notouch/</directory>
         </testsuite>
     </testsuites>
     <php>
