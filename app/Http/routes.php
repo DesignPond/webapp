@@ -11,16 +11,16 @@ Route::get('about', array('as' => 'about', 'uses' => 'WelcomeController@about'))
 Route::get('contact', array('as' => 'contact', 'uses' => 'WelcomeController@contact'));
 
 Route::get('activation', array('as' => 'activation', 'uses' => 'DispatchController@activation'));
+Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
 
 Route::group(['middleware' => 'auth'], function()
 {
-    Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
     Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
 
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
-
+    Route::post('updateMetas', 'MetasController@updateMetas');
     // Upload
     Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@updatePhoto'));
 

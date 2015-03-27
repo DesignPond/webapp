@@ -50,17 +50,20 @@
 
     </div>
 
-    <script src="<?php echo asset('backend/js/base.js');?>"></script>
-    {{--
+    <!--
+       <script src="<?php //echo asset('backend/js/base.js');?>"></script>
+       <script src="<?php //echo asset('backend/js/app.js');?>"></script>
+   -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    --}}
     <script src="<?php echo asset('backend/js/moment.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/jquery-birthday-picker.min.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
-    <script src="<?php echo asset('backend/js/app.js');?>"></script>
 
     <!-- Filter -->
     <script src="<?php echo asset('backend/vendor/isotope/isotope.js');?>"></script>
@@ -80,14 +83,22 @@
     <script>
         (function($) {
 
-            var inputs = $(".mask_tel");
+            var $inputs = $(".mask_tel");
 
-            inputs.intlTelInput({
+            $inputs.intlTelInput({
                 defaultCountry: "auto",
                 autoFormat:true,
                 utilsScript: "../../backend/js/utils.js"
             });
 
+            $("#editForm").submit(function (e) {
+                $inputs.each( function( index, element ){
+                    var intlNumber = $(this).intlTelInput("getNumber");
+                    if(intlNumber != ''){
+                        $(this).val(intlNumber);
+                    }
+                });
+            });
 
         })(jQuery);
 

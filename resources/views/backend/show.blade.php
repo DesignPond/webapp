@@ -20,7 +20,7 @@
                                      <img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$photo) }}">
                                   </span>
                                   <div class="clearfix">
-                                    <div class="chat-header">
+                                    <div class="chat-header chat-riiinglink">
                                         <a class="text-inverse" href="{{ url('user/link/'.$link['id']) }}">
                                             <?php $name = (!empty($link['invited_name']) ? $link['invited_name'] :'Pas indiqué'); ?>
                                             <strong class="title">{{ $name }}</strong>

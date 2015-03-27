@@ -9,22 +9,6 @@
 
     });
 
-    /*    $.fn.datepicker.dates['fr'] = {
-     days: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-     daysShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-     daysMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-     months: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-     monthsShort: ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
-     today: "Aujourd'hui",
-     clear: "Clear"
-     };*/
-
-    /*  $('.mask_date').datepicker({
-     format: 'yyyy-mm-dd',
-     language: 'fr',
-     calendarWeeks: true*
-     });*/
-
     $.datepicker.regional['fr-CH'] = {
         closeText: 'Fermer',
         prevText: '&#x3c;Préc',
@@ -44,11 +28,10 @@
 
     $.datepicker.setDefaults($.datepicker.regional['fr-CH']);
 
-    $( ".mask_date" ).datepicker({
+   $( ".mask_date" ).datepicker({
         changeMonth: true,
         changeYear: true,
-        altFormat: "yyyy-mm-dd",
-        dateFormat: "dd.mm.yy",
+        dateFormat: "yyyy-mm-dd",
         yearRange: "1900:"+ new Date().getFullYear()
     });
 
@@ -76,7 +59,6 @@
 
     $( ranges).each( function( index, element ){
         var value =  element;
-        console.log(value);
     });
 
     // $(this).data('daterangepicker').setStartDate('2014-03-01');

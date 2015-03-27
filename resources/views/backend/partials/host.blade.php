@@ -10,12 +10,9 @@
                         <?php $informations = $labels[1]; unset($labels[1]); ?>
 
                         <div class="row chat-header">
-                            <div class="col-md-2">
-                                <span class="chat-img"><img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$ringlink['host_photo']) }}"></span>
-                            </div>
-                            <div class="col-md-10">
-                                <h4><a class="text-inverse" href="#"><strong>{{ $ringlink['host_name'] }}</strong></a></h4>
-                                <h5><a class="text-inverse" href="mailto:{{ $ringlink['host_email'] }}"><em class="icon-mail"></em> &nbsp;{{ $ringlink['host_email'] }}</a></h5>
+                            <div class="col-md-12" style="position: relative;">
+                                <h4>Mes données partagées</h4>
+                                <p id="saved" class="text-success">Mise à jour ok</p>
                             </div>
                         </div>
 
@@ -27,8 +24,8 @@
 
                                     @if(isset($host[$groupe_id]) && isset($groupes_user[$groupe_id]))
                                         <div class="chat-msg">
-                                            <div class="panel bg-info panel-small">
-                                                <div class="panel-body text-center">
+                                            <div class="panel bg-gray panel-small">
+                                                <div class="panel-body text-left">
                                                     {{ $groupes_user[$groupe_id] }}
                                                 </div>
                                             </div>

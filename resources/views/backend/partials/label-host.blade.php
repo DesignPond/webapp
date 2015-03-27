@@ -6,12 +6,12 @@
 
 @if($label_text)
     <div class="chat-msg-item riiinglink linked <?php echo ($used ? 'used' : ''); ?>">
-        <div class="chat-msg-content bg-<?php echo ($used ? 'turquoise' : 'grey'); ?>">
+        <div class="chat-msg-content chat-msg-host bg-<?php echo ($used ? 'activated' : 'grey'); ?>">
             <label class="text-left">{{ $types[$label] }}</label>
             <p>{{ $label_text }}</p>
         </div>
-        <div class="chat-msg-switch">
-            <label class="switch switch-turquoise switch-sm">
+        <div class="chat-msg-switch chat-switch-host">
+            <label class="switch switch-sm">
                 <input type="checkbox" name="metas[{{$groupe_id}}][]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
                 <span></span>
             </label>

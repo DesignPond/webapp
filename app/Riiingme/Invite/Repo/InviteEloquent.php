@@ -35,7 +35,8 @@ class InviteEloquent implements InviteInterface {
 
     public function validate($token){
 
-        return $this->invite->where('token','=',$token)->get();
+        $invite = $this->invite->where('token','=',$token)->get();
+        return (!$invite->isEmpty() ? $invite->first() : null);
 
     }
 

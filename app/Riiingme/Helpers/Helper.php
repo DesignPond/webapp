@@ -51,36 +51,41 @@ class Helper{
         switch ($type) {
             case 1:
                 $class = 'mask_email';
+                $placeholder = 'nom@domaine.ch';
                 break;
             case 8:
             case 9:
                 $class = 'mask_tel';
+                $placeholder = '032 555 55 55';
                 break;
             case 10:
                 $class = 'mask_date';
+                $placeholder = '1982-10-01';
                 break;
             case 11:
                 $class = 'mask_web';
+                $placeholder = 'wwww.domaine.ch';
                 break;
             default:
                 $class = '';
+                $placeholder = '';
         }
 
-        return $class;
+        return [$class,$placeholder];
 
     }
 
     public function generateInput($type, $groupe, $exist, $data = null){
 
-        $class = $this->labelClass($type);
-        $id    = ($class == 'mask_tel' ? 'placeholder="032 555 55 55"' : '');
+        list($class,$placeholder) = $this->labelClass($type);
 
         if($exist)
         {
-            $content = '<input value="'.$data['text'].'" '.$id.' type="text" name="edit['.$data['id'].']" class="form-control '.$class.'">';
+            $content = '<input value="'.$data['text'].'" type="text" name="edit['.$data['id'].']" class="form-control '.$class.'" placeholder="'.$placeholder.'">';
         }
-        else{
-            $content = '<input value="" '.$id.' type="text" name="label['.$groupe.']['.$type.']" class="form-control '.$class.'">';
+        else
+        {
+            $content = '<input value="" type="text" name="label['.$groupe.']['.$type.']" class="form-control '.$class.'" placeholder="'.$placeholder.'">';
         }
 
         return $content;

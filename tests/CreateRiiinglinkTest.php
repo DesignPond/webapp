@@ -2,7 +2,7 @@
 
 class CreateRiiinglinkTest extends TestCase {
 
-    protected $mock;
+    protected $link;
     protected $command;
     protected $send;
     protected $user;
@@ -12,7 +12,7 @@ class CreateRiiinglinkTest extends TestCase {
         parent::setUp();
 
         $this->user = \App::make('App\Riiingme\User\Repo\UserInterface');
-        $this->mock = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+        $this->link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
 
         $user = $this->user->find(23);
         $data = ['email' => 'pruntrut@yahoo.fr', 'user_id' => 1, 'partage_host' => '', 'partage_invited' => ''];
@@ -26,6 +26,11 @@ class CreateRiiinglinkTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+
+        $link = $this->link->findByHostAndInvited(23,1);
+        $this->link->delete($link->id);
+        $link = $this->link->findByHostAndInvited(1,23);
+        $this->link->delete($link->id);
     }
 
 	/**

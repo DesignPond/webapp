@@ -1,9 +1,10 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-use Riiingme\Meta\Worker\MetaWorker;
-use Riiingme\Riiinglink\Worker\RiiinglinkWorker;
+use App\Riiingme\Meta\Worker\MetaWorker;
+use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
+use Illuminate\Http\Request;
 
-class MetasController extends \BaseController {
+class MetasController extends Controller {
 
     protected $meta;
 	protected $update;
@@ -22,9 +23,9 @@ class MetasController extends \BaseController {
 	 * @param  int $riiinglink
 	 * @return json
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		if(Input::get('riiinglink_id'))
+		if($request->input('riiinglink_id'))
 		{
 			$metas = $this->meta->getMetasForRiiinglink(Input::get('riiinglink_id'));
 		}
@@ -37,19 +38,19 @@ class MetasController extends \BaseController {
 	 *
 	 * @return json
 	 */
-	public function store()
+	public function store(Request $request)
 	{
 
 		try
 		{
-			$this->creation->validate(Input::all());
+			$this->creation->validate($request->all());
 		}
 		catch (FormValidationException $e)
 		{
 			return $this->errorWrongArgs('Il manque des arguments');
 		}
 
-		$meta = $this->meta->createMeta( Input::all() );
+		$meta = $this->meta->createMeta( $request->all() );
 
 		return $this->respondWithItem($meta, new MetaTransformer);
 
@@ -64,9 +65,7 @@ class MetasController extends \BaseController {
 	 */
 	public function show($id)
 	{
-
 		$meta = $this->meta->getMeta($id);
-
 	}
 
 	/**
@@ -100,9 +99,9 @@ class MetasController extends \BaseController {
 	 * @param  array $data
 	 * @return json
 	 */
-	public function updateMetas()
+	public function updateMetas(Request $request)
 	{
-		parse_str(Input::get('riiinglink'), $data);
+		parse_str($request->input('riiinglink'), $data);
 
 		$id    = $data['riiinglink_id'];
 		$metas = $data['metas'];
@@ -110,7 +109,7 @@ class MetasController extends \BaseController {
         $metas = serialize($metas);
         $metas = $this->riiinglink->setMetasForRiiinglink($id,$metas);
 
-		return Response::json($unser,200);
+		return \Response::json($unser,200);
 
 	}
 

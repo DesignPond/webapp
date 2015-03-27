@@ -1,7 +1,7 @@
-<aside class="ng-scope bg-inverse"><!-- START Sidebar-->
+<aside class="bg-inverse"><!-- START Sidebar-->
     <!-- START Sidebar-->
-    <div data-ng-controller="SidebarController" class="sidebar-wrapper">
-        <side-bar>
+    <div class="sidebar-wrapper">
+        <div class="sidebar">
             <div class="sidebar-nav">
 
                 <!-- START sidebar buttons-->
@@ -17,33 +17,32 @@
                 <!-- END sidebar buttons-->
                 <!-- START sidebar nav-->
                 <ul class="nav">
-                    <hr class="hidden-collapsed" />
                     <!-- Iterates over all sidebar items-->
-                    <li class="ng-scope nav-heading">
+                    <li class="nav-heading">
                         <span class="text-muted">Navigation</span>
                     </li>
                     <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
                         <a title="Dashboard" href="{{ url('/user') }}">
                             <em class="sidebar-item-icon icon-head"></em>
-                            <span class="ng-scope ng-binding">Activités</span>
+                            <span>Activités</span>
                         </a>
                     </li>
                     <li class="<?php echo (Request::is('user/'.$user->id.'/edit') ? 'active' : '' ); ?>">
                         <a title="Dashboard" href="{{ url('user/'.$user->id.'/edit') }}">
                             <em class="sidebar-item-icon icon-box"></em>
-                            <span class="ng-scope ng-binding">Mes données</span>
+                            <span>Mes données</span>
                         </a>
                     </li>
                     <li class="<?php echo ( Request::is('user/'.$user->id) ||  Request::is('user/link/*') ? 'active' : '' ); ?>">
                         <a title="Components" href="{{ url('/user/'.$user->id) }}">
                             <em class="sidebar-item-icon icon-book"></em>
-                            <span class="ng-scope ng-binding">Contacts</span>
+                            <span>Contacts</span>
                         </a>
                     </li>
                     <li class="<?php echo (Request::is('user/partage') ? 'active' : '' ); ?>">
                         <a title="Components" href="{{ url('/user/partage') }}">
                             <em class="sidebar-item-icon icon-maximize"></em>
-                            <span class="ng-scope ng-binding">Partages</span>
+                            <span>Partages</span>
                         </a>
                     </li>
                     <li><hr></li>
@@ -56,7 +55,7 @@
                 </ul>
                 <!-- END sidebar nav-->
             </div>
-        </side-bar>
+        </div>
     </div>
     <!-- END Sidebar-->
     <!-- END Sidebar-->

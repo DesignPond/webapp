@@ -16,6 +16,7 @@ class SendInviteTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+        \DB::table('invites')->truncate();
     }
 
 	/**
@@ -48,6 +49,5 @@ class SendInviteTest extends TestCase {
     {
         return \DB::table('invites')->orderBy('id', 'desc')->first();
     }
-
 
 }

@@ -78,7 +78,7 @@ class HelperTest extends TestCase {
         $data    = ['id' => 1,'text' => 'label'];
 
         $actual  = $this->helper->generateInput($type, $groupe, true, $data);
-        $expect  = '<input value="'.$data['text'].'" placeholder="032 555 55 55" type="text" name="edit['.$data['id'].']" class="form-control mask_tel">';
+        $expect  = '<input value="'.$data['text'].'" type="text" name="edit['.$data['id'].']" class="form-control mask_tel" placeholder="032 555 55 55">';
 
         $this->assertEquals($expect, $actual);
     }
@@ -95,7 +95,7 @@ class HelperTest extends TestCase {
         $data    = ['id' => 1,'text' => 'label'];
 
         $actual  = $this->helper->generateInput($type, $groupe, true, $data);
-        $expect  = '<input value="'.$data['text'].'"  type="text" name="edit['.$data['id'].']" class="form-control ">';
+        $expect  = '<input value="'.$data['text'].'" type="text" name="edit['.$data['id'].']" class="form-control " placeholder="">';
 
         $this->assertEquals($expect, $actual);
     }
@@ -112,7 +112,7 @@ class HelperTest extends TestCase {
         $data    = ['id' => 1,'text' => 'label'];
 
         $actual  = $this->helper->generateInput($type, $groupe, true, $data);
-        $expect  = '<input value="'.$data['text'].'"  type="text" name="edit['.$data['id'].']" class="form-control mask_email">';
+        $expect  = '<input value="'.$data['text'].'" type="text" name="edit['.$data['id'].']" class="form-control mask_email" placeholder="nom@domaine.ch">';
 
         $this->assertEquals($expect, $actual);
     }
@@ -128,7 +128,7 @@ class HelperTest extends TestCase {
         $groupe  = 2;
 
         $actual  = $this->helper->generateInput($type, $groupe, false);
-        $expect  = '<input value="" placeholder="032 555 55 55" type="text" name="label['.$groupe.']['.$type.']" class="form-control mask_tel">';
+        $expect  = '<input value="" type="text" name="label['.$groupe.']['.$type.']" class="form-control mask_tel" placeholder="032 555 55 55">';
 
         $this->assertEquals($expect, $actual);
     }

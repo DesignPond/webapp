@@ -28,17 +28,14 @@ class ConfirmInvite extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
-        
         // validate token
         $invite = $this->invite->validate($this->token);
-        $invite = (!$invite->isEmpty() ? $invite->first() : null);
 
         // Decode from email
         $email  = base64_decode($this->ref);
 
         // Find registered user if any
-        $user  = $this->user->findByEmail($email);
-        $user = (!$user->isEmpty() ? $user->first() : null);
+        $user   = $this->user->findByEmail($email);
 
         // Token checks out
         if($invite && $user)
@@ -53,14 +50,17 @@ class ConfirmInvite extends Command implements SelfHandling {
         }
         elseif($invite && !$user)
         {
+            if($email != $invite->email)
+            {
+                return ['status' => 'error'];
+            }
             // It's not a user yet, redirect to register form with from invitation id and email used
-            return ['status' => 'register','email' => $email, 'invite_id' => $invite->id];
+            return ['status' => 'register', 'email' => $email, 'invite_id' => $invite->id];
         }
         else
         {
             return ['status' => 'error'];
         }
-
     }
 
 }

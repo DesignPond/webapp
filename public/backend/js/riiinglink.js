@@ -25,7 +25,7 @@
                 $check.toggleClass("used");
 
                 var color = $check.find('.chat-msg-content');
-                color.toggleClass("bg-turquoise bg-grey");
+                color.toggleClass("bg-activated bg-grey");
 
                 saving();
 
@@ -40,12 +40,15 @@
 
             $.ajax({
                 url     : '/updateMetas',
-                data    : { riiinglink: riiinglink },
+                data    : { riiinglink: riiinglink , _token: $("meta[name='token']").attr('content')},
                 type    : "POST",
                 dataType: 'json',
                 success : function(data) {
                     if(data)
                     {
+                       // $('#saved').fadeIn(200).delay(2000).fadeOut(200);
+                        $.notify("Mise à jour ok!", "success");
+                        $.notify.defaults( {autoHideDelay: 1000} )
                     }
                 }
             });

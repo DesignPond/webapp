@@ -30,7 +30,7 @@
                         @if(isset($groupes[$group]))
                             <div class="chat-msg">
                                 <div class="panel bg-info panel-small">
-                                    <div class="panel-body text-center">
+                                    <div class="panel-body text-left">
                                         {{ $groupes[$group] }}
                                     </div>
                                 </div>

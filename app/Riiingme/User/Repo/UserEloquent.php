@@ -32,8 +32,8 @@ class UserEloquent implements UserInterface {
 
     public function findByEmail($email){
 
-        return $this->user->where('email','=', $email)->get();
-
+        $user = $this->user->where('email','=', $email)->get();
+        return (!$user->isEmpty() ? $user->first() : null);
     }
 
     public function activate($token){

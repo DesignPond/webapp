@@ -38,6 +38,10 @@ class CreateRiiinglink extends Command implements SelfHandling {
         $partage_host    = (!empty($this->invite->partage_host) ? unserialize($this->invite->partage_host): []);
         $partage_invited = (!empty($this->invite->partage_invited) ? unserialize($this->invite->partage_invited): []);
 
+        // Update invite
+        $this->invite->invited_id = $this->user->id;
+        $this->invite->save();
+
         // sync labels
         $this->syncLabels($hosted_link->id, $this->invite->user_id, $partage_host);
         $this->syncLabels($invited_link->id, $this->user->id, $partage_invited);
