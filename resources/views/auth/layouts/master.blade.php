@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}">
     <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/login/component.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/login/content.css') }}" />
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/user.css') }}" />
 
 </head>
 

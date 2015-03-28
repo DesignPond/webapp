@@ -724,3 +724,35 @@ fieldset.border {
     width: 100%;
     text-align: center;
 }
+
+.auth-login{
+    padding: 20px;
+    background: #fff;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#register .btn-cyan{
+    background: #337ab7;
+}
+
+#register .btn-primary,#register .btn-cyan{
+    color: #fff;
+    padding:20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 22px;
+    white-space: normal;
+    margin: 20px 0;
+}
+
+form.mb-lg .c-checkbox p{
+    left: 35px;
+    position: absolute;
+    top: 0;
+    font-size: 13px;
+}
+
+form.mb-lg .clearfix{
+    height: 40px;
+}

@@ -38,10 +38,17 @@ Route::group(['middleware' => 'auth'], function()
 });
 
 
+Route::group(['namespace' => 'Auth','prefix' => 'auth'], function()
+{
+    Route::get('register_company', array('as' => 'register_company', 'uses' => 'AuthController@register_company'));
+    Route::get('register_private', array('as' => 'register_private', 'uses' => 'AuthController@register_private'));
+});
+
 Route::controllers([
 	'auth'     => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
 
 Route::get('logout', function()
 {

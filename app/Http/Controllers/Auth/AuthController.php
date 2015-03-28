@@ -46,9 +46,20 @@ class AuthController extends Controller {
      *
      * @return Response
      */
-    public function register()
+    public function register_private()
     {
-        return view('login.register');
+        return view('auth.private');
+    }
+
+    /**
+     * Register new user
+     * GET /register
+     *
+     * @return Response
+     */
+    public function register_company()
+    {
+        return view('auth.company');
     }
 
     /**

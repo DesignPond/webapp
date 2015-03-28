@@ -1,10 +1,10 @@
 <p><hr /></p>
 <div class="form-group has-feedback">
     <?php
-    $session_email = Session::get('email');
-    $input_email   = Input::old('email', null);
+        $session_email = Session::get('email');
+        $input_email   = Input::old('email', null);
 
-    $email = (!empty($session_email) ? $session_email: $input_email);
+        $email = (!empty($session_email) ? $session_email: $input_email);
     ?>
     <input required type="email" name="email" value="{{ $email or '' }}" placeholder="Email" class="form-control" />
     <span class="fa fa-envelope form-control-feedback text-muted"></span>
@@ -28,14 +28,13 @@
 </div>
 
 <?php
-$session_id = Session::get('invite_id');
-$input_id   = Input::old('invite_id', null);
-$user_type  = Input::old('user_type', 'private');
-$invite_id  = (!empty($session_id) ? $session_id: $input_id);
+    $session_id = Session::get('invite_id');
+    $input_id   = Input::old('invite_id', null);
+    $invite_id  = (!empty($session_id) ? $session_id: $input_id);
 ?>
+
 @if(isset($invite_id) && !empty($invite_id))
     <input type="hidden" value="{{ $invite_id or '' }}" name="invite_id">
 @endif
 
-<input type="hidden" value="{{ $user_type }}" name="user_type" id="user_type">
 <button type="submit" class="btn btn-block btn-primary mt-lg">Créer le compte</button>
