@@ -55,11 +55,14 @@ Route::get('test', function()
 {
     //return DB::table('riiinglinks')->orderBy('id', 'desc')->first()->id;
 
-    $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-    $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
+   // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+   // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
+
+    $user = \App::make('App\Riiingme\User\Repo\UserInterface');
+    $user = $user->find(1);
 
     echo '<pre>';
-    print_r($ring);
+    print_r($user->activites()->with('invitation')->get()->toArray());
     echo '</pre>';
 
 });

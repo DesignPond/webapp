@@ -84,29 +84,35 @@
                 @if( !empty($activity) )
 
                     <div class="smoothy">
-                        <scrollable>
 
+                        <div id="scroll">
                             <ul class="timeline-alt">
+
                                 @foreach($activity as $event)
+                                    <?php setlocale(LC_ALL, 'fr_FR.UTF-8'); ?>
+                                    <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
 
-                                    <li data-datetime="{{ $event['event']->created_at->format('jS F') }}" class="timeline-separator"></li>
-
-                                    @if($event['type'] == 'invite' && !empty($event['event']))
+                                    @if($event->name == 'created_riiinglink')
                                         <!-- START timeline item-->
                                         <li>
                                             <div class="timeline-badge timeline-badge-sm thumb-32 bg-purple">
                                                 <em class="fa fa-link"></em>
                                             </div>
                                             <div class="timeline-panel">
-                                                <strong>Partage envoyé</strong><div class="text-muted">A: <a href="">{{ $event['event']->email }}</a></div>
+                                                @if($event->user_id == $user->id)
+                                                    <strong>Vous avez accepté le partage</strong><div class="text-muted">Avec: <a href="">{{ $event->invitation->name }}</a></div>
+                                                @else
+                                                    <strong>Partage accepté</strong><div class="text-muted">Par: <a href="">{{ $event->host->name }}</a></div>
+                                                @endif
                                             </div>
                                         </li>
-                                    @endif
-                                <!-- END timeline item-->
+                                        @endif
+                                     <!-- END timeline item-->
                                 @endforeach
                             </ul>
-                        </scrollable>
+                        </div>
                     </div>
+
                 </div>
                 <div class="panel-footer">
                     <a href="#" class="btn btn-sm btn-info"><small>Voir tous</small></a>

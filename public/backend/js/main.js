@@ -84,5 +84,8 @@
         return false;
     });
 
+    $('#scroll').slimScroll({
+        height: '350px'
+    });
 
 })(jQuery);

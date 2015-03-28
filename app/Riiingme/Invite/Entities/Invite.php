@@ -1,7 +1,12 @@
 <?php namespace App\Riiingme\Invite\Entities;
 
+use App\Riiingme\Traits\RecordsActivity;
+
 class Invite extends \Eloquent{
 
+    use RecordsActivity;
+
+    protected static $recordEvents = ['created','updated'];
     /**
      * Fillable columns
      *

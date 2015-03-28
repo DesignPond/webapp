@@ -49,6 +49,6 @@ class MetaEloquent implements MetaInterface {
             return false;
         }
 
-        return $meta->delete();
+        return $meta->delete($id);
     }
 }

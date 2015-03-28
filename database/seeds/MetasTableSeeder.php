@@ -66,7 +66,7 @@ class MetasTableSeeder extends \Illuminate\Database\Seeder  {
             'labels'        => serialize($user3_labels)
         ]);
 
-		for( $x = 5 ; $x < 24; $x++ )
+		for( $x = 5 ; $x < 14; $x++ )
 		{
 			$user_0  = App\Riiingme\Label\Entities\Label::where('user_id','=',$x)->get();
 			$links_0 = App\Riiingme\Riiinglink\Entities\Riiinglink::where('host_id','=',$x)->get();

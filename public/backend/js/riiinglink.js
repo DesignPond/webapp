@@ -20,21 +20,20 @@
 
             $checkbox.change(function()
             {
-                $check = $(this).closest('.linked');
-
+                $check  = $(this).closest('.linked');
                 $check.toggleClass("used");
 
                 var color = $check.find('.chat-msg-content');
                 color.toggleClass("bg-activated bg-grey");
 
-                saving();
+                saving($check);
 
             });
         }
 
         plugin.foo_public_method = function() {}
 
-        var saving = function() {
+        var saving = function(color) {
 
             var riiinglink = $('#formRiiinglink').serialize();
 
@@ -47,8 +46,8 @@
                     if(data)
                     {
                        // $('#saved').fadeIn(200).delay(2000).fadeOut(200);
-                        $.notify("Mise à jour ok!", "success");
-                        $.notify.defaults( {autoHideDelay: 1000} )
+                        $(color).notify("ok!", {autoHideDelay: 900, position:"left",className: "success" });
+                       // $(color).notify.defaults( {autoHideDelay: 900, position:"right"} );
                     }
                 }
             });

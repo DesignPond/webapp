@@ -10,6 +10,7 @@ use App\Riiingme\Groupe\Entities\Groupe;
 use App\Riiingme\Riiinglink\Entities\Riiinglink;
 use App\Riiingme\Invite\Entities\Invite;
 use App\Riiingme\Country\Entities\Country;
+use App\Riiingme\Activite\Entities\Activite;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerLabelService();
         $this->registerTypeService();
         $this->registerGroupeService();
+        $this->registerActiviteService();
         $this->registerRiiinglinkService();
         $this->registerInviteService();
         $this->registerAuthService();
@@ -53,6 +55,17 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('\App\Riiingme\Country\Repo\CountryInterface', function()
         {
             return new \App\Riiingme\Country\Repo\CountryEloquent(new Country);
+        });
+    }
+
+    /**
+     * Activite
+     */
+    protected function registerActiviteService(){
+
+        $this->app->bind('\App\Riiingme\Activite\Repo\ActiviteInterface', function()
+        {
+            return new \App\Riiingme\Activite\Repo\ActiviteEloquent(new Activite);
         });
     }
 

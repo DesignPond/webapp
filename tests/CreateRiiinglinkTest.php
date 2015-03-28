@@ -26,11 +26,9 @@ class CreateRiiinglinkTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
-
-        $link = $this->link->findByHostAndInvited(23,1);
-        $this->link->delete($link->id);
-        $link = $this->link->findByHostAndInvited(1,23);
-        $this->link->delete($link->id);
+        \DB::table('riiinglinks')->truncate();
+        $this->seed('RiiinglinksTableSeeder');
+        //\DB::table('activites')->truncate();
     }
 
 	/**

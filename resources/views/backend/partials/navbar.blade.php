@@ -56,7 +56,7 @@
                 <!-- END sidebar nav-->
             </div>
         </div>
+        <span id="copyright">&copy; Riiingme <?php echo date('Y'); ?></span>
     </div>
-    <!-- END Sidebar-->
     <!-- END Sidebar-->
 </aside>

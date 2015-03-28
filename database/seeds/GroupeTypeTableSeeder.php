@@ -15,6 +15,7 @@ class GroupeTypeTableSeeder extends \Illuminate\Database\Seeder  {
 			array( 'groupe_id' => 1, 'type_id' => 1 ),
 			array( 'groupe_id' => 1, 'type_id' => 12 ),
 
+            array( 'groupe_id' => 2, 'type_id' => 1 ),
 			array( 'groupe_id' => 2, 'type_id' => 4 ),
 			array( 'groupe_id' => 2, 'type_id' => 5 ),
 			array( 'groupe_id' => 2, 'type_id' => 6 ),

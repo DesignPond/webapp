@@ -11,8 +11,8 @@
 
                         <div class="row chat-header">
                             <div class="col-md-12" style="position: relative;">
-                                <h4>Mes données partagées</h4>
-                                <p id="saved" class="text-success">Mise à jour ok</p>
+                                <h4>Données partagées avec: </h4>
+                                <p>{{ $ringlink['invited_name'] }}</p>
                             </div>
                         </div>
 

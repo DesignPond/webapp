@@ -44,9 +44,8 @@
                 @yield('content')
                 <!-- Fin contenu -->
             </div>
-        </section>
 
-        @include('backend.partials.footer')
+        </section>
 
     </div>
 
@@ -62,8 +61,8 @@
     <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery-birthday-picker.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
-    <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
+    <script src="<?php echo asset('backend/js/main.js');?>"></script>
 
     <!-- Filter -->
     <script src="<?php echo asset('backend/vendor/isotope/isotope.js');?>"></script>

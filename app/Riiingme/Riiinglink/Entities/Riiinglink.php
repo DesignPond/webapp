@@ -1,8 +1,14 @@
 <?php namespace App\Riiingme\Riiinglink\Entities;
 
+use App\Riiingme\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Riiinglink extends Model{
+
+    use RecordsActivity;
+
+    protected static $recordEvents = ['created','deleted'];
 
     /**
      * Fillable columns

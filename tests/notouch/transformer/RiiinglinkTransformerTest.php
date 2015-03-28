@@ -101,9 +101,9 @@ class RiiinglinkTransformerTest extends TestCase {
                 12 => 'cindy.jpg'
             ],
             2 => [
-                5 => '2520',
-                6 => 'La Neuveville',
-                7 => 'Suisse'
+                5 => 'Ruelle de l\'hôtel de ville 3',
+                6 => '2520',
+                7 => 'La Neuveville'
             ]
         ];
 
@@ -122,7 +122,7 @@ class RiiinglinkTransformerTest extends TestCase {
 
     public function testLabel()
     {
-        $label = $this->transformer->getLabelItem(29);
+        $label = $this->transformer->getLabelItem(31);
 
         $this->assertEquals('cyril.jpg', $label);
     }

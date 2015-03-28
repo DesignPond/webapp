@@ -93,7 +93,7 @@
                                     <input type="hidden" name="info[first_name]" value=""><input type="hidden" name="info[last_name]" value="">
                                 @endif
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">E-mail principal</label>
+                                    <label class="col-sm-4 control-label">Login</label>
                                     <div class="col-sm-8">
                                         <input value="{{ $user->email }}" type="text" name="info[email]" class="form-control">
                                     </div>

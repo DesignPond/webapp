@@ -7,13 +7,11 @@
                 <li>
 
                     <?php
-
                         if(isset($invited[1]))
                         {
                             $informations = $invited[1];
                             unset($invited[1]);
                         }
-
                     ?>
 
                     <div class="row chat-header">

@@ -90,4 +90,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('App\Riiingme\Groupe\Entities\Groupe', 'user_groups', 'user_id', 'groupe_id')->withPivot('start_at','end_at');
     }
 
+    /**
+     * Activites belongs to user
+     *
+     * @var query
+     */
+    public function activites(){
+
+        return $this->hasMany('App\Riiingme\Activite\Entities\Activite');
+    }
+
+    /**
+     * Activites belongs to user
+     *
+     * @var query
+     */
+    public function invitations(){
+
+        return $this->hasMany('App\Riiingme\Activite\Entities\Activite','invited_id');
+    }
+
 }

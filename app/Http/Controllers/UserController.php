@@ -6,7 +6,7 @@ use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
-use App\Riiingme\Service\Activity\ActivityWorker;
+use App\Riiingme\Activite\Worker\ActiviteWorker;
 use App\Riiingme\Invite\Repo\InviteInterface;
 use App\Riiingme\Country\Repo\CountryInterface;
 
@@ -30,7 +30,7 @@ class UserController extends Controller {
     protected $helper;
     protected $country;
 
-	public function __construct(UserInterface $user,CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActivityWorker $activity)
+	public function __construct(UserInterface $user,CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActiviteWorker $activity)
 	{
 
         $this->helper     = new \App\Riiingme\Helpers\Helper;
@@ -71,7 +71,7 @@ class UserController extends Controller {
 	{
 
 		$ringlinks = $this->riiinglink->getRiiinglinks($this->auth->id);
-		$activity  = $this->activity->getActivity($this->auth->id);
+		$activity  = $this->activity->getActivites($this->auth->id);
 
 		if(!empty($ringlinks)){
 			$ringlinks = array_slice($ringlinks['data'],0,6);

@@ -73,7 +73,7 @@
 }
 
 .bg-activated{
-    background: #e3fff9;
+    background: #fff;
 }
 
 .chat-msg-content.chat-msg-host{
@@ -108,7 +108,6 @@
 }
 
 .chat-msg-content.chat-msg-host p{
-    text-align: right;
     margin-bottom: 2px;
 }
 
@@ -132,9 +131,6 @@
     margin-bottom: 0;
 }
 
-.bg-grey{
-    background: #e7e7e7;
-}
 
 .riiinglink{
     display: block;
@@ -437,6 +433,15 @@ fieldset.border {
     padding-top: 20px;
 }
 
+
+.bg-grey{
+    background: #f0f0f0;
+}
+
+.chat-msg-content.chat-msg-host.bg-grey label,.chat-msg-content.chat-msg-host.bg-grey p{
+    color: #666;
+}
+
 /* ---- isotope ---- */
 
 /* clear fix */
@@ -724,4 +729,11 @@ fieldset.border {
 .intl-tel-input input[type="text"],
 .intl-tel-input input[type="tel"]{
 
+}
+
+#copyright{
+    position: absolute;;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
 }

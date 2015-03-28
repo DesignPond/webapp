@@ -33,7 +33,7 @@ class RiiinglinksTableSeeder extends \Illuminate\Database\Seeder  {
             'invited_id' => 1,
         ]);
 
-        for( $x = 5 ; $x < 23; $x++ )
+        for( $x = 5 ; $x < 13; $x++ )
         {
 
             App\Riiingme\Riiinglink\Entities\Riiinglink::create([

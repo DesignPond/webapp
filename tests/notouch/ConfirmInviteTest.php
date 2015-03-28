@@ -59,7 +59,9 @@ class ConfirmInviteTest extends TestCase {
         Mockery::close();
 
         \DB::table('invites')->truncate();
+        \DB::table('riiinglinks')->truncate();
 
+        $this->seed('RiiinglinksTableSeeder');
     }
 
 	/**
