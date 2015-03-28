@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="timeline-panel">
                                                 @if($event->user_id == $user->id)
-                                                    <strong>Vous avez accepté le partage</strong><div class="text-muted">Avec: <a href="">{{ $event->invitation->name }}</a></div>
+                                                    <strong>Vous avez accepté le partage</strong><div class="text-muted">Avec: <a href="">{{ $event->invited->name }}</a></div>
                                                 @else
                                                     <strong>Partage accepté</strong><div class="text-muted">Par: <a href="">{{ $event->host->name }}</a></div>
                                                 @endif

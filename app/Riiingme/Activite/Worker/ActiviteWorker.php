@@ -16,11 +16,10 @@ class ActiviteWorker{
 
     public function getActivites($user_id){
 
-
         $user = $this->user->find($user_id);
 
         $activites   = $user->invitations()->with('host')->get()->take(3);
-        $invitations = $user->activites()->with('invitation')->get()->take(3);
+        $invitations = $user->activites()->with('invited')->get()->take(3);
 
         $result = $activites->merge($invitations);
 
@@ -28,6 +27,15 @@ class ActiviteWorker{
 
         return $result;
 
+    }
+
+    public function getPendingInvites($user_id){
+
+        $user = $this->user->find($user_id);
+        $invitations = $user->activites()->with('invite')->where('invited_id','=',null)->get();
+        $invitations->sortByDesc('updated_at');
+
+        return $invitations;
     }
 
 

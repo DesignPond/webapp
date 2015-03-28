@@ -11,7 +11,7 @@ class Activite extends Model {
      */
     protected $fillable = array('type','name', 'activite_id', 'user_id','invited_id');
 
-    public function invitation()
+    public function invited()
     {
         return $this->belongsTo('App\Riiingme\User\Entities\User','invited_id');
     }
@@ -19,6 +19,11 @@ class Activite extends Model {
     public function host()
     {
         return $this->belongsTo('App\Riiingme\User\Entities\User','user_id');
+    }
+
+    public function invite()
+    {
+        return $this->belongsTo('App\Riiingme\Invite\Entities\Invite','activite_id');
     }
 
 }

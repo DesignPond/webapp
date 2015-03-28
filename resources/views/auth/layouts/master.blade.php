@@ -14,19 +14,18 @@
     <!-- App CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/css/user.css') }}">
     <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/login/component.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/login/content.css') }}" />
+
+
 </head>
 
-<body class="layout-boxed">
+<body>
     <div class="container">
-
         <section>
-            <div class="app">
+            <div>
 
                 <div class="center-block mt-xl wd-xl">
                     @include('partials.message')

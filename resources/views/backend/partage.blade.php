@@ -43,40 +43,62 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
 
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-primary">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="icon-location"></i> &nbsp;Demandes en cours</a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        @if(!$invites->isEmpty())
-                            <!-- List group -->
-                            <ul class="list-group">
-                                @foreach($invites as $invite)
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <p class="mb-sm col-md-7">
-                                                <strong><a class="text-inverse" href="#">{{ $invite->email }}</a></strong><br/>
-                                                <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
-                                            </p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <div class="panel-body"><p>Encore aucune invitations envoyés</p></div>
-                        @endif
-                    </div>
-                </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="icon-location"></i> &nbsp;Demandes reçues</h4>
+            </div>
+            <div class="panel-body">
+                @if(!$invites->isEmpty())
+                    <!-- List group -->
+                    <ul class="list-group">
+                        @foreach($invites as $invite)
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <p class="col-md-8">
+                                        <strong><a class="text-inverse" href="#">{{ $invite->invite->email }}</a></strong><br/>
+                                        <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
+                                    </p>
+                                    <p class="col-md-4 text-right">
+                                        <a href="#" class="btn btn-success btn-sm">Accepter</a>
+                                    </p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <div class="panel-body"><p>Encore aucune invitations en cours</p></div>
+                @endif
             </div>
         </div>
-
     </div><!-- /input-group -->
+    <div class="col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="icon-location"></i> &nbsp;Demandes envoyés</h4>
+            </div>
+            <div class="panel-body">
+                @if(!$invites->isEmpty())
+                    <!-- List group -->
+                    <ul class="list-group">
+                        @foreach($invites as $invite)
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <p class="mb-sm col-md-7">
+                                        <strong><a class="text-inverse" href="#">{{ $invite->invite->email }}</a></strong><br/>
+                                        <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
+                                    </p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <div class="panel-body"><p>Encore aucune invitations en cours</p></div>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 
 @stop

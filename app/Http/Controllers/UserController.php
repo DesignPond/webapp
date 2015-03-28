@@ -89,7 +89,7 @@ class UserController extends Controller {
 	 */
 	public function partage()
 	{
-		$invites = $this->activity->getInvites($this->auth->id);
+		$invites = $this->activity->getPendingInvites($this->auth->id);
 
 		return view('backend.partage')->with(array('invites' => $invites));
 	}
