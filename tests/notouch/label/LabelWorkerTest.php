@@ -59,6 +59,20 @@ class LabelWorkerTest extends TestCase {
 
 	}
 
+    public function testLabelForUser()
+    {
+        $inputs = [
+            2 => [1],
+            3 => [4,5,6]
+        ];
+
+        $actual = $this->worker->labelForUser($inputs,1); // $inputs, $user_id, $groupe, $date = null
+
+        $expected = [2,14,15,16];
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testAssignPhotoUser()
     {
 /*        $user_id = 1;

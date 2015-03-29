@@ -4,9 +4,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Riiingme\Invite\Repo\InviteInterface;
 
 use Illuminate\Http\Request;
 use App\Commands\CreateRiiinglink;
+use App\Commands\ProcessInvite;
 
 class AuthController extends Controller {
 
@@ -32,10 +34,11 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct(Guard $auth, Registrar $registrar, InviteInterface $invite)
 	{
 		$this->auth      = $auth;
 		$this->registrar = $registrar;
+        $this->invite    = $invite;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -110,10 +113,13 @@ class AuthController extends Controller {
             $invite = $this->invite->find($invite_id);
 
             // update with new user id
-            $invite->update(['invited_id' => $user->id]);
+            $invite->invited_id = $user->id;
+            $invite->save();
 
             // Create riiinglink between users
-            $this->dispatch(new CreateRiiinglink($user,$invite));
+            $this->dispatch(new CreateRiiinglink($invite_id,$user->id));
+            $this->dispatch(new ProcessInvite($invite));
+
         }
 
         return redirect($this->redirectPath());

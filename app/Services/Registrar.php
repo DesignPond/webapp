@@ -6,6 +6,18 @@ use App\Commands\CreateAccount;
 
 class Registrar implements RegistrarContract {
 
+    protected $user;
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->user = \App::make('App\Riiingme\User\Repo\UserInterface');
+    }
+
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
@@ -38,7 +50,21 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-        return $this->dispatch(new CreateAccount($data));
+        $date = \Carbon\Carbon::now();
+        $activation_token = md5($data['email'].$date);
+
+        $user = $this->user->create([
+            'email'            => $data['email'],
+            'password'         => bcrypt($data['password']),
+            'first_name'       => (isset($data['first_name']) && !empty($data['first_name']) ? $data['first_name'] : ''),
+            'last_name'        => (isset($data['last_name']) && !empty($data['last_name']) ? $data['last_name'] : ''),
+            'company'          => (isset($data['company']) && !empty($data['company']) ? $data['company'] : ''),
+            'user_type'        => $data['user_type'],
+            'activation_token' => $activation_token
+        ]);
+
+        return $user;
+
 	}
 
 }

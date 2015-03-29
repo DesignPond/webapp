@@ -29,6 +29,10 @@
                     @include('partials.message')
                 </div>
 
+                <div class="center-block mt-xl wd-xl">
+                    <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="Image" class="center-block img-rounded" /></a>
+                </div>
+
                 <!-- Contenu -->
                 @yield('content')
                 <!-- Fin contenu -->

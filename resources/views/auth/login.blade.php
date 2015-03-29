@@ -4,11 +4,6 @@
     <div class="center-block mt-xl wd-xl">
         <!-- START panel-->
         <div class="panel panel-grey">
-            <div class="panel-heading text-center">
-                <a href="{{ url('/') }}">
-                    <img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="Image" class="center-block img-rounded" />
-                </a>
-            </div>
             <div class="panel-body">
                 <p class="text-center pv text-bold">LOGIN</p>
 

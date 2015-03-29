@@ -115,6 +115,21 @@ class RiiinglinkWorker{
 
     }
 
+    public function updateMetas($old,$new){
+
+        $exist = ($old->labels != '' ? unserialize($old->labels) : []);
+
+        if(!empty($exist))
+        {
+            return serialize(array_merge($exist, array_intersect_key( $exist,$new)));
+        }
+        else
+        {
+            return serialize($new);
+        }
+
+    }
+
     public function createRiiinglink($host_id,$invited_id){
 
         return $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);

@@ -22,6 +22,7 @@ class ConfirmInviteTest extends TestCase {
             'partage_host' => serialize([2 => [5,6]]),
             'partage_host' => serialize([2 => [5,6]])
         ));*/
+
         $this->link   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
 

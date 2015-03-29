@@ -65,11 +65,11 @@ Route::get('test', function()
    // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
    // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
 
-    $user = \App::make('App\Riiingme\User\Repo\UserInterface');
+    $user = \App::make('App\Riiingme\Riiinglink\Entities\Riiinglink');
     $user = $user->find(1);
 
     echo '<pre>';
-    print_r($user->activites()->with('invitation')->get()->toArray());
+    print_r($user->with(['usermetas'])->get()->toArray());
     echo '</pre>';
 
 });

@@ -3,9 +3,6 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Riiingme\Invite\Repo\InviteInterface;
-use App\Riiingme\User\Repo\UserInterface;
-
 use Request;
 use App\Http\Requests\TokenRequest;
 use App\Http\Requests\InviteRequest;
@@ -52,7 +49,9 @@ class DispatchController extends Controller {
         }
         elseif($result['status'] == 'register')
         {
-            return redirect('auth/register')->with(array('email' => $result['email'], 'invite_id' => $result['invite_id'] ));
+            session(['invite_id' => $result['invite_id'] ,'email' => $result['email']]);
+
+            return redirect('auth/register');
         }
         else{
             return redirect('/')->with(array('error' => 'Problem avec le jeton'));

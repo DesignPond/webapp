@@ -28,5 +28,15 @@ class Meta extends Model{
         return $this->hasOne('App\Riiingme\Label\Entities\Label', 'id', 'label_id');
     }
 
+    /**
+     * Metas belongs to multiple riiinglinks
+     *
+     * @var query
+     */
+    public function riiinglink(){
+
+        return $this->belongsTo('App\Riiingme\Riiinglink\Entities\Riiinglink');
+    }
+
 
 }

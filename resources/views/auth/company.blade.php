@@ -2,13 +2,13 @@
 @section('content')
 
     <div class="center-block mt-xl wd-xl">
-        <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="Image" class="center-block img-rounded" /></a>
-        <p><br/><a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;Retour</a></p>
+        <a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;Retour</a>
     </div>
 
     <section class="center-block mt-xl wd-xl">
         <div class="panel panel-grey">
             <div class="panel-body">
+                <p class="text-center pv text-bold">Création du compte Entreprise/Association</p>
                 <form class="mb-lg" role="form" method="POST" action="/auth/register">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group has-feedback">

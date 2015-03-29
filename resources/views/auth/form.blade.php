@@ -21,8 +21,7 @@
 <div class="clearfix">
     <div class="checkbox c-checkbox mt0">
         <label>
-            <input required="" type="checkbox" value="1" name="accept" /><span class="fa fa-check"></span>
-            <p>J'accepte les <a href="#">Conditions d'utilisation</a> de RiiingMe</p>
+            <input required="" type="checkbox" value="1" name="accept" /><span class="fa fa-check"></span><p>J'accepte les <a href="#">Conditions d'utilisation</a> de RiiingMe</p>
         </label>
     </div>
 </div>
