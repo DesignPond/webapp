@@ -43,13 +43,12 @@ class ProcessInvite extends Command implements SelfHandling {
         $invited_link = $this->getRiiinglink($this->invite->invited_id , $this->invite->user_id);
 
         // sync labels
-
         if(!empty($partage_host)){
-            $this->syncLabels($hosted_link->id, $this->invite->user_id, $partage_host);
+            $this->syncLabels($hosted_link->id, $hosted_link->host_id, $partage_host);
         }
 
         if(!empty($partage_invited)){
-            $this->syncLabels($invited_link->id, $this->invite->invited_id, $partage_invited);
+            $this->syncLabels($invited_link->id, $invited_link->host_id, $partage_invited);
         }
 
 	}
@@ -66,7 +65,7 @@ class ProcessInvite extends Command implements SelfHandling {
 
     public function getRiiinglink($host,$invited){
 
-        $riiinglink =  $this->riiinglink->findByHostAndInvited($invited,$host);
+        $riiinglink =  $this->riiinglink->findByHostAndInvited($host,$invited);
 
         if($riiinglink)
         {

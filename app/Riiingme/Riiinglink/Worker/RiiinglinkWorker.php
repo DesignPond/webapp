@@ -5,8 +5,6 @@ use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Meta\Repo\MetaInterface;
 
-use App\Riiingme\Helpers\Helper;
-
 use League\Fractal;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;
@@ -26,7 +24,7 @@ class RiiinglinkWorker{
         $this->riiinglink = $riiinglink;
         $this->groupe     = $groupe;
         $this->meta       = $meta;
-        $this->helper     = new Helper;
+        $this->helper     = new \App\Riiingme\Helpers\Helper;
     }
 
     public function generate(){
@@ -100,8 +98,10 @@ class RiiinglinkWorker{
 
         if(!$meta->isEMpty())
         {
-            $meta = $meta->first();
-            $meta->labels = $metas;
+            $meta     = $meta->first();
+            $newmetas = $this->updateMetas($meta,unserialize($metas));
+
+            $meta->labels = $newmetas;
             $meta->save();
         }
         else
@@ -121,7 +121,9 @@ class RiiinglinkWorker{
 
         if(!empty($exist))
         {
-            return serialize(array_merge($exist, array_intersect_key( $exist,$new)));
+            $result = $this->helper->array_merge_recursive_new($exist,$new);
+
+            return serialize($result);
         }
         else
         {

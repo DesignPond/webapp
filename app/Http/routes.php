@@ -68,8 +68,12 @@ Route::get('test', function()
     $user = \App::make('App\Riiingme\Riiinglink\Entities\Riiinglink');
     $user = $user->find(1);
 
+    $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
+    $meta = $meta->find(1);
+    $labels = $meta->first()->labels;
+
     echo '<pre>';
-    print_r($user->with(['usermetas'])->get()->toArray());
+    print_r(unserialize($labels));
     echo '</pre>';
 
 });

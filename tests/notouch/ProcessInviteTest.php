@@ -9,6 +9,8 @@ class ProcessInviteTest extends TestCase {
     protected $user;
     protected $link1;
     protected $link2;
+    protected $invitation;
+    protected $helper;
 
     public function setUp()
     {
@@ -20,10 +22,12 @@ class ProcessInviteTest extends TestCase {
 
         $data = ['email' => 'pruntrut@yahoo.fr', 'user_id' => 1,'invited_id' => 23, 'partage_host' => serialize([2 => [1]]), 'partage_invited' => serialize([2 => [1]])];
 
-        $this->invite  = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
-        $invitation    = $this->invite->create($data);
+        $this->invite     = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+        $this->invitation = $this->invite->create($data);
 
-        $this->command = new App\Commands\ProcessInvite($invitation);
+        $this->helper     = new \App\Riiingme\Helpers\Helper;
+
+        $this->command = new App\Commands\ProcessInvite($this->invitation);
     }
 
     public function tearDown()
@@ -42,7 +46,6 @@ class ProcessInviteTest extends TestCase {
 	public function testProcessInvite()
 	{
 
-/*
         $before = $this->getLastIdInDb();
 
         $before++;
@@ -52,32 +55,38 @@ class ProcessInviteTest extends TestCase {
 
         $after = $this->getLastIdInDb();
 
-        $this->assertEquals($before, $after);
-    */
+        //$this->assertEquals($before, $after);
+
 
 	}
 
     public function testGetRiiinglink()
     {
 
-        $before      = $this->getLastIdInDb();
         $riinglinkId = $this->command->getRiiinglink(1,23);
 
-        $this->assertEquals($before, $riinglinkId->id);
+        $this->assertEquals(22, $riinglinkId->id);
+
     }
 
+    public function testInvitedInvitation()
+    {
+
+        $user_id = $this->invitation->user_id;
+
+        $this->assertEquals(1, $user_id);
+    }
 
     public function testSyncLabels()
     {
+        list($link1 , $link2) = $this->link->create(['host_id' => 1, 'invited_id' => 24]);
 
-        $this->meta->setMetasForRiiinglink($this->link1->id,serialize([2 => [1]]));
+        $this->command->syncLabels($link1->id, $link1->host_id, [2 => [1]]);
 
-        $riinglink = $this->link->find($this->link1->id);
-        $riinglink = $riinglink->first();
+        $riinglink = $this->link->find($link1->id)->first();
+        $expected  = [2 => [1 => 2]];
 
-        $this->command->syncLabels($this->link1,23,[2 => [1]]);
-        
-        $this->assertEquals(serialize([2 => [1]]),$riinglink->usermetas->labels);
+        $this->assertEquals($expected,unserialize($riinglink->usermetas->labels));
     }
     
     public function getLastIdInDb()

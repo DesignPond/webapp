@@ -68,7 +68,16 @@ class LabelWorkerTest extends TestCase {
 
         $actual = $this->worker->labelForUser($inputs,1); // $inputs, $user_id, $groupe, $date = null
 
-        $expected = [2,14,15,16];
+        $expected = [
+            2 => [
+                1 => 2
+            ],
+            3 => [
+                4 => 14,
+                5 => 15,
+                6 => 16
+            ]
+        ];
 
         $this->assertEquals($expected, $actual);
     }

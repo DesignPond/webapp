@@ -82,9 +82,9 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
     /**
      * Riiinglink current user and invited switching places here
      */
-    public function findByHostAndInvited($invited_id,$host_id){
+    public function findByHostAndInvited($host_id,$invited_id){
 
-        $riiinglink = $this->riiinglink->where('host_id','=',$invited_id)->where('invited_id','=',$host_id)->with(array('labels'))->get();
+        $riiinglink = $this->riiinglink->where('host_id','=',$host_id)->where('invited_id','=',$invited_id)->with(array('labels'))->get();
 
         if(!$riiinglink)
         {

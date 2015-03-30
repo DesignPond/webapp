@@ -98,6 +98,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
             if(isset($link->usermetas->labels))
             {
                 $data = unserialize($link->usermetas->labels);
+
                 return $this->getLabels($data);
             }
 

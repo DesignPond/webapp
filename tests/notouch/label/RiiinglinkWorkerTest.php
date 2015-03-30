@@ -53,12 +53,8 @@ class RiiinglinkWorkerTest extends TestCase {
 
         $expected = [
             2 => [1,4,5],
-            3 => [1,3,6,7]
+            3 => [1,6,3,7]
         ];
-        
-        echo '<pre>';
-        print_r(unserialize($actual));
-        echo '</pre>';exit;
 
         $this->assertEquals($expected, unserialize($actual));
 

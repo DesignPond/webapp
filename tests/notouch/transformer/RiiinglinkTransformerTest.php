@@ -11,6 +11,7 @@ class RiiinglinkTransformerTest extends TestCase {
     protected $link;
     protected $link2;
     protected $link3;
+    protected $link4;
 
     public function setUp()
     {
@@ -23,6 +24,7 @@ class RiiinglinkTransformerTest extends TestCase {
         $this->link        = $this->riiinglink->find(1);
         $this->link2       = $this->riiinglink->find(5);
         $this->link3       = $this->riiinglink->find(2);
+        $this->link4       = $this->riiinglink->find(22);
     }
 
     public function tearDown()
@@ -76,7 +78,6 @@ class RiiinglinkTransformerTest extends TestCase {
 
     public function testGetHostLabels()
     {
-
         $expected = [
             1 => [
                 12 => 'cyril.jpg'
@@ -89,6 +90,16 @@ class RiiinglinkTransformerTest extends TestCase {
         ];
 
         $labels = $this->transformer->getHostLabels($this->link2->first());
+
+        $this->assertEquals($expected, $labels);
+    }
+
+
+    public function testGetHostLabelsOther()
+    {
+        $expected = [];
+
+        $labels = $this->transformer->getHostLabels($this->link4->first());
 
         $this->assertEquals($expected, $labels);
     }

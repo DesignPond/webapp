@@ -45,6 +45,7 @@ class InviteEloquent implements InviteInterface {
         $invite = $this->invite->create([
             'email'           => $data['email'],
             'user_id'         => $data['user_id'],
+            'invited_id'      => (isset($data['invited_id']) ? $data['invited_id'] : null),
             'partage_host'    => $data['partage_host'],
             'partage_invited' => $data['partage_invited'],
             'created_at'      => date('Y-m-d G:i:s'),

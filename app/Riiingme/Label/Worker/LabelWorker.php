@@ -117,7 +117,7 @@ class LabelWorker{
 
                     if(!$label->isEmpty())
                     {
-                        $metas[] = $label->first()->id;
+                        $metas[$groupe][$type] = $label->first()->id;
                     }
                 }
             }

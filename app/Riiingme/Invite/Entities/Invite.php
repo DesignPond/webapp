@@ -12,7 +12,7 @@ class Invite extends \Eloquent{
      *
      * @var array
      */
-    protected $fillable = array('email','user_id','partage_host','partage_invited');
+    protected $fillable = array('email','user_id','invited_id','partage_host','partage_invited');
 
     /**
      * Labels belongs to user

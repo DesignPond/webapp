@@ -169,4 +169,26 @@ class HelperTest extends TestCase {
         $this->assertFalse($actual);
     }
 
+    public function testMetaCompare(){
+
+        $new = [
+            3 => [3,6,7]
+        ];
+
+        $metas = [
+            2 => [1,4,5],
+            3 => [1,6]
+        ];
+
+        //$actual = $this->helper->array_merge_recursive_new($metas,$new); // $inputs, $user_id, $groupe, $date = null
+        $actual = $this->helper->addMetas($metas,$new);
+        
+        $expected = [
+            2 => [1,4,5],
+            3 => [1,6,3,7]
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
 }

@@ -105,11 +105,9 @@ class MetasController extends Controller {
 
 		$id    = $data['riiinglink_id'];
 		$metas = $data['metas'];
-        $unser = $metas;
-        $metas = serialize($metas);
-        $metas = $this->riiinglink->setMetasForRiiinglink($id,$metas);
+        $this->riiinglink->setMetasForRiiinglink($id,serialize($metas));
 
-		return \Response::json($unser,200);
+		return \Response::json($metas,200);
 
 	}
 

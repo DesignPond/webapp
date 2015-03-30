@@ -40,7 +40,6 @@ class ConfirmInvite extends Command implements SelfHandling {
         // Token checks out
         if($invite && $user)
         {
-
             // Update invite with new user id
             $this->invite->invited_id = $this->user->id;
             $this->invite->save();
