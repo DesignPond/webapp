@@ -12,6 +12,14 @@
             </div>
             <!-- List group -->
             <div class="panel-body">
+                <?php
+                /*
+                    echo '<pre>';
+                    print_r($activity->toArray());
+                    echo '</pre>';
+                */
+                ?>
+
                 <ul class="list-group">
 
                     @foreach($ringlinks as $ringlink)
@@ -29,9 +37,7 @@
                                 <div class="media-body">
                                     <div class="media-heading">
                                         <?php $nom = (!empty($ringlink['invited_name']) ? $ringlink['invited_name'] : '<small class="text-muted">Non indiqué</small>' ); ?>
-                                        <p class="mb-sm">
-                                            <strong><a href="{{ url('user/link/'.$ringlink['id']) }}" class="text-inverse">{{ $nom }}</a></strong>
-                                        </p>
+                                        <p class="mb-sm"><strong><a href="{{ url('user/link/'.$ringlink['id']) }}" class="text-inverse">{{ $nom }}</a></strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -42,10 +48,7 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <a href="{{ url('/user/'.$user->id) }}" class="btn btn-sm btn-info pull-right">
-                    <small>Voir tous</small>
-                </a>
-                <span class="clearfix"></span>
+                <a href="{{ url('/user/'.$user->id) }}" class="btn btn-sm btn-info pull-right"><small>Voir tous</small></a><span class="clearfix"></span>
             </div>
         </div>
 
@@ -90,9 +93,9 @@
 
                                 @foreach($activity as $event)
                                     <?php setlocale(LC_ALL, 'fr_FR.UTF-8'); ?>
-                                    <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
 
                                     @if($event->name == 'created_riiinglink')
+                                       <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
                                         <!-- START timeline item-->
                                         <li>
                                             <div class="timeline-badge timeline-badge-sm thumb-32 bg-purple">
@@ -102,7 +105,7 @@
                                                 @if($event->user_id == $user->id)
                                                     <strong>Vous avez accepté le partage</strong><div class="text-muted">Avec: <a href="">{{ $event->invited->name }}</a></div>
                                                 @else
-                                                    <strong>Partage accepté</strong><div class="text-muted">Par: <a href="">{{ $event->host->name }}</a></div>
+                                                    <strong>Partage accepté</strong><div class="text-muted">Par: <a href="">{{ $event->host->name or $event->host->company }}</a></div>
                                                 @endif
                                             </div>
                                         </li>

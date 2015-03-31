@@ -24,9 +24,16 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
     /**
      * Riiinglinks for scope and user_id
      */
-    public function findBy($id,$scope){
+    public function findBy($id,$scope,$nbr = null){
 
-        return $this->riiinglink->$scope($id)->orderBy('created_at','desc')->get();
+        $riiinglink = $this->riiinglink->$scope($id)->orderBy('created_at','desc');
+
+        if($nbr)
+        {
+            $riiinglink->take($nbr);
+        }
+
+        return $riiinglink->get();
     }
 
     /**

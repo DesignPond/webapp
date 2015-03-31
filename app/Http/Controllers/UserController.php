@@ -70,7 +70,7 @@ class UserController extends Controller {
 	public function index()
 	{
 
-		$ringlinks = $this->riiinglink->getRiiinglinks($this->auth->id);
+		$ringlinks = $this->riiinglink->getRiiinglinks($this->auth->id,null,4);
 		$activity  = $this->activity->getActivites($this->auth->id);
 
 		if(!empty($ringlinks)){
@@ -147,7 +147,7 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-       /* $four = $request->all();
+/*        $four = $request->all();
         echo '<pre>';
         print_r($four);
         echo '</pre>';exit;*/

@@ -52,10 +52,13 @@
     <!--
        <script src="<?php //echo asset('backend/js/base.js');?>"></script>
        <script src="<?php //echo asset('backend/js/app.js');?>"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
    -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+
+    <script src="<?php echo asset('backend/js/bootstrap/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/moment.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>

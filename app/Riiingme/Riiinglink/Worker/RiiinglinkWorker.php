@@ -35,9 +35,9 @@ class RiiinglinkWorker{
         return $rootScope;
     }
 
-    public function getRiiinglinks($id,$single = null){
+    public function getRiiinglinks($id,$single = null,$nbr = null){
 
-        $this->items = ($single ? $this->riiinglink->find($id) : $this->riiinglinkCollection($id));
+        $this->items = ($single ? $this->riiinglink->find($id) : $this->riiinglinkCollection($id,$nbr));
 
         return $this->generate();
     }
@@ -48,9 +48,9 @@ class RiiinglinkWorker{
 
     }
 
-    public function riiinglinkCollection($user){
+    public function riiinglinkCollection($user,$nbr = null){
 
-        return $this->riiinglink->findBy($user,'hosted');
+        return $this->riiinglink->findBy($user,'hosted',$nbr);
 
     }
 

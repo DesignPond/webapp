@@ -1,11 +1,11 @@
 @extends('backend.layouts.master')
 @section('content')
 
-    <?php
-        $host    = $ringlink['label'];
-        $invited = $ringlink['invited_labels'];
-        $helper  = new \App\Riiingme\Helpers\Helper;
-    ?>
+<?php
+    $host    = $ringlink['label'];
+    $invited = $ringlink['invited_labels'];
+    $helper  = new \App\Riiingme\Helpers\Helper;
+?>
 
 <div class="row">
     <div class="col-md-12">

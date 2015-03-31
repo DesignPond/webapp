@@ -18,8 +18,8 @@ class ActiviteWorker{
 
         $user = $this->user->find($user_id);
 
-        $activites   = $user->invitations()->with('host')->get()->take(3);
-        $invitations = $user->activites()->with('invited')->get()->take(3);
+        $activites   = $user->invitations()->with('host')->orderBy('id', 'desc')->get()->take(3);
+        $invitations = $user->activites()->with('invited')->orderBy('id', 'desc')->get()->take(3);
 
         $result = $activites->merge($invitations);
 

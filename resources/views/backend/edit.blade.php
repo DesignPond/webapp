@@ -41,7 +41,7 @@
                                     <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" data-label_id="{{$image_id}}" value="{{$image}}">
                                 @else
                                     <?php $image = 'avatar.jpg';?>
-                                    <input type="hidden" name="label[1][13][]" id="flow-img">
+                                    <input type="hidden" name="label[1][12]" id="flow-img">
                                 @endif
 
                                 <div class="form-group">

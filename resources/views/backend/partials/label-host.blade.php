@@ -1,5 +1,7 @@
 <?php
-    $used       = $helper->getUsedMetas($host[$groupe_id][$label]['id'], $metas,$groupe_id);
+
+    $id         = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : null);
+    $used       = $helper->getUsedMetas($id , $metas, $groupe_id);
     $label_text = (isset($host[$groupe_id][$label]['label']) && $host[$groupe_id][$label]['label'] != '' ? $host[$groupe_id][$label]['label'] : false);
     $label_id   = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : '');
 ?>

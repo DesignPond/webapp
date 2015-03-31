@@ -16,6 +16,7 @@ $('#userpic').fileapi({
     },
     onComplete: function (evt, uiEvt){
         var file = uiEvt.file;
+        console.log(file.name);
         $("#flow-img").val(file.name);
         var path = url + 'users/' + file.name;
 

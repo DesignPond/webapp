@@ -62,7 +62,7 @@ class LabelWorker{
     public function createLabels($inputs, $user_id, $groupe, $date = null){
 
         $labels = $this->convertLabels($inputs, $user_id, $groupe);
-
+        
         if($date)
         {
             $user = $this->user->find($user_id);
