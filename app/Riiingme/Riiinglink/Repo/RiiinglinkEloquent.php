@@ -44,6 +44,11 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         return $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'))->get();
     }
 
+    public function latest($user_id){
+
+        return $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'))->orderBy('created_at','desc')->take(8)->get();
+    }
+
     public function findByHostWithParams($user_id,$params){
 
         $results = $this->riiinglink->where('host_id','=',$user_id);

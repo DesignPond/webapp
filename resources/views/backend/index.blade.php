@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-7">
 
-        @if(!empty($ringlinks))
+        @if(!empty($latest))
 
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -12,32 +12,30 @@
             </div>
             <!-- List group -->
             <div class="panel-body">
-                <?php
-                /*
-                    echo '<pre>';
-                    print_r($activity->toArray());
-                    echo '</pre>';
-                */
-                ?>
 
                 <ul class="list-group">
 
-                    @foreach($ringlinks as $ringlink)
+                    @foreach($latest as $link)
 
                         <li class="list-group-item">
                             <div class="media lasted-riiinglink">
                                 <div class="pull-left">
                                     <!-- Contact avatar-->
                                     <div class="point-pin">
-                                        <?php $photo = (!empty($ringlink['invited_photo']) ? $ringlink['invited_photo'] : 'avatar.jpg' ); ?>
+                                        <?php $photo = (isset($link->photo) ? $link->photo : 'avatar.jpg' ); ?>
                                         <a href="#"><img src="{{ asset('users/'.$photo) }}" alt="riiinglink" class="media-object img-circle thumb32" /></a>
                                     </div>
                                 </div>
                                 <!-- Contact info-->
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <?php $nom = (!empty($ringlink['invited_name']) ? $ringlink['invited_name'] : '<small class="text-muted">Non indiqué</small>' ); ?>
-                                        <p class="mb-sm"><strong><a href="{{ url('user/link/'.$ringlink['id']) }}" class="text-inverse">{{ $nom }}</a></strong></p>
+                                        <p class="mb-sm">
+                                            <strong>
+                                                <a href="{{ url('user/link/'.$link->id) }}" class="text-inverse">
+                                                    {{ $link->invite->first_name }}  {{ $link->invite->last_name }}
+                                                </a>
+                                            </strong>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +116,7 @@
 
                 </div>
                 <div class="panel-footer">
-                    <a href="#" class="btn btn-sm btn-info"><small>Voir tous</small></a>
+                    <a href="{{ url('user/timeline') }}" class="btn btn-sm btn-info"><small>Voir tous</small></a>
                 </div>
                 @else
                      <p>Aucune activités pour le moment</p>

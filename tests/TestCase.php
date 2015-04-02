@@ -2,6 +2,15 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
+    /*   public function setUp()
+      {
+         parent::setUp();
+
+          \Artisan::call('migrate:refresh');
+
+          $this->seed();
+      }
+  */
 	/**
 	 * Creates the application.
 	 *

@@ -24,7 +24,7 @@ class RiiinglinkTransformerTest extends TestCase {
         $this->link        = $this->riiinglink->find(1);
         $this->link2       = $this->riiinglink->find(5);
         $this->link3       = $this->riiinglink->find(2);
-        $this->link4       = $this->riiinglink->find(22);
+        $this->link4       = $this->riiinglink->find(24);
     }
 
     public function tearDown()

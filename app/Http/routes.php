@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function()
     // User
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'UserController@link'));
     Route::get('user/partage', array('as' => 'partage', 'uses' => 'UserController@partage'));
+    Route::get('user/timeline', array('as' => 'partage', 'uses' => 'UserController@timeline'));
     Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
     Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
 

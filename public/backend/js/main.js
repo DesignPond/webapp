@@ -85,7 +85,7 @@
     });
 
     $('#scroll').slimScroll({
-        height: '350px'
+        height: '465px'
     });
 
 })(jQuery);

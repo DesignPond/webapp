@@ -169,6 +169,36 @@ class HelperTest extends TestCase {
         $this->assertFalse($actual);
     }
 
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testSearchArray()
+    {
+        $key   = 'type_id';
+        $value = 12;
+        $array = [
+            [
+                'label'     => 'coralie.jpg',
+                'type_id'   => 12
+            ],
+            [
+                'label'     => 'cindy.jpg',
+                'type_id'   => 11
+            ],
+            [
+                'label'     => 'avatar.jpg',
+                'type_id'   => 10
+            ]
+        ];
+
+        $actual = $this->helper->getKeyValue($array,$key,$value);
+        $expect = 'coralie.jpg';
+
+        $this->assertEquals($expect,$actual);
+    }
+
     public function testMetaCompare(){
 
         $new = [

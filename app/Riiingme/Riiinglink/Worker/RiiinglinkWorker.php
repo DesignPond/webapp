@@ -42,10 +42,29 @@ class RiiinglinkWorker{
         return $this->generate();
     }
 
-    public function riiinglinkItem($id){
+    public function getLatest($user_id)
+    {
+        $latest = $this->riiinglink->latest($user_id);
 
+        if(!$latest->isEmpty())
+        {
+            $latest = $latest->map(function($linked)
+            {
+                $labels = $linked->invite->labels;
+                $photo  = $this->helper->getKeyValue($labels,'type_id',12);
+
+                $linked->setAttribute('photo',$photo);
+
+                return $linked;
+            });
+        }
+
+        return $latest;
+    }
+
+    public function riiinglinkItem($id)
+    {
         return $this->riiinglink->find($id)->first();
-
     }
 
     public function riiinglinkCollection($user,$nbr = null){

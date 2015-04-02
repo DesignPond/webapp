@@ -8,6 +8,7 @@ interface RiiinglinkInterface {
     public function findByHost($user_id);
     public function findByHostWithParams($user_id,$params);
     public function findByHostAndInvited($invited_id,$host_id);
+    public function latest($user_id);
     public function create(array $data);
     public function delete($id);
 

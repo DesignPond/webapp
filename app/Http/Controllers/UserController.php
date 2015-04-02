@@ -70,14 +70,10 @@ class UserController extends Controller {
 	public function index()
 	{
 
-		$ringlinks = $this->riiinglink->getRiiinglinks($this->auth->id,null,4);
+        $latest    = $this->riiinglink->getLatest($this->auth->id);
 		$activity  = $this->activity->getActivites($this->auth->id);
 
-		if(!empty($ringlinks)){
-			$ringlinks = array_slice($ringlinks['data'],0,6);
-		}
-
-		return view('backend.index')->with(array('ringlinks' => $ringlinks, 'activity' => $activity));
+		return view('backend.index')->with(array( 'activity' => $activity, 'latest' => $latest));
 
 	}
 
@@ -95,7 +91,21 @@ class UserController extends Controller {
 	}
 
 
-	/**
+    /**
+     * Show the timeline
+     * GET /user/timeline
+     *
+     * @return Response
+     */
+    public function timeline()
+    {
+        $activity = $this->activity->getPendingInvites($this->auth->id);
+
+        return view('backend.timeline')->with(array('activity' => $activity));
+    }
+
+
+    /**
 	 * Display the specified resource.
 	 * GET /user/{id}
 	 *

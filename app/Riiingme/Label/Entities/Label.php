@@ -26,6 +26,21 @@ class Label extends Model{
         return ( isset($this->type_id) && $this->type_id == 10 ? \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y') : $this->label );
     }
 
+    public function getUserPhotoAttribute()
+    {
+
+        if(isset($this->labels))
+        {
+            $photo = $this->labels->filter(function($item) {
+                return $item->type_id == 12;
+            })->first();
+        }
+
+        return 'aha';
+        //return ( isset($photo->label) && !empty($photo->label) ? $photo->label : 'avatar.jpg');
+
+    }
+
     /**
      * Labels belongs to user
      *

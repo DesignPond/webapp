@@ -231,6 +231,24 @@ class Helper{
         return $base;
     }
 
+    public function getKeyValue($array,$key,$value){
+
+        $results = array();
+
+        if (!empty($array))
+        {
+            foreach ($array as $subarray)
+            {
+                if(isset($subarray[$key]) && $subarray[$key] == $value){
+                    return $subarray['label'];
+                }
+            }
+        }
+
+        return $results;
+
+    }
+
 }
 
 
