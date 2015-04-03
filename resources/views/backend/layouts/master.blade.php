@@ -58,15 +58,16 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
-
     <script src="<?php echo asset('backend/js/bootstrap/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/moment.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery-birthday-picker.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/jquery.infinitescroll.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/main.js');?>"></script>
+    <script src="<?php echo asset('backend/js/timeline.js');?>"></script>
 
     <!-- Filter -->
     <script src="<?php echo asset('backend/vendor/isotope/isotope.js');?>"></script>

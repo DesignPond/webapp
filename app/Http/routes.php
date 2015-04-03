@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
     Route::post('updateMetas', 'MetasController@updateMetas');
+    Route::post('activites', array('as' => 'labels', 'uses' => 'UserController@activites'));
+
     // Upload
     Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@updatePhoto'));
 

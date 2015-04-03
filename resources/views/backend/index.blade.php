@@ -125,6 +125,12 @@
                 <!-- END timeline-->
             </div>
         </div>
+
+<?php
+        echo '<pre>';
+        print_r($activity->toArray());
+        echo '</pre>';
+?>
     </div>
 </div>
 

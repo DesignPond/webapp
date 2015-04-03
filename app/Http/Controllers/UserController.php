@@ -71,7 +71,7 @@ class UserController extends Controller {
 	{
 
         $latest    = $this->riiinglink->getLatest($this->auth->id);
-		$activity  = $this->activity->getActivites($this->auth->id);
+		$activity  = $this->activity->getPaginate($this->auth->id, 0, 5);
 
 		return view('backend.index')->with(array( 'activity' => $activity, 'latest' => $latest));
 
@@ -90,7 +90,6 @@ class UserController extends Controller {
 		return view('backend.partage')->with(array('invites' => $invites));
 	}
 
-
     /**
      * Show the timeline
      * GET /user/timeline
@@ -99,11 +98,28 @@ class UserController extends Controller {
      */
     public function timeline()
     {
-        $activity = $this->activity->getPendingInvites($this->auth->id);
+        $activity = $this->activity->getPaginate($this->auth->id, 0, 6);
+        $total    = $this->activity->getTotal($this->auth->id);
 
-        return view('backend.timeline')->with(array('activity' => $activity));
+        return view('backend.timeline')->with(array('activity' => $activity, 'total' => $total));
     }
 
+    /**
+     * Show the timeline
+     * GET /user/timeline
+     *
+     * @return Response
+     */
+    public function activites(Request $request)
+    {
+        $take = $request->take;
+        $skip = $request->skip;
+
+        $activity = $this->activity->getPaginate($this->auth->id, $skip, $take);
+
+        echo view('backend.partials.activite', ['activity' => $activity]);
+
+    }
 
     /**
 	 * Display the specified resource.
@@ -114,7 +130,6 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
-
 		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
 		return view('backend.show')->with(array('ringlink' => $ringlink, 'items' => $items));
@@ -157,10 +172,6 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-/*        $four = $request->all();
-        echo '<pre>';
-        print_r($four);
-        echo '</pre>';exit;*/
 
         $this->dispatch(new UpdateUser($request->info));
         $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
