@@ -25,6 +25,7 @@
     <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/intlTelInput.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/jquery.tagit.css') }}" rel="stylesheet">
 
 </head>
 
@@ -66,6 +67,7 @@
     <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery.infinitescroll.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
+    <script src="<?php echo asset('backend/js/tag-it.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/js/timeline.js');?>"></script>
 

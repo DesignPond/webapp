@@ -131,6 +131,13 @@
     margin-bottom: 0;
 }
 
+.panel .dl-horizontal{
+    margin-top: 20px;
+}
+
+.panel .dl-horizontal dt, .panel .dl-horizontal dd{
+    margin-bottom: 3px;
+}
 
 .riiinglink{
     display: block;

@@ -53,6 +53,7 @@ class RiiinglinkWorker{
                 $labels = $linked->invite->labels;
                 $photo  = $this->helper->getKeyValue($labels,'type_id',12);
 
+                $photo = ($photo != '' ? $photo : 'avatar.jpg');
                 $linked->setAttribute('photo',$photo);
 
                 return $linked;

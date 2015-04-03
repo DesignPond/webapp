@@ -6076,7 +6076,7 @@ body {
   top: 50px;
   left: 0;
   bottom: 0;
-  width: 180px;
+  width: 170px;
   z-index: 310;
 }
 .app-container > section {
@@ -6102,7 +6102,7 @@ body {
 @media only screen and (min-width: 768px) {
   .app-container > section,
   .app-container > footer {
-    margin-left: 180px;
+    margin-left: 170px;
   }
 }
 .app {
@@ -6276,7 +6276,7 @@ body {
 }
 @media only screen and (min-width: 768px) {
   .topnavbar > .navbar-header {
-    width: 180px;
+    width: 170px;
     background-image: none;
     z-index: 1;
   }
@@ -6457,7 +6457,7 @@ body {
   float: left;
   padding: 15px;
   padding-top: 25px;
-  width: 180px;
+  width: 170px;
 }
 .sidebar .sidebar-buttons .btn-sidebar {
   cursor: pointer;

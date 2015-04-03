@@ -16,11 +16,16 @@
 
                     <div class="row chat-header">
                         <div class="col-md-2">
-                            <span class="chat-img"><img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$ringlink['invited_photo']) }}"></span>
+                            <span class="chat-img"><img class="img-circle thumb64" alt="Image" src="{{ asset('users/'.$ringlink['invited_photo']) }}"></span>
                         </div>
-                        <div class="col-md-10">
-                            <h4><a class="text-inverse" href="#"><strong>{{ $ringlink['invited_name'] }}</strong></a></h4>
-                            <h5><a class="text-inverse" href="mailto:{{ $ringlink['invited_email'] }}"><em class="icon-mail"></em> &nbsp;{{ $ringlink['invited_email'] }}</a></h5>
+                        <div class="col-md-5">
+                            <h4><strong>{{ $ringlink['invited_name'] }}</strong></h4>
+                        </div>
+                        <div class="col-md-5">
+                            <ul id="myTags">
+                                <li>Tag1</li>
+                                <li>Tag2</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -32,9 +37,12 @@
                                         {{ $groupes[$group] }}
                                     </div>
                                 </div>
+                                <dl class="dl-horizontal">
                                 @foreach($groupe_label as $type_id => $label)
-                                    @include('backend.partials.label-invite')
+                                    <dt>{{ $types[$type_id] }}</dt>
+                                    <dd>{{ $label }}</dd>
                                 @endforeach
+                                </dl>
                             </div>
                         @endif
                     @endforeach

@@ -88,4 +88,6 @@
         height: '465px'
     });
 
+    $('#myTags').tagit();
+
 })(jQuery);
