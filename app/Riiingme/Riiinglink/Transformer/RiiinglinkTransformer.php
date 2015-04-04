@@ -38,6 +38,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
             'invited_email'  => $this->getEmail($riiinglink->invited_id),
             'host_labels'    => $this->getHostLabels($riiinglink),
             'invited_labels' => $this->getInvitedLabels($riiinglink),
+            'tags'           => $this->getTags($riiinglink)
         ];
     }
 
@@ -75,6 +76,16 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
         return $this->link->findByHostAndInvited($invited_id,$host_id);
 
+    }
+
+    public function getTags($riiinglink)
+    {
+        if(isset($riiinglink->tags) && !empty($riiinglink->tags))
+        {
+            return $riiinglink->tags->lists('title');
+        }
+
+        return '';
     }
 
     public function getHostLabels($riiinglink){

@@ -5,12 +5,13 @@
 
         @include('backend.partials.filter')
 
-        <?php  $filter = array('famille','amis','professionnel');  ?>
-
         <div class="isotope">
             <div class="row">
              @foreach($ringlink['data'] as $link)
-                <div class="col-lg-6 col-md-6 col-xs-12 element-item">
+
+                <?php $tags = (!empty($link['tags']) ? implode(' ',$link['tags']): ''); ?>
+
+                <div class="col-lg-6 col-md-6 col-xs-12 element-item <?php echo $tags; ?>">
                     <div class="panel panel-info">
                         <div class="panel-body">
                             <ul class="chat row">

@@ -7,7 +7,7 @@
 }
 
 .chat li .chat-header{
-    padding: 20px;
+    padding: 15px 20px;
 }
 
 .panel-label{
@@ -24,7 +24,7 @@
 }
 
 .panel-small .panel-body{
-    padding: 3px;
+    padding: 5px;
 }
 
 .panel-label .panel-body{
@@ -51,8 +51,12 @@
     margin-bottom: 5px;
 }
 
-.chat-msg .panel-small .panel-body {
-    padding:4px 5px;
+.chat-msg .panel-small .panel-body{
+    padding:5px 10px;
+}
+
+.panel-heading.panel-small{
+    padding:8px 10px;
 }
 
 .chat-msg-item{
@@ -129,6 +133,11 @@
 
 .chat-msg-switch label{
     margin-bottom: 0;
+}
+
+.chat-header-name{
+    display: block;
+    line-height: 60px;
 }
 
 .panel .dl-horizontal{

@@ -29,6 +29,12 @@ Route::group(['middleware' => 'auth'], function()
     // Search
     Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));
 
+    // Tags
+    Route::get('tags', 'TagController@tags');
+    Route::get('allTags', 'TagController@allTags');
+    Route::post('addTag', 'TagController@addTag');
+    Route::post('removeTag', 'TagController@removeTag');
+
     // User
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'UserController@link'));
     Route::get('user/partage', array('as' => 'partage', 'uses' => 'UserController@partage'));

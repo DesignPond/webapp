@@ -88,6 +88,65 @@
         height: '465px'
     });
 
-    $('#myTags').tagit();
+    var base_url = location.protocol + "//" + location.host+"/";
+
+    $("#myTags").tagit({
+        placeholderText: "Nouveau tag",
+        afterTagAdded: function(event, ui) {
+            if(!ui.duringInitialization){
+
+                var tag = ui.tagLabel;
+                var id  = $(this).data('id');
+
+                $.ajax({
+                    dataType: "json",
+                    type    : 'POST',
+                    url     : base_url + 'addTag',
+                    data: {  id  : id,  tag : tag , _token: $("meta[name='token']").attr('content') },
+                    success: function( data ) {
+                        console.log('added');
+                    },
+                    error: function(data) {  console.log('error');  }
+                });
+            }
+        },
+        beforeTagRemoved: function(event, ui) {
+
+            var tag = ui.tagLabel;
+            var id  = $(this).data('id');
+
+            $.ajax({
+                dataType: "json",
+                type    : 'POST',
+                url     : base_url + 'removeTag',
+                data: {  id  : id,  tag : tag , _token: $("meta[name='token']").attr('content')},
+                success: function( data ) {
+                    console.log('removed');
+                },
+                error: function(data) {  console.log('error'); }
+            });
+        },
+        autocomplete: {
+            delay: 0,
+            minLength: 2,
+            source: function( request, response ) {
+                $.ajax({
+                    dataType: "json",
+                    type    : 'GET',
+                    url     : base_url + 'tags',
+                    data: {  term: request.term , _token: $("meta[name='token']").attr('content') },
+                    success: function( data ) {
+                        response( $.map( data, function( item ) {
+                            return {
+                                label: item.title,
+                                value: item.title
+                            }
+                        }));
+                    },
+                    error: function(data) {  console.log('error');  }
+                });
+            }
+        }
+    });
 
 })(jQuery);

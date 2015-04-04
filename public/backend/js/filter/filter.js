@@ -139,8 +139,8 @@ $( function() {
         }
     });
 
-    $('#filters').on( 'click', 'a', function() {
-        buttonFilter = $( this ).attr('data-filter');
+    $('#selectFilter').on( 'change', function() {
+        buttonFilter = $(this).find(':selected').attr('data-filter');
         $container.isotope();
     });
 

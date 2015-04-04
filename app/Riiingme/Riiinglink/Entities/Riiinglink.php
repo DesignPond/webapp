@@ -77,5 +77,15 @@ class Riiinglink extends Model{
         return $this->hasOne('App\Riiingme\Meta\Entities\Meta');
     }
 
+    /**
+     * Tags for riiinglink
+     *
+     * @var query
+     */
+    public function tags(){
+
+        return $this->belongsToMany('App\Riiingme\Tag\Entities\Tag', 'riiinglink_tags', 'riiinglink_id', 'tag_id');
+    }
+
 
 }

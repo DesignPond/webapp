@@ -1,5 +1,18 @@
 @if(!empty($invited))
 
+    <div class="panel panel-default">
+        <div class="panel-heading panel-small">Tags</div>
+        <div class="panel-body">
+            <ul id="myTags" data-id="{{ $riiinglink_id }}">
+                @if(!$tags->isEmpty())
+                    @foreach($tags as $tag)
+                        <li>{{ $tag->title }}</li>
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+    </div>
+
     <div class="panel panel-primary">
         <div class="panel-body">
 
@@ -18,14 +31,8 @@
                         <div class="col-md-2">
                             <span class="chat-img"><img class="img-circle thumb64" alt="Image" src="{{ asset('users/'.$ringlink['invited_photo']) }}"></span>
                         </div>
-                        <div class="col-md-5">
-                            <h4><strong>{{ $ringlink['invited_name'] }}</strong></h4>
-                        </div>
-                        <div class="col-md-5">
-                            <ul id="myTags">
-                                <li>Tag1</li>
-                                <li>Tag2</li>
-                            </ul>
+                        <div class="col-md-10">
+                            <h4 class="chat-header-name"><strong>{{ $ringlink['invited_name'] }}</strong></h4>
                         </div>
                     </div>
 

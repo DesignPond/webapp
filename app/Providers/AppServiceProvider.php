@@ -11,6 +11,7 @@ use App\Riiingme\Riiinglink\Entities\Riiinglink;
 use App\Riiingme\Invite\Entities\Invite;
 use App\Riiingme\Country\Entities\Country;
 use App\Riiingme\Activite\Entities\Activite;
+use App\Riiingme\Tag\Entities\Tag;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerActiviteService();
         $this->registerRiiinglinkService();
         $this->registerInviteService();
+        $this->registerTagService();
         $this->registerAuthService();
 
 	}
@@ -146,5 +148,14 @@ class AppServiceProvider extends ServiceProvider {
         });
     }
 
+    /**
+     * Tag
+     */
+    protected function registerTagService(){
 
+        $this->app->bind('\App\Riiingme\Tag\Repo\TagInterface', function()
+        {
+            return new \App\Riiingme\Tag\Repo\TagEloquent(new Tag);
+        });
+    }
 }

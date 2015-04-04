@@ -6,6 +6,7 @@ use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
+use App\Riiingme\Tag\Repo\TagInterface;
 use App\Riiingme\Activite\Worker\ActiviteWorker;
 use App\Riiingme\Invite\Repo\InviteInterface;
 use App\Riiingme\Country\Repo\CountryInterface;
@@ -29,8 +30,9 @@ class UserController extends Controller {
     protected $auth;
     protected $helper;
     protected $country;
+    protected $tags;
 
-	public function __construct(UserInterface $user,CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActiviteWorker $activity)
+	public function __construct(UserInterface $user, TagInterface $tags, CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActiviteWorker $activity)
 	{
 
         $this->helper     = new \App\Riiingme\Helpers\Helper;
@@ -43,6 +45,7 @@ class UserController extends Controller {
 		$this->activity   = $activity;
 		$this->invite     = $invite;
         $this->country    = $country;
+        $this->tags       = $tags;
 
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
@@ -130,9 +133,11 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
+        $droptags = $this->tags->getAll($this->auth->id)->lists('title','id');
+
 		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
-		return view('backend.show')->with(array('ringlink' => $ringlink, 'items' => $items));
+		return view('backend.show')->with(array('ringlink' => $ringlink, 'droptags' => $droptags,'items' => $items));
 	}
 
 	/**
@@ -146,22 +151,19 @@ class UserController extends Controller {
 	{
         // Get riiinglink from id
         $link = $this->riiinglink->riiinglinkItem($id);
-
+        $tags = $link->tags;
         // Test if id is user_id from riinglink
         if($this->auth->id != $link->host_id)
         {
             return redirect('/');
         }
 
-        // Get metas
 		$metas     = $this->meta->getMetas($id);
-
 		$ringlink  = $this->riiinglink->getRiiinglinks($id,true);
 		$ringlink  = $this->riiinglink->convert($ringlink, $this->auth->labels->toArray());
-
 		$labels    = $this->riiinglink->convertToGroupLabel();
 
-        return view('backend.link')->with(array('ringlink' => $ringlink, 'metas' => $metas , 'labels' => $labels));
+        return view('backend.link')->with(array('ringlink' => $ringlink, 'tags' => $tags, 'metas' => $metas , 'labels' => $labels, 'riiinglink_id' => $id));
 	}
 
     /**

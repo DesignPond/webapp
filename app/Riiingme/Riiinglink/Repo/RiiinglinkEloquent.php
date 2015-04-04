@@ -18,7 +18,7 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         //return $this->riiinglink->where('id','=',$id)->with(array('labels'))->get();
 
-        return $this->riiinglink->where('id','=',$id)->with(array('usermetas'))->get();
+        return $this->riiinglink->where('id','=',$id)->with(array('usermetas','tags'))->get();
     }
 
     /**
@@ -57,7 +57,7 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         {
             $search = $params['search'];
 
-            $results->with(array('invite' => function($query) use ($search)
+            $results->with(array('tags','invite' => function($query) use ($search)
             {
                 $query->where('first_name', 'like', '%'.$search.'%');
                 $query->orWhere('last_name', 'like', '%'.$search.'%');
@@ -65,27 +65,9 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
             }));
         }
-/*        else if(isset($params['order']) && !empty($params['order'])){
-
-            $order = $params['order'];
-
-            $results->whereHas('invite', function($q) use ($order)
-            {
-                $q->orderBy($order, 'asc');
-            });
-
-        }*/
-/*        else if(isset($params['label'])){
-
-            $results->whereHas('invite', function($q)
-            {
-                $q->where('content', 'like', 'foo%');
-
-            });
-        }*/
         else
         {
-            $results->with(array('invite'));
+            $results->with(array('tags','invite'));
         }
 
         return $results->paginate(10);
@@ -96,7 +78,7 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
      */
     public function findByHostAndInvited($host_id,$invited_id){
 
-        $riiinglink = $this->riiinglink->where('host_id','=',$host_id)->where('invited_id','=',$invited_id)->with(array('labels'))->get();
+        $riiinglink = $this->riiinglink->where('host_id','=',$host_id)->where('invited_id','=',$invited_id)->with(array('labels','tags'))->get();
 
         if(!$riiinglink)
         {

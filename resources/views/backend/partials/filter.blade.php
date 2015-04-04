@@ -11,18 +11,16 @@
                             <option value="last_name">Alphabétique</option>
                         </select>
 
-                        <select class="selectpicker" style="width:190px;" name="label">
+                        <select id="selectFilter" class="selectpicker" style="width:190px;" name="label">
                             <option data-filter="*" value="">Filtrer par label</option>
-                            <option data-filter=".famille" value="created_at">Famille</option>
-                            <option data-filter=".professionnel" value="last_name">Professionnel</option>
+                            @if(!empty($droptags))
+                                @foreach($droptags as $tag)
+                                    <option data-filter=".{{ $tag }}" value="">{{ $tag }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </form>
 
-{{--                        <select class="selectpicker" style="width:130px;" name="export">
-                            <option data-filter="*" value="">Exporter</option>
-                            <option data-filter=".famille" value="created_at">Famille</option>
-                            <option data-filter=".professionnel" value="last_name">Professionnel</option>
-                        </select>--}}
                 </div><!-- /.col-lg-6 -->
 
                 <div class="col-md-4">
