@@ -12,10 +12,10 @@ class CreateUserTagsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tags', function(Blueprint $table) {
+		Schema::create('user_tags', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
             $table->integer('user_id');
+            $table->integer('tag_id');
         });
 	}
 
@@ -26,7 +26,7 @@ class CreateUserTagsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tags');
+		Schema::drop('user_tags');
 	}
 
 }

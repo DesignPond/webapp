@@ -92,6 +92,7 @@
 
     $("#myTags").tagit({
         placeholderText: "Nouveau tag",
+        removeConfirmation: true,
         afterTagAdded: function(event, ui) {
             if(!ui.duringInitialization){
 
@@ -115,16 +116,25 @@
             var tag = ui.tagLabel;
             var id  = $(this).data('id');
 
-            $.ajax({
-                dataType: "json",
-                type    : 'POST',
-                url     : base_url + 'removeTag',
-                data: {  id  : id,  tag : tag , _token: $("meta[name='token']").attr('content')},
-                success: function( data ) {
-                    console.log('removed');
-                },
-                error: function(data) {  console.log('error'); }
-            });
+            var answer = confirm('Voulez-vous vraiment supprimer : '+ tag +' ?');
+            if (answer) {
+                $.ajax({
+                    dataType: "json",
+                    type: 'POST',
+                    url: base_url + 'removeTag',
+                    data: {id: id, tag: tag, _token: $("meta[name='token']").attr('content')},
+                    success: function (data) {
+                        console.log('removed');
+                    },
+                    error: function (data) {
+                        console.log('error');
+                    }
+                });
+            }
+            else
+            {
+                return false;
+            }
         },
         autocomplete: {
             delay: 0,

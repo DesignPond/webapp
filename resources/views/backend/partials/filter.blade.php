@@ -10,14 +10,18 @@
                             <option value="created_at">Plus récent</option>
                             <option value="last_name">Alphabétique</option>
                         </select>
-
+<?php
+                            echo '<pre>';
+                            print_r($droptags);
+                            echo '</pre>';exit;
+        ?>
                         <select id="selectFilter" class="selectpicker" style="width:190px;" name="label">
                             <option data-filter="*" value="">Filtrer par label</option>
-                            @if(!empty($droptags))
+      {{--                      @if(!empty($droptags))
                                 @foreach($droptags as $tag)
                                     <option data-filter=".{{ $tag }}" value="">{{ $tag }}</option>
                                 @endforeach
-                            @endif
+                            @endif--}}
                         </select>
                     </form>
 

@@ -133,7 +133,7 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
-        $droptags = $this->tags->getAll($this->auth->id)->lists('title','id');
+        $droptags = $this->tags->getAll($this->auth->id);
 
 		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 

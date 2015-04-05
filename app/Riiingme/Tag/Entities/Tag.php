@@ -11,5 +11,10 @@ class Tag extends Model {
     {
         return $this->belongsToMany('App\Riiingme\Riiinglink\Entities\Riiinglink', 'riiinglink_tags', 'tag_id', 'riiinglink_id');
     }
+
+    public function user_tags()
+    {
+        return $this->belongsToMany('App\Riiingme\User\Entities\User', 'user_tags', 'tag_id', 'user_id');
+    }
     
 }

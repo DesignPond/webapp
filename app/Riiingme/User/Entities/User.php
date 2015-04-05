@@ -110,4 +110,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Riiingme\Activite\Entities\Activite','invited_id');
     }
 
+    /**
+     * Link belongs to user
+     *
+     * @var query
+     */
+    public function user_tags(){
+
+        return $this->belongsToMany('App\Riiingme\Tag\Entities\Tag', 'user_tags', 'user_id', 'tag_id');
+    }
+
 }

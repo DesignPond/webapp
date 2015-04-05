@@ -5,15 +5,18 @@ use App\Http\Controllers\Controller;
 
 use App\Riiingme\Tag\Repo\TagInterface;
 use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
+use App\Riiingme\User\Repo\UserInterface;
 use Illuminate\Http\Request;
 
 class TagController extends Controller {
 
 	protected $tag;
+    protected $user;
 	protected $riiinglink;
 
-    public function __construct( TagInterface $tag,  RiiinglinkInterface $riiinglink){
-		
+    public function __construct(UserInterface $user, TagInterface $tag,  RiiinglinkInterface $riiinglink){
+
+        $this->user       = $user;
 		$this->tag        = $tag;
 		$this->riiinglink = $riiinglink;
 
@@ -49,11 +52,13 @@ class TagController extends Controller {
 		// If tag not found	
 		if(!$find)
 		{
-			$find = $this->tag->create(array('title' => $tag));
+			$find = $this->tag->create(array('title' => $tag, 'user_id' => \Auth::user()->id));
 		}
-		
+
+        $user       = $this->user->find(\Auth::user()->id);
 		$riiinglink = $this->riiinglink->find($id)->first();
 
+        $user->user_tags()->attach($find->id);
         $riiinglink->tags()->attach($find->id);
 		
 		return \Response::json( $find , 200 );
