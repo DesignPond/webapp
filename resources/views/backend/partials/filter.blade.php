@@ -13,7 +13,7 @@
 <?php
                             echo '<pre>';
                             print_r($droptags);
-                            echo '</pre>';exit;
+                            echo '</pre>';
         ?>
                         <select id="selectFilter" class="selectpicker" style="width:190px;" name="label">
                             <option data-filter="*" value="">Filtrer par label</option>

@@ -1,32 +1,13 @@
 @if(!empty($invited))
 
-    <div class="panel panel-default">
-        <div class="panel-heading panel-small">Tags</div>
-        <div class="panel-body">
-            <ul id="myTags" data-id="{{ $riiinglink_id }}">
-                @if(!$tags->isEmpty())
-                    @foreach($tags as $tag)
-                        <li>{{ $tag->title }}</li>
-                    @endforeach
-                @endif
-            </ul>
-        </div>
-    </div>
+    <?php if(isset($invited[1])){ unset($invited[1]); } ?>
+
+    @include('backend.partials.tags')
 
     <div class="panel panel-primary">
         <div class="panel-body">
-
             <ul class="chat">
                 <li>
-
-                    <?php
-                        if(isset($invited[1]))
-                        {
-                            $informations = $invited[1];
-                            unset($invited[1]);
-                        }
-                    ?>
-
                     <div class="row chat-header">
                         <div class="col-md-2">
                             <span class="chat-img"><img class="img-circle thumb64" alt="Image" src="{{ asset('users/'.$ringlink['invited_photo']) }}"></span>
@@ -40,9 +21,7 @@
                         @if(isset($groupes[$group]))
                             <div class="chat-msg">
                                 <div class="panel bg-info panel-small">
-                                    <div class="panel-body text-left">
-                                        {{ $groupes[$group] }}
-                                    </div>
+                                    <div class="panel-body text-left">{{ $groupes[$group] }}</div>
                                 </div>
                                 <dl class="dl-horizontal">
                                 @foreach($groupe_label as $type_id => $label)
@@ -56,7 +35,6 @@
 
                 </li>
             </ul>
-
         </div>
     </div>
 

@@ -1,15 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
-use App\Riiingme\Meta\Worker\MetaWorker;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Label\Worker\LabelWorker;
-use App\Riiingme\Groupe\Repo\GroupeInterface;
-use App\Riiingme\Type\Repo\TypeInterface;
+use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Tag\Repo\TagInterface;
 use App\Riiingme\Activite\Worker\ActiviteWorker;
-use App\Riiingme\Invite\Repo\InviteInterface;
-use App\Riiingme\Country\Repo\CountryInterface;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Commands\UpdateUser;
@@ -20,47 +16,27 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
 
 	protected $riiinglink;
-	protected $meta;
 	protected $label;
 	protected $groupe;
-	protected $type;
 	protected $user;
 	protected $activity;
-	protected $invite;
     protected $auth;
     protected $helper;
-    protected $country;
     protected $tags;
 
-	public function __construct(UserInterface $user, TagInterface $tags, CountryInterface $country, RiiinglinkWorker $riiinglink, MetaWorker $meta, LabelWorker $label, GroupeInterface $groupe, TypeInterface $type, InviteInterface $invite, ActiviteWorker $activity)
+	public function __construct(UserInterface $user, TagInterface $tags, RiiinglinkWorker $riiinglink, LabelWorker $label, GroupeWorker $groupe, ActiviteWorker $activity)
 	{
 
         $this->helper     = new \App\Riiingme\Helpers\Helper;
 		$this->user       = $user;
 		$this->riiinglink = $riiinglink;
-		$this->meta       = $meta;
 		$this->label      = $label;
 		$this->groupe     = $groupe;
-		$this->type       = $type;
 		$this->activity   = $activity;
-		$this->invite     = $invite;
-        $this->country    = $country;
         $this->tags       = $tags;
 
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
-
-		$groupes       = $this->groupe->getAll()->lists('titre','id');
-        $status        = $this->groupe->getAll()->lists('status','id');
-		$groupe_type   = $this->groupe->getAll($this->auth->user_type)->toArray();
-		$types         = $this->type->getAll()->lists('titre','id');
-        $groupes_user  = $this->groupe->getAll($this->auth->user_type)->lists('titre','id');
-
-		\View::share('groupes', $groupes);
-        \View::share('status', $status);
-		\View::share('groupe_type', $groupe_type);
-        \View::share('groupes_user', $groupes_user);
-		\View::share('types', $types);
 
 	}
 
@@ -88,9 +64,10 @@ class UserController extends Controller {
 	 */
 	public function partage()
 	{
-		$invites = $this->activity->getPendingInvites($this->auth->id);
+		$invites     = $this->activity->getPendingInvites($this->auth->id);
+        $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-		return view('backend.partage')->with(array('invites' => $invites));
+		return view('backend.partage')->with($depedencies + array('invites' => $invites));
 	}
 
     /**
@@ -115,10 +92,8 @@ class UserController extends Controller {
      */
     public function activites(Request $request)
     {
-        $take = $request->take;
-        $skip = $request->skip;
 
-        $activity = $this->activity->getPaginate($this->auth->id, $skip, $take);
+        $activity = $this->activity->getPaginate($this->auth->id, $request->skip, $request->take);
 
         echo view('backend.partials.activite', ['activity' => $activity]);
 
@@ -138,32 +113,6 @@ class UserController extends Controller {
 		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
 		return view('backend.show')->with(array('ringlink' => $ringlink, 'droptags' => $droptags,'items' => $items));
-	}
-
-	/**
-	 * Display the specified resource.
-	 * GET /user/link/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function link($id)
-	{
-        // Get riiinglink from id
-        $link = $this->riiinglink->riiinglinkItem($id);
-        $tags = $link->tags;
-        // Test if id is user_id from riinglink
-        if($this->auth->id != $link->host_id)
-        {
-            return redirect('/');
-        }
-
-		$metas     = $this->meta->getMetas($id);
-		$ringlink  = $this->riiinglink->getRiiinglinks($id,true);
-		$ringlink  = $this->riiinglink->convert($ringlink, $this->auth->labels->toArray());
-		$labels    = $this->riiinglink->convertToGroupLabel();
-
-        return view('backend.link')->with(array('ringlink' => $ringlink, 'tags' => $tags, 'metas' => $metas , 'labels' => $labels, 'riiinglink_id' => $id));
 	}
 
     /**
@@ -203,10 +152,10 @@ class UserController extends Controller {
 	public function edit($id)
 	{
 
-		$labels  = $this->label->labelByGroupeType($id);
-        $country = $this->country->getAll()->lists('phonecode','id');
+		$labels      = $this->label->labelByGroupeType($id);
+        $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-		return view('backend.edit')->with(array('labels' => $labels, 'country' => $country));
+		return view('backend.edit')->with($depedencies + array('labels' => $labels));
 	}
 
 	/**
