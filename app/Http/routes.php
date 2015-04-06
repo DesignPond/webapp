@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
     Route::post('updateMetas', 'MetasController@updateMetas');
-    Route::post('activites', array('as' => 'labels', 'uses' => 'UserController@activites'));
+
+    Route::post('activites', array('as' => 'activites', 'uses' => 'ActviteController@activites'));
 
     // Upload
     Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@updatePhoto'));
@@ -37,8 +38,8 @@ Route::group(['middleware' => 'auth'], function()
 
     // User
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'RiiinglinkController@show'));
-    Route::get('user/partage', array('as' => 'partage', 'uses' => 'UserController@partage'));
-    Route::get('user/timeline', array('as' => 'partage', 'uses' => 'UserController@timeline'));
+    Route::get('user/partage', array('as' => 'partage', 'uses' => 'ActviteController@partage'));
+    Route::get('user/timeline', array('as' => 'timeline', 'uses' => 'ActviteController@index'));
     Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
     Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
 

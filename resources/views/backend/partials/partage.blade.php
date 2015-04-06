@@ -1,6 +1,5 @@
 <?php unset($groupe_type[0]); ?>
 
-
 @if(!empty($groupe_type))
 
     <div class="well">

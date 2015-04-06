@@ -70,7 +70,7 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
             $results->with(array('tags','invite'));
         }
 
-        return $results->paginate(10);
+        return $results->paginate(9);
     }
 
     /**

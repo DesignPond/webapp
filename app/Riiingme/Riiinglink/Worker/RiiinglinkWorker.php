@@ -82,12 +82,12 @@ class RiiinglinkWorker{
 
     public function getRiiinglinkWithParams($user_id,$params)
     {
-        $items =  $this->riiinglink->findByHostWithParams($user_id,$params);
+        $pagination =  $this->riiinglink->findByHostWithParams($user_id,$params);
 
-        $collection = new Collection($items, new RiiinglinkTransformer);
+        $collection = new Collection($pagination, new RiiinglinkTransformer);
         $rootScope  = $this->fractal->createData($collection)->toArray();
 
-        return [$rootScope,$items];
+        return [$rootScope,$pagination];
     }
 
     public function convert($riiinglinks,$user_labels){

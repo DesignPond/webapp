@@ -21,13 +21,10 @@ class UserController extends Controller {
 	protected $user;
 	protected $activity;
     protected $auth;
-    protected $helper;
     protected $tags;
 
 	public function __construct(UserInterface $user, TagInterface $tags, RiiinglinkWorker $riiinglink, LabelWorker $label, GroupeWorker $groupe, ActiviteWorker $activity)
 	{
-
-        $this->helper     = new \App\Riiingme\Helpers\Helper;
 		$this->user       = $user;
 		$this->riiinglink = $riiinglink;
 		$this->label      = $label;
@@ -56,49 +53,6 @@ class UserController extends Controller {
 
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /user/create
-	 *
-	 * @return Response
-	 */
-	public function partage()
-	{
-		$invites     = $this->activity->getPendingInvites($this->auth->id);
-        $depedencies = $this->groupe->getDependencies($this->auth->user_type);
-
-		return view('backend.partage')->with($depedencies + array('invites' => $invites));
-	}
-
-    /**
-     * Show the timeline
-     * GET /user/timeline
-     *
-     * @return Response
-     */
-    public function timeline()
-    {
-        $activity = $this->activity->getPaginate($this->auth->id, 0, 6);
-        $total    = $this->activity->getTotal($this->auth->id);
-
-        return view('backend.timeline')->with(array('activity' => $activity, 'total' => $total));
-    }
-
-    /**
-     * Show the timeline
-     * GET /user/timeline
-     *
-     * @return Response
-     */
-    public function activites(Request $request)
-    {
-
-        $activity = $this->activity->getPaginate($this->auth->id, $request->skip, $request->take);
-
-        echo view('backend.partials.activite', ['activity' => $activity]);
-
-    }
-
     /**
 	 * Display the specified resource.
 	 * GET /user/{id}
@@ -110,9 +64,9 @@ class UserController extends Controller {
 	{
         $droptags = $this->tags->getAll($this->auth->id);
 
-		list($ringlink,$items) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
+		list($ringlink,$pagination) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
-		return view('backend.show')->with(array('ringlink' => $ringlink, 'droptags' => $droptags,'items' => $items));
+		return view('backend.show')->with(array('ringlink' => $ringlink, 'droptags' => $droptags,'items' => $pagination));
 	}
 
     /**
