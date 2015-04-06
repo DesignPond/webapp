@@ -24,14 +24,9 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
     /**
      * Riiinglinks for scope and user_id
      */
-    public function findBy($id,$scope,$nbr = null){
+    public function findBy($id,$scope,$params = null){
 
         $riiinglink = $this->riiinglink->$scope($id)->orderBy('created_at','desc');
-
-        if($nbr)
-        {
-            $riiinglink->take($nbr);
-        }
 
         return $riiinglink->get();
     }
@@ -62,12 +57,12 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         }
         else if(isset($params['search']) && !empty($params['search']))
         {
-            $results->with(array('tags','invite' => function($query) use ($params)
+            $results->with(array('tags','invite'))->whereHas('invite', function($query) use($params)
             {
                 $query->where('first_name', 'like', '%'.$params['search'].'%');
                 $query->orWhere('last_name', 'like', '%'.$params['search'].'%');
                 $query->orWhere('email', 'like', '%'.$params['search'].'%');
-            }));
+            });
         }
         else
         {
@@ -76,7 +71,19 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         if(isset($params['orderBy']) && !empty($params['orderBy']))
         {
-            $results->orderBy($params['orderBy'], 'asc');
+
+            if($params['orderBy'] == 'created_at')
+            {
+                $results->with(array('tags','invite'))->orderBy($params['orderBy'], 'asc');
+            }
+
+            if($params['orderBy'] == 'last_name')
+            {
+                $results->with(array('tags','invite'))->whereHas('invite', function($query) use($params)
+                {
+                    $query->orderBy('users.last_name', 'asc');
+                });
+            }
         }
 
         return $results->paginate(9);

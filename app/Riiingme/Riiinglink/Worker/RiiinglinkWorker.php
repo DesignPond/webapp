@@ -74,9 +74,9 @@ class RiiinglinkWorker{
 
     }
 
-    public function riiinglinkCollectionPaginate($user){
+    public function riiinglinkCollectionPaginate($user,$params){
 
-        return $this->riiinglink->findBy($user,'hosted');
+        return $this->riiinglink->findBy($user,'hosted',$params);
 
     }
 

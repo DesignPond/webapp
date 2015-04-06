@@ -62,6 +62,10 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
+        echo '<pre>';
+        print_r($request->all());
+        echo '</pre>';
+
         $droptags = $this->tags->getAll($this->auth->id);
 
 		list($ringlink,$pagination) = $this->riiinglink->getRiiinglinkWithParams($id,$request);

@@ -26,7 +26,15 @@
 
             </div><!-- /.col-lg-6 -->
             <div class="col-md-4">
-                <input type="text" id="quicksearch" class="form-control" placeholder="Rechercher...">
+                <form id="filterSearch" action="{{ Request::url() }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Rechercher...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">Envoyer</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
             </div><!-- /.col-lg-6 -->
 
         </div>

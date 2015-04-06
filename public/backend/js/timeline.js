@@ -1,23 +1,25 @@
 (function($) {
 
-    var base_url = location.protocol + "//" + location.host+"/";
-    var count = 5;
-    var total = $('#timeline-content').data('total');
+    var content = $('#timeline-content');
 
-    $(window).scroll(function()
+    var base_url = location.protocol + "//" + location.host + "/";
+    var count = 5;
+    var total = content.data('total');
+
+    if(content)
     {
-        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
-            if (count > total)
-            {
-                return false;
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                if (count > total) {
+                    return false;
+                }
+                else {
+                    loadArticle(count);
+                }
+                count = count + 5;
             }
-            else
-            {
-                loadArticle(count);
-            }
-            count = count + 5;
-        }
-    });
+        });
+    }
 
     function loadArticle(pageNumber){
 
@@ -32,7 +34,6 @@
         });
 
         return false;
-
     }
 
 })(jQuery);
