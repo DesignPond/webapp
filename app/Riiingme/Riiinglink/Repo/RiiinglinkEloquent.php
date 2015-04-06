@@ -53,21 +53,30 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         $results = $this->riiinglink->where('host_id','=',$user_id);
 
-        if(isset($params['search']))
+        if(isset($params['tag']) && !empty($params['tag']))
         {
-            $search = $params['search'];
-
-            $results->with(array('tags','invite' => function($query) use ($search)
+            $results->with(array('tags','invite'))->whereHas('tags', function($q) use($params)
             {
-                $query->where('first_name', 'like', '%'.$search.'%');
-                $query->orWhere('last_name', 'like', '%'.$search.'%');
-                $query->orWhere('email', 'like', '%'.$search.'%');
-
+                $q->where('tag_id', '=', $params['tag']);
+            });
+        }
+        else if(isset($params['search']) && !empty($params['search']))
+        {
+            $results->with(array('tags','invite' => function($query) use ($params)
+            {
+                $query->where('first_name', 'like', '%'.$params['search'].'%');
+                $query->orWhere('last_name', 'like', '%'.$params['search'].'%');
+                $query->orWhere('email', 'like', '%'.$params['search'].'%');
             }));
         }
         else
         {
             $results->with(array('tags','invite'));
+        }
+
+        if(isset($params['orderBy']) && !empty($params['orderBy']))
+        {
+            $results->orderBy($params['orderBy'], 'asc');
         }
 
         return $results->paginate(9);

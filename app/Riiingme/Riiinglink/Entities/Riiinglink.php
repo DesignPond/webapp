@@ -87,5 +87,4 @@ class Riiinglink extends Model{
         return $this->belongsToMany('App\Riiingme\Tag\Entities\Tag', 'riiinglink_tags', 'riiinglink_id', 'tag_id');
     }
 
-
 }

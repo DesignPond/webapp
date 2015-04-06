@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 
         'Illuminate\Html\HtmlServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
         'Laracasts\Generators\GeneratorsServiceProvider',
 
 	],
@@ -175,6 +176,7 @@ return [
 		'DB'        => 'Illuminate\Support\Facades\DB',
 		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
 		'Event'     => 'Illuminate\Support\Facades\Event',
+        'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
 		'File'      => 'Illuminate\Support\Facades\File',
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
         'Form'      => 'Illuminate\Html\FormFacade',
