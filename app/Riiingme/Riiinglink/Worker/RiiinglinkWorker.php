@@ -154,7 +154,7 @@ class RiiinglinkWorker{
 
         if(!empty($exist))
         {
-            $result = $this->helper->array_merge_recursive_new($exist,$new);
+            $result = $this->helper->addMetas($exist,$new);
 
             return serialize($result);
         }

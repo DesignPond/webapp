@@ -1,5 +1,4 @@
 <?php
-
     $id         = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : null);
     $used       = $helper->getUsedMetas($id , $metas, $groupe_id);
     $label_text = (isset($host[$groupe_id][$label]['label']) && $host[$groupe_id][$label]['label'] != '' ? $host[$groupe_id][$label]['label'] : false);
@@ -14,7 +13,7 @@
         </div>
         <div class="chat-msg-switch chat-switch-host">
             <label class="switch switch-sm">
-                <input type="checkbox" name="metas[{{$groupe_id}}][]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
+                <input type="checkbox" name="metas[{{$groupe_id}}][{{$label}}]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
                 <span></span>
             </label>
         </div>

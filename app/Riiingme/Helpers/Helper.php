@@ -174,7 +174,7 @@ class Helper{
 
         if(!empty($exist))
         {
-            foreach($exist as $group  => $labels)
+            foreach($exist as $group => $labels)
             {
                 if(isset($new[$group]))
                 {
@@ -188,7 +188,7 @@ class Helper{
         }
         else
         {
-            $data = $exist;
+            $data = $new;
         }
 
         return $data;
