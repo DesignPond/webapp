@@ -3,30 +3,28 @@
 
 <div class="row">
 
-    @if(!empty($ringlink['data']))
+    @if(!empty($riiinglinks))
 
-         @include('backend.partials.filter')
+        @include('backend.partials.filter')
 
-             @foreach($ringlink['data'] as $link)
+        @foreach($riiinglinks as $link)
 
-             <?php $tags = (!empty($link['tags']) ? implode(' ',$link['tags']): ''); ?>
-
-             <div class="col-lg-4 col-md-4 col-xs-12 <?php echo $tags; ?>">
-                 <a href="{{ url('user/link/'.$link['id']) }}">
+             <div class="col-lg-4 col-md-4 col-xs-12">
+                 <a href="{{ url('user/link/'.$link->id) }}">
                     <div class="panel">
                         <div class="panel-body riiinglink-card">
                             <span class="pull-left">
-                               <?php $photo = (!empty($link['invited_photo']) ? $link['invited_photo'] :'avatar.jpg'); ?>
+                               <?php $photo = (!empty($link->photo) ? $link->photo :'avatar.jpg'); ?>
                                <img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$photo) }}">
                             </span>
-                            <strong class="title"><?php echo (!empty($link['invited_name']) ? $link['invited_name'] :'Pas indiqué'); ?></strong>
+                            <strong class="title">{{ $link->invite->name }}</strong>
                         </div>
                     </div>
                  </a>
              </div>
-         @endforeach
+        @endforeach
 
-         <div class="col-md-12">{!! $items->render() !!}</div>
+        <div class="col-md-12">{!! $pagination->render() !!}</div>
 
     @else
          <div class="col-md-12">

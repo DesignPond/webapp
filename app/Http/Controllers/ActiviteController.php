@@ -8,7 +8,7 @@ use App\Riiingme\Activite\Worker\ActiviteWorker;
 
 use Illuminate\Http\Request;
 
-class ActviteController extends Controller {
+class ActiviteController extends Controller {
 
     protected $groupe;
     protected $user;

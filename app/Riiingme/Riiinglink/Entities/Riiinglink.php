@@ -42,6 +42,16 @@ class Riiinglink extends Model{
      *
      * @var query
      */
+    public function invite_sortAsc(){
+
+        return $this->belongsTo('App\Riiingme\User\Entities\User','invited_id','id')->orderBy('last_name', 'asc');
+    }
+
+    /**
+     * Invited infos belongs to host user through link
+     *
+     * @var query
+     */
     public function host(){
 
         return $this->belongsTo('App\Riiingme\User\Entities\User','host_id','id');

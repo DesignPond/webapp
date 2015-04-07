@@ -82,12 +82,25 @@ class RiiinglinkWorker{
 
     public function getRiiinglinkWithParams($user_id,$params)
     {
-        $pagination =  $this->riiinglink->findByHostWithParams($user_id,$params);
+        $pagination = $this->riiinglink->findByHostWithParams($user_id,$params);
 
-        $collection = new Collection($pagination, new RiiinglinkTransformer);
-        $rootScope  = $this->fractal->createData($collection)->toArray();
+        if(!$pagination->isEmpty())
+        {
+            $riiinglinks = $pagination->map(function($linked)
+            {
+                $labels = $linked->invite->labels;
+                $photo  = $this->helper->getKeyValue($labels,'type_id',12);
 
-        return [$rootScope,$pagination];
+                $photo = ($photo != '' ? $photo : 'avatar.jpg');
+                $linked->setAttribute('photo',$photo);
+
+                return $linked;
+            });
+
+            return [$pagination,$riiinglinks];
+        }
+
+        return [];
     }
 
     public function convert($riiinglinks,$user_labels){

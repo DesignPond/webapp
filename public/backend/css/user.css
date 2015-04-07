@@ -190,7 +190,7 @@
 }
 
 .panel .list-group{
-    margin-bottom: 11px;
+    margin-bottom:0;
 }
 
 .isEditable .linked:not(.used) {

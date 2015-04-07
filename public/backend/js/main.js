@@ -85,7 +85,7 @@
     });
 
     $('#scroll').slimScroll({
-        height: '465px'
+        height: '337px'
     });
 
     var base_url = location.protocol + "//" + location.host+"/";

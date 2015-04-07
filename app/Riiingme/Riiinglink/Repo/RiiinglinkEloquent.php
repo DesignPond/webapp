@@ -41,7 +41,7 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
     public function latest($user_id){
 
-        return $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'))->orderBy('created_at','desc')->take(8)->get();
+        return $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'))->orderBy('created_at','desc')->take(6)->get();
     }
 
     public function findByHostWithParams($user_id,$params){
@@ -55,34 +55,34 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
                 $q->where('tag_id', '=', $params['tag']);
             });
         }
-        else if(isset($params['search']) && !empty($params['search']))
+
+        if(isset($params['search']) && !empty($params['search']))
         {
-            $results->with(array('tags','invite'))->whereHas('invite', function($query) use($params)
-            {
-                $query->where('first_name', 'like', '%'.$params['search'].'%');
-                $query->orWhere('last_name', 'like', '%'.$params['search'].'%');
-                $query->orWhere('email', 'like', '%'.$params['search'].'%');
-            });
-        }
-        else
-        {
-            $results->with(array('tags','invite'));
+
+            $results->join('users', 'users.id', '=', 'riiinglinks.invited_id')
+                ->where(function($query) use($params)
+                {
+                    $query->where('first_name', 'like', '%'.$params['search'].'%');
+                    $query->orWhere('last_name', 'like', '%'.$params['search'].'%');
+                    $query->orWhere('email', 'like', '%'.$params['search'].'%');
+                })
+                ->select('riiinglinks.*','users.first_name','users.last_name','users.email')
+                ->with(['tags','invite']);
         }
 
         if(isset($params['orderBy']) && !empty($params['orderBy']))
         {
-
             if($params['orderBy'] == 'created_at')
             {
-                $results->with(array('tags','invite'))->orderBy($params['orderBy'], 'asc');
+                $results->orderBy('created_at', 'asc');
             }
 
             if($params['orderBy'] == 'last_name')
             {
-                $results->with(array('tags','invite'))->whereHas('invite', function($query) use($params)
-                {
-                    $query->orderBy('users.last_name', 'asc');
-                });
+                $results->join('users', 'users.id', '=', 'riiinglinks.invited_id')
+                    ->orderBy('users.last_name', 'asc')
+                    ->select('riiinglinks.*','users.last_name')       // just to avoid fetching anything from joined table
+                    ->with(['tags','invite']);
             }
         }
 

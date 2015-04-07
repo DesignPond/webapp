@@ -7363,9 +7363,9 @@ fieldset[disabled] .btn-orange.active {
 }
 .timeline > li,
 .timeline-alt > li {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   position: relative;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .timeline > li:before,
 .timeline-alt > li:before,
@@ -7399,16 +7399,16 @@ fieldset[disabled] .btn-orange.active {
 }
 .timeline > li.timeline-separator:before,
 .timeline-alt > li.timeline-separator:before {
-  content: attr(data-datetime);
-  display: inline-block;
-  min-width: 40px;
-  text-align: center;
-  padding: 0 18px;
-  line-height: 28px;
-  font-size: 11px;
-  background-color: #e6e9ee;
-  border-radius: 30px;
-  margin-left: 40px;
+    background-color: #e6e9ee;
+    border-radius: 10px;
+    content: attr(data-datetime);
+    display: inline-block;
+    font-size: 11px;
+    line-height: 22px;
+    margin-left: 40px;
+    min-width: 40px;
+    padding: 0 12px;
+    text-align: center;
 }
 .timeline > li.timeline-separator:after,
 .timeline-alt > li.timeline-separator:after {

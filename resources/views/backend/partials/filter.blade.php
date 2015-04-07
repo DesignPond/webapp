@@ -31,7 +31,7 @@
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Rechercher...">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Envoyer</button>
+                            <button class="btn btn-primary" type="submit">Envoyer</button>
                         </span>
                     </div><!-- /input-group -->
                 </form>
