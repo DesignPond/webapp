@@ -81,7 +81,7 @@ class ProcessInviteTest extends TestCase {
     {
         list($link1 , $link2) = $this->link->create(['host_id' => 1, 'invited_id' => 24]);
 
-        $this->command->syncLabels($link1->id, $link1->host_id, [2 => [1 => 2]]);
+        $this->command->syncLabels($link1->id, $link1->host_id, [2 => [1]]);
 
         $riinglink = $this->link->find($link1->id)->first();
         $expected  = [2 => [1 => 2]];

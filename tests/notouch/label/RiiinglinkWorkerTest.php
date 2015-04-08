@@ -60,4 +60,29 @@ class RiiinglinkWorkerTest extends TestCase {
 
 	}
 
+    /**
+     * A basic functional test example.
+     *
+     * @return void
+     */
+    public function testUpdateMetasSecond()
+    {
+        $object = new stdClass();
+        $metas = [ 2 => [1] ];
+
+        $object->labels = serialize($metas);
+
+        $new = [];
+
+        $actual = $this->worker->updateMetas($object,$new); // $inputs, $user_id, $groupe, $date = null
+
+        $expected = [
+            2 => [1,4,5],
+            3 => [1,6,3,7]
+        ];
+
+        $this->assertEquals($expected, unserialize($actual));
+
+    }
+
 }

@@ -16,12 +16,9 @@
                         <div class="input-group">
                             <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Envoyer à cette email">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">Go!</button>
-                            </span>
+                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">Go!</button></span>
                         </div><!-- /input-group -->
                     </div>
-
                     <div id="partage" class="row">
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;Je partage les informations suivantes:</strong></h4>
@@ -60,9 +57,7 @@
                                         <strong><a class="text-inverse" href="#">{{ $invite->invite->email }}</a></strong><br/>
                                         <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
                                     </p>
-                                    <p class="col-md-4 text-right">
-                                        <a href="#" class="btn btn-success btn-sm">Accepter</a>
-                                    </p>
+                                    <p class="col-md-4 text-right"><a href="#" class="btn btn-success btn-sm">Accepter</a></p>
                                 </div>
                             </li>
                         @endforeach

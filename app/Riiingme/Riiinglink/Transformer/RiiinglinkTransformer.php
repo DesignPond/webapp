@@ -134,7 +134,6 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
     public function getLabels($data)
     {
-
         if(!empty($data))
         {
             $labels = [];
@@ -144,6 +143,28 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
                 foreach($groupe as $type => $id)
                 {
                     $labels[$groupe_id][$type] = $this->getLabelItem($id);
+                }
+            }
+
+            return $labels;
+        }
+
+        return [];
+    }
+
+    public function getMetaLabelId($user_id,$metas){
+
+        if(!empty($metas))
+        {
+            $labels = [];
+
+            foreach($metas as $groupe_id => $type_id)
+            {
+                $label = $this->label->findByUserGroupeType($user_id,$groupe_id,$type_id);
+
+                if(!$label->isEmpty())
+                {
+                    $labels[$groupe_id][$type_id] = $this->getLabelItem($label->first()->id);
                 }
             }
 

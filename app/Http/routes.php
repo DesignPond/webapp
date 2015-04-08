@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
     Route::post('updateMetas', 'MetasController@updateMetas');
 
-    Route::post('activites', array('as' => 'activites', 'uses' => 'ActviteController@activites'));
+    Route::post('activites', array('as' => 'activites', 'uses' => 'ActiviteController@activites'));
 
     // Upload
     Route::post('upload', array('as' => 'upload', 'uses' => 'UploadController@updatePhoto'));

@@ -17,7 +17,6 @@ class CreateMetasTable extends Migration {
 
 			$table->increments('id');
 			$table->bigInteger('riiinglink_id');
-			$table->bigInteger('label_id');
             $table->text('labels');
 			$table->integer('rang');
 

@@ -29,7 +29,6 @@ class MetaEloquent implements MetaInterface {
 
         $meta = $this->meta->create([
             'riiinglink_id' => $data['riiinglink_id'],
-            'label_id'      => $data['label_id'],
             'labels'        => $data['labels']
         ]);
 

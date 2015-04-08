@@ -202,20 +202,40 @@ class HelperTest extends TestCase {
     public function testMetaCompare(){
 
         $new = [
-            3 => [3,6,7]
+            3 => [
+                3 => 1,
+                6 => 2,
+                7 => 3
+            ]
         ];
 
         $metas = [
-            2 => [1,4,5],
-            3 => [1,6]
+                2 => [
+                    1 => 4,
+                    4 => 5,
+                    5 => 6
+                ],
+                3 => [
+                    1 => 4,
+                    6 => 2
+                ]
         ];
 
         //$actual = $this->helper->array_merge_recursive_new($metas,$new); // $inputs, $user_id, $groupe, $date = null
         $actual = $this->helper->addMetas($metas,$new);
         
         $expected = [
-            2 => [1,4,5],
-            3 => [1,6,3,7]
+            2 => [
+                1 => 4,
+                4 => 5,
+                5 => 6
+            ],
+            3 => [
+                1 => 4,
+                6 => 2,
+                3 => 1,
+                7 => 3
+            ]
         ];
 
         $this->assertEquals($expected, $actual);

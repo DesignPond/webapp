@@ -25,7 +25,7 @@
                                 </div>
                                 <dl class="dl-horizontal">
                                 @foreach($groupe_label as $type_id => $label)
-                                    <dt>{{ $types[$type_id] }}</dt>
+                                    <dt>{{ $types[$type_id] or ''}}</dt>
                                     <dd>{{ $label }}</dd>
                                 @endforeach
                                 </dl>

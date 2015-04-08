@@ -17,14 +17,16 @@ class RiiinglinkWorker{
     protected $groupe;
     protected $labels;
     protected $meta;
+    protected $transformer;
 
-    public function __construct(Manager $fractal, RiiinglinkInterface $riiinglink, GroupeInterface $groupe, MetaInterface $meta)
+    public function __construct(Manager $fractal, RiiinglinkInterface $riiinglink, GroupeInterface $groupe, MetaInterface $meta, RiiinglinkTransformer $transformer)
     {
-        $this->fractal    = $fractal;
-        $this->riiinglink = $riiinglink;
-        $this->groupe     = $groupe;
-        $this->meta       = $meta;
-        $this->helper     = new \App\Riiingme\Helpers\Helper;
+        $this->fractal     = $fractal;
+        $this->riiinglink  = $riiinglink;
+        $this->groupe      = $groupe;
+        $this->meta        = $meta;
+        $this->transformer = $transformer;
+        $this->helper      = new \App\Riiingme\Helpers\Helper;
     }
 
     public function generate(){
@@ -125,14 +127,14 @@ class RiiinglinkWorker{
 
     }
 
-    public function setMetasForRiiinglink($id,$metas){
+    public function setMetasForRiiinglink($user_id,$id,$metas){
 
         $meta = $this->meta->findByRiiinglink($id);
 
         if(!$meta->isEMpty())
         {
             $meta     = $meta->first();
-            $newmetas = $this->updateMetas($meta,unserialize($metas));
+            $newmetas = $this->updateMetas($user_id,$meta,unserialize($metas));
 
             $meta->labels = $newmetas;
             $meta->save();
@@ -148,9 +150,11 @@ class RiiinglinkWorker{
 
     }
 
-    public function updateMetas($old,$new){
+    public function updateMetas($user_id,$old,$new){
 
         $exist = ($old->labels != '' ? unserialize($old->labels) : []);
+
+        $new   = $this->transformer->getMetaLabelId($user_id,$new);
 
         if(!empty($exist))
         {
