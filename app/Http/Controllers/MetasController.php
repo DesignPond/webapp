@@ -21,27 +21,39 @@ class MetasController extends Controller {
 	 * @param  array $data
 	 * @return json
 	 */
-	public function updateMetas(Request $request)
+	public function update(Request $request)
 	{
 		parse_str($request->input('riiinglink'), $data);
 
 		$id    = $data['riiinglink_id'];
-		$metas = $data['metas'];
 
-        $meta  = $this->meta->findByRiiinglink($id);
-
-        if(!$meta->isEMpty())
+        if(isset($data['metas']))
         {
-            $meta = $meta->first();
-            $meta->labels = serialize($metas);
-            $meta->save();
-        }
-        else
-        {
-            $this->meta->create([ 'riiinglink_id' => $id,  'labels'  => serialize($metas) ]);
+            $metas = $data['metas'];
+
+            $meta = $this->meta->findByRiiinglink($id);
+
+            if(!$meta->isEMpty())
+            {
+                $meta     = $meta->first();
+                $newmetas = $this->riiinglink->updateMetas($meta,$metas);
+
+                $meta->labels = $newmetas;
+                $meta->save();
+            }
+            else
+            {
+                $this->meta->create([
+                    'riiinglink_id' => $id,
+                    'label_id'      => 0,
+                    'labels'        => serialize($metas)
+                ]);
+            }
+
+            return \Response::json($metas,200);
         }
 
-		return \Response::json($metas,200);
+        return \Response::json('',200);
 
 	}
 

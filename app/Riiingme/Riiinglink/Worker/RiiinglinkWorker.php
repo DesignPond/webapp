@@ -134,7 +134,8 @@ class RiiinglinkWorker{
         if(!$meta->isEMpty())
         {
             $meta     = $meta->first();
-            $newmetas = $this->updateMetas($user_id,$meta,unserialize($metas));
+            $metas    = $this->transformer->getMetaLabelId($user_id,$metas);
+            $newmetas = $this->updateMetas($meta,$metas);
 
             $meta->labels = $newmetas;
             $meta->save();
@@ -150,22 +151,13 @@ class RiiinglinkWorker{
 
     }
 
-    public function updateMetas($user_id,$old,$new){
+    public function updateMetas($old,$new){
 
-        $exist = ($old->labels != '' ? unserialize($old->labels) : []);
+        $exist  = ($old->labels != '' ? unserialize($old->labels) : []);
 
-        $new   = $this->transformer->getMetaLabelId($user_id,$new);
+        $result = $this->helper->addMetas($exist,$new);
 
-        if(!empty($exist))
-        {
-            $result = $this->helper->addMetas($exist,$new);
-
-            return serialize($result);
-        }
-        else
-        {
-            return serialize($new);
-        }
+        return serialize($result);
 
     }
 

@@ -7,13 +7,28 @@ class RiiinglinkWorkerTest extends TestCase {
 
     protected $mock;
     protected $worker;
+    protected $meta;
+    protected $stub;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->worker = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
+        $metas = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16,
+            ]
+        ];
 
+        $this->worker = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
+        $this->meta   = \App::make('App\Riiingme\Meta\Repo\MetaInterface');
+        $this->stub   =  $this->meta->create([ 'riiinglink_id' => 50, 'labels' => serialize($metas) ]);
     }
 
     public function mock($class)
@@ -28,6 +43,8 @@ class RiiinglinkWorkerTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+        \DB::table('metas')->truncate();
+        $this->seed('MetasTableSeeder');
     }
 
 	/**
@@ -37,52 +54,29 @@ class RiiinglinkWorkerTest extends TestCase {
 	 */
 	public function testUpdateMetas()
 	{
-        $object = new stdClass();
-        $metas = [
-            2 => [1,4,5],
-            3 => [1,6]
-        ];
 
-        $object->labels = serialize($metas);
+        $new = [ 3 => [ 6 , 3 , 7]];
 
-        $new = [
-            3 => [3,6,7]
-        ];
+        $this->worker->setMetasForRiiinglink(1,50,$new);
 
-        $actual = $this->worker->updateMetas($object,$new); // $inputs, $user_id, $groupe, $date = null
+        $actual = $this->meta->find($this->stub->id);
 
         $expected = [
-            2 => [1,4,5],
-            3 => [1,6,3,7]
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                3 => 13,
+                6 => 16,
+                7 => 17
+            ]
         ];
 
-        $this->assertEquals($expected, unserialize($actual));
+       $this->assertEquals($expected, unserialize($actual->labels));
 
 	}
-
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testUpdateMetasSecond()
-    {
-        $object = new stdClass();
-        $metas = [ 2 => [1] ];
-
-        $object->labels = serialize($metas);
-
-        $new = [];
-
-        $actual = $this->worker->updateMetas($object,$new); // $inputs, $user_id, $groupe, $date = null
-
-        $expected = [
-            2 => [1,4,5],
-            3 => [1,6,3,7]
-        ];
-
-        $this->assertEquals($expected, unserialize($actual));
-
-    }
 
 }

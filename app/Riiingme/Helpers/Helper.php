@@ -172,17 +172,31 @@ class Helper{
 
         $data = [];
 
+        $all_groupes = range(1,5);
+
         if(!empty($exist))
         {
-            foreach($exist as $group => $labels)
+            foreach($all_groupes as $group_id) // 1,2,3,4,5
             {
-                if(isset($new[$group]))
+                if(isset($new[$group_id]))
                 {
-                    $data[$group] = array_merge($labels, array_diff($new[$group], $labels));
+                    if(isset($exist[$group_id]))
+                    {
+                        $data[$group_id] = $exist[$group_id] + $new[$group_id];
+                        ksort($data[$group_id]);
+                    }
+                    else
+                    {
+                        $data[$group_id] = $new[$group_id];
+                    }
                 }
                 else
                 {
-                    $data[$group] = $labels;
+                    if(isset($exist[$group_id]))
+                    {
+                        $data[$group_id] = $exist[$group_id];
+                        ksort($data[$group_id]);
+                    }
                 }
             }
         }
@@ -192,43 +206,6 @@ class Helper{
         }
 
         return $data;
-    }
-
-    public function array_merge_recursive_new()
-    {
-        $arrays = func_get_args();
-        $base   = array_shift($arrays);
-
-        if(!is_array($base)) $base = empty($base) ? array() : array($base);
-
-        foreach($arrays as $append)
-        {
-            if(!is_array($append)) $append = array($append);
-
-            foreach($append as $key => $value)
-            {
-                if(!array_key_exists($key, $base) and !is_numeric($key))
-                {
-                    $base[$key] = $append[$key];
-                    continue;
-                }
-
-                if(is_array($value) or ( isset($base[$key]) && is_array($base[$key]) && isset($append[$key])))
-                {
-                    $base[$key] = $this->array_merge_recursive_new($base[$key], $append[$key]);
-                }
-                else if(is_numeric($key))
-                {
-                    if(!in_array($value, $base)) $base[] = $value;
-                }
-                else
-                {
-                    $base[$key] = $value;
-                }
-            }
-        }
-
-        return $base;
     }
 
     public function getKeyValue($array,$key,$value){

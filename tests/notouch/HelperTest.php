@@ -203,38 +203,81 @@ class HelperTest extends TestCase {
 
         $new = [
             3 => [
-                3 => 1,
-                6 => 2,
-                7 => 3
+                6 => 16,
+                3 => 13,
+                7 => 17
             ]
         ];
 
         $metas = [
-                2 => [
-                    1 => 4,
-                    4 => 5,
-                    5 => 6
-                ],
-                3 => [
-                    1 => 4,
-                    6 => 2
-                ]
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16,
+            ]
         ];
 
         //$actual = $this->helper->array_merge_recursive_new($metas,$new); // $inputs, $user_id, $groupe, $date = null
         $actual = $this->helper->addMetas($metas,$new);
-        
+
         $expected = [
             2 => [
-                1 => 4,
-                4 => 5,
-                5 => 6
+                1 => 2,
+                4 => 3,
+                5 => 4
             ],
             3 => [
-                1 => 4,
-                6 => 2,
-                3 => 1,
-                7 => 3
+                1 => 11,
+                3 => 13,
+                6 => 16,
+                7 => 17
+            ]
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    public function testMetaCompareSecond(){
+
+        $metas = [
+            3 => [
+                6 => 16,
+                3 => 13,
+                7 => 17
+            ]
+        ];
+
+        $new = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16,
+            ]
+        ];
+
+        //$actual = $this->helper->array_merge_recursive_new($metas,$new); // $inputs, $user_id, $groupe, $date = null
+        $actual = $this->helper->addMetas($metas,$new);
+
+        $expected = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                3 => 13,
+                6 => 16,
+                7 => 17
             ]
         ];
 

@@ -158,13 +158,16 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         {
             $labels = [];
 
-            foreach($metas as $groupe_id => $type_id)
+            foreach($metas as $groupe_id => $types)
             {
-                $label = $this->label->findByUserGroupeType($user_id,$groupe_id,$type_id);
-
-                if(!$label->isEmpty())
+                foreach($types as $type_id)
                 {
-                    $labels[$groupe_id][$type_id] = $this->getLabelItem($label->first()->id);
+                    $label = $this->label->findByUserGroupeType($user_id,$groupe_id,$type_id);
+
+                    if(!$label->isEmpty())
+                    {
+                        $labels[$groupe_id][$type_id] = $label->first()->id;
+                    }
                 }
             }
 

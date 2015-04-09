@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function()
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
-    Route::post('updateMetas', 'MetasController@updateMetas');
+    Route::post('updateMetas', 'MetasController@update');
 
     Route::post('activites', array('as' => 'activites', 'uses' => 'ActiviteController@activites'));
 
@@ -83,9 +83,15 @@ Route::get('test', function()
     $meta = $meta->find(1);
     $labels = $meta->first()->labels;
 
+    $all = unserialize($labels);
     echo '<pre>';
-    print_r(unserialize($labels));
+    print_r($all);
+
+    print_r(array_keys($all));
     echo '</pre>';
+
+
+
 
 });
 
