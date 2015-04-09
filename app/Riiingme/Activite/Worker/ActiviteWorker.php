@@ -2,16 +2,19 @@
 
 use App\Riiingme\Activite\Repo\ActiviteInterface;
 use App\Riiingme\User\Repo\UserInterface;
+use App\Riiingme\Invite\Repo\InviteInterface;
 
 class ActiviteWorker{
 
     protected $activite;
+    protected $invite;
     protected $user;
 
-    public function __construct(ActiviteInterface $activite, UserInterface $user){
+    public function __construct(ActiviteInterface $activite, InviteInterface $invite, UserInterface $user){
 
         $this->activite = $activite;
-        $this->user = $user;
+        $this->invite   = $invite;
+        $this->user     = $user;
     }
 
     public function getActivites($user_id){
@@ -35,11 +38,7 @@ class ActiviteWorker{
 
     public function getPendingInvites($user_id){
 
-        $user = $this->user->find($user_id);
-        $invitations = $user->activites()->with('invite')->where('invited_id','=',null)->get();
-        $invitations->sortByDesc('created_at');
-
-        return $invitations;
+        return $this->invite->getPending($user_id);
     }
 
     public function getPaginate($user_id, $skip, $take){

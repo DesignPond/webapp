@@ -85,6 +85,11 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
                     ->with(['tags','invite']);
             }
         }
+        else
+        {
+            $results->orderBy('created_at', 'desc');
+        }
+
 
         return $results->paginate(9);
     }
