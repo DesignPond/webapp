@@ -31,9 +31,7 @@
                                     <div class="media-heading">
                                         <p class="mb-sm">
                                             <strong>
-                                                <a href="{{ url('user/link/'.$link->id) }}" class="text-inverse">
-                                                    {{ $link->invite->first_name }}  {{ $link->invite->last_name }}
-                                                </a>
+                                                <a href="{{ url('user/link/'.$link->id) }}" class="text-inverse">{{ $link->invite->name }}</a>
                                             </strong>
                                         </p>
                                     </div>
@@ -57,9 +55,7 @@
                     <div class="panel-title">Bienvenue!</div>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        Vous n'avez encore aucun riiinglinks
-                    </li>
+                    <li class="list-group-item">Vous n'avez encore aucun riiinglinks</li>
                     <li class="list-group-item">
                         <a href="{{ url('user/partage') }}" class="btn btn-sm btn-info">
                             <small>Commencer à envoyer des invitations</small>

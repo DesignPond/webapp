@@ -14,6 +14,14 @@ class Invite extends \Eloquent{
      */
     protected $fillable = array('email','user_id','invited_id','partage_host','partage_invited');
 
+    public function getUrlTokenAttribute()
+    {
+        $email = base64_encode($this->email);
+        $url   = url('invite?token='.$this->token.'&ref='.$email.'');
+
+        return $url;
+    }
+
     /**
      * Labels belongs to user
      *

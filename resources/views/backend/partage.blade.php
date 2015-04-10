@@ -44,21 +44,17 @@
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title"><i class="icon-location"></i> &nbsp;Demandes reçues</h4>
+                <h4 class="panel-title"><i class="icon-star"></i> &nbsp;Demandes reçues</h4>
             </div>
             <div class="panel-body">
-                @if(!$invites->isEmpty())
+                @if(!$demandes->isEmpty())
                     <!-- List group -->
                     <ul class="list-group">
-                        @foreach($invites as $invite)
+                        @foreach($demandes as $demande)
                             <li class="list-group-item">
-                                <div class="row">
-                                    <p class="col-md-8">
-                                        <strong><a class="text-inverse" href="#">{{ $invite->invite->email }}</a></strong><br/>
-                                        <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
-                                    </p>
-                                    <p class="col-md-4 text-right"><a href="#" class="btn btn-success btn-sm">Accepter</a></p>
-                                </div>
+                                <strong>{{ $demande->user->email }}</strong>
+                                <a href="{{ $demande->url_token  }}" class="btn btn-success pull-right">Accepter</a><br/>
+                                <small class="text-muted">{{ $demande->created_at->format('Y-m-d H:i:s') }}</small>
                             </li>
                         @endforeach
                     </ul>
@@ -79,12 +75,9 @@
                     <ul class="list-group">
                         @foreach($invites as $invite)
                             <li class="list-group-item">
-                                <div class="row">
-                                    <p class="mb-sm col-md-7">
-                                        <strong><a class="text-inverse" href="#">{{ $invite->invite->email }}</a></strong><br/>
-                                        <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
-                                    </p>
-                                </div>
+                                <strong>{{ $invite->email }}</strong>
+                                <span class="clearfix"></span>
+                                <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
                             </li>
                         @endforeach
                     </ul>

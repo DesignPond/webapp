@@ -28,7 +28,6 @@ class ActiviteWorker{
         $result->sortByDesc('created_at');
 
         return $result;
-
     }
 
     public function getTotal($user_id){
@@ -39,6 +38,11 @@ class ActiviteWorker{
     public function getPendingInvites($user_id){
 
         return $this->invite->getPending($user_id);
+    }
+
+    public function getAskInvites($email){
+
+        return $this->invite->getAsked($email);
     }
 
     public function getPaginate($user_id, $skip, $take){
