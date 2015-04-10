@@ -50,7 +50,7 @@ class UserController extends Controller {
 	{
 
         $latest    = $this->riiinglink->getLatest($this->auth->id);
-		$activity  = $this->activity->getPaginate($this->auth->id, 0, 6);
+		$activity  = $this->activity->getPaginate($this->auth->id, 0, 8);
 
 		return view('backend.index')->with(array( 'activity' => $activity, 'latest' => $latest));
 

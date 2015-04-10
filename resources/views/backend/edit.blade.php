@@ -68,7 +68,7 @@
 
                         <fieldset class="row border">
                             <h4>Informations</h4>
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-12">
                                 @if($user->user_type == '1')
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Prénom</label>
@@ -101,7 +101,8 @@
                                 <input type="hidden" name="info[id]" value="{{ $user->id }}">
                                 <input type="hidden" name="info[user_type]" value="{{ $user->user_type }}">
                             </div>
-                            <button class="btn btn-primary btn-sm btn-save" type="submit">Enregistrer</button>
+                            <span class="clearfix"></span><br/>
+                            <button class="btn btn-primary btn-sm pull-right" type="submit">Enregistrer</button>
                         </fieldset>
 
                         @foreach($groupe_type as $groupe)
@@ -121,7 +122,7 @@
 
                                <fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $groupe['id'] }}">
                                     <h4 class="title-adresse">{{ $groupe['titre'] }} <small class="text-danger">Temporaire</small></h4>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-xs-12">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" for="exampleInputEmail1">Pour la période</label>
                                             <div class="col-sm-8">
@@ -131,7 +132,7 @@
                             @else
                                 <fieldset class="row border">
                                     <h4 class="title-adresse">{{ $groupe['titre'] }}</h4>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-xs-12">
                             @endif
 
                                 @foreach($groupe['groupe_type'] as $types)
@@ -152,14 +153,15 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-12">
                                 @if(!$temp && !$exist)
                                     <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $groupe['id'] + 2 }}" aria-expanded="false" aria-controls="collapseExample">
                                        Indiquer une <span>{{ $groupe['titre'] }}</span> temporaire
                                     </a>
                                 @endif
                             </div>
-                            <button class="btn btn-primary btn-sm btn-save" type="submit">Enregistrer</button>
+                            <span class="clearfix"></span><br/>
+                            <button class="btn btn-primary btn-sm pull-right" type="submit">Enregistrer</button>
                             </fieldset>
                         @endforeach
 

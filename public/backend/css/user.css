@@ -877,3 +877,15 @@ Autocomplete ui
     color: #212121;
     font-weight: normal;
 }
+
+@media (max-width: 990px) {
+    .btn-collapse {
+        width: 100%;
+        margin: 20px 0 10px 0;
+        min-height: 35px;
+    }
+
+    .btn-collapse span{
+        display: inline-block;
+    }
+}

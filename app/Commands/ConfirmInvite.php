@@ -41,8 +41,8 @@ class ConfirmInvite extends Command implements SelfHandling {
         if($invite && $user)
         {
             // Update invite with new user id
-            $this->invite->invited_id = $this->user->id;
-            $this->invite->save();
+            $invite->invited_id = $user->id;
+            $invite->save();
 
             // User is registred create riiinglink
             $this->dispatch(new CreateRiiinglink($user,$invite));

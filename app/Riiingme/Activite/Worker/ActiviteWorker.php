@@ -22,7 +22,7 @@ class ActiviteWorker{
         $user = $this->user->find($user_id);
 
         $activites   = $user->invitations()->with('host')->orderBy('created_at', 'desc')->get();
-        $invitations = $user->activites()->with('invited')->orderBy('created_at', 'desc')->get();
+        $invitations = $user->activites()->with('invited','invite')->orderBy('created_at', 'desc')->get();
 
         $result = $activites->merge($invitations);
         $result->sortByDesc('created_at');

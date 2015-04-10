@@ -42,17 +42,19 @@
             <div class="panel panel-info">
                 <div class="panel-heading"><div class="panel-title">Bienvenue sur RiiingMe {{ $user->name }}!</div></div>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="media">
-                            <a class="media-left media-middle text-muted" href="#"><em class="fa fa-home fa-2x"></em></a>
-                            <div class="media-body">
-                                <p class="text-bold">
-                                    <span>Vous n'avez pas indiqué vos informations</span>
-                                    <a href="{{ url('user/'.$user->id) }}" class="btn btn-primary pull-right">Mettre à jour!</a>
-                                </p>
+                    @if($user->labels->isEmpty())
+                        <li class="list-group-item">
+                            <div class="media">
+                                <a class="media-left media-middle text-muted" href="#"><em class="fa fa-home fa-2x"></em></a>
+                                <div class="media-body">
+                                    <p class="text-bold">
+                                        <span>Vous n'avez pas indiqué vos informations</span>
+                                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-primary pull-right">Mettre à jour!</a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endif
                     <li class="list-group-item">
                         <div class="media">
                             <a class="media-left media-middle text-muted" href="#"><em class="fa fa-paper-plane fa-2x"></em></a>
@@ -85,24 +87,69 @@
                         <div id="scroll">
                             <ul class="timeline-alt">
                                 @foreach($activity as $event)
-                                    <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
-                                    <li><!-- START timeline item-->
-                                        @if($event->name == 'created_riiinglink')
-                                            <div class="timeline-badge timeline-badge-sm thumb-32 bg-purple"><em class="fa fa-link"></em></div>
-                                            <div class="timeline-panel">
+                                    <?php
+                                    /*
+                                    echo '<pre>';
+                                    print_r($event);
+                                    echo '</pre>';   */
+
+                                    ?>
+
+                                        <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
+
+                                        <li><!-- START timeline item-->
+                                            @if($event->name == 'created_riiinglink')
+
                                                 @if($event->user_id == $user->id)
-                                                    <strong>Vous avez accepté le partage</strong><div class="text-muted">Avec: <a href="">{{ $event->invited->name }}</a></div>
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-primary"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Vous avez accepté le partage</strong>
+                                                        <div class="text-muted">Avec: <a href="">{{ $event->invited->name }}</a></div>
+                                                    </div>
                                                 @else
-                                                    <strong>Partage accepté</strong><div class="text-muted">Par: <a href="">{{ $event->host->name or $event->host->company }}</a></div>
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-success"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Partage accepté</strong>
+                                                        <div class="text-muted">Par: <a href="">{{ $event->host->name  }}</a></div>
+                                                    </div>
                                                 @endif
-                                            </div>
-                                        @else
-                                            <div class="timeline-badge timeline-badge-sm thumb-32 bg-purple"><em class="fa fa-star"></em></div>
-                                            <div class="timeline-panel">
-                                                <strong>Vous avez envoyé une invitation</strong><div class="text-muted"><a href=""></a></div>
-                                            </div>
-                                        @endif
-                                    </li><!-- END timeline item-->
+
+                                            @elseif($event->name == 'created_invite')
+
+                                                @if($event->user_id == $user->id)
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-warning"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Vous avez envoyé une invitation</strong>
+
+                                                        <div class="text-muted">A: <a href="">{{ $event->invite->email }}</a></div>
+                                                    </div>
+                                                @elseif($event->invited_id == null)
+
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-primary"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Vous avez une invitation</strong>
+                                                        <div class="text-muted">De: <a href="">{{ $event->invited->name }}</a></div>
+                                                    </div>
+                                                @endif
+
+                                            @elseif($event->name == 'updated_invite')
+
+                                                @if($event->user_id == $user->id)
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-primary"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Vous avez accepté l'invitation</strong>
+                                                        <div class="text-muted">De: <a href="">{{ $event->invited->name }}</a></div>
+                                                    </div>
+                                                @elseif($event->invited_id == $user->id)
+                                                    <div class="timeline-badge timeline-badge-sm thumb-32 bg-primary"><em class="fa fa-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <strong>Invitation accepté</strong>
+                                                        <div class="text-muted">Par: <a href="">{{ $event->host->name }}</a></div>
+                                                    </div>
+                                                @endif
+
+                                            @endif
+                                        </li><!-- END timeline item-->
                                 @endforeach
                             </ul>
                         </div>

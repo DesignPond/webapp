@@ -17,12 +17,12 @@
            if($activite->user_id == $user->id)
            {
                $partage = '<strong>Vous avez accepté le partage</strong><div class="text-primary">Avec: '.  $activite->invited->name .'</div>';
-               $color   = 'purple';
+               $color   = 'primary';
            }
            else
            {
                $partage = '<strong>Partage accepté</strong><div class="text-primary">Par: '. $activite->host->name or $activite->host->company.'</div>';
-               $color   = 'warning';
+               $color   = 'success';
            }
 
            if( $month != $activite->created_at->month )

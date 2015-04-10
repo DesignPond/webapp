@@ -18,7 +18,7 @@
             <!-- START list item-->
             @foreach($demandes as $demande)
                 <li>
-                    <a class="p" href="#">
+                    <a class="p" href="{{ url('user/partage') }}">
                         <!-- START media preview-->
                         <div class="media">
                             <div class="media-body clearfix">
