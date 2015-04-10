@@ -14,8 +14,7 @@ class SendInviteRequest extends Request {
 
         $factory->extend('labels', function ($attribute, $value, $parameters)
         {
-            $user_id = $this->data['user_id'];
-            $labels  = $this->label->findByUser($user_id);
+            $labels  = $this->label->findByUser($value);
 
             return ($labels->isEmpty() ? false : true);
         },
@@ -46,7 +45,7 @@ class SendInviteRequest extends Request {
 	public function rules()
 	{
 		return [
-            'email'        => 'required',
+            'email'        => 'required|email',
             'user_id'      => 'required|exists:users,id|labels'
 		];
 	}

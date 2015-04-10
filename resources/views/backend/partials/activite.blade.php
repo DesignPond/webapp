@@ -47,6 +47,7 @@
 
         <?php $time  = $activite->created_at->toDateString();  ?>
         <?php $month = $activite->created_at->month; ?>
+
     @endforeach
 @endif
 

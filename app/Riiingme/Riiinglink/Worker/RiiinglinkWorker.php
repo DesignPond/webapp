@@ -86,7 +86,7 @@ class RiiinglinkWorker{
     {
         $pagination = $this->riiinglink->findByHostWithParams($user_id,$params);
 
-        if(!$pagination->isEmpty())
+        if($pagination->count() > 0 )
         {
             $riiinglinks = $pagination->map(function($linked)
             {
@@ -102,7 +102,7 @@ class RiiinglinkWorker{
             return [$pagination,$riiinglinks];
         }
 
-        return [];
+        return [ [],[] ];
     }
 
     public function convert($riiinglinks,$user_labels){

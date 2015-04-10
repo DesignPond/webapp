@@ -35,6 +35,9 @@ class UserController extends Controller {
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
 
+        $demandes = $this->activity->getAskInvites($this->auth->email);
+        \View::share('demandes', $demandes);
+
 	}
 
 	/**
@@ -62,15 +65,13 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
-/*        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';*/
 
-        $droptags = $this->tags->getAll($this->auth->id);
+        //$droptags = $this->tags->getAll($this->auth->id);
+        $droptags = [];
 
 		list($pagination,$riiinglinks) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
-		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'droptags' => $droptags,'pagination' => $pagination));
+		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'droptags' => $droptags , 'pagination' => $pagination));
 	}
 
     /**

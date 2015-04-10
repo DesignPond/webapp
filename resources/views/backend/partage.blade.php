@@ -6,7 +6,7 @@
 
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Envoyer une demande</div>
+                <div class="panel-title">Envoyer une demande de partage</div>
             </div>
             <div class="panel-body">
 
@@ -14,7 +14,7 @@
 
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Envoyer à cette email">
+                            <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Recherche email ou nom/prénom">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                             <span class="input-group-btn"><button class="btn btn-primary" type="submit">Go!</button></span>
                         </div><!-- /input-group -->
@@ -54,12 +54,14 @@
                             <li class="list-group-item">
                                 <strong>{{ $demande->user->email }}</strong>
                                 <a href="{{ $demande->url_token  }}" class="btn btn-success pull-right">Accepter</a><br/>
-                                <small class="text-muted">{{ $demande->created_at->format('Y-m-d H:i:s') }}</small>
+                                <small title="{{ $demande->created_at->format('Y-m-d H:i:s') }}" class="text-muted">
+                                    <i class="fa fa-clock-o"></i> &nbsp; {{ $demande->created_at->format('Y-m-d') }}
+                                </small>
                             </li>
                         @endforeach
                     </ul>
                 @else
-                    <div class="panel-body"><p>Encore aucune invitations en cours</p></div>
+                    Encore aucune demandes reçues
                 @endif
             </div>
         </div>
@@ -75,14 +77,15 @@
                     <ul class="list-group">
                         @foreach($invites as $invite)
                             <li class="list-group-item">
+                                <small class="label label-warning" title="{{ $invite->created_at->format('Y-m-d H:i:s') }}">
+                                    <i class="fa fa-clock-o"></i> &nbsp;{{ $invite->created_at->format('Y-m-d') }}
+                                </small> &nbsp;
                                 <strong>{{ $invite->email }}</strong>
-                                <span class="clearfix"></span>
-                                <small class="text-muted">{{ $invite->created_at->format('Y-m-d H:i:s') }}</small>
                             </li>
                         @endforeach
                     </ul>
                 @else
-                    <div class="panel-body"><p>Encore aucune invitations en cours</p></div>
+                   Encore aucune invitations en cours
                 @endif
             </div>
         </div>

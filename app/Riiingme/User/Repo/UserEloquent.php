@@ -26,8 +26,7 @@ class UserEloquent implements UserInterface {
 
     public function search($term){
 
-        return $this->user->where('email','LIKE', '%'.$term.'%')->get();
-
+        return $this->user->where('email','=', $term)->orWhere('first_name', 'like', '%'.$term.'%')->orWhere('last_name', 'like', '%'.$term.'%')->get();
     }
 
     public function findByEmail($email){

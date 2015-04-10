@@ -25,6 +25,8 @@ class ActiviteController extends Controller {
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
 
+        $demandes = $this->activity->getAskInvites($this->auth->email);
+        \View::share('demandes', $demandes);
     }
 
     /**
@@ -50,11 +52,9 @@ class ActiviteController extends Controller {
     public function partage()
     {
         $invites     = $this->activity->getPendingInvites($this->auth->id);
-        $demandes    = $this->activity->getAskInvites($this->auth->email);
-
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-        return view('backend.partage')->with($depedencies + array('invites' => $invites, 'demandes' => $demandes));
+        return view('backend.partage')->with($depedencies + array('invites' => $invites));
     }
 
     /**

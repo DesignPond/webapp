@@ -8,6 +8,7 @@ use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Meta\Worker\MetaWorker;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
+use App\Riiingme\Activite\Worker\ActiviteWorker;
 
 class RiiinglinkController extends Controller {
 
@@ -15,8 +16,9 @@ class RiiinglinkController extends Controller {
     protected $user;
     protected $meta;
     protected $groupe;
+    protected $activity;
 
-    public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink)
+    public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink, ActiviteWorker $activity)
     {
         $this->middleware('auth');
 
@@ -24,8 +26,12 @@ class RiiinglinkController extends Controller {
         $this->meta       = $meta;
         $this->riiinglink = $riiinglink;
         $this->groupe     = $groupe;
+        $this->activity   = $activity;
 
         $this->auth = $this->user->find(\Auth::user()->id);
+
+        $demandes = $this->activity->getAskInvites($this->auth->email);
+        \View::share('demandes', $demandes);
     }
 
 	/**

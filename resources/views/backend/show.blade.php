@@ -30,8 +30,8 @@
          <div class="col-md-12">
              <div class="panel">
                 <div class="panel-body">
-                    <p>Vous n'avez encore aucun contact. <a href="{{ url('user/partage') }}" class="btn btn-sm btn-info"><small>Commencer à envoyer des invitations</small></a>
-                    </p>
+                    <p>Vous n'avez encore aucun contact</p>
+                    <p><a href="{{ url('user/partage') }}" class="btn btn-sm btn-success"><small>Envoyer des invitations</small></a></p>
                 </div>
              </div>
          </div>

@@ -11,7 +11,7 @@
     <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
     <meta name="token" content="<?php echo csrf_token(); ?>">
     <meta name="token_id" content="<?php echo base64_encode($user->id); ?>">
-    <title>Dashboard</title>
+    <title>RiiingMe</title>
     <!-- App CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}">

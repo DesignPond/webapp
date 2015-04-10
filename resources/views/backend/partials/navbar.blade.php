@@ -3,24 +3,17 @@
     <div class="sidebar-wrapper">
         <div class="sidebar">
             <div class="sidebar-nav">
-
                 <!-- START sidebar buttons-->
                 <div class="sidebar-buttons">
-                    <div class="">
+                    <div class="text-center">
                         <img id="userPhoto" class="mb center-block img-circle img-responsive thumb64" alt="" src="{{ asset('users/'.$user->user_photo) }}">
-                        <div class="text-center">
-                            <h4 class="text-bold m0 ng-binding">{{ $user->name }}</h4>
-                        </div>
+                        <h4 class="text-bold m0 ng-binding">{{ $user->name }}</h4>
                     </div>
                 </div>
-
-                <!-- END sidebar buttons-->
                 <!-- START sidebar nav-->
                 <ul class="nav">
                     <!-- Iterates over all sidebar items-->
-                    <li class="nav-heading">
-                        <span class="text-muted">Navigation</span>
-                    </li>
+                    <li class="nav-heading"><span class="text-muted">Navigation</span></li>
                     <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
                         <a title="Dashboard" href="{{ url('/user') }}">
                             <em class="sidebar-item-icon icon-head"></em>
@@ -51,7 +44,6 @@
                             <em class="sidebar-item-icon icon-power"></em><span>Log out</span>
                         </a>
                     </li>
-
                 </ul>
                 <!-- END sidebar nav-->
             </div>
