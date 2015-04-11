@@ -7,6 +7,8 @@ class Meta extends Model{
 
     use RecordsChanges;
 
+    protected static $recordEvents = ['created','updated','deleted'];
+
     /**
      * No timestamps
      *
@@ -19,7 +21,7 @@ class Meta extends Model{
      *
      * @var array
      */
-    protected $fillable = array('riiinglink_id', 'label_id', 'labels');
+    protected $fillable = array('riiinglink_id', 'labels');
 
     /**
      * Metas belongs to one label

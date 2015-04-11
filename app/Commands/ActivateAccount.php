@@ -3,15 +3,16 @@
 use App\Commands\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use App\Riiingme\User\Repo\UserInterface;
 
 class ActivateAccount extends Command implements SelfHandling {
 
     protected $user;
+    protected $token;
 
-    public function __construct(UserInterface $user)
+    public function __construct($token)
     {
-        $this->user = $user;
+        $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->token = $token;
     }
 
 	/**
@@ -21,7 +22,9 @@ class ActivateAccount extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
+        //$this->user->activate($this->token);
 
+        dd('activated!!');
 	}
 
 }

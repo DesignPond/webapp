@@ -1,18 +1,46 @@
-<!DOCTYPE html>
-<html lang="fr_FR">
-<head>
-    <meta charset="utf-8">
-</head>
-<body style="font-family: arial, sans-serif;">
-<h2 style="font-family: arial, sans-serif; color: #dd0330;font-size: 20px;font-weight: 300;letter-spacing: 0;line-height: 30px;">Riiingme</h2>
-<h3 style="font-family: arial, sans-serif;">Inscription sur Riiingme</h3>
-<div style="font-family: arial, sans-serif;">Pour confirmer votre inscription sur www.riiingme.ch veuillez suivre ce lien:
-    <p style="font-family: arial, sans-serif;">
-        <a style="text-align:center;font-size:13px;font-family:arial,sans-serif;
-			color:white;font-weight:bold;background-color: #dd0330;border: 1px solid #cc002a;
-			text-decoration:none;display:inline-block;min-height:27px;padding-left:8px;padding-right:8px;
-			line-height:27px;border-radius:2px;border-width:1px" href="{{ URL::to('user/activation', array($token)) }}">Confirmer l'adresse email </a></p>
-</div>
-<p><a style="font-family: arial, sans-serif;color: #444; font-size: 13px;" href="http://www.riiingme.ch">www.riiingme.ch</a></p>
-</body>
-</html>
+
+@extends('emails.layouts.notification')
+@section('content')
+
+    <table width="528" border="0" align="center" cellpadding="0" cellspacing="0" class="mainContent">
+        <tr><td height="20"></td></tr>
+        <tr>
+            <td>
+                <table border="0" align="left" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="section-item">
+                    <tr><td height="6"></td></tr>
+                    <tr>
+                        <td>
+                            <a href="{{ url('/') }}" style="width: 88px; display: block; border-style: none !important; border: 0 !important;">
+                                <img width="88" height="88" border="0" style="display: block;" src="<?php echo asset('backend/images/email/image1.png');?>" alt="image" class="section-img" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr><td height="10"></td></tr>
+                </table>
+                <table border="0" align="left" width="10" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                    <tr><td height="30" width="10"></td></tr>
+                </table>
+                <table border="0" width="400" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="section-item">
+                    <tr>
+                        <td style="color: #484848; line-height: 22px; font-size: 16px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
+                            <h3 style="font-family: arial, sans-serif;">Inscription sur RiiingMe</h3>
+                            <p style="font-size:13px;font-family: arial, sans-serif;">Bonjour <strong>{{ $name }}</strong>, <br/>Pour confirmer votre inscription sur RiiingMe veuillez suivre ce lien:</p>
+                        </td>
+                    </tr>
+                    <tr><td height="5"></td></tr>
+                    <tr>
+                        <td>
+                            <a style="text-align:center;font-size:13px;font-family:arial,sans-serif;font-weight: normal;
+                                                color:white;background-color: #3996d3;text-decoration:none;display:inline-block;
+                                                min-height:35px;padding-left:15px;padding-right:15px;
+                                                line-height:35px;border-radius:2px;" href="{{ url('activation?token='.$token) }}">Confirmer l'adresse email</a>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td height="20"></td></tr>
+    </table>
+
+@stop

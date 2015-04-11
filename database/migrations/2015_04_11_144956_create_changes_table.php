@@ -14,9 +14,11 @@ class CreateChangesTable extends Migration {
 	{
 		Schema::create('changes', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('user_id');
+            $table->integer('riiinglink_id');
             $table->integer('meta_id');
-            $table->dateTime('changed_at');
+            $table->date('changed_at');
             $table->timestamps();
         });
 	}

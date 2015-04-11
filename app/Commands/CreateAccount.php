@@ -40,6 +40,8 @@ class CreateAccount extends Command implements SelfHandling {
             'activation_token' => $activation_token
         ]);
 
+        \Event::fire(new \App\Events\AccountWasCreated($user));
+
         return $user;
 	}
 

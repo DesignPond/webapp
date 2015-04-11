@@ -14,6 +14,10 @@ class EventServiceProvider extends ServiceProvider {
 		'event.name' => [
 			'EventListener',
 		],
+
+        'App\Events\AccountWasCreated' => [
+            'App\Handlers\Events\SendActivationConfirmation',
+        ],
 	];
 
 	/**

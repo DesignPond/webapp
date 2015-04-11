@@ -16,7 +16,7 @@ class Change extends Model {
      *
      * @var array
      */
-    protected $fillable = array('meta_id', 'user_id', 'changed_at');
+    protected $fillable = array('meta_id', 'user_id', 'riiinglink_id', 'changed_at','name');
 
     public function user()
     {

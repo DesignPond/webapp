@@ -48,7 +48,6 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('export', 'ExportController');
 });
 
-
 Route::group(['namespace' => 'Auth','prefix' => 'auth'], function()
 {
     Route::get('register_company', array('as' => 'register_company', 'uses' => 'AuthController@register_company'));
@@ -76,22 +75,14 @@ Route::get('test', function()
    // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
    // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
 
-    $user = \App::make('App\Riiingme\Riiinglink\Entities\Riiinglink');
-    $user = $user->find(1);
-
-    $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
+/*    $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
     $meta = $meta->find(1);
-    $labels = $meta->first()->labels;
+    $labels = $meta->first()->labels;*/
 
-    $all = unserialize($labels);
-    echo '<pre>';
-    print_r($all);
+    $user = \App::make('App\Riiingme\User\Entities\User');
+    $user = $user->find(25);
 
-    print_r(array_keys($all));
-    echo '</pre>';
-
-
-
+    \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
 
 });
 

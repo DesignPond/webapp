@@ -2,8 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-use Request;
 use App\Http\Requests\TokenRequest;
 use App\Http\Requests\InviteRequest;
 use App\Http\Requests\SendInviteRequest;
@@ -24,10 +24,10 @@ class DispatchController extends Controller {
 	 * @param  $request
 	 * @return Response
 	 */
-    public function activation(TokenRequest $request)
+    public function activation(Request $request)
     {
 
-        $this->dispatch(new ActivateAccount($request->token));
+        $this->dispatch(new ActivateAccount($request->input('token')));
 
         return redirect('/user')->with(array('status' => 'success', 'message' => 'Vous êtes maintenant inscrit'));
 

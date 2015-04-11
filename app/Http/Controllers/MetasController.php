@@ -30,22 +30,19 @@ class MetasController extends Controller {
         if(isset($data['metas']))
         {
             $metas = $data['metas'];
+            $meta  = $this->meta->findByRiiinglink($id);
 
-            $meta = $this->meta->findByRiiinglink($id);
-
-            if(!$meta->isEMpty())
+            if(!$meta->isEmpty())
             {
-                $meta     = $meta->first();
-                $newmetas = $this->riiinglink->updateMetas($meta,$metas);
+                $meta = $meta->first();
+                $meta->labels = serialize($metas);
 
-                $meta->labels = $newmetas;
                 $meta->save();
             }
             else
             {
                 $this->meta->create([
                     'riiinglink_id' => $id,
-                    'label_id'      => 0,
                     'labels'        => serialize($metas)
                 ]);
             }

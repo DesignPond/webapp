@@ -186,7 +186,7 @@
                 <tr bgcolor="243266"><td height="14"></td></tr>
                 <tr bgcolor="243266">
                     <td align="center" style="color: #cecece; font-size: 10px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                        Riiingme © Copyright 2015. All Rights Reserved
+                        RiiingMe © Copyright {{ date('Y') }}. All Rights Reserved
                     </td>
                 </tr>
                 <tr bgcolor="243266"><td height="14"></td></tr>
