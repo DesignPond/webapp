@@ -3,9 +3,9 @@
 
 <div class="row">
 
-    @if(!empty($riiinglinks))
+    @include('backend.partials.filter')
 
-        @include('backend.partials.filter')
+    @if(!empty($riiinglinks))
 
         @foreach($riiinglinks as $link)
 
@@ -26,6 +26,20 @@
 
         <div class="col-md-12">{!! $pagination->render() !!}</div>
 
+    @elseif(!$pagination && !empty($filtres))
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    @if(isset($filtres['tag']))
+                        <h4 class="text-danger">Aucun contact ne correspond au filtre <strong>"{{ $tags[$filtres['tag']] }}"</strong></h4>
+                    @endif
+
+                    @if(isset($filtres['search']))
+                        <h4 class="text-danger">Aucun contact ne correspond a votre recherche <strong>"{{ $filtres['search'] }}"</strong></h4>
+                    @endif
+                </div>
+            </div>
+        </div>
     @else
          <div class="col-md-12">
              <div class="panel">

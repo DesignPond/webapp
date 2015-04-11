@@ -65,13 +65,11 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
-
-        //$droptags = $this->tags->getAll($this->auth->id);
-        $droptags = [];
+        $tags = $this->auth->user_tags->lists('title','id');
 
 		list($pagination,$riiinglinks) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
 
-		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'droptags' => $droptags , 'pagination' => $pagination));
+		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'pagination' => $pagination,'tags' => $tags, 'filtres' => $request->all()));
 	}
 
     /**

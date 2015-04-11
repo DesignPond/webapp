@@ -210,7 +210,7 @@ class Helper{
 
     public function getKeyValue($array,$key,$value){
 
-        $results = array();
+        $results = '';
 
         if (!empty($array))
         {

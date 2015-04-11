@@ -9,7 +9,44 @@ class Activite extends Model {
      *
      * @var array
      */
-    protected $fillable = array('type','name', 'activite_id', 'user_id','invited_id');
+    protected $fillable = array('type','name', 'activite_id', 'user_id','invited_id','token');
+
+    public function getTypeActiviteAttribute()
+    {
+        setlocale(LC_ALL, 'fr_FR.UTF-8');
+
+        if($this->name == 'updated_invite'){
+
+            if($this->user_id == \Auth::user()->id)
+            {
+                if($this->invited_id == null)
+                {
+                    return ['color' => 'warning', 'quoi' => 'Invitation envoyé à', 'qui' => $this->invite->email];
+                }
+                else
+                {
+                    return ['color' => 'success', 'quoi' => 'Invitation accepté par', 'qui' => $this->invited->name];
+                }
+            }
+            else
+            {
+                return ['color' => 'primary', 'quoi' => 'Invitation de', 'qui' => $this->host->name.' accepté'];
+            }
+        }
+
+        if($this->name == 'created_riiinglink'){
+
+            if($this->user_id == \Auth::user()->id)
+            {
+                return ['color' => 'success', 'quoi' => 'Vous partagez avec', 'qui' => $this->invited->name];
+            }
+            else
+            {
+                return ['color' => 'success', 'quoi' => 'Nouveau partage', 'qui' => $this->host->name.' partage avec vous'];
+            }
+        }
+
+    }
 
     public function invited()
     {

@@ -19,6 +19,7 @@ class CreateActivitesTable extends Migration {
             $table->integer('activite_id')->index();
             $table->integer('user_id')->nullable();
             $table->integer('invited_id')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
         });
 	}

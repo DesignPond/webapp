@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <h3>Activités</h3>
             <ul id="timeline-content" class="timeline" data-total="{{ $total }}">
-                @include('backend.partials.activite')
+                @include('backend.timeline.activite')
             </ul>
         </div>
     </div>

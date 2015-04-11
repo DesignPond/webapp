@@ -40,7 +40,7 @@ class ActiviteController extends Controller {
         $activity = $this->activity->getPaginate($this->auth->id, 0, 6);
         $total    = $this->activity->getTotal($this->auth->id);
 
-        return view('backend.timeline')->with(array('activity' => $activity, 'total' => $total));
+        return view('backend.timeline.timeline')->with(array('activity' => $activity, 'total' => $total));
     }
 
     /**
@@ -67,7 +67,7 @@ class ActiviteController extends Controller {
     {
         $activity = $this->activity->getPaginate($this->auth->id, $request->skip, $request->take);
 
-        echo view('backend.partials.activite', ['activity' => $activity]);
+        echo view('backend.timeline.activite', ['activity' => $activity]);
     }
 
 }

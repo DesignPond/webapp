@@ -15,9 +15,9 @@
 
                     <select id="selectFilter" class="selectpicker bg-info" style="width:190px;" name="tag">
                         <option value="">Filtrer par tag</option>
-                        @if(!$user->user_tags->isEmpty())
-                            @foreach($user->user_tags->unique() as $tag)
-                                <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                        @if(!empty($tags))
+                            @foreach($tags as $tag_id => $tag)
+                                <option <?php echo (isset($filtres['tag']) && $filtres['tag'] == $tag_id  ? 'selected' : ''); ?> value="{{ $tag_id }}">{{ $tag }}</option>
                             @endforeach
                         @endif
                     </select>

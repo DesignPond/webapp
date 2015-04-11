@@ -1,8 +1,4 @@
-@if(!empty($invited))
-
-    <?php if(isset($invited[1])){ unset($invited[1]); } ?>
-
-    @include('backend.partials.tags')
+@include('backend.partials.tags')
 
     <div class="panel panel-primary">
         <div class="panel-body">
@@ -17,25 +13,31 @@
                         </div>
                     </div>
 
-                    @foreach($invited as $group => $groupe_label)
-                        @if(isset($groupes[$group]))
-                            <div class="chat-msg">
-                                <div class="panel bg-info panel-small">
-                                    <div class="panel-body text-left">{{ $groupes[$group] }}</div>
+                    @if(!empty($invited))
+                        <?php if(isset($invited[1])){ unset($invited[1]); } ?>
+                        @foreach($invited as $group => $groupe_label)
+                            @if(isset($groupes[$group]))
+                                <div class="chat-msg">
+                                    <div class="panel bg-info panel-small">
+                                        <div class="panel-body text-left">{{ $groupes[$group] }}</div>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                    @foreach($groupe_label as $type_id => $label)
+                                        <dt>{{ $types[$type_id] or ''}}</dt>
+                                        <dd>{{ $label }}</dd>
+                                    @endforeach
+                                    </dl>
                                 </div>
-                                <dl class="dl-horizontal">
-                                @foreach($groupe_label as $type_id => $label)
-                                    <dt>{{ $types[$type_id] or ''}}</dt>
-                                    <dd>{{ $label }}</dd>
-                                @endforeach
-                                </dl>
-                            </div>
-                        @endif
-                    @endforeach
-
+                            @endif
+                        @endforeach
+                    @else
+                        <div style="border-top: 1px solid #f4f5f5" class="chat-msg">
+                             <div class="well-sm">
+                                 {{ $ringlink['invited_name'] }} n'a pas encore partagé d'informations
+                             </div>
+                        </div>
+                    @endif
                 </li>
             </ul>
         </div>
     </div>
-
-@endif

@@ -25,6 +25,7 @@ trait RecordsActivity
             'name'        => $this->getActiviteName($this,$event),
             'user_id'     => (isset($this->host_id)? $this->host_id : $this->user_id),
             'invited_id'  => (isset($this->invited_id)? $this->invited_id : null),
+            'token'       => (isset($this->token)? $this->token : null),
         ]);
     }
 

@@ -2,7 +2,6 @@
 
 use App\Riiingme\Invite\Repo\InviteInterface;
 use App\Riiingme\Invite\Entities\Invite as M;
-use App\Riiingme\Event\InviteCreated;
 
 class InviteEloquent implements InviteInterface {
 

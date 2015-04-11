@@ -1,8 +1,11 @@
 <?php namespace App\Riiingme\Meta\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Riiingme\Traits\RecordsChanges;
 
 class Meta extends Model{
+
+    use RecordsChanges;
 
     /**
      * No timestamps

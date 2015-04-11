@@ -13,10 +13,10 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6 col-xs-12">
-                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-sm btn-primary">Retour à la liste</a>
+                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-xs btn-primary">Retour à la liste</a>
                     </div>
                     <div class="col-md-6 col-xs-12">
-                        <button type="button" class="btn btn-danger btn-sm pull-right">Détruire le partage</button>
+                        <button type="button" class="btn btn-danger btn-xs pull-right">Détruire le partage</button>
                     </div>
                 </div>
             </div>

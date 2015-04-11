@@ -20,6 +20,7 @@
 
 .panel-small{
     margin: 0;
+    padding: 3px 10px;
     border-radius: 0;
 }
 
@@ -157,6 +158,8 @@
 .chat-header-name{
     display: block;
     line-height: 60px;
+    margin: 0;
+    margin-top: 5px;
 }
 
 .panel .dl-horizontal{
@@ -227,13 +230,14 @@ fieldset .form-group {
     padding-bottom: 0;
 }
 
-.chat-header h4{
+.chat-header h3{
+    margin-top: 2px;
+    font-size: 16px;
     margin-bottom: 0;
-    margin-top: 0;
 }
 
-.chat-header , .chat-header h5{
-    margin-bottom:0;
+.chat-header p{
+    margin-bottom: 5px;
 }
 
 .chat-img{
