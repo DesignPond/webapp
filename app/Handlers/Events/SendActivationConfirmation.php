@@ -25,7 +25,7 @@ class SendActivationConfirmation {
 	 */
 	public function handle(AccountWasCreated $event)
 	{
-        \Mail::send('emails.confirmation', ['name' => $event->user->name,'token' => $event->token] , function($message) use ($event)
+        \Mail::send('emails.confirmation', ['name' => $event->user->name, 'user_photo' => $event->user->user_photo, 'token' => $event->token] , function($message) use ($event)
         {
             $message->to($event->email)->subject('Confirmation');
         });

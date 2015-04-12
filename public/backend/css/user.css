@@ -389,8 +389,12 @@ html {
 }
 
 .app .alert > p{
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 14px;
+    line-height: 15px;
+}
+
+.app .alert > a{
+   margin-top: 2px;
 }
 
 .cropArea {

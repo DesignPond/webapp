@@ -10,18 +10,18 @@ class AccountWasCreated extends Event {
 
     public $user;
     public $email;
-    public $activation_token;
+    public $token;
 
 	/**
 	 * Create a new event instance.
 	 *
 	 * @return void
 	 */
-	public function __construct($user,$activation_token)
+	public function __construct($user)
 	{
 		$this->user   = $user;
         $this->email  = $user->email;
-        $this->token =  $activation_token;
+        $this->token =  $user->activation_token;
 	}
 
 }

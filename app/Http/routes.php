@@ -16,6 +16,7 @@ Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invit
 Route::group(['middleware' => 'auth'], function()
 {
     Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
+    Route::get('sendActivationLink', array('as' => 'send', 'uses' => 'DispatchController@sendActivationLink'));
 
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
@@ -30,7 +31,7 @@ Route::group(['middleware' => 'auth'], function()
     // Search
     Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));
 
-    // Tags
+    // Tags, Ajax
     Route::get('tags', 'TagController@tags');
     Route::get('allTags', 'TagController@allTags');
     Route::post('addTag', 'TagController@addTag');
@@ -70,20 +71,29 @@ Route::get('logout', function()
 
 Route::get('test', function()
 {
-    //return DB::table('riiinglinks')->orderBy('id', 'desc')->first()->id;
-
+   // return DB::table('riiinglinks')->orderBy('id', 'desc')->first()->id;
    // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
    // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
 
-/*    $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
+/*
+    $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
     $meta = $meta->find(1);
-    $labels = $meta->first()->labels;*/
+    $labels = $meta->first()->labels;
+*/
+    $user = \App::make('App\Riiingme\User\Entities\User');
+    $user = $user->find(1);
 
+    \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
+    //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');
+
+});
+
+Route::get('notification', function()
+{
     $user = \App::make('App\Riiingme\User\Entities\User');
     $user = $user->find(25);
 
-    \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
-
+    return View::make('emails.confirmation', array('user' => $user, 'token' => '2rw3t342t2t'));
 });
 
 Event::listen('illuminate.query', function($query, $bindings, $time, $name)

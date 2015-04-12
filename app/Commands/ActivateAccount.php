@@ -22,9 +22,11 @@ class ActivateAccount extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
-        //$this->user->activate($this->token);
+        $user = $this->user->activate($this->token);
 
-        dd('activated!!');
+        if(!$user){
+            throw new \App\Exceptions\ActivationFailException($user->id ,$this->token);
+        }
 	}
 
 }

@@ -53,6 +53,8 @@ class UserEloquent implements UserInterface {
 
         $user->save();
 
+        \Auth::login($user);
+
         return $user;
 
     }

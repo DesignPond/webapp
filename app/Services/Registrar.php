@@ -63,7 +63,7 @@ class Registrar implements RegistrarContract {
             'activation_token' => $activation_token
         ]);
 
-        \Event::fire(new \App\Events\AccountWasCreated($user,$activation_token));
+        \Event::fire(new \App\Events\AccountWasCreated($user));
 
         return $user;
 

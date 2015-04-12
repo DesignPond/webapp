@@ -1,46 +1,40 @@
 
-@extends('emails.layouts.notification')
+@extends('emails.layouts.master')
 @section('content')
 
-    <table width="528" border="0" align="center" cellpadding="0" cellspacing="0" class="mainContent">
-        <tr><td height="20"></td></tr>
-        <tr>
-            <td>
-                <table border="0" align="left" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="section-item">
-                    <tr><td height="6"></td></tr>
-                    <tr>
-                        <td>
-                            <a href="{{ url('/') }}" style="width: 88px; display: block; border-style: none !important; border: 0 !important;">
-                                <img width="88" height="88" border="0" style="display: block;" src="<?php echo asset('backend/images/email/image1.png');?>" alt="image" class="section-img" />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr><td height="10"></td></tr>
-                </table>
-                <table border="0" align="left" width="10" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                    <tr><td height="30" width="10"></td></tr>
-                </table>
-                <table border="0" width="400" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="section-item">
-                    <tr>
-                        <td style="color: #484848; line-height: 22px; font-size: 16px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                            <h3 style="font-family: arial, sans-serif;">Inscription sur RiiingMe</h3>
-                            <p style="font-size:13px;font-family: arial, sans-serif;">Bonjour <strong>{{ $name }}</strong>, <br/>Pour confirmer votre inscription sur RiiingMe veuillez suivre ce lien:</p>
-                        </td>
-                    </tr>
-                    <tr><td height="5"></td></tr>
-                    <tr>
-                        <td>
-                            <a style="text-align:center;font-size:13px;font-family:arial,sans-serif;font-weight: normal;
-                                                color:white;background-color: #3996d3;text-decoration:none;display:inline-block;
-                                                min-height:35px;padding-left:15px;padding-right:15px;
-                                                line-height:35px;border-radius:2px;" href="{{ url('activation?token='.$token) }}">Confirmer l'adresse email</a>
+<?php
 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr><td height="20"></td></tr>
-    </table>
+    $paddingReset = 'padding: 0;';
+    $marginReset  = 'margin: 0;';
+    $reset = $marginReset.$paddingReset.'border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;';
+    $empty = '<td class="emptyCell" style="'.$reset.'background-color: #4f7dbb;line-height: 0 !important;font-size: 0 !important;">&nbsp;</td>';
+
+?>
+
+@include('emails.partials.user')
+
+<tr>
+    <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
+    <td class="eBody alignCenter pdTp32" style="{{ $marginReset }}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #54565c;background-color: #ffffff;">
+        <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 20px;line-height: 36px;font-weight: bold;color: #465059;">
+            <span style="color: #465059;">Inscription sur RiiingMe</span>
+        </h1>
+        <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">
+            Vous êtes prêt à configurer votre nouveau compte RiiingMe.<br>
+            Cliquez sur le bouton ci-dessous pour...
+        </p>
+
+        <?php  $url = url('activation?token='.$token); ?>
+        @include('emails.partials.button', ['url' => $url, 'titre' => 'Activer votre compte' ])
+
+    </td>
+    <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
+    <!-- end .eBody-->
+</tr>
+<tr>
+    <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
+    <td class="bottomCorners" style="{{ $reset }}height: 16px;background-color: #ffffff;">&nbsp;</td>
+    <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
+</tr>
 
 @stop

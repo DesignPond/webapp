@@ -22,14 +22,14 @@ class DispatchController extends Controller {
 	/**
 	 * Activate the account
 	 * @param  $request
-	 * @return Response
+	 * @return response
 	 */
     public function activation(Request $request)
     {
 
         $this->dispatch(new ActivateAccount($request->input('token')));
 
-        return redirect('/user')->with(array('status' => 'success', 'message' => 'Vous êtes maintenant inscrit'));
+        return redirect('/user')->with(array('status' => 'success', 'message' => 'Votre compta est maintenant actif!'));
 
     }
 
@@ -60,7 +60,7 @@ class DispatchController extends Controller {
     }
 
     /**
-     * Activate newsletter abo
+     * Send invitation
      * @param  $request
      * @return Response
      */
@@ -70,6 +70,20 @@ class DispatchController extends Controller {
         $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
+
+    }
+
+    /**
+     * Activate account
+     * @param  $request
+     * @return Response
+     */
+    public function sendActivationLink()
+    {
+
+        \Event::fire(new \App\Events\AccountWasCreated(\Auth::user()));
+
+        return redirect('user')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
 
     }
 
