@@ -2,11 +2,14 @@
 
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
-use App\Commands\CreateAccount;
+use Illuminate\Foundation\Bus\DispatchesCommands;
+use App\Commands\ProcessInvite;
 
 class Registrar implements RegistrarContract {
 
     protected $user;
+
+    use DispatchesCommands;
 
     /**
      * Create a new command instance.
@@ -63,7 +66,9 @@ class Registrar implements RegistrarContract {
             'activation_token' => $activation_token
         ]);
 
-        \Event::fire(new \App\Events\AccountWasCreated($user));
+        $invite_id = (isset($data['invite_id']) && !empty($data['invite_id']) ? $data['invite_id'] : null);
+
+        \Event::fire(new \App\Events\AccountWasCreated($user,$invite_id));
 
         return $user;
 

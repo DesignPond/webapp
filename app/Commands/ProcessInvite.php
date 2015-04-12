@@ -17,14 +17,15 @@ class ProcessInvite extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function __construct($invite)
+	public function __construct($invite_id)
 	{
         $this->riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->label      = \App::make('App\Riiingme\Label\Worker\LabelWorker');
         $this->user       = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->meta       = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
 
-        $this->invite     = $invite;
+        $this->invite     = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+        $this->invite_id  = $invite_id;
 	}
 
 	/**
@@ -34,13 +35,14 @@ class ProcessInvite extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
+        $invite = $this->invite->find($this->invite_id);
 
         // infos to partage
-        $partage_host    = (!empty($this->invite->partage_host) ? unserialize($this->invite->partage_host): []);
-        $partage_invited = (!empty($this->invite->partage_invited) ? unserialize($this->invite->partage_invited): []);
+        $partage_host    = (!empty($invite->partage_host) ? unserialize($invite->partage_host): []);
+        $partage_invited = (!empty($invite->partage_invited) ? unserialize($invite->partage_invited): []);
 
-        $hosted_link  = $this->getRiiinglink($this->invite->user_id , $this->invite->invited_id);
-        $invited_link = $this->getRiiinglink($this->invite->invited_id , $this->invite->user_id);
+        $hosted_link  = $this->getRiiinglink($invite->user_id , $invite->invited_id);
+        $invited_link = $this->getRiiinglink($invite->invited_id , $invite->user_id);
 
         // sync labels
         if(!empty($partage_host)){
@@ -50,7 +52,6 @@ class ProcessInvite extends Command implements SelfHandling {
         if(!empty($partage_invited)){
             $this->syncLabels($invited_link->id, $invited_link->host_id, $partage_invited);
         }
-
 	}
 
     public function syncLabels($riiinglink_id,$user_id,$partage){
@@ -71,5 +72,7 @@ class ProcessInvite extends Command implements SelfHandling {
         {
             return $riiinglink;
         }
+
+        return false;
     }
 }

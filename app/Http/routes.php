@@ -83,8 +83,11 @@ Route::get('test', function()
     $user = \App::make('App\Riiingme\User\Entities\User');
     $user = $user->find(1);
 
-    \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
+   // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');
+
+    $process = new \App\Commands\ProcessInvite(1);
+    $process->handle();
 
 });
 

@@ -73,13 +73,11 @@ class RiiinglinkWorker{
     public function riiinglinkCollection($user,$nbr = null){
 
         return $this->riiinglink->findBy($user,'hosted',$nbr);
-
     }
 
     public function riiinglinkCollectionPaginate($user,$params){
 
         return $this->riiinglink->findBy($user,'hosted',$params);
-
     }
 
     public function getRiiinglinkWithParams($user_id,$params)
@@ -108,7 +106,6 @@ class RiiinglinkWorker{
     public function convert($riiinglinks,$user_labels){
 
         return $this->helper->convert($riiinglinks,$user_labels);
-
     }
 
     public function convertToGroupLabel(){

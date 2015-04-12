@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider {
 
         'App\Events\AccountWasCreated' => [
             'App\Handlers\Events\SendActivationConfirmation',
+            'App\Handlers\Events\ProcessInvitation',
         ],
 	];
 

@@ -21,6 +21,7 @@ class CreateInvitesTable extends Migration {
             $table->integer('invited_id')->nullable();
 			$table->text('partage_host');
 			$table->text('partage_invited');
+            $table->timestamp('activated_at')->nullable();
 			$table->timestamps();
 		});
 	}

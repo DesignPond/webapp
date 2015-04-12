@@ -29,8 +29,7 @@
 
 </head>
 
-<body class="layout-boxed" flow-prevent-drop data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.sidebar.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'aside-slide' : app.sidebar.slide, 'in-app': $state.includes('app')}">
-
+<body class="layout-boxed">
     <div class="app-container">
 
         @include('backend.partials.header')
@@ -40,22 +39,25 @@
         <section>
             <div class="app">
 
+                @if(!$user->activated_at)
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <a href="{{ url('sendActivationLink') }}" class="btn btn-default pull-right">Renvoyer le lien</a>
+                        <h4><strong>Activation!</strong></h4>
+                        <p>Veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.</p>
+                    </div>
+                @endif
+
                 @include('partials.message')
 
                 <!-- Contenu -->
                 @yield('content')
                 <!-- Fin contenu -->
+
             </div>
 
         </section>
-
     </div>
 
-    <!--
-       <script src="<?php //echo asset('backend/js/base.js');?>"></script>
-       <script src="<?php //echo asset('backend/js/app.js');?>"></script>
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-   -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 

@@ -7,12 +7,13 @@ class Invite extends \Eloquent{
     use RecordsActivity;
 
     protected static $recordEvents = ['created','updated'];
+
     /**
      * Fillable columns
      *
      * @var array
      */
-    protected $fillable = array('email','user_id','invited_id','partage_host','partage_invited');
+    protected $fillable = array('email','user_id','invited_id','partage_host','partage_invited','activated_at');
 
     public function getUrlTokenAttribute()
     {

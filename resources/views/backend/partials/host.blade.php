@@ -31,5 +31,16 @@
             </ul>
         </div>
     </div>
+@else
+
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="well-sm text-center">
+                <h4>Vous n'avez pas encore indiqué vos informations à partager</h4>
+                <p><a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-warning">Mettre à jour!</a></p>
+            </div>
+
+        </div>
+    </div>
 
 @endif

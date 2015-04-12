@@ -2,6 +2,7 @@
 
 use App\Commands\Command;
 use App\Commands\CreateRiiinglink;
+use App\Commands\ProcessInvite;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
@@ -14,7 +15,8 @@ class ConfirmInvite extends Command implements SelfHandling {
     protected $token;
     protected $ref;
 
-    public function __construct($token,$ref ){
+    public function __construct($token,$ref )
+    {
         $this->user   = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
         $this->token  = $token;
@@ -41,11 +43,20 @@ class ConfirmInvite extends Command implements SelfHandling {
         if($invite && $user)
         {
             // Update invite with new user id
-            $invite->invited_id = $user->id;
+            $invite->invited_id   = $user->id;
+            $invite->activated_at = date('Y-m-d G:i:s');
+
             $invite->save();
 
-            // User is registred create riiinglink
-            $this->dispatch(new CreateRiiinglink($user,$invite));
+            $exist = $this->riiinglinkExist($user->id,$invite->user_id);
+
+            if(!$exist)
+            {
+                // User is registred and riiinglink doesn't exist, create riiinglink
+                $this->dispatch(new CreateRiiinglink($user,$invite));
+            }
+
+            $this->dispatch(new ProcessInvite($invite->id));
 
             // Log in the user
             \Auth::login($user);
@@ -65,6 +76,18 @@ class ConfirmInvite extends Command implements SelfHandling {
         {
             return ['status' => 'error'];
         }
+    }
+
+    public function riiinglinkExist($host_id,$invited_id)
+    {
+        $riiinglink = $this->riiinglink->findByHostAndInvited($host_id,$invited_id);
+
+        if($riiinglink)
+        {
+            return $riiinglink;
+        }
+
+        return false;
     }
 
 }

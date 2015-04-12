@@ -37,15 +37,12 @@ class SendInvite extends Command implements SelfHandling {
 
         $types = $this->type->getAll()->lists('titre','id');
 
-        $partage_host    = ( !empty($this->partage_host) ? serialize($this->partage_host) : '');
+        $partage_host    = ( !empty($this->partage_host)    ? serialize($this->partage_host) : '');
         $partage_invited = ( !empty($this->partage_invited) ? serialize($this->partage_invited) : '');
 
         $data = array( 'user_id' => $this->user_id, 'email' => $this->email, 'partage_host' => $partage_host, 'partage_invited' => $partage_invited);
 
-        $send = $this->invite->create( $data );
-
-        $send_invite = $this->invite->find($send->id);
-        $send_invite = $this->invite->setToken($send_invite->id);
+        $send_invite = $this->processInvite($data);
 
         \Mail::send('emails.invitation', array('invite' => $send_invite, 'types' => $types, 'partage' => $this->partage_invited), function($message) use ($send_invite)
         {
@@ -53,5 +50,28 @@ class SendInvite extends Command implements SelfHandling {
         });
 
 	}
+
+    public function processInvite($data){
+
+        $exist = $this->inviteExist($data['user_id'],$data['email']);
+
+        if($exist)
+        {
+            $data['id'] = $exist->id;
+            $send = $this->invite->update( $data );
+        }
+        else
+        {
+            $send = $this->invite->create( $data );
+            $send = $this->invite->setToken($send->id);
+        }
+
+        return $send;
+    }
+
+    public function inviteExist($user_id,$email)
+    {
+        return $this->invite->exist($user_id,$email);
+    }
 
 }

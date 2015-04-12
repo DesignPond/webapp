@@ -30,6 +30,18 @@ class InviteEloquent implements InviteInterface {
         return $this->invite->with(array('user'))->where('id','=',$id)->get()->first();
     }
 
+    public function exist($user_id,$email)
+    {
+        $invite =  $this->invite->where('user_id','=',$user_id)->where('email','=',$email)->get();
+
+        if(!$invite->isEmpty())
+        {
+            return $invite->first();
+        }
+
+        return false;
+    }
+
     public function setToken($id){
 
         $invite = $this->invite->find($id);
@@ -77,7 +89,7 @@ class InviteEloquent implements InviteInterface {
             return false;
         }
 
-        $invite->invited_id = $data['invited_id'];
+        $invite->fill($data);
 
         $invite->save();
 

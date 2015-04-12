@@ -53,7 +53,8 @@ class DispatchController extends Controller {
 
             return redirect('auth/register');
         }
-        else{
+        else
+        {
             return redirect('/')->with(array('error' => 'Problem avec le jeton'));
         }
 
@@ -66,11 +67,9 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
-
         $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
-
     }
 
     /**
@@ -80,11 +79,9 @@ class DispatchController extends Controller {
      */
     public function sendActivationLink()
     {
-
         \Event::fire(new \App\Events\AccountWasCreated(\Auth::user()));
 
         return redirect('user')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
-
     }
 
 }
