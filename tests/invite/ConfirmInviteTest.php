@@ -5,6 +5,7 @@ use League\FactoryMuffin\Facade as FactoryMuffin;
 class ConfirmInviteTest extends TestCase {
 
     protected $link;
+    protected $mock;
     protected $command;
     protected $invite;
     protected $token;
@@ -15,13 +16,8 @@ class ConfirmInviteTest extends TestCase {
     {
         parent::setUp();
 
-        //Invite fixture
-/*        FactoryMuffin::define('Invite', array(
-            'email'        => 'pruntrut@yahoo.fr',
-            'user_id'      => '1',
-            'partage_host' => serialize([2 => [5,6]]),
-            'partage_host' => serialize([2 => [5,6]])
-        ));*/
+/*        $this->mock = Mockery::mock('Illuminate\Contracts\Bus\Dispatcher');
+        $this->app->instance('Illuminate\Contracts\Bus\Dispatcher', $this->mock);*/
 
         $this->link   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
@@ -74,6 +70,8 @@ class ConfirmInviteTest extends TestCase {
         $id     = $this->oneinvite->id;
         $token  = $this->token($id,'pruntrut@yahoo.fr');
 
+        //$this->mock->shouldReceive('dispatch')->once()->with(new App\Commands\CreateRiiinglink(1,2));
+
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('pruntrut@yahoo.fr'), 'token' => $token ] ,[], []);
 
         $this->assertRedirectedTo('/auth/register');
@@ -106,7 +104,7 @@ class ConfirmInviteTest extends TestCase {
 
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('coralie.95@hotmail.com'), 'token' => $token ] ,[], []);
 
-        //$this->assertRedirectedTo('/user');
+        $this->assertRedirectedTo('/user');
 
     }
 
@@ -128,6 +126,11 @@ class ConfirmInviteTest extends TestCase {
     public function token($id,$email)
     {
         return  md5($id.$email);
+    }
+
+    public function testDispatchProcess()
+    {
+
     }
 
     public function getLastInDb()

@@ -19,6 +19,9 @@
         <testsuite name="pages">
             <directory>./tests/pages/</directory>
         </testsuite>
+        <testsuite name="invite">
+            <directory>./tests/invite/</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>

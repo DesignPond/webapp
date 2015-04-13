@@ -14,13 +14,15 @@ class ConfirmInvite extends Command implements SelfHandling {
     protected $user;
     protected $token;
     protected $ref;
+    protected $riiinglink;
 
     public function __construct($token,$ref )
     {
-        $this->user   = \App::make('App\Riiingme\User\Repo\UserInterface');
-        $this->invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
-        $this->token  = $token;
-        $this->ref    = $ref;
+        $this->user       = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->invite     = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+        $this->riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+        $this->token      = $token;
+        $this->ref        = $ref;
     }
 
 	/**
@@ -48,13 +50,7 @@ class ConfirmInvite extends Command implements SelfHandling {
 
             $invite->save();
 
-            $exist = $this->riiinglinkExist($user->id,$invite->user_id);
-
-            if(!$exist)
-            {
-                // User is registred and riiinglink doesn't exist, create riiinglink
-                $this->dispatch(new CreateRiiinglink($user,$invite));
-            }
+            $this->riiinglinkExist($user->id,$invite->user_id);
 
             $this->dispatch(new ProcessInvite($invite->id));
 
@@ -84,7 +80,8 @@ class ConfirmInvite extends Command implements SelfHandling {
 
         if($riiinglink)
         {
-            return $riiinglink;
+            // User is registred and riiinglink doesn't exist, create riiinglink
+            $this->dispatch(new CreateRiiinglink($host_id,$invited_id));
         }
 
         return false;

@@ -3,7 +3,6 @@
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use App\Commands\ProcessInvite;
 
 class Registrar implements RegistrarContract {
 

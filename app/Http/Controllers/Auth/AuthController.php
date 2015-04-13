@@ -118,7 +118,7 @@ class AuthController extends Controller {
 
             // Create riiinglink between users
             $this->dispatch(new CreateRiiinglink($invite_id,$user->id));
-            $this->dispatch(new ProcessInvite($invite));
+            $this->dispatch(new ProcessInvite($invite_id));
 
         }
 
