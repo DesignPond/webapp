@@ -5,7 +5,7 @@
         <div class="row">
 
             <div class="col-md-6">
-                <p>Tous droits réservés <strong>&copy; Riiingme 2015</strong></p>
+                <p>Tous droits réservés <strong>&copy; RiiingMe 2015</strong></p>
             </div><!-- end of copyrights -->
             <div class="col-md-6">
                 <ul class="nav nav-pills pull-right">

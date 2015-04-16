@@ -11,6 +11,7 @@ use App\Riiingme\Riiinglink\Entities\Riiinglink;
 use App\Riiingme\Invite\Entities\Invite;
 use App\Riiingme\Country\Entities\Country;
 use App\Riiingme\Activite\Entities\Activite;
+use App\Riiingme\Activite\Entities\Change as Change;
 use App\Riiingme\Tag\Entities\Tag;
 
 class AppServiceProvider extends ServiceProvider {
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerInviteService();
         $this->registerTagService();
         $this->registerAuthService();
+        $this->registerChangeService();
 
 	}
 
@@ -68,6 +70,17 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('\App\Riiingme\Activite\Repo\ActiviteInterface', function()
         {
             return new \App\Riiingme\Activite\Repo\ActiviteEloquent(new Activite);
+        });
+    }
+
+    /**
+     * Change
+     */
+    protected function registerChangeService(){
+
+        $this->app->bind('\App\Riiingme\Activite\Repo\ChangeInterface', function()
+        {
+            return new \App\Riiingme\Activite\Repo\ChangeEloquent(new Change);
         });
     }
 

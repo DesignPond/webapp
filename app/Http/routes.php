@@ -80,14 +80,18 @@ Route::get('test', function()
     $meta = $meta->find(1);
     $labels = $meta->first()->labels;
 */
-    $user = \App::make('App\Riiingme\User\Entities\User');
-    $user = $user->find(1);
+    $user = \App::make('App\Riiingme\User\Repo\UserInterface');
+    $user = $user->find(\Auth::user()->id);
 
    // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');
+   // $changes = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
+    //$change  = $changes->getAll(25);
 
-    $process = new \App\Commands\ProcessInvite(1);
-    $process->handle();
+    // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
+    //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');
+
+    \Event::fire(new \App\Events\CheckChanges($user));
 
 });
 

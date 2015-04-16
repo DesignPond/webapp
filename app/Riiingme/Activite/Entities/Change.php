@@ -23,9 +23,9 @@ class Change extends Model {
         return $this->belongsTo('App\Riiingme\User\Entities\User','user_id');
     }
 
-    public function meta()
+    public function riiinglink()
     {
-        return $this->belongsTo('App\Riiingme\Meta\Entities\Meta','meta_id');
+        return $this->belongsTo('App\Riiingme\Riiinglink\Entities\Riiinglink','riiinglink_id');
     }
 
 }

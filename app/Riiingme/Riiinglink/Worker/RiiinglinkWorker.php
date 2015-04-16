@@ -29,6 +29,10 @@ class RiiinglinkWorker{
         $this->helper      = new \App\Riiingme\Helpers\Helper;
     }
 
+    /*
+     * Prepare riiinglink with all infos
+     * Host, invited, Tags, Labels
+     * */
     public function generate(){
 
         $collection = new Collection($this->items, new RiiinglinkTransformer);
@@ -36,14 +40,6 @@ class RiiinglinkWorker{
 
         return $rootScope;
     }
-/*
-    public function getRiiinglinks($id,$single = null,$nbr = null){
-
-        $this->items = ($single ? $this->riiinglink->find($id) : $this->riiinglinkCollection($id,$nbr));
-
-        return $this->generate();
-    }*/
-
 
     public function getRiiinglinkPrepared($id){
 
@@ -53,7 +49,7 @@ class RiiinglinkWorker{
     }
 
     /*
-     * EGt latest riiinglinks list for user
+     * Get latest riiinglinks list for user
      * */
     public function getLatest($user_id)
     {
@@ -76,21 +72,17 @@ class RiiinglinkWorker{
         return $latest;
     }
 
+    /*
+     * Fetch one riiinglink
+     * */
     public function riiinglinkItem($id)
     {
         return $this->riiinglink->find($id)->first();
     }
+
     /*
-        public function riiinglinkCollection($user,$nbr = null){
-
-            return $this->riiinglink->findBy($user,'hosted',$nbr);
-        }
-
-        public function riiinglinkCollectionPaginate($user,$params){
-
-            return $this->riiinglink->findBy($user,'hosted',$params);
-        }*/
-
+     * Fetch colleciton of riiinglinks with filter or search
+     * */
     public function getRiiinglinkWithParams($user_id,$params)
     {
         $pagination = $this->riiinglink->findByHostWithParams($user_id,$params);
@@ -114,25 +106,10 @@ class RiiinglinkWorker{
         return [ [],[] ];
     }
 
+
     public function convert($riiinglinks,$user_labels){
 
         return $this->helper->convert($riiinglinks,$user_labels);
-    }
-
-    public function convertToGroupLabel(){
-
-        $groupes = $this->groupe->getAll()->toArray();
-
-        foreach($groupes as $groupe_type)
-        {
-            foreach($groupe_type['groupe_type'] as $type)
-            {
-                $data[$groupe_type['id']][] = $type['pivot']['type_id'];
-            }
-        }
-
-        return ($data ? $data : []);
-
     }
 
     public function setMetasForRiiinglink($user_id,$id,$metas){
