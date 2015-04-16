@@ -19,23 +19,36 @@ trait RecordsChanges
 
     public function recordChange($event)
     {
-        if(!$this->itExist($this) && \Auth::check())
+        if( \Auth::check())
         {
-            Change::create([
-                'meta_id'       => $this->id,
-                'riiinglink_id' => $this->riiinglink_id,
-                'name'          => $this->getChangeName($this,$event),
-                'user_id'       => \Auth::user()->id,
-                'changed_at'    => date('Y-m-d')
-            ]);
+            $exist = $this->itExist($this);
+
+            if (!$exist)
+            {
+                Change::create([
+                    'meta_id'       => $this->id,
+                    'riiinglink_id' => $this->riiinglink_id,
+                    'name'          => $this->getChangeName($this, $event),
+                    'labels'        => $this->labels,
+                    'user_id'       => \Auth::user()->id,
+                    'changed_at'    => date('Y-m-d')
+                ]);
+            }
+            else
+            {
+                $change = Change::find($exist->id);
+
+                $change->labels  = $this->labels;
+                $change->save();
+            }
         }
     }
 
     protected function itExist($model)
     {
-        $exist = Change::where('changed_at','=',date('Y-m-d'))->where('meta_id','=',$model->id)->get();
+        $exist = Change::where('changed_at','=',date('Y-m-d'))->where('meta_id','=',$model->id)->where('user_id','=',\Auth::user()->id)->get();
 
-        return ($exist->isEmpty() ? false : true);
+        return (!$exist->isEmpty() ? $exist->first() : false);
     }
 
     protected function getChangeName($model,$action)

@@ -16,7 +16,7 @@ class ChangeEloquent implements ChangeInterface {
         {
             $query->where('riiinglinks.invited_id','=',$user_id);
 
-        })->get();
+        })->where('user_id','!=',$user_id)->get();
     }
 
     public function find($id){
@@ -30,6 +30,7 @@ class ChangeEloquent implements ChangeInterface {
             'meta_id'       => $data['meta_id'],
             'user_id'       => $data['user_id'],
             'riiinglink_id' => $data['riiinglink_id'],
+            'labels'        => $data['labels'],
             'changed_at'    => date('Y-m-d G:i:s'),
             'name'          => $data['name']
         ]);

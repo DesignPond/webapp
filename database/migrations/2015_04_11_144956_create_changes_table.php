@@ -18,6 +18,7 @@ class CreateChangesTable extends Migration {
             $table->integer('user_id');
             $table->integer('riiinglink_id');
             $table->integer('meta_id');
+            $table->text('labels');
             $table->date('changed_at');
             $table->timestamps();
         });
