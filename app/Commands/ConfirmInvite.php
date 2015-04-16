@@ -50,7 +50,7 @@ class ConfirmInvite extends Command implements SelfHandling {
 
             $invite->save();
 
-            $this->riiinglinkExist($user->id,$invite->user_id);
+            $this->riiinglinkExist($invite->user_id,$user->id);
 
             $this->dispatch(new ProcessInvite($invite->id));
 
@@ -78,7 +78,7 @@ class ConfirmInvite extends Command implements SelfHandling {
     {
         $riiinglink = $this->riiinglink->findByHostAndInvited($host_id,$invited_id);
 
-        if($riiinglink)
+        if(!$riiinglink)
         {
             // User is registred and riiinglink doesn't exist, create riiinglink
             $this->dispatch(new CreateRiiinglink($host_id,$invited_id));
