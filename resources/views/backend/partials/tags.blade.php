@@ -2,9 +2,9 @@
     <div class="panel-heading panel-small">Tags</div>
     <div class="panel-body" style="position: relative;">
         <ul id="myTags" data-id="{{ $ringlink['id'] }}">
-            @if(!$tags->isEmpty())
-                @foreach($tags as $tag)
-                    <li>{{ $tag->title }}</li>
+            @if(!empty( $ringlink['tags'] ))
+                @foreach($ringlink['tags'] as $tag)
+                    <li>{{ $tag }}</li>
                 @endforeach
             @endif
         </ul>

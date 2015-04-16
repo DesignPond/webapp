@@ -1,19 +1,19 @@
 <?php
-    $id         = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : null);
-    $used       = $helper->getUsedMetas($id , $metas, $groupe_id);
-    $label_text = (isset($host[$groupe_id][$label]['label']) && $host[$groupe_id][$label]['label'] != '' ? $host[$groupe_id][$label]['label'] : false);
-    $label_id   = (isset($host[$groupe_id][$label]['id']) ? $host[$groupe_id][$label]['id'] : '');
+    $id         = (isset($host[$items['id']][$label['id']]['id']) ? $host[$items['id']][$label['id']]['id'] : null);
+    $used       = $helper->getUsedMetas($id , $metas, $items['id']);
+    $label_text = (isset($host[$items['id']][$label['id']]['label']) && $host[$items['id']][$label['id']]['label'] != '' ? $host[$items['id']][$label['id']]['label'] : false);
+    $label_id   = (isset($host[$items['id']][$label['id']]['id']) ? $host[$items['id']][$label['id']]['id'] : '');
 ?>
 
 @if($label_text)
     <div class="chat-msg-item riiinglink linked <?php echo ($used ? 'used' : ''); ?>">
         <div class="chat-msg-content chat-msg-host bg-<?php echo ($used ? 'activated' : 'grey'); ?>">
-            <label class="text-left">{{ $types[$label] }}</label>
+            <label class="text-left">{{ $types[$label['id']] }}</label>
             <p>{{ $label_text }}</p>
         </div>
         <div class="chat-msg-switch chat-switch-host">
             <label class="switch switch-sm">
-                <input type="checkbox" name="metas[{{$groupe_id}}][{{$label}}]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
+                <input type="checkbox" name="metas[{{$items['id']}}][{{$label['id']}}]" <?php echo ($used ? 'checked="checked"' : ''); ?> value="{{ $label_id }}">
                 <span></span>
             </label>
         </div>

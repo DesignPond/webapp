@@ -22,7 +22,7 @@ class ProcessInvite extends Command implements SelfHandling {
         $this->riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->label      = \App::make('App\Riiingme\Label\Worker\LabelWorker');
         $this->user       = \App::make('App\Riiingme\User\Repo\UserInterface');
-        $this->meta       = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
+        $this->worker     = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
 
         $this->invite     = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
         $this->invite_id  = $invite_id;
@@ -46,21 +46,21 @@ class ProcessInvite extends Command implements SelfHandling {
 
         // sync labels
         if(!empty($partage_host)){
-            $this->syncLabels($hosted_link->id, $hosted_link->host_id, $partage_host);
+            $this->syncLabels($hosted_link, $partage_host);
         }
 
         if(!empty($partage_invited)){
-            $this->syncLabels($invited_link->id, $invited_link->host_id, $partage_invited);
+            $this->syncLabels($invited_link, $partage_invited);
         }
 	}
 
-    public function syncLabels($riiinglink_id,$user_id,$partage){
+    public function syncLabels($riiinglink,$partage){
 
-        $metas = $this->label->labelForUser($partage,$user_id);
+        $metas = $this->label->labelForUser($partage,$riiinglink->host_id);
 
         if(!empty($metas))
         {
-            $this->meta->setMetasForRiiinglink($user_id,$riiinglink_id,$metas);
+            $this->worker->setMetasForRiiinglink($riiinglink->host_id,$riiinglink->id,$metas);
         }
     }
 

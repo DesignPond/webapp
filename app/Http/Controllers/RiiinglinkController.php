@@ -21,6 +21,7 @@ class RiiinglinkController extends Controller {
     public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink, ActiviteWorker $activity)
     {
         $this->middleware('auth');
+        $this->middleware('autorized', ['only' => ['show']]);
 
         $this->user       = $user;
         $this->meta       = $meta;
@@ -65,22 +66,12 @@ class RiiinglinkController extends Controller {
      */
     public function show($id)
     {
-        // Get riiinglink from id
-        $link = $this->riiinglink->riiinglinkItem($id);
-        $tags = $link->tags;
-        // Test if id is user_id from riinglink
-        if($this->auth->id != $link->host_id)
-        {
-            return redirect('/');
-        }
-
         $metas       = $this->meta->getMetas($id);
-        $ringlink    = $this->riiinglink->getRiiinglinks($id,true);
-        $ringlink    = $this->riiinglink->convert($ringlink, $this->auth->labels->toArray());
-        $labels      = $this->riiinglink->convertToGroupLabel();
+        $ringlink    = $this->riiinglink->getRiiinglinkPrepared($id);
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
+        $ringlink    = $this->riiinglink->convert($ringlink, $this->auth->labels->toArray());
 
-        return view('backend.link')->with( $depedencies + array('user' => $this->auth,'ringlink' => $ringlink, 'tags' => $tags, 'metas' => $metas , 'labels' => $labels));
+        return view('backend.link')->with( $depedencies + array('user' => $this->auth, 'ringlink' => $ringlink, 'metas' => $metas ));
     }
 
 }

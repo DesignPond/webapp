@@ -36,14 +36,25 @@ class RiiinglinkWorker{
 
         return $rootScope;
     }
-
+/*
     public function getRiiinglinks($id,$single = null,$nbr = null){
 
         $this->items = ($single ? $this->riiinglink->find($id) : $this->riiinglinkCollection($id,$nbr));
 
         return $this->generate();
+    }*/
+
+
+    public function getRiiinglinkPrepared($id){
+
+        $this->items = $this->riiinglink->find($id);
+
+        return $this->generate();
     }
 
+    /*
+     * EGt latest riiinglinks list for user
+     * */
     public function getLatest($user_id)
     {
         $latest = $this->riiinglink->latest($user_id);
@@ -69,16 +80,16 @@ class RiiinglinkWorker{
     {
         return $this->riiinglink->find($id)->first();
     }
+    /*
+        public function riiinglinkCollection($user,$nbr = null){
 
-    public function riiinglinkCollection($user,$nbr = null){
+            return $this->riiinglink->findBy($user,'hosted',$nbr);
+        }
 
-        return $this->riiinglink->findBy($user,'hosted',$nbr);
-    }
+        public function riiinglinkCollectionPaginate($user,$params){
 
-    public function riiinglinkCollectionPaginate($user,$params){
-
-        return $this->riiinglink->findBy($user,'hosted',$params);
-    }
+            return $this->riiinglink->findBy($user,'hosted',$params);
+        }*/
 
     public function getRiiinglinkWithParams($user_id,$params)
     {
