@@ -25,7 +25,7 @@ class ActivateAccount extends Command implements SelfHandling {
         $user = $this->user->activate($this->token);
 
         if(!$user){
-            throw new \App\Exceptions\ActivationFailException($user->id ,$this->token);
+            throw new \App\Exceptions\ActivationFailException($this->token);
         }
 	}
 

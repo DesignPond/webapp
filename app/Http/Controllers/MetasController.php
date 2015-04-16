@@ -25,7 +25,7 @@ class MetasController extends Controller {
 	{
 		parse_str($request->input('riiinglink'), $data);
 
-		$id    = $data['riiinglink_id'];
+		$id = $data['riiinglink_id'];
 
         if(isset($data['metas']))
         {

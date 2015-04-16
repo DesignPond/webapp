@@ -134,7 +134,7 @@ class RiiinglinkWorker{
             $metas    = $this->transformer->getMetaLabelId($user_id,$metas);
             $newmetas = $this->updateMetas($meta,$metas);
 
-            $meta->labels = $newmetas;
+            $meta->labels = serialize($newmetas);
             $meta->save();
         }
         else
@@ -142,7 +142,7 @@ class RiiinglinkWorker{
             $this->meta->create([
                 'riiinglink_id' => $id,
                 'label_id'      => 0,
-                'labels'        => $metas
+                'labels'        => serialize($metas)
             ]);
         }
 
@@ -154,7 +154,7 @@ class RiiinglinkWorker{
 
         $result = $this->helper->addMetas($exist,$new);
 
-        return serialize($result);
+        return $result;
 
     }
 

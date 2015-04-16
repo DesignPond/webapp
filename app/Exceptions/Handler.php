@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler {
             return \Redirect::back()->with(array('status' => 'danger' , 'message' => 'Veuillez indiquer les informations pour l\'adresse temporaire'))->withInput();
 
         if ($e instanceof \App\Exceptions\ActivationFailException)
-            \Log::info('Problème avec l\'activation du compte', ['token' => $e->getToken(), 'user_id' => $e->getUser()]);
+            \Log::info('Problème avec l\'activation du compte', ['token' => $e->getToken()]);
 
 		return parent::render($request, $e);
 	}

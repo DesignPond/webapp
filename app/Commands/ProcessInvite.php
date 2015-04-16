@@ -60,7 +60,7 @@ class ProcessInvite extends Command implements SelfHandling {
 
         if(!empty($metas))
         {
-            $this->meta->setMetasForRiiinglink($user_id,$riiinglink_id,serialize($metas));
+            $this->meta->setMetasForRiiinglink($user_id,$riiinglink_id,$metas);
         }
     }
 

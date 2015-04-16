@@ -8,12 +8,15 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
 	{
 		$faker = Faker::create();
 
+        $date = \Carbon\Carbon::now();
+
         App\Riiingme\User\Entities\User::create([
             'email'      => 'cindy.leschaud@gmail.com',
             'first_name' => 'Cindy',
             'last_name'  => 'Leschaud',
             'user_type'  => 1,
-            'password'   => Hash::make('cindy2')
+            'password'   => Hash::make('cindy2'),
+            'activation_token' => md5('cindy.leschaud@gmail.com'.$date)
         ]);
 
         App\Riiingme\User\Entities\User::create([

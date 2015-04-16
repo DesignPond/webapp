@@ -29,7 +29,7 @@ class DispatchController extends Controller {
 
         $this->dispatch(new ActivateAccount($request->input('token')));
 
-        return redirect('/user')->with(array('status' => 'success', 'message' => 'Votre compta est maintenant actif!'));
+        return redirect('/user')->with(array('status' => 'success', 'message' => 'Votre compte est maintenant actif!'));
 
     }
 

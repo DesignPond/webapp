@@ -16,8 +16,8 @@ class ConfirmInviteTest extends TestCase {
     {
         parent::setUp();
 
-/*        $this->mock = Mockery::mock('Illuminate\Contracts\Bus\Dispatcher');
-        $this->app->instance('Illuminate\Contracts\Bus\Dispatcher', $this->mock);*/
+        //$this->mock = Mockery::mock('Illuminate\Contracts\Bus\Dispatcher');
+       // $this->app->instance('Illuminate\Contracts\Bus\Dispatcher', $this->mock);
 
         $this->link   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
@@ -70,7 +70,7 @@ class ConfirmInviteTest extends TestCase {
         $id     = $this->oneinvite->id;
         $token  = $this->token($id,'pruntrut@yahoo.fr');
 
-        //$this->mock->shouldReceive('dispatch')->once()->with(new App\Commands\CreateRiiinglink(1,2));
+        //$this->mock->shouldReceive('dispatch')->with(new App\Commands\ProcessInvite($id))->once();
 
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('pruntrut@yahoo.fr'), 'token' => $token ] ,[], []);
 
@@ -101,6 +101,8 @@ class ConfirmInviteTest extends TestCase {
     {
         $id     = $this->secondinvite->id;
         $token  = $this->token($id,'coralie.95@hotmail.com');
+
+        //$this->mock->shouldReceive('dispatch')->with(new App\Commands\ProcessInvite($id))->once();
 
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('coralie.95@hotmail.com'), 'token' => $token ] ,[], []);
 

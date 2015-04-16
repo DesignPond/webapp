@@ -9,6 +9,8 @@ class SendInviteTest extends TestCase {
     {
         parent::setUp();
 
+        \DB::table('invites')->truncate();
+
         $this->send    = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
         $this->command = new App\Commands\SendInvite('pruntrut@yahoo.fr',1,'','');
     }
@@ -30,6 +32,7 @@ class SendInviteTest extends TestCase {
         $this->command->handle();
 
         $invite = $this->getLastInDb();
+
         $id     = $invite->id;
         $email  = 'pruntrut@yahoo.fr';
 

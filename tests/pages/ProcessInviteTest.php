@@ -18,6 +18,7 @@ class ProcessInviteTest extends TestCase {
 
         $this->meta    = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
         $this->link    = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+
         list($this->link1 , $this->link2) = $this->link->create(['host_id' => 1, 'invited_id' => 23]);
 
         $data = ['email' => 'pruntrut@yahoo.fr', 'user_id' => 1,'invited_id' => 23, 'partage_host' => serialize([2 => [1]]), 'partage_invited' => serialize([2 => [1]])];
@@ -27,7 +28,7 @@ class ProcessInviteTest extends TestCase {
 
         $this->helper     = new \App\Riiingme\Helpers\Helper;
 
-        $this->command = new App\Commands\ProcessInvite($this->invitation);
+        $this->command = new App\Commands\ProcessInvite($this->invitation->id);
     }
 
     public function tearDown()
