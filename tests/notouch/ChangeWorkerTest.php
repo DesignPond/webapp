@@ -11,6 +11,13 @@ class ChangeWorkerTest extends TestCase {
         $this->worker = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
     }
 
+    public function tearDown()
+    {
+        Mockery::close();
+        \DB::table('riiinglinks')->truncate();
+        $this->seed('RiiinglinksTableSeeder');
+    }
+
     public function testMetaCompareChanges(){
 
         $metas = [

@@ -77,37 +77,6 @@ class ProcessInviteTest extends TestCase {
 
         $this->assertEquals(1, $user_id);
     }
-
-    public function testSyncLabels()
-    {
-        list($link1 , $link2) = $this->link->create(['host_id' => 1, 'invited_id' => 24]);
-
-        $metas = [ 2 => [ 1, 4, 5 ],  3 => [ 1, 6 ] ];
-
-        $expected  =  [
-            2 => [
-                1 => 2,
-                4 => 3,
-                5 => 4
-            ],
-            3 => [
-                1 => 11,
-                6 => 16
-            ]
-        ];
-
-        $this->command->syncLabels($link1, $metas);
-
-        $riinglink = $this->link->find($link1->id)->first();
-
-        $actual = unserialize($riinglink->usermetas->labels);
-
-        echo '<pre>';
-        print_r($link1->id);
-        echo '</pre>';exit;
-
-        $this->assertEquals($expected,$actual);
-    }
     
     public function getLastIdInDb()
     {

@@ -4,6 +4,7 @@ use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Meta\Repo\MetaInterface;
+use App\Riiingme\Label\Worker\LabelWorker;
 
 use League\Fractal;
 use League\Fractal\Manager;
@@ -15,14 +16,15 @@ class RiiinglinkWorker{
     protected $riiinglink;
     protected $items;
     protected $groupe;
-    protected $labels;
+    protected $label;
     protected $meta;
     protected $transformer;
 
-    public function __construct(Manager $fractal, RiiinglinkInterface $riiinglink, GroupeInterface $groupe, MetaInterface $meta, RiiinglinkTransformer $transformer)
+    public function __construct(Manager $fractal, RiiinglinkInterface $riiinglink, LabelWorker $label, GroupeInterface $groupe, MetaInterface $meta, RiiinglinkTransformer $transformer)
     {
         $this->fractal     = $fractal;
         $this->riiinglink  = $riiinglink;
+        $this->label       = $label;
         $this->groupe      = $groupe;
         $this->meta        = $meta;
         $this->transformer = $transformer;
@@ -146,10 +148,19 @@ class RiiinglinkWorker{
 
     }
 
+    public function syncLabels($riiinglink,$partage){
+
+        $metas = $this->label->labelForUser($partage,$riiinglink->host_id);
+
+        if(!empty($metas))
+        {
+            $this->setMetasForRiiinglink($riiinglink->host_id,$riiinglink->id,$metas);
+        }
+    }
+
     public function createRiiinglink($host_id,$invited_id){
 
         return $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);
-
     }
 
 }

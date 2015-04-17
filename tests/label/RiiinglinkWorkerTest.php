@@ -9,6 +9,7 @@ class RiiinglinkWorkerTest extends TestCase {
     protected $worker;
     protected $meta;
     protected $stub;
+    protected $link;
 
     public function setUp()
     {
@@ -28,6 +29,7 @@ class RiiinglinkWorkerTest extends TestCase {
 
         $this->worker = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
         $this->meta   = \App::make('App\Riiingme\Meta\Repo\MetaInterface');
+        $this->link   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->stub   =  $this->meta->create([ 'riiinglink_id' => 50, 'labels' => serialize($metas) ]);
     }
 
@@ -43,6 +45,9 @@ class RiiinglinkWorkerTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+        \DB::table('invites')->truncate();
+        \DB::table('riiinglinks')->truncate();
+        $this->seed('RiiinglinksTableSeeder');
         \DB::table('metas')->truncate();
         $this->seed('MetasTableSeeder');
     }
@@ -78,5 +83,37 @@ class RiiinglinkWorkerTest extends TestCase {
        $this->assertEquals($expected, unserialize($actual->labels));
 
 	}
+
+
+    public function testSyncLabels()
+    {
+        list($link1 , $link2) = $this->link->create(['host_id' => 1, 'invited_id' => 24]);
+
+        $metas = [ 2 => [ 1, 4, 5 ],  3 => [ 1, 6 ] ];
+
+        $before = [];
+
+        $this->assertEquals($before,[]);
+
+        $expected  =  [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16
+            ]
+        ];
+
+        $this->worker->syncLabels($link1, $metas);
+
+        $riinglink = $this->link->find($link1->id)->first();
+
+        $actual    = unserialize($riinglink->usermetas->labels);
+
+        $this->assertEquals($expected,$actual);
+    }
 
 }

@@ -33,6 +33,8 @@ class LabelWorkerTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
+        \DB::table('riiinglinks')->truncate();
+        $this->seed('RiiinglinksTableSeeder');
     }
 
 	/**
