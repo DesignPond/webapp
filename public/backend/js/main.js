@@ -186,4 +186,19 @@
         }
     });
 
+    $('.partageCheckAll').on('click',function()
+    {
+        var who = $(this).data('who');
+        console.log(who);
+        if ($(this).is(':checked'))
+        {
+            $('.checkbox.'+who+' input').each(function(){this.checked = true;});
+        }
+        else
+        {
+            $('.checkbox.'+who+' input').each(function(){this.checked = false;});
+        }
+    });
+
+
 })(jQuery);

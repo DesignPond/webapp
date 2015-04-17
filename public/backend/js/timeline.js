@@ -6,21 +6,22 @@
     var count = 5;
     var total = content.data('total');
 
-    $( "#updateTimeline" ).click(function() {
-        if (count > total) {
-            $("#timelineLoader").hide();
-            $('#updateTimeline').text('Aucune autre activité à afficher');
-            return false;
-        }
-        else
-        {
-            loadArticle(count);
-        }
-        count = count + 5;
-    });
-
-    if(content)
+    if(content.length)
     {
+
+        $( "#updateTimeline" ).click(function() {
+            if (count > total) {
+                $("#timelineLoader").hide();
+                $('#updateTimeline').text('Aucune autre activité à afficher');
+                return false;
+            }
+            else
+            {
+                loadArticle(count);
+            }
+            count = count + 5;
+        });
+
         $(window).scroll(function ()
         {
             if ( $(window).scrollTop() == $(document).height() - $(window).height() )

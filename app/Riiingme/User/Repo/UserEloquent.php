@@ -26,16 +26,24 @@ class UserEloquent implements UserInterface {
 
     public function search($term){
 
-        return $this->user->where('email','like', '%'.$term.'%')
-            ->orWhere('first_name', 'like', '%'.$term.'%')
-            ->orWhere('last_name', 'like', '%'.$term.'%')
-            ->orWhere('company', 'like', '%'.$term.'%')
-            ->get();
+        $id = \Auth::user()->id;
+
+        return $this->user
+            ->whereNotIn('id', [$id] )
+            ->where(function($query) use ($term)
+            {
+                $query->where('email','like', '%'.$term.'%')
+                    ->orWhere('first_name', 'like', '%'.$term.'%')
+                    ->orWhere('last_name', 'like', '%'.$term.'%')
+                    ->orWhere('company', 'like', '%'.$term.'%');
+
+            })->get();
     }
 
     public function findByEmail($email){
 
         $user = $this->user->where('email','=', $email)->get();
+
         return (!$user->isEmpty() ? $user->first() : null);
     }
 

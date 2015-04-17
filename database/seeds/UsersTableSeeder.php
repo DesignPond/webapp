@@ -24,7 +24,8 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
             'first_name' => 'Coralie',
             'last_name'  => 'Leschaud',
             'user_type'  => 1,
-            'password'   => Hash::make('cindy2')
+            'password'   => Hash::make('cindy2'),
+            'activation_token' => md5('coralie.95@hotmail.com'.$date)
         ]);
 
         App\Riiingme\User\Entities\User::create([
@@ -32,7 +33,8 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
             'first_name' => 'Céline',
             'last_name'  => 'Leschaud',
             'user_type'  => 1,
-            'password'   => Hash::make('cindy2')
+            'password'   => Hash::make('cindy2'),
+            'activation_token' => md5('celine.bensmida@gmail.com'.$date)
         ]);
 
         App\Riiingme\User\Entities\User::create([
@@ -40,27 +42,34 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
             'first_name' => 'Cyril',
             'last_name'  => 'Leschaud',
             'user_type'  => 1,
-            'password'   => Hash::make('cindy2')
+            'password'   => Hash::make('cindy2'),
+            'activation_token' => md5('cyrilus1987@live.fr'.$date)
         ]);
 
         for( $x = 1 ; $x < 11; $x++ )
         {
+            $email = $faker->companyEmail;
+
             App\Riiingme\User\Entities\User::create(array(
-                'email'      => $faker->companyEmail,
+                'email'      => $email,
                 'first_name' => $faker->firstName,
                 'last_name'  => $faker->lastName,
                 'user_type'  => 1,
-                'password'   => Hash::make('1234')
+                'password'   => Hash::make('1234'),
+                'activation_token' => md5($email.$date)
             ));
         }
 
         for( $x = 11 ; $x < 21; $x++ )
         {
+            $email = $faker->companyEmail;
+
             App\Riiingme\User\Entities\User::create(array(
-                'email'      => $faker->companyEmail,
+                'email'      => $email,
                 'company'    => $faker->company,
                 'user_type'  => 2,
-                'password'   => Hash::make('1234')
+                'password'   => Hash::make('1234'),
+                'activation_token' => md5($email.$date)
             ));
         }
 

@@ -13,7 +13,9 @@ class GroupesTableSeeder extends Seeder {
             array('titre' => 'Adresse privé' , 'status' => 'principal'),
             array('titre' => 'Adresse professionnelle' , 'status' => 'principal'),
             array('titre' => 'Adresse privé' , 'status' => 'temporaire'),
-            array('titre' => 'Adresse professionnelle' , 'status' => 'temporaire')
+            array('titre' => 'Adresse professionnelle' , 'status' => 'temporaire'),
+            array('titre' => 'Adresse entreprise' , 'status' => 'principal'),
+            array('titre' => 'Adresse entreprise' , 'status' => 'temporaire'),
         );
 
         // Uncomment the below to run the seeder

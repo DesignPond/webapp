@@ -23,12 +23,12 @@
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;Je partage les informations suivantes:</strong></h4>
                             <?php $who = 'host'; ?>
-                            @include('backend.partials.partage')
+                            @include('backend.partials.partage-host')
                         </div>
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;Je souhaite obtenir les informations suivantes:</strong></h4>
                             <?php $who = 'invited'; ?>
-                            @include('backend.partials.partage')
+                            @include('backend.partials.partage-invited')
                         </div>
                     </div>
 

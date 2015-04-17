@@ -1,6 +1,9 @@
-<?php unset($groupe_type[0]); ?>
+@if(isset($user->label_groupe) && !empty($user->label_groupe))
 
-@if(!empty($groupe_type))
+<?php
+    $host_group_type = $user->label_groupe;
+    unset($host_group_type[1]);
+?>
 
     <div class="well">
         <div class="row">
@@ -14,22 +17,20 @@
         <br/>
         <div class="row">
 
-            @foreach($groupe_type as $groupe)
-
-                @if($status[$groupe['id']] == 'principal')
+            @foreach($host_group_type as $groupe_id => $groupe)
+                @if($groupe_id == 2 || $groupe_id == 3)
                     <div class="col-md-6">
-                        <h5><strong>{{ $groupe['titre'] }}</strong></h5>
-                        @foreach($groupe['groupe_type'] as $type)
+                        <h5><strong>{{ $groupes[$groupe_id] }}</strong></h5>
+                        @foreach($groupe as $type_id => $type)
                             <div class="checkbox {{ $who }}">
                                 <label>
-                                    <input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
-                                    {{ $type['titre'] }}
+                                    <input name="partage_{{ $who }}[{{ $groupe_id }}][]" value="{{ $type_id }}" type="checkbox">
+                                    {{ $types[$type] }}
                                 </label>
                             </div>
                         @endforeach
                     </div>
                 @endif
-
             @endforeach
 
         </div>

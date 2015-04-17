@@ -2,9 +2,10 @@
 @section('content')
 
 <?php
-    $host    = $ringlink['label'];
-    $invited = $ringlink['invited_labels'];
-    $helper  = new \App\Riiingme\Helpers\Helper;
+    $host      = $ringlink['label'];
+    $invited   = $ringlink['invited_labels'];
+    $helper    = new \App\Riiingme\Helpers\Helper;
+   // $hasLabels = array_map('array_keys',$ringlink['host_labels']);
 ?>
 
 <div class="row">

@@ -155,7 +155,10 @@
                             </div>
                             <div class="col-md-4 col-xs-12">
                                 @if(!$temp && !$exist)
-                                    <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $groupe['id'] + 2 }}" aria-expanded="false" aria-controls="collapseExample">
+
+                                    <?php  $collapsible = ($user->user_type == '1' ? $groupe['id'] + 2 : $groupe['id'] + 1); ?>
+
+                                    <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $collapsible }}" aria-expanded="false" aria-controls="collapseExample">
                                        Indiquer une <span>{{ $groupe['titre'] }}</span> temporaire
                                     </a>
                                 @endif
