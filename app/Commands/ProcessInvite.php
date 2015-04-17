@@ -45,11 +45,13 @@ class ProcessInvite extends Command implements SelfHandling {
         $invited_link = $this->getRiiinglink($invite->invited_id , $invite->user_id);
 
         // sync labels
-        if(!empty($partage_host)){
+        if(!empty($partage_host))
+        {
             $this->syncLabels($hosted_link, $partage_host);
         }
 
-        if(!empty($partage_invited)){
+        if(!empty($partage_invited))
+        {
             $this->syncLabels($invited_link, $partage_invited);
         }
 	}

@@ -38,7 +38,16 @@
 
                     @if(!empty($partage))
 
-                        <?php $groupes_titres = array(2 => 'Adresse privé' , 3 => 'Adresse professionnelle' ,4 => 'Adresse privé temporaire' , 5 => 'Adresse professionnelle temporaire' );  ?>
+                        <?php
+                            $groupes_titres = [
+                                    2 => 'Adresse privé' ,
+                                    3 => 'Adresse professionnelle' ,
+                                    4 => 'Adresse privé temporaire' ,
+                                    5 => 'Adresse professionnelle temporaire',
+                                    6 => 'Adresse entreprise',
+                                    7 => 'Adresse entreprise temporaire'
+                            ];
+                        ?>
                         <br/>
                         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">
                             {{ $invite->user->first_name }} souhaiterai obtenir les informations suivantes:

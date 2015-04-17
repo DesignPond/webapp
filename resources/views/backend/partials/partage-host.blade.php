@@ -3,6 +3,7 @@
 <?php
     $host_group_type = $user->label_groupe;
     unset($host_group_type[1]);
+
 ?>
 
     <div class="well">
@@ -18,7 +19,7 @@
         <div class="row">
 
             @foreach($host_group_type as $groupe_id => $groupe)
-                @if($groupe_id == 2 || $groupe_id == 3)
+                @if($groupe_id == 2 || $groupe_id == 3 || $groupe_id == 6)
                     <div class="col-md-6">
                         <h5><strong>{{ $groupes[$groupe_id] }}</strong></h5>
                         @foreach($groupe as $type_id => $type)
@@ -39,7 +40,7 @@
                 <hr/>
                 <div class="checkbox">
                     <label>
-                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout selectionner/deselectionner
+                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
                     </label>
                 </div>
             </div>

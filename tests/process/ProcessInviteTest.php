@@ -82,12 +82,31 @@ class ProcessInviteTest extends TestCase {
     {
         list($link1 , $link2) = $this->link->create(['host_id' => 1, 'invited_id' => 24]);
 
-        $this->command->syncLabels($link1, [2 => [1]]);
+        $metas = [ 2 => [ 1, 4, 5 ],  3 => [ 1, 6 ] ];
+
+        $expected  =  [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16
+            ]
+        ];
+
+        $this->command->syncLabels($link1, $metas);
 
         $riinglink = $this->link->find($link1->id)->first();
-        $expected  = [2 => [1 => 2]];
 
-        $this->assertEquals($expected,unserialize($riinglink->usermetas->labels));
+        $actual = unserialize($riinglink->usermetas->labels);
+
+        echo '<pre>';
+        print_r($link1->id);
+        echo '</pre>';exit;
+
+        $this->assertEquals($expected,$actual);
     }
     
     public function getLastIdInDb()

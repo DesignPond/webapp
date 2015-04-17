@@ -38,7 +38,7 @@
                 <hr/>
                 <div class="checkbox">
                     <label>
-                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout selectionner/deselectionner
+                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
                     </label>
                 </div>
             </div>
