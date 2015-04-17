@@ -30,18 +30,21 @@ class AutorizedMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-        $id = $request->segment(3);
+        if (\Auth::check()) {
+            $id = $request->segment(3);
 
-        // Get riiinglink from id
-        $link = $this->riiinglink->riiinglinkItem($id);
+            // Get riiinglink from id
+            $link = $this->riiinglink->riiinglinkItem($id);
 
-        // Test if id is user_id from riinglink
-        if($link && (\Auth::user()->id != $link->host_id))
-        {
-            return redirect('/');
+            // Test if id is user_id from riinglink
+            if ($link && (\Auth::user()->id != $link->host_id)) {
+                return redirect('/');
+            }
+
+            return $next($request);
         }
 
-		return $next($request);
+        return $next($request);
 	}
 
 }

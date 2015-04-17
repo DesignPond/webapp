@@ -74,4 +74,16 @@ class RiiinglinkController extends Controller {
         return view('backend.link')->with( $depedencies + array('user' => $this->auth, 'ringlink' => $ringlink, 'metas' => $metas ));
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * DELETE /riiinlink/{id}
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $this->riiinglink->destroy($id);
+    }
+
 }

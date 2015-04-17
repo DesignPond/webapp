@@ -16,7 +16,7 @@ class CheckChangesForUser {
 	 */
 	public function __construct()
 	{
-        $this->changes = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
+        $this->changes = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
 	}
 
 	/**
@@ -36,11 +36,13 @@ class CheckChangesForUser {
 
         //$event->user
 
-        $change  = $this->changes->getAll($event->user->id);
+        $change  = $this->changes->getChanges($event->user->id);
 
         // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
         //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');
-        dd($change);
+        echo '<pre>';
+        print_r($change);
+        echo '</pre>';exit;
 	}
 
 }

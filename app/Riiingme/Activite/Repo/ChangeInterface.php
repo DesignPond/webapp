@@ -4,6 +4,7 @@
 interface ChangeInterface{
 
     public function getAll($user_id);
+    public function getUpdated($user_id);
     public function find($id);
     public function create(array $data);
     public function update(array $data);
