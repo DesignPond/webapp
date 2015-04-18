@@ -81,7 +81,7 @@ Route::get('test', function()
     $labels = $meta->first()->labels;
 */
     $user = \App::make('App\Riiingme\User\Repo\UserInterface');
-    $user = $user->find(\Auth::user()->id);
+    $user = $user->find(2);
 
    // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');

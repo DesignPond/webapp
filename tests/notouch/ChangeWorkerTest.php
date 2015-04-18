@@ -53,4 +53,39 @@ class ChangeWorkerTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
+    public function testMetaCompareChangesSecond(){
+
+        $metas = [
+            3 => [
+                6 => 16,
+                3 => 13,
+                7 => 17
+            ]
+        ];
+
+        $new = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                6 => 16,
+            ]
+        ];
+
+        $actual = $this->worker->calculDiff($metas,$new);
+
+        $expected = [
+            'added'   => [
+                2 => [ 1 => 2,  4 => 3, 5 => 4 ]
+            ],
+            'deleted' => [
+                3 =>  [ 3 => 13,  7 => 17 ]
+            ]
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
 }

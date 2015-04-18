@@ -9,6 +9,7 @@ class CheckChangesForUser {
 
     public $changes;
     public $type;
+    public $user;
 
 	/**
 	 * Create the event handler.
@@ -19,6 +20,7 @@ class CheckChangesForUser {
 	{
         $this->changes = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
         $this->type    = \App::make('App\Riiingme\Type\Repo\TypeInterface');
+        $this->user    = \App::make('App\Riiingme\User\Repo\UserInterface');
 	}
 
 	/**
@@ -32,11 +34,13 @@ class CheckChangesForUser {
         $types    = $this->type->getAll()->lists('titre','id');
         $changes  = $this->changes->getChanges($event->user->id);
 
+        $user = $this->user->find(1);
+
         if(!empty($changes))
         {
-            \Mail::send('emails.changement', ['name' => $event->user->name, 'user_photo' => $event->user->user_photo, 'types' => $types , 'changes' => $changes] , function($message) use ($event)
+            \Mail::send('emails.changement', ['user' => $user, 'types' => $types , 'changes' => $changes] , function($message) use ($event)
             {
-                $message->to($event->email)->subject('Notification de changement des données partagées');
+                $message->to($event->user->email)->subject('Notification de changement des données partagées');
             });
         }
 

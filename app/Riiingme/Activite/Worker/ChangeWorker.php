@@ -19,8 +19,8 @@ class ChangeWorker{
 
         $change = $this->changes->getUpdated($user_id);
 
-        if( $change->count() > 1){
-
+        if( $change->count() > 1)
+        {
             $newChanges = $change->first();
             $oldChanges = $change->last();
 
@@ -31,6 +31,8 @@ class ChangeWorker{
 
             return $difference;
         }
+
+        return [];
 
     }
 
@@ -43,8 +45,18 @@ class ChangeWorker{
         {
             if( isset($newLabels[$group_id]) && isset($oldLabels[$group_id]) )
             {
-                $difference['deleted'][$group_id] = array_diff($oldLabels[$group_id], $newLabels[$group_id]);
-                $difference['added'][$group_id]   = array_diff($newLabels[$group_id],$oldLabels[$group_id]);
+                $deleted = array_diff($oldLabels[$group_id], $newLabels[$group_id]);
+
+                if(!empty($deleted)){
+                    $difference['deleted'][$group_id] = $deleted;
+                }
+
+                $added = array_diff($newLabels[$group_id],$oldLabels[$group_id]);
+
+                if(!empty($added)){
+                    $difference['added'][$group_id] = $added;
+                }
+
             }
 
             elseif( isset($newLabels[$group_id]) && !isset($oldLabels[$group_id]) )
