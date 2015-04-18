@@ -14,8 +14,6 @@ class ChangeWorkerTest extends TestCase {
     public function tearDown()
     {
         Mockery::close();
-        \DB::table('riiinglinks')->truncate();
-        $this->seed('RiiinglinksTableSeeder');
     }
 
     public function testMetaCompareChanges(){
@@ -42,7 +40,15 @@ class ChangeWorkerTest extends TestCase {
 
         $actual = $this->worker->calculDiff($metas,$new);
 
-        $expected = true;
+        $expected = [
+            'added'   => [
+                2 => [ 1 => 2,  4 => 3, 5 => 4 ],
+                3 => [ 1 => 11]
+            ],
+            'deleted' => [
+                3 =>  [ 3 => 13,  7 => 17 ]
+            ]
+        ];
 
         $this->assertEquals($expected, $actual);
     }

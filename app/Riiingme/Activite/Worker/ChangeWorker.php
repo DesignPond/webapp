@@ -27,7 +27,7 @@ class ChangeWorker{
             $newLabels = (!empty($newChanges->labels) ? unserialize($newChanges->labels) : []);
             $oldLabels = (!empty($oldChanges->labels) ? unserialize($oldChanges->labels) : []);
 
-            $difference = array_diff($oldLabels, $newLabels);
+            $difference = $this->calculDiff($oldLabels, $newLabels);
 
             return $difference;
         }
@@ -37,22 +37,28 @@ class ChangeWorker{
     public function calculDiff($oldLabels,$newLabels)
     {
 
-        foreach($oldLabels as $group_id => $groupes)
+        $all_groupes = range(1,7);
+
+        foreach($all_groupes as $group_id)
         {
-            if(isset($newLabels[$group_id]))
+            if( isset($newLabels[$group_id]) && isset($oldLabels[$group_id]) )
             {
-                $difference = array_diff($oldLabels[$group_id], $newLabels[$group_id]);
+                $difference['deleted'][$group_id] = array_diff($oldLabels[$group_id], $newLabels[$group_id]);
+                $difference['added'][$group_id]   = array_diff($newLabels[$group_id],$oldLabels[$group_id]);
             }
-            else
+
+            elseif( isset($newLabels[$group_id]) && !isset($oldLabels[$group_id]) )
             {
-                if(isset($exist[$group_id]))
-                {
-                    $data[$group_id] = $exist[$group_id];
-                    ksort($data[$group_id]);
-                }
+               $difference['added'][$group_id] = $newLabels[$group_id];
+            }
+
+            elseif( !isset($newLabels[$group_id]) && isset($oldLabels[$group_id]) )
+            {
+                $difference['added'][$group_id] = $oldLabels[$group_id];
             }
         }
 
+        return $difference;
     }
 
 }

@@ -95,6 +95,28 @@ Route::get('test', function()
 
 });
 
+Route::get('changement', function()
+{
+
+    $user  = \App::make('App\Riiingme\User\Entities\User');
+    $type  = \App::make('App\Riiingme\Type\Repo\TypeInterface');
+    $user  = $user->find(1);
+    $types = $type->getAll()->lists('titre','id');
+
+    $changes = [
+        'added'   => [
+            2 => [ 1 => 2,  4 => 3, 5 => 4 ],
+            3 => [ 1 => 11]
+        ],
+        'deleted' => [
+            3 =>  [ 3 => 13,  7 => 17 ]
+        ]
+    ];
+
+    return View::make('emails.changement', array('user' => $user, 'user_photo' => 'avatar.jpg', 'types' => $types , 'name' => 'Cindy Leschaud', 'changes' => $changes));
+
+});
+
 Route::get('notification', function()
 {
     $user = \App::make('App\Riiingme\User\Entities\User');
