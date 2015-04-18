@@ -98,9 +98,20 @@ Route::get('test', function()
 Route::get('notification', function()
 {
     $user = \App::make('App\Riiingme\User\Entities\User');
-    $user = $user->find(25);
+    $user = $user->find(1);
 
-    return View::make('emails.confirmation', array('user' => $user, 'token' => '2rw3t342t2t'));
+    return View::make('emails.confirmation', array('user' => $user, 'user_photo' => 'avatar.jpg', 'name' => 'Cindy Leschaud', 'token' => '2rw3t342t2t'));
+});
+
+Route::get('invitation', function()
+{
+    $user   = \App::make('App\Riiingme\User\Entities\User');
+    $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+    $invite = $invite->find(3);
+    $user   = $user->find($invite->user_id);
+    $data   = array('invite' => $invite, 'user' => $user, 'types' => [], 'partage' => []);
+
+    return View::make('emails.invitation', $data);
 });
 
 Event::listen('illuminate.query', function($query, $bindings, $time, $name)

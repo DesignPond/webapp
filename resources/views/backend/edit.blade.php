@@ -139,7 +139,7 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label" for="input-id-1">{{ $types['titre'] }}</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-8 col-xs-12">
                                             <?php
                                                 $type  = $types['pivot']['type_id'];
                                                 $group = $types['pivot']['groupe_id'];

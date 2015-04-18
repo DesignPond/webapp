@@ -8,6 +8,16 @@
 
     <div class="well">
         <div class="row">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <label class="text-primary">
+                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
+                    </label>
+                </div>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="checkbox"><label><input checked disabled type="checkbox">Prénom</label></div>
             </div>
@@ -15,7 +25,6 @@
                 <div class="checkbox"><label><input checked disabled type="checkbox">Nom</label></div>
             </div>
         </div>
-        <br/>
         <div class="row">
 
             @foreach($host_group_type as $groupe_id => $groupe)
@@ -25,7 +34,7 @@
                         @foreach($groupe as $type_id => $type)
                             <div class="checkbox {{ $who }}">
                                 <label>
-                                    <input name="partage_{{ $who }}[{{ $groupe_id }}][]" value="{{ $type_id }}" type="checkbox">
+                                    <input name="partage_{{ $who }}[{{ $groupe_id }}][{{ $type_id }}]" value="{{ $type }}" type="checkbox">
                                     {{ $types[$type] }}
                                 </label>
                             </div>
@@ -34,16 +43,6 @@
                 @endif
             @endforeach
 
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <hr/>
-                <div class="checkbox">
-                    <label>
-                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
-                    </label>
-                </div>
-            </div>
         </div>
     </div>
 

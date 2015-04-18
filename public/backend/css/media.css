@@ -48,6 +48,27 @@
         width: 100%;
         padding: 8px 14px 7px;
     }
+
+    label {
+        margin-bottom: 5px;
+        margin-top: 8px;
+    }
+
+    #dropdownMenu1{
+        text-align: center;
+    }
+
+    .navbar-nav {
+        margin: 0 -15px;
+    }
+
+    #timeline-content > li.timeline-separator::before {
+        margin-left: 0;
+    }
+
+    .timeline > li.timeline-separator::before, .timeline-alt > li.timeline-separator::before {
+        padding:0 30px;
+    }
 }
 
 /* Portrait and Landscape */

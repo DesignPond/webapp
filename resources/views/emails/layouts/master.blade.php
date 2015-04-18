@@ -12,6 +12,9 @@
         body {
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
+            margin-left:auto;
+            margin-right:auto;
+            width: 600px;
         }
         body, p, h1, h2, h3, h4, h5, h6, img, table, td, #emailBody {
             margin-top: 0;
@@ -767,7 +770,7 @@
         }
         /* Text Colors */
         a, a span, .tableBtn a span, .priceColumn td a span {
-            color: #302683;
+            color: #454d59;
         }
         .entryBox p, .eBody, .invoiceTable td, .invoiceTable p, .invoiceTable2 th, .invoiceTable2 td, .invoiceTable2 p, .priceTable td, .priceTable th, .priceTable p, h4, .subTotal .amount, .invoiceHead .amount, .twcoList strong, .eBody .twcoList strong, .priceColumn td span {
             color: #54565c;
@@ -798,7 +801,7 @@
         }
         /* Background Colors */
         .eHeader, .btnLfTp, .btnLfBt, .btnRgTp, .btnRgBt, .defaultBtn td, .priceColumn.recommend th, .eHeader_stretch {
-            background-color: #302683;
+            background-color: #454d59;
         }
         .bottomCorners, .ReadMsgBody, .ExternalClass, .eBody, .invoiceTable2, .invoiceTable2 td, .invoiceTable2 th, .priceColumn.recommend .tableBtn, .eBody_stretch {
             background-color: #ffffff;
@@ -859,7 +862,7 @@
             border-bottom: 1px solid #cacaca;
         }
         .priceColumn.recommend th {
-            border-bottom: 1px solid #302683;
+            border-bottom: 1px solid #454d59;
         }
         @media only screen {
             td[class=topCorners] img, td[class=bottomCorners] img, td[class=btnLfTp] img, td[class=btnRgTp] img, td[class=btnLfBt] img, td[class=btnRgBt] img {
@@ -1209,27 +1212,29 @@
 
     ?>
 </head>
-<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;{{ $marginReset }}{{ $paddingReset }}height: 100%;width: 100%;min-height: 1000px;background-color: #ebebeb;">
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;{{ $marginReset }}{{ $paddingReset }} margin-left:auto;margin-right:auto;height: 100%;width: 600px;min-height: 1000px;background-color: #ebebeb;">
+
 <div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">
    Notification automatique depuis www.riiingme.ch
 </div>
-<table id="emailBody" width="100%" border="0" cellspacing="0" cellpadding="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #ebebeb;">
+
+<table id="emailBody" width="600" border="0" cellspacing="0" cellpadding="0" style="{{ $marginReset }}{{ $paddingReset }}margin-left:auto;margin-right:auto;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;min-height: 1000px;background-color: #ebebeb;">
     <tr>
         <td align="center" valign="top" class="emailBodyCell" style="{{ $marginReset }}padding-top: 0;padding-bottom: 32px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;min-height: 1000px;background-color: #ebebeb;">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="eBox" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 100%;min-width: 576px;">
                 <tr>
-                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #302683;">&nbsp;</td>
-                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #302683;">
+                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #454d59;">&nbsp;</td>
+                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #454d59;">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">
                             <tr>
-                                <td class="eHeaderLogo" style="{{ $reset }}height: 48px;text-align: left;font-size: 0 !important;font-weight: bold;color: #ffffff;">
-                                    <a href="#" style="{{ $paddingReset }}display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;height: 48px;text-align: left;font-size: 18px;font-weight: bold;line-height: 0;">
+                                <td class="eHeaderLogo" style="{{ $reset }}height: 48px;text-align: center;font-size: 0 !important;font-weight: bold;color: #ffffff;">
+                                    <a href="#" style="{{ $paddingReset }}display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;height: 48px;text-align: center;font-size: 18px;font-weight: bold;line-height: 0;">
                                         <img class="imageFix" src="<?php echo asset('emails/images/logo.png');?>" width="200" height="48" alt="RiiingMe" style="{{ $marginReset }}{{ $paddingReset }}height: auto;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;border: none;display: block;vertical-align: top;">
                                     </a>
                                 </td>
                             </tr>
                         </table></td>
-                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #302683;">&nbsp;</td>
+                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #454d59;">&nbsp;</td>
                 </tr>
                     <!-- Contenu -->
                     @yield('content')
@@ -1247,11 +1252,12 @@
                     <td class="eFooter_stretch" style="{{ $reset }}min-width: 16px;">&nbsp;</td>
                 </tr>
             </table>
-
-            <!-- end .eBox --></td>
+            <!-- end .eBox -->
+        </td>
         <!-- end .emailBodyCell -->
     </tr>
 </table>
+
 <!-- end #emailBody -->
 </body>
 </html>

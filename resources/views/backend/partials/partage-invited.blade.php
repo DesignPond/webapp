@@ -4,6 +4,16 @@
 
     <div class="well">
         <div class="row">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <label class="text-primary">
+                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
+                    </label>
+                </div>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="checkbox"><label><input checked disabled type="checkbox">Prénom</label></div>
             </div>
@@ -11,11 +21,9 @@
                 <div class="checkbox"><label><input checked disabled type="checkbox">Nom</label></div>
             </div>
         </div>
-        <br/>
         <div class="row">
 
             @foreach($groupe_type as $groupe)
-
                 @if($status[$groupe['id']] == 'principal')
                     <div class="col-md-6">
                         <h5><strong>{{ $groupe['titre'] }}</strong></h5>
@@ -29,19 +37,8 @@
                         @endforeach
                     </div>
                 @endif
-
             @endforeach
 
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <hr/>
-                <div class="checkbox">
-                    <label>
-                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
-                    </label>
-                </div>
-            </div>
         </div>
     </div>
 
