@@ -853,6 +853,20 @@ form.mb-lg .clearfix{
     display: none;
 }
 
+#orderFilter,#selectFilter{
+    width: 190px;
+}
+
+#footer{
+  margin-top: 30px;
+}
+
+#footer p{
+    margin-bottom: 0;
+    padding: 10px 0;
+    color: #333;
+}
+
 /*
 Autocomplete ui
 */
@@ -886,14 +900,3 @@ Autocomplete ui
     font-weight: normal;
 }
 
-@media (max-width: 990px) {
-    .btn-collapse {
-        width: 100%;
-        margin: 20px 0 10px 0;
-        min-height: 35px;
-    }
-
-    .btn-collapse span{
-        display: inline-block;
-    }
-}

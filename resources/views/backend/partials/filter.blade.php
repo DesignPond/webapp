@@ -1,19 +1,19 @@
 <div class="col-md-12">
     <div class="panel panel-default" id="filters">
         <div class="panel-body">
-            <div class="col-md-8">
+            <div class="col-md-8 col-xs-12">
 
                 <form id="filterChange" action="{{ Request::url() }}" method="post">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <select id="orderFilter" style="width:130px;" class="selectpicker" name="orderBy">
+                    <select id="orderFilter" class="selectpicker" name="orderBy">
                         <option value="">Ordre</option>
                         <option value="created_at">Plus récent</option>
                         <option value="last_name">Alphabétique</option>
                     </select>
 
-                    <select id="selectFilter" class="selectpicker bg-info" style="width:190px;" name="tag">
+                    <select id="selectFilter" class="selectpicker bg-info" name="tag">
                         <option value="">Filtrer par tag</option>
                         @if(!empty($tags))
                             @foreach($tags as $tag_id => $tag)
@@ -21,11 +21,11 @@
                             @endforeach
                         @endif
                     </select>
-                    &nbsp;<a href="{{ Request::url() }}" class="btn btn-primary">Tous</a>
+                    &nbsp;&nbsp;<a href="{{ Request::url() }}" class="btn btn-primary collapseButton">Tous</a>
                 </form>
 
             </div><!-- /.col-lg-6 -->
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-12">
                 <form id="filterSearch" action="{{ Request::url() }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="input-group">
