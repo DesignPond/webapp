@@ -7,7 +7,7 @@
         @if(!$latest->isEmpty())
 
         <div class="panel panel-info">
-            <div class="panel-heading"><div class="panel-title">Derniers contacts</div></div>
+            <div class="panel-heading"><div class="panel-title">{{ trans('menu.lastcontact') }}</div></div>
             <!-- List group -->
             <div class="panel-body">
                 <ul class="list-group">
@@ -32,14 +32,14 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <a href="{{ url('/user/'.$user->id) }}" class="btn btn-sm btn-info pull-right"><small>Voir tous</small></a><span class="clearfix"></span>
+                <a href="{{ url('/user/'.$user->id) }}" class="btn btn-sm btn-info pull-right"><small>{{ trans('action.seeall') }}</small></a><span class="clearfix"></span>
             </div>
         </div>
 
         @else
 
             <div class="panel panel-info">
-                <div class="panel-heading"><div class="panel-title">Bienvenue sur RiiingMe {{ $user->name }}!</div></div>
+                <div class="panel-heading"><div class="panel-title">{{ trans('menu.welcome') }} {{ $user->name }}!</div></div>
                 <ul class="list-group">
                     @if($user->labels->isEmpty())
                         <li class="list-group-item">
@@ -47,8 +47,8 @@
                                 <a class="media-left media-middle text-muted" href="#"><em class="fa fa-home fa-2x"></em></a>
                                 <div class="media-body">
                                     <p class="text-bold">
-                                        <span>Vous n'avez pas indiqué vos informations</span>
-                                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-primary pull-right">Mettre à jour!</a>
+                                        <span>{{ trans('empty.noinfo') }}</span>
+                                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-primary pull-right">{{ trans('action.maj') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -59,8 +59,8 @@
                             <a class="media-left media-middle text-muted" href="#"><em class="fa fa-paper-plane fa-2x"></em></a>
                             <div class="media-body">
                                 <p class="text-bold">
-                                    <span>Vous n'avez pas encore de contacts</span>
-                                    <a href="{{ url('user/partage') }}" class="btn btn-success pull-right">Partager!</a>
+                                    <span>{{ trans('empty.contact') }}</span>
+                                    <a href="{{ url('user/partage') }}" class="btn btn-success pull-right">{{ trans('action.partager') }}</a>
                                 </p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
     <div class="col-md-5">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title bg-info"><em class="icon-clock fa-lg pull-right text-muted"></em>Activités</div>
+                <div class="panel-title bg-info"><em class="icon-clock fa-lg pull-right text-muted"></em>{{ trans('menu.activites') }}</div>
             </div>
                 <!-- START Activites-->
 

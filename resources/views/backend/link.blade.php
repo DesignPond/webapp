@@ -14,10 +14,10 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6 col-xs-6">
-                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-xs btn-primary">Retour à la liste</a>
+                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-xs btn-primary">{{ trans('action.back') }}</a>
                     </div>
                     <div class="col-md-6 col-xs-6">
-                        <button type="button" class="btn btn-danger btn-xs pull-right">Détruire le partage</button>
+                        <button type="button" class="btn btn-danger btn-xs pull-right">{{ trans('action.destroy') }}</button>
                     </div>
                 </div>
             </div>

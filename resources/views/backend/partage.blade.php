@@ -6,7 +6,7 @@
 
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Envoyer une demande de partage</div>
+                <div class="panel-title">{{ trans('action.send') }}</div>
             </div>
             <div class="panel-body">
 
@@ -16,21 +16,17 @@
                         <div class="input-group">
                             <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Recherche email ou nom/prénom">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
-                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">Go!</button></span>
+                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('action.envoyer') }}</button></span>
                         </div><!-- /input-group -->
                     </div>
                     <div id="partage" class="row">
                         <div class="col-md-6">
-                            <h4>
-                                <strong><em class="icon-repeat"></em> &nbsp;Je partage les informations:</strong>
-                            </h4>
+                            <h4><strong><em class="icon-repeat"></em> &nbsp;{{ trans('action.ipartage') }}:</strong></h4>
                             <?php $who = 'host'; ?>
                             @include('backend.partials.partage-host')
                         </div>
                         <div class="col-md-6">
-                            <h4>
-                                <strong><em class="icon-repeat"></em> &nbsp;Je souhaite obtenir les informations:</strong>
-                            </h4>
+                            <h4><strong><em class="icon-repeat"></em> &nbsp;{{ trans('action.iwant') }}:</strong></h4>
                             <?php $who = 'invited'; ?>
                             @include('backend.partials.partage-invited')
                         </div>

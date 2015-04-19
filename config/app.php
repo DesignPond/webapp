@@ -148,6 +148,7 @@ return [
         'Illuminate\Html\HtmlServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Msurguy\Honeypot\HoneypotServiceProvider',
 
 	],
 

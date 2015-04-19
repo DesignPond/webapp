@@ -21,8 +21,8 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a href="{{ url('user/timeline') }}" class="btn btn-sm btn-info pull-right"><small>Voir tous</small></a><span class="clearfix"></span>
+        <a href="{{ url('user/timeline') }}" class="btn btn-sm btn-info pull-right"><small>{{ trans('action.seeall') }}</small></a><span class="clearfix"></span>
     </div>
 @else
-    <div class="panel-body">Aucune activités pour le moment</div>
+    <div class="panel-body">{{ trans('empty.activites') }}</div>
 @endif

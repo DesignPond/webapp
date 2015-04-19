@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="panel-title">Vos données</div>
+                    <div class="panel-title">{{ trans('menu.vosdonnees') }}</div>
                 </div>
                 <div class="panel-body">
 
@@ -19,9 +19,7 @@
                     ?>
 
                     <h4>{{ $informations['titre'] }}</h4>
-
                     <fieldset>
-
                         <div class="form-group">
                             <div class="col-md-2">
                                 <div ng-show="$flow.files.length"><img class="mb center-block img-circle img-responsive thumb64" flow-img="$flow.files[0]" /></div>
@@ -29,21 +27,18 @@
                             <label class="col-sm-2 control-label" for="input-id-1">{{ $image_label['titre'] }}</label>
                             <div class="col-sm-8">
                                 <div class="uploadBtn">
-                                    <span class="btn btn-xs btn-info" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Selectionner image</span>
-                                    <span class="btn btn-xs btn-warning" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">Changer</span>
-                                    <span class="btn btn-xs btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()">Supprimer</span>
+                                    <span class="btn btn-xs btn-info" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">{{ trans('action.select') }}</span>
+                                    <span class="btn btn-xs btn-warning" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}">{{ trans('action.change') }}</span>
+                                    <span class="btn btn-xs btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()">{{ trans('action.delete') }}</span>
                                 </div>
                                 <div ng-hide="!$flow.files.length"><img src="{{ asset('users/avatar.jpg') }}" /></div>
                                 <input type="hidden" name="label[1][13][]"  value="{[{ $flow.files[0].name }]}">
                             </div>
                         </div>
-
                     </fieldset>
 
                     @foreach($groupe_type as $groupe)
-
                         <h4>{{ $groupe['titre'] }}</h4>
-
                         <fieldset>
                             @foreach($groupe['groupe_type'] as $types)
                                 <div class="form-group">
@@ -54,11 +49,10 @@
                                 </div>
                             @endforeach
                         </fieldset>
-
                     @endforeach
 
                 </div>
-                <div class="panel-footer"><button class="btn btn-primary" type="submit">Go!</button></div>
+                <div class="panel-footer"><button class="btn btn-primary" type="submit">{{ trans('action.envoyer') }}</button></div>
             </div>
             {!! Form::close() !!}
 

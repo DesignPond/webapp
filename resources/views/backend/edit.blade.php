@@ -19,7 +19,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-title">Vos données</div>
+                        <div class="panel-title">{{ trans('menu.vosdonnees') }}</div>
                     </div>
                     <div class="panel-body">
 
@@ -29,7 +29,7 @@
                             unset($groupe_type[0]);
                         ?>
 
-                        <h4>Photo</h4>
+                        <h4>{{ trans('menu.photo') }}</h4>
                         <fieldset class="row">
                             <div class="col-md-8">
 
@@ -50,7 +50,7 @@
                                         <div id="userpic" class="userpic" style="background-image: url('{{ asset('users/'.$image) }}'); background-size:contain;">
                                             <div class="btn js-fileapi-wrapper">
                                                 <div class="js-browse">
-                                                    <span class="btn btn-info btn-sm">Changer</span>
+                                                    <span class="btn btn-info btn-sm">{{ trans('action.change') }}</span>
                                                     <input name="file" type="file">
                                                 </div>
                                                 <div class="js-upload" style="display: none;">
@@ -67,17 +67,17 @@
                         </fieldset>
 
                         <fieldset class="row border">
-                            <h4>Informations</h4>
+                            <h4>{{ trans('menu.informations') }}</h4>
                             <div class="col-md-8 col-xs-12">
                                 @if($user->user_type == '1')
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Prénom</label>
+                                        <label class="col-sm-4 control-label">{{ trans('menu.firstname') }}</label>
                                         <div class="col-sm-8">
                                             <input value="{{ $user->first_name }}" type="text" name="info[first_name]" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Nom</label>
+                                        <label class="col-sm-4 control-label">{{ trans('menu.lastname') }}</label>
                                         <div class="col-sm-8">
                                             <input value="{{ $user->last_name }}" type="text" name="info[last_name]" class="form-control">
                                         </div>
@@ -85,7 +85,7 @@
                                     <input type="hidden" name="info[company]" value="">
                                 @else
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Entreprise/association</label>
+                                        <label class="col-sm-4 control-label">{{ trans('menu.company') }}</label>
                                         <div class="col-sm-8">
                                             <input value="{{ $user->company }}" type="text" name="info[company]" class="form-control">
                                         </div>
@@ -102,7 +102,7 @@
                                 <input type="hidden" name="info[user_type]" value="{{ $user->user_type }}">
                             </div>
                             <span class="clearfix"></span><br/>
-                            <button class="btn btn-primary btn-sm pull-right" type="submit">Enregistrer</button>
+                            <button class="btn btn-primary btn-sm pull-right" type="submit">{{ trans('action.save') }}</button>
                         </fieldset>
 
                         @foreach($groupe_type as $groupe)
@@ -121,10 +121,10 @@
                             @if($temp)
 
                                <fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $groupe['id'] }}">
-                                    <h4 class="title-adresse">{{ $groupe['titre'] }} <small class="text-danger">Temporaire</small></h4>
+                                    <h4 class="title-adresse">{{ $groupe['titre'] }} <small class="text-danger">{{ trans('menu.temporaire') }}</small></h4>
                                     <div class="col-md-8 col-xs-12">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="exampleInputEmail1">Pour la période</label>
+                                            <label class="col-sm-4 control-label" for="exampleInputEmail1">{{ trans('menu.periode') }}</label>
                                             <div class="col-sm-8">
                                                 <input value="{{ $daterange }}" type="text" name="date[{{ $groupe['id'] }}]" class="form-control daterange">
                                             </div>
@@ -159,12 +159,12 @@
                                     <?php  $collapsible = ($user->user_type == '1' ? $groupe['id'] + 2 : $groupe['id'] + 1); ?>
 
                                     <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $collapsible }}" aria-expanded="false" aria-controls="collapseExample">
-                                       Indiquer une <span>{{ $groupe['titre'] }}</span> temporaire
+                                       {{ trans('menu.indiquer') }} <span>{{ $groupe['titre'] }}</span> {{ trans('menu.temporaire') }}
                                     </a>
                                 @endif
                             </div>
                             <span class="clearfix"></span><br/>
-                            <button class="btn btn-primary btn-sm pull-right" type="submit">Enregistrer</button>
+                            <button class="btn btn-primary btn-sm pull-right" type="submit">{{ trans('action.save') }}</button>
                             </fieldset>
                         @endforeach
 

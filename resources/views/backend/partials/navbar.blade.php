@@ -12,30 +12,30 @@
                 </div>
                 <!-- START sidebar nav-->
                 <ul class="nav">
+                    <li><hr></li>
                     <!-- Iterates over all sidebar items-->
-                    <li class="nav-heading"><span class="text-muted">Navigation</span></li>
                     <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
-                        <a title="Dashboard" href="{{ url('/user') }}">
+                        <a href="{{ url('/user') }}">
                             <em class="sidebar-item-icon icon-head"></em>
-                            <span>Activités</span>
+                            <span>{{ trans('menu.activites') }}</span>
                         </a>
                     </li>
                     <li class="<?php echo (Request::is('user/'.$user->id.'/edit') ? 'active' : '' ); ?>">
-                        <a title="Dashboard" href="{{ url('user/'.$user->id.'/edit') }}">
+                        <a href="{{ url('user/'.$user->id.'/edit') }}">
                             <em class="sidebar-item-icon icon-box"></em>
-                            <span>Mes données</span>
+                            <span>{{ trans('menu.mesdonnes') }}</span>
                         </a>
                     </li>
                     <li class="<?php echo ( Request::is('user/'.$user->id) ||  Request::is('user/link/*') ? 'active' : '' ); ?>">
-                        <a title="Components" href="{{ url('/user/'.$user->id) }}">
+                        <a href="{{ url('/user/'.$user->id) }}">
                             <em class="sidebar-item-icon icon-book"></em>
-                            <span>Contacts</span>
+                            <span>{{ trans('menu.contacts') }}</span>
                         </a>
                     </li>
                     <li class="<?php echo (Request::is('user/partage') ? 'active' : '' ); ?>">
-                        <a title="Components" href="{{ url('/user/partage') }}">
+                        <a href="{{ url('/user/partage') }}">
                             <em class="sidebar-item-icon icon-maximize"></em>
-                            <span>Partages</span>
+                            <span>{{ trans('menu.partages') }}</span>
                         </a>
                     </li>
                     <li><hr></li>

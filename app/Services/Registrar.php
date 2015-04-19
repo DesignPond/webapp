@@ -34,7 +34,9 @@ class Registrar implements RegistrarContract {
             'company'    => 'required_if:user_type,company|max:255',
             'user_type'  => 'required',
             'email'      => 'required|email|unique:users',
-            'password'   => 'required|confirmed|min:6'
+            'password'   => 'required|confirmed|min:6',
+            'my_name'    => 'honeypot',
+            'my_time'    => 'required|honeytime:5'
 		],
         [
             'first_name.required_if' => 'Pour un compte privé le prénom est requis',

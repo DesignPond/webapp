@@ -16,6 +16,9 @@
                         <span class="fa fa-quote-right form-control-feedback text-muted"></span>
                     </div>
                     <input type="hidden" value="2" name="user_type" id="user_type">
+
+                    {!! Form::honeypot('my_name', 'my_time') !!}
+
                     @include('auth.form')
                 </form>
                 <p class="pt-lg text-center">Déjà inscrit?</p>

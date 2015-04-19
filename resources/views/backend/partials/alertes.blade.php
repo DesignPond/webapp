@@ -9,7 +9,7 @@
                     <div class="point point-success point-lg"></div>
                 @endif
             </div>
-            <span class="visible-xs-inline ml">Voir Alertes</span>
+            <span class="visible-xs-inline ml">{{ trans('action.seealert') }}</span>
         </a>
 
         <!-- START Dropdown menu-->
@@ -22,7 +22,7 @@
                         <!-- START media preview-->
                         <div class="media">
                             <div class="media-body clearfix">
-                                <h5><div class="point point-success point-lg"></div> Demande de partage de&nbsp;</h5>
+                                <h5><div class="point point-success point-lg"></div> {{ trans('menu.demande') }}</h5>
                                 <p class="m0">{{ $demande->user->email }}</p>
                                 <p title="{{ $demande->created_at->format('Y-m-d H:i:s') }}" class="m0 text-gray text-sm">{{ $demande->created_at->format('Y-m-d') }}</p>
                             </div>
@@ -32,13 +32,13 @@
             @endforeach
                 <li class="text-center bt">
                     <a class="p" ui-sref="app.mailbox.folder.list" href="{{ url('user/partage') }}">
-                        <small>Voir tous</small>
+                        <small>{{ trans('action.seeall') }}</small>
                     </a>
                 </li>
             @else
                 <li class="text-center bt">
                     <a class="p" ui-sref="app.mailbox.folder.list" href="{{ url('user/partage') }}">
-                        <small>Aucune demande en cours</small>
+                        <small>{{ trans('menu.nodemande') }}</small>
                     </a>
                 </li>
             @endif
