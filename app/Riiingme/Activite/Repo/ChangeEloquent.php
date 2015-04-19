@@ -28,6 +28,15 @@ class ChangeEloquent implements ChangeInterface {
         })->where('user_id','!=',$user_id)->where('name','=','updated_meta')->orderBy('id', 'desc')->skip(0)->take(2)->get();
     }
 
+    public function getLastChanges(){
+
+        return $this->change->with(['user','riiinglink'])
+            ->where('name','=','updated_meta')
+            ->whereBetween('changed_at', array(\Carbon\Carbon::now()->toDateString(), \Carbon\Carbon::now()->addWeek()->toDateString()))
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function find($id){
 
         return $this->change->find($id);

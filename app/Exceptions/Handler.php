@@ -42,6 +42,9 @@ class Handler extends ExceptionHandler {
         if ($e instanceof \App\Exceptions\ActivationFailException)
             \Log::info('Problème avec l\'activation du compte', ['token' => $e->getToken()]);
 
+        if ($e instanceof \Illuminate\Session\TokenMismatchException)
+            return \Redirect::to('auth/login');
+
 		return parent::render($request, $e);
 	}
 
