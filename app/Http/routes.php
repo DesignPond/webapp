@@ -13,7 +13,7 @@ Route::get('contact', array('as' => 'contact', 'uses' => 'WelcomeController@cont
 Route::get('activation', array('as' => 'activation', 'uses' => 'DispatchController@activation'));
 Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
 
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => ['auth','activate']], function()
 {
     Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
     Route::get('sendActivationLink', array('as' => 'send', 'uses' => 'DispatchController@sendActivationLink'));
@@ -53,6 +53,7 @@ Route::group(['namespace' => 'Auth','prefix' => 'auth'], function()
 {
     Route::get('register_company', array('as' => 'register_company', 'uses' => 'AuthController@register_company'));
     Route::get('register_private', array('as' => 'register_private', 'uses' => 'AuthController@register_private'));
+    Route::get('activate', array('as' => 'activate', 'uses' => 'AuthController@activate'));
 });
 
 Route::controllers([

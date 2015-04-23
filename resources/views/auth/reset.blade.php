@@ -31,7 +31,9 @@
                         <div class="col-sm-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="confirmer le mot de passe">
+                                <input type="password" class="form-control"
+                                       onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
+                                       id="password_confirmation" name="password_confirmation" placeholder="confirmer le mot de passe">
                             </div>
                         </div>
                     </div>

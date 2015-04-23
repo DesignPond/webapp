@@ -42,7 +42,7 @@
                         <fieldset>
                             @foreach($groupe['groupe_type'] as $types)
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="input-id-1">{{ $types['titre'] }}</label>
+                                    <label class="col-sm-4 control-label">{{ $types['titre'] }}</label>
                                     <div class="col-sm-8">
                                         <input value="" type="text" name="label[{{ $types['pivot']['groupe_id'] }}][{{ $types['pivot']['type_id'] }}][]" class="form-control">
                                     </div>

@@ -14,12 +14,7 @@
                 <ul class="nav">
                     <li><hr></li>
                     <!-- Iterates over all sidebar items-->
-                    <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
-                        <a href="{{ url('/user') }}">
-                            <em class="sidebar-item-icon icon-head"></em>
-                            <span>{{ trans('menu.activites') }}</span>
-                        </a>
-                    </li>
+
                     <li class="<?php echo (Request::is('user/'.$user->id.'/edit') ? 'active' : '' ); ?>">
                         <a href="{{ url('user/'.$user->id.'/edit') }}">
                             <em class="sidebar-item-icon icon-box"></em>
@@ -36,6 +31,12 @@
                         <a href="{{ url('/user/partage') }}">
                             <em class="sidebar-item-icon icon-maximize"></em>
                             <span>{{ trans('menu.partages') }}</span>
+                        </a>
+                    </li>
+                    <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
+                        <a href="{{ url('/user') }}">
+                            <em class="sidebar-item-icon icon-head"></em>
+                            <span>{{ trans('menu.activites') }}</span>
                         </a>
                     </li>
                     <li><hr></li>

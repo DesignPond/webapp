@@ -41,14 +41,6 @@
         <section>
             <div class="app">
 
-                @if(!$user->activated_at)
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        <a href="{{ url('sendActivationLink') }}" class="btn btn-default pull-right">Renvoyer le lien</a>
-                        <h4><strong>Activation!</strong></h4>
-                        <p>Veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.</p>
-                    </div>
-                @endif
-
                 @include('partials.message')
 
                 <!-- Contenu -->

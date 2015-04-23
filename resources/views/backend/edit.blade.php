@@ -108,9 +108,11 @@
                         @foreach($groupe_type as $groupe)
 
                             <?php
-                                $temp = ($status[$groupe['id']] == 'temporaire' ? true : false);
+
+                                $temp      = ($status[$groupe['id']] == 'temporaire' ? true : false);
                                 $daterange = '';
                                 $exist     = false;
+
                                 if(isset($groupe_dates[$groupe['id']]))
                                 {
                                     $daterange = $groupe_dates[$groupe['id']]['start'].' | '.$groupe_dates[$groupe['id']]['end'];
@@ -154,9 +156,9 @@
                                 @endforeach
                             </div>
                             <div class="col-md-4 col-xs-12">
-                                @if(!$temp && !$exist)
+                                @if(!$temp && !$exist && $user->user_type == '1')
 
-                                    <?php  $collapsible = ($user->user_type == '1' ? $groupe['id'] + 2 : $groupe['id'] + 1); ?>
+                                    <?php $collapsible = $groupe['id'] + 2 ; ?>
 
                                     <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $collapsible }}" aria-expanded="false" aria-controls="collapseExample">
                                        {{ trans('menu.indiquer') }} <span>{{ $groupe['titre'] }}</span> {{ trans('menu.temporaire') }}

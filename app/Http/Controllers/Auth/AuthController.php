@@ -66,6 +66,18 @@ class AuthController extends Controller {
     }
 
     /**
+     * Register new user
+     * GET /register
+     *
+     * @return Response
+     */
+    public function activate()
+    {
+        return view('auth.activate');
+    }
+
+
+    /**
      * Destroy session
      *
      * @return Response

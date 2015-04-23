@@ -15,7 +15,6 @@ class UserTypesGroupesTableSeeder extends \Illuminate\Database\Seeder  {
             array( 'user_type_id' => 1, 'groupe_id' => 5),
             array( 'user_type_id' => 2, 'groupe_id' => 1),
             array( 'user_type_id' => 2, 'groupe_id' => 6),
-            array( 'user_type_id' => 2, 'groupe_id' => 7)
         );
 
         // Uncomment the below to run the seeder

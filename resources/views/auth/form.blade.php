@@ -14,7 +14,9 @@
     <span class="fa fa-lock form-control-feedback text-muted"></span>
 </div>
 <div class="form-group has-feedback">
-    <input required type="password" value="" name="password_confirmation" placeholder="Confirmer le mot de passe" class="form-control" />
+    <input required type="password" value=""
+           onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
+           name="password_confirmation" placeholder="Confirmer le mot de passe" class="form-control" />
     <span class="fa fa-lock form-control-feedback text-muted"></span>
 </div>
 <p><hr /></p>
