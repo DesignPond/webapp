@@ -5,16 +5,18 @@
         <!-- START panel-->
         <div class="panel panel-grey">
             <div class="panel-body">
-                <p class="text-center pv text-bold">Mot de passe perdu</p>
+                <p class="text-center pv text-bold">{{ trans('message.lostpassword') }}</p>
 
                 {!! Form::open(array( 'method' => 'POST', 'class'  => 'mb-lg', 'url'  => array('password/email'))) !!}
 
-                <p class="text-center">Veuillez saisir votre adresse email.<br/> Un lien permettant de créer un nouveau mot de passe vous sera envoyé par e-mail.</p>
+                <p class="text-center">
+                    {!! trans('message.recoverpassword') !!}
+                </p>
                 <div class="form-group has-feedback">
-                    <input required type="email" name="email" placeholder="Votre email" autocomplete="off" class="form-control" />
+                    <input required type="email" name="email" placeholder="{{ trans('message.youremail') }}" autocomplete="off" class="form-control" />
                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
                 </div>
-                <button type="submit" class="btn btn-danger btn-block">Envoyer</button>
+                <button type="submit" class="btn btn-danger btn-block">{{ trans('menu.envoyer') }}</button>
 
                 {!! Form::close() !!}
 

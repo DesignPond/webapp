@@ -6,9 +6,9 @@
             <div class="panel panel-grey">
                 <div class="panel-body">
 
-                    <h3><strong>Activation!</strong></h3>
-                    <p>Veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.</p><br/>
-                    <p><a href="{{ url('sendActivationLink') }}" class="btn btn-warning">Renvoyer le lien</a></p>
+                    <h3><strong>{{ trans('message.activation') }}</strong></h3>
+                    <p>{{ trans('message.confirmer') }}</p><br/>
+                    <p><a href="{{ url('sendActivationLink') }}" class="btn btn-warning">{{ trans('message.renvoyer') }}</a></p>
 
                 </div>
             </div>

@@ -2,27 +2,27 @@
 @section('content')
 
     <div class="center-block mt-xl wd-xl">
-        <a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;Retour</a>
+        <a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;{{ trans('action.backto') }}</a>
     </div>
 
     <section class="center-block mt-xl wd-xl">
         <div class="panel panel-grey">
             <div class="panel-body">
-                <p class="text-center pv text-bold">Création du compte Privé</p>
+                <p class="text-center pv text-bold">{{ trans('message.createprivate') }}</p>
                 <form class="mb-lg" role="form" method="POST" action="/auth/register">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group has-feedback">
-                        <input value="{{ Input::old('first_name') }}" type="text" name="first_name" placeholder="Prénom" class="form-control" />
+                        <input value="{{ Input::old('first_name') }}" type="text" name="first_name" placeholder="{{ trans('menu.firstname') }}" class="form-control" />
                         <span class="fa fa-quote-left form-control-feedback text-muted"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input value="{{ Input::old('last_name') }}" type="text" name="last_name" placeholder="Nom" class="form-control" />
+                        <input value="{{ Input::old('last_name') }}" type="text" name="last_name" placeholder="{{ trans('menu.lastname') }}" class="form-control" />
                         <span class="fa fa-quote-right form-control-feedback text-muted"></span>
                     </div>
                     <input type="hidden" value="1" name="user_type" id="user_type">
                     @include('auth.form')
                 </form>
-                <p class="pt-lg text-center">Déjà inscrit?</p>
+                <p class="pt-lg text-center">{{ trans('message.already') }}</p>
                 <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>Login</strong></a>
             </div>
         </div>

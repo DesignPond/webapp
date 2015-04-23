@@ -10,20 +10,22 @@
     <span class="fa fa-envelope form-control-feedback text-muted"></span>
 </div>
 <div class="form-group has-feedback">
-    <input required type="password" value="" name="password" placeholder="Mot de passe" class="form-control" />
+    <input required type="password" value="" name="password" placeholder="{{ trans('message.password') }}" class="form-control" />
     <span class="fa fa-lock form-control-feedback text-muted"></span>
 </div>
 <div class="form-group has-feedback">
     <input required type="password" value=""
            onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
-           name="password_confirmation" placeholder="Confirmer le mot de passe" class="form-control" />
+           name="password_confirmation" placeholder="{{ trans('message.confirm') }}" class="form-control" />
     <span class="fa fa-lock form-control-feedback text-muted"></span>
 </div>
 <p><hr /></p>
 <div class="clearfix">
     <div class="checkbox c-checkbox mt0">
         <label>
-            <input required="" type="checkbox" value="1" name="accept" /><span class="fa fa-check"></span><p>J'accepte les <a href="#">Conditions d'utilisation</a> de RiiingMe</p>
+            <input required="" type="checkbox" value="1" name="accept" />
+            <span class="fa fa-check"></span>
+            <p>{{ trans('message.accept') }} <a href="#">{{ trans('message.cg') }}</a> {{ trans('message.from') }}</p>
         </label>
     </div>
 </div>

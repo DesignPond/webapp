@@ -5,7 +5,7 @@
         <!-- START panel-->
         <div class="panel panel-grey">
             <div class="panel-body">
-                <h4 class="text-center" style="margin-bottom: 25px;">Définir un nouveau mot de passe</h4>
+                <h4 class="text-center" style="margin-bottom: 25px;">{{ trans('message.newpassword') }}</h4>
 
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -15,7 +15,7 @@
                         <div class="col-sm-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="email">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="{{ trans('message.youremail') }}">
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                         <div class="col-sm-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="mot de passe">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="{{ trans('message.yourpassword') }}">
                             </div>
                         </div>
                     </div>
@@ -33,11 +33,11 @@
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <input type="password" class="form-control"
                                        onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
-                                       id="password_confirmation" name="password_confirmation" placeholder="confirmer le mot de passe">
+                                       id="password_confirmation" name="password_confirmation" placeholder="{{ trans('message.confirm') }}">
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-block btn-info mt-lg">Envoyer</button>
+                    <button type="submit" class="btn btn-block btn-info mt-lg">{{ trans('menu.envoyer') }}</button>
                 </form>
             </div>
         </div>

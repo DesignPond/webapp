@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TokenRequest;
 use App\Http\Requests\InviteRequest;
 use App\Http\Requests\SendInviteRequest;
+use App\Riiingme\User\Repo\UserInterface;
 
 use App\Commands\ActivateAccount;
 use App\Commands\ConfirmInvite;
@@ -14,9 +15,10 @@ use App\Commands\SendInvite;
 
 class DispatchController extends Controller {
 
-    public function __construct()
+    public function __construct(UserInterface $user)
     {
         $this->middleware('guest');
+        $this->user = $user;
     }
 
 	/**
@@ -80,7 +82,14 @@ class DispatchController extends Controller {
      */
     public function sendActivationLink()
     {
-        \Event::fire(new \App\Events\AccountWasCreated(\Auth::user()));
+        $user = $this->user->find(\Auth::user()->id);
+
+        \Event::fire(new \App\Events\AccountWasCreated($user));
+/*
+        if(!$user->activated_at)
+        {
+            return redirect('auth/activate')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
+        }*/
 
         return redirect('user')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
     }
