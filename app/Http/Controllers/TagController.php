@@ -73,8 +73,21 @@ class TagController extends Controller {
         $riiinglink = $this->riiinglink->find($id)->first();
 
         $riiinglink->tags()->detach($find->id);
+
+        $this->cleanTags($find->id);
 		
 		return \Response::json( $riiinglink, 200 );
 	}
+
+    public function cleanTags($tag_id){
+
+        $riiinglinks = $this->riiinglink->findByHost(\Auth::user()->id)->lists('id');
+        $results     = $this->riiinglink->findTags($tag_id,$riiinglinks);
+
+        if($results->isEmpty())
+        {
+            $this->tag->delete($tag_id);
+        }
+    }
 
 }

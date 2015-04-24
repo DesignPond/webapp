@@ -78,7 +78,7 @@
 }
 
 .bg-activated{
-    background: #fff;
+    background: #edfce6;
 }
 
 .riiinglink-card:hover {
@@ -469,7 +469,7 @@ fieldset.border {
 
 
 .bg-grey{
-    background: #f0f0f0;
+/*    background: #f0f0f0;*/
 }
 
 .chat-msg-content.chat-msg-host.bg-grey label,.chat-msg-content.chat-msg-host.bg-grey p{

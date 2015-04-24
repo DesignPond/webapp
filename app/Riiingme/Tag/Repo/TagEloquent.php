@@ -50,6 +50,18 @@ class TagEloquent implements TagInterface{
 		
 		return $tag;
 	}
+
+    public function delete($id){
+
+        $tag = $this->tag->find($id);
+
+        if( ! $tag )
+        {
+            return false;
+        }
+
+        return $tag->delete($id);
+    }
 	
 }
 

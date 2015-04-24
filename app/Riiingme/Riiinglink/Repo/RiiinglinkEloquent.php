@@ -11,14 +11,21 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
     public function getAll(){
 
         return $this->riiinglink->with(array('user'))->get();
-
     }
 
     public function find($id){
 
-        //return $this->riiinglink->where('id','=',$id)->with(array('labels'))->get();
-
         return $this->riiinglink->where('id','=',$id)->with(array('usermetas','tags'))->get();
+    }
+
+    public function findTags($tag_id,$riiinglinks){
+
+        return $this->riiinglink->whereHas('tags', function($q) use ($tag_id,$riiinglinks)
+            {
+                $q->where('tag_id','=',$tag_id);
+                $q->whereIn('riiinglink_id', $riiinglinks);
+
+            })->get();
     }
 
     /**

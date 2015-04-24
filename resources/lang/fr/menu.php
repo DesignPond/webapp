@@ -38,4 +38,5 @@ return [
     'periode'      => 'Pour la période',
     'indiquer'     => 'Indiquer une',
     'envoyer'      => 'Envoyer',
+    'majinfos'     => 'Mettre à jour vos données',
 ];

@@ -137,7 +137,7 @@ class LabelWorker{
             return $this->label->create([
                 'label'     => $label,
                 'user_id'   => $user_id,
-                'type_id'   => 13,
+                'type_id'   => 12,
                 'groupe_id' => 1
             ]);
         }

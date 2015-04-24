@@ -40,8 +40,9 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerTagService();
         $this->registerAuthService();
         $this->registerChangeService();
+        $this->registerUploadService();
 
-	}
+    }
 
     /**
      * Auth
@@ -49,6 +50,17 @@ class AppServiceProvider extends ServiceProvider {
     protected function registerAuthService(){
 
         $this->app->bind( 'Illuminate\Contracts\Auth\Registrar', 'App\Services\Registrar');
+    }
+
+    /**
+     * Upload service
+     */
+    protected function registerUploadService(){
+
+        $this->app->bind('\App\Riiingme\Service\Upload\UploadInterface', function()
+        {
+            return new \App\Riiingme\Service\Upload\UploadWorker();
+        });
     }
 
     /**

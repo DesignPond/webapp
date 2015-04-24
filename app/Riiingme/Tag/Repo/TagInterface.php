@@ -6,6 +6,7 @@ interface TagInterface {
 	public function find($id);
 	public function create(array $data);
 	public function search($term);
+    public function delete($id);
 	
 }
 

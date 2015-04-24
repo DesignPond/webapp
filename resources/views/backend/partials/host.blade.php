@@ -42,9 +42,8 @@
         <div class="panel-body">
             <div class="well-sm text-center">
                 <h4>Vous n'avez pas encore indiqué vos informations à partager</h4>
-                <p><a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-warning">Mettre à jour!</a></p>
+                <p><a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-warning">{{ trans('menu.majinfos') }}!</a></p>
             </div>
-
         </div>
     </div>
 

@@ -12,17 +12,27 @@ Route::get('test', function()
         $labels = $meta->first()->labels;
     */
 
-    $change = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
-    $user   = \App::make('App\Riiingme\User\Repo\UserInterface');
-    
-    //$user = $user->find(2);
-    $user = $user->getAll();
+    $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
+    $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
+    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+    $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
 
+    //$user = $user->find(2);
+    $user    = $user->getAll();
     $changes = $change->getLastChanges();
 
+    $riiinglinks = $riiinglink->findByHost(1)->lists('id');
+    $results     = $riiinglink->findTags(4,$riiinglinks);
+
+    if($results->isEmpty())
+    {
+        echo 'remove tag';
+        //$tags->delete(4);
+    }
+/*
     echo '<pre>';
-    print_r($changes);
-    echo '</pre>';exit;
+    print_r($results);
+    echo '</pre>';exit;*/
 
     // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');

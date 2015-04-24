@@ -31,6 +31,7 @@ class UploadController extends Controller {
 
             $this->label->updatePhoto($user_id,$photo,$label_id);
 
+            return $photo;
         }
     }
 

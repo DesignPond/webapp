@@ -14,16 +14,14 @@ $('#userpic').fileapi({
         },
         progress: '.js-progress'
     },
-    onComplete: function (evt, uiEvt){
-        var file = uiEvt.file;
-        console.log(file.name);
-        $("#flow-img").val(file.name);
-        var path = url + 'users/' + file.name;
+    onFileComplete:function (evt, uiEvt){
+
+        var path = url + 'users/' + uiEvt.result;
 
         $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '")' });
         $("#userPhoto").attr("src",path);
 
-        console.log(path);
+        console.log(uiEvt);
     },
     onSelect: function (evt, ui){
         var file = ui.files[0];

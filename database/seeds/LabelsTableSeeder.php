@@ -41,7 +41,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
 		);
 
 		$info  = array(12);
-		$prive = array(1,4,5,6,7,8,9,10,11);
+		$prive = array(4,5,6,7,8,9,10,11);
 		$prof  = array(1,2,3,4,5,6,7,8,9,11);
 
 		$metas1 = array('',
