@@ -45,7 +45,7 @@ class SendInvite extends Command implements SelfHandling {
 
         $send_invite = $this->processInvite($data);
         $user = $this->user->find($this->user_id);
-
+        
         \Mail::send('emails.invitation', array('invite' => $send_invite, 'user' => $user, 'types' => $types, 'partage' => $this->partage_invited), function($message) use ($send_invite)
         {
             $message->to($send_invite->email, $send_invite->email)->subject('Demande de partage');

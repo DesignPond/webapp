@@ -16,7 +16,7 @@
                         <div class="input-group">
                             <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Recherche email ou nom/prénom">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
-                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('action.envoyer') }}</button></span>
+                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
                         </div><!-- /input-group -->
                     </div>
                     <div id="partage" class="row">

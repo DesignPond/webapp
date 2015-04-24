@@ -2,7 +2,7 @@
 @section('content')
 
     <section class="row">
-        <div class="col-md-6 col-md-offset-3 mt-xl">
+        <div class="center-block mt-xl wd-xl">
             <div class="panel panel-grey">
                 <div class="panel-body">
 

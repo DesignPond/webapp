@@ -4,7 +4,7 @@
         <table border="0" align="center" cellpadding="0" cellspacing="0" class="profilePicture" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;text-align: center;width: 128px;height: 128px;">
             <tr>
                 <td style="{{ $marginReset }}padding-top: 10px;padding-bottom: 6px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;">
-                    <img src="<?php echo asset('frontend/images/illustration-web.svg');?>" width="160" height="160" alt="Profile" style="{{ $marginReset }}{{ $paddingReset }}height: 160px;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;">
+                    <img src="<?php echo asset('emails/images/illustration.png');?>" width="160" height="160" alt="Profile" style="{{ $marginReset }}{{ $paddingReset }}height: 160px;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;">
                 </td>
             </tr>
         </table>

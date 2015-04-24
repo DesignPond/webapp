@@ -70,8 +70,8 @@ Route::get('invitation', function()
 {
     $user   = \App::make('App\Riiingme\User\Entities\User');
     $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
-    $invite = $invite->find(3);
-    $user   = $user->find($invite->user_id);
+    $invite = $invite->find(1);
+    $user   = $user->where('id','=',$invite->user_id)->with('labels')->get()->first();
     $data   = array('invite' => $invite, 'user' => $user, 'types' => [], 'partage' => []);
 
     return View::make('emails.invitation', $data);

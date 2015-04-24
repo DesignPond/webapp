@@ -9,7 +9,7 @@ return [
     */
 
     'activation'      => 'Activation!',
-    'confirmer'       => 'Veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.',
+    'confirmer'       => 'Afin d\'activer votre compte, veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.',
     'renvoyer'        => 'Renvoyer le lien',
     'createcompany'   => 'Création du compte Entreprise/Association',
     'already'         => 'Déjà inscrit?',

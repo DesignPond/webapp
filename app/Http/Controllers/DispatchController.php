@@ -84,14 +84,12 @@ class DispatchController extends Controller {
     {
         $user = $this->user->find(\Auth::user()->id);
 
-        \Event::fire(new \App\Events\AccountWasCreated($user));
-/*
-        if(!$user->activated_at)
+        \Mail::send('emails.confirmation', ['name' => $user->name, 'user_photo' => $user->user_photo, 'token' => $user->activation_token] , function($message) use ($user)
         {
-            return redirect('auth/activate')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
-        }*/
+            $message->to($user->email)->subject('Confirmation');
+        });
 
-        return redirect('user')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
+        return redirect('auth/activate')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
     }
 
 }

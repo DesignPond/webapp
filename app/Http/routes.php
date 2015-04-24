@@ -12,11 +12,11 @@ Route::get('contact', array('as' => 'contact', 'uses' => 'WelcomeController@cont
 
 Route::get('activation', array('as' => 'activation', 'uses' => 'DispatchController@activation'));
 Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
+Route::get('sendActivationLink', array('as' => 'send', 'uses' => 'DispatchController@sendActivationLink'));
 
 Route::group(['middleware' => ['auth','activate']], function()
 {
     Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
-    Route::get('sendActivationLink', array('as' => 'send', 'uses' => 'DispatchController@sendActivationLink'));
 
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
@@ -60,7 +60,6 @@ Route::controllers([
 	'auth'     => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController'
 ]);
-
 
 Route::get('logout', function()
 {

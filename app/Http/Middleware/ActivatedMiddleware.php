@@ -29,10 +29,10 @@ class ActivatedMiddleware {
 	{
         $user = $this->user->find(\Auth::user()->id);
 
-      /*  if(!$user->activated_at)
+        if(!$user->activated_at)
         {
             return redirect('auth/activate');
-        }*/
+        }
 
 		return $next($request);
 	}
