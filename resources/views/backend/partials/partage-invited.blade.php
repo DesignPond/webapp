@@ -14,12 +14,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="checkbox"><label><input checked disabled type="checkbox">Prénom</label></div>
-            </div>
-            <div class="col-md-6">
-                <div class="checkbox"><label><input checked disabled type="checkbox">Nom</label></div>
-            </div>
+            <div class="col-md-6"><div class="checkbox"><label><input checked disabled type="checkbox">Prénom</label></div></div>
+            <div class="col-md-6"><div class="checkbox"><label><input checked disabled type="checkbox">Nom</label></div></div>
         </div>
         <div class="row">
 
