@@ -14,7 +14,7 @@
 
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="Recherche email ou nom/prénom">
+                            <input type="text" id="searchEmail" required class="form-control" name="email" placeholder="{{ trans('menu.search') }}">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
                             <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
                         </div><!-- /input-group -->
@@ -44,7 +44,7 @@
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title"><i class="icon-star"></i> &nbsp;Demandes reçues</h4>
+                <h4 class="panel-title"><i class="icon-star"></i> &nbsp;{{ trans('menu.demandes') }}</h4>
             </div>
             <div class="panel-body">
                 @if(!$demandes->isEmpty())
@@ -61,7 +61,7 @@
                         @endforeach
                     </ul>
                 @else
-                    Encore aucune demandes reçues
+                    {{ trans('menu.nodemandes') }}
                 @endif
             </div>
         </div>
@@ -69,7 +69,7 @@
     <div class="col-md-6">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <h4 class="panel-title"><i class="icon-location"></i> &nbsp;Demandes envoyés</h4>
+                <h4 class="panel-title"><i class="icon-location"></i> &nbsp;{{ trans('menu.demandesent') }}</h4>
             </div>
             <div class="panel-body">
                 @if(!$invites->isEmpty())
@@ -85,7 +85,7 @@
                         @endforeach
                     </ul>
                 @else
-                   Encore aucune invitations en cours
+                  {{ trans('menu.noinvites') }}
                 @endif
             </div>
         </div>

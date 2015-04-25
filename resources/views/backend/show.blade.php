@@ -36,11 +36,11 @@
                 <div class="panel">
                     <div class="panel-body">
                         @if(isset($filtres['tag']))
-                            <h4 class="text-danger">Aucun contact ne correspond au filtre <strong>"{{ $tags[$filtres['tag']] }}"</strong></h4>
+                            <h4 class="text-danger">{{ trans('message.nocorrespondfilter') }}<strong>"{{ $tags[$filtres['tag']] }}"</strong></h4>
                         @endif
 
                         @if(isset($filtres['search']))
-                            <h4 class="text-danger">Aucun contact ne correspond a votre recherche <strong>"{{ $filtres['search'] }}"</strong></h4>
+                            <h4 class="text-danger">{{ trans('message.nocorrespondsearch') }} <strong>"{{ $filtres['search'] }}"</strong></h4>
                         @endif
                     </div>
                 </div>
@@ -51,8 +51,8 @@
              <div class="col-md-12">
                  <div class="panel">
                     <div class="panel-body">
-                        <p>Vous n'avez encore aucun contact</p>
-                        <p><a href="{{ url('user/partage') }}" class="btn btn-sm btn-success"><small>Envoyer des invitations</small></a></p>
+                        <p>{{ trans('message.nocontact') }}</p>
+                        <p><a href="{{ url('user/partage') }}" class="btn btn-sm btn-success"><small>{{ trans('message.sentinvites') }}</small></a></p>
                     </div>
                  </div>
              </div>

@@ -1,5 +1,5 @@
 <fieldset class="row border">
-    <h4 class="title-adresse">{{ $view['titre'] }}</h4>
+    <h4 class="title-adresse">{{ trans('label.title_'.$view['id']) }}</h4>
     <div class="col-md-8 col-xs-12">
 
         @if($prive)
@@ -8,7 +8,7 @@
                 <label class="col-sm-4 control-label">Email</label>
                 <div class="col-sm-8 col-xs-12">
                     <input value="{{ $user->email }}" type="text" name="info[email]" class="form-control">
-                    <p class="help-block"><small>vaut aussi comme adresse de login</small></p>
+                    <p class="help-block"><small>{{ trans('menu.loginemail') }}</small></p>
                 </div>
             </div>
         @endif
@@ -21,7 +21,7 @@
             ?>
 
             <div class="form-group">
-                <label class="col-sm-4 control-label">{{ $types['titre'] }}</label>
+                <label class="col-sm-4 control-label">{{ trans('label.label_'.$types['id']) }}</label>
                 <div class="col-sm-8 col-xs-12">
                     @if(isset($labels[$group][$type]['label']))
                         <?php echo $helper->generateInput($type, $group ,true,['id' => $labels[$group][$type]['id'] , 'text' => $labels[$group][$type]['label'] ]); ?>
