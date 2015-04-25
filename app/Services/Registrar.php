@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class Registrar implements RegistrarContract {
 
     protected $user;
+    protected $label;
 
     use DispatchesCommands;
 
@@ -17,7 +18,8 @@ class Registrar implements RegistrarContract {
      */
     public function __construct()
     {
-        $this->user = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
     }
 
 	/**
@@ -65,6 +67,13 @@ class Registrar implements RegistrarContract {
             'company'          => (isset($data['company']) && !empty($data['company']) ? $data['company'] : ''),
             'user_type'        => $data['user_type'],
             'activation_token' => $activation_token
+        ]);
+
+        $this->label->create([
+            'label'     => $data['email'],
+            'user_id'   => $user->id,
+            'type_id'   => 1,
+            'groupe_id' => 1
         ]);
 
         $invite_id = (isset($data['invite_id']) && !empty($data['invite_id']) ? $data['invite_id'] : null);

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class UpdateUser extends Command implements SelfHandling {
 
+    protected $label;
+    protected $user;
+    protected $infos;
+
 	/**
 	 * Create a new command instance.
 	 *
@@ -16,6 +20,7 @@ class UpdateUser extends Command implements SelfHandling {
 	{
         $this->infos = $infos;
         $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
 	}
 
 	/**
@@ -44,13 +49,22 @@ class UpdateUser extends Command implements SelfHandling {
         {
             $used = $this->user->findByEmail($this->infos['email']);
 
-            if(!$used->isEmpty())
+            if($used)
             {
                 return redirect()->back()->with( array('status' => 'error' , 'message' => 'Cet email est déjà utilisé') );
             }
             else
             {
                 $this->user->update(array('id' => $this->infos['id'] ,'email' => $this->infos['email']));
+                
+                $email = $this->label->findByUserGroupeType($user->id,2,1);
+
+                if(!$email->isEmpty())
+                {
+                    $email = $email->first();
+                    $email->label = $this->infos['email'];
+                    $email->save();
+                }
             }
         }
 

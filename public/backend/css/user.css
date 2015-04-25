@@ -492,7 +492,7 @@ fieldset.border {
     display: inline-block;
     position: relative;
     background: url('../images/uploader/userpic.gif') no-repeat;
-    background-size: cover;
+    background-size:contain;
 }
 
 .webcam__preview,

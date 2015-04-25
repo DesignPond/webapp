@@ -6,9 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="checkbox">
-                    <label class="text-primary">
-                        <input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner
-                    </label>
+                    <label class="text-primary"><input id="partageCheckAll" class="partageCheckAll" data-who="{{ $who }}" type="checkbox">Tout sélectionner/desélectionner</label>
                 </div>
                 <hr/>
             </div>

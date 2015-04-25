@@ -38,5 +38,6 @@ return [
     'periode'      => 'Pour la période',
     'indiquer'     => 'Indiquer une',
     'envoyer'      => 'Envoyer',
+    'uploading'    => 'Téléchargement',
     'majinfos'     => 'Mettre à jour vos données',
 ];

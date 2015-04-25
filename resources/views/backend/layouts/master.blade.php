@@ -89,7 +89,9 @@
 
             $inputs.intlTelInput({
                 defaultCountry: "auto",
+                autoHideDialCode:false,
                 autoFormat:true,
+                nationalMode:false,
                 utilsScript: "../../backend/js/utils.js"
             });
 

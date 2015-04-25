@@ -31,12 +31,12 @@
    $( ".mask_date" ).datepicker({
         changeMonth: true,
         changeYear: true,
-        dateFormat: "yy-mm-dd",
+        dateFormat: "dd/mm/yy",
         yearRange: "1900:"+ new Date().getFullYear()
     });
 
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd/mm/yy',
         language: 'fr'
     });
 

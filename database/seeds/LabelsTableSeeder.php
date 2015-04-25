@@ -54,7 +54,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
             'Suisse',
 			'032 751 38 07',
             '078 690 00 23',
-			'1982-10-01',
+			'01/10/1982',
             'http://wwww.desingpond.ch',
             'cindy.jpg');
 
@@ -81,7 +81,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
             'Suisse',
 			'032 318 21 40',
             '078 543 06 23',
-			'1995-09-27',
+			'09/27/1995',
             'http://wwww.orange.ch',
             'coralie.jpg');
 
@@ -95,7 +95,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
             'Suisse',
 			'032 987 21 40',
             '076 523 06 23',
-			'1987-06-19',
+			'06/19/1987',
             'http://wwww.hne.ch',
             'cyril.jpg');
 
