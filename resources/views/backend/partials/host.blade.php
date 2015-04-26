@@ -9,7 +9,7 @@
                 @if(!empty($groupe_type))
                     <li>
                         <div class="chat-header">
-                            <p class="text-muted">Données partagées avec: </p>
+                            <p class="text-muted">{{ trans('menu.infopartage') }}: </p>
                             <h3>{{ $ringlink['invited_name'] }}</h3>
                         </div>
                         <form id="formRiiinglink">
@@ -41,7 +41,7 @@
     <div class="panel panel-info">
         <div class="panel-body">
             <div class="well-sm text-center">
-                <h4>Vous n'avez pas encore indiqué vos informations à partager</h4>
+                <h4>{{ trans('menu.noinfopartage') }}</h4>
                 <p><a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-warning">{{ trans('menu.majinfos') }}!</a></p>
             </div>
         </div>

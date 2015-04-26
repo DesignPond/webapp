@@ -30,7 +30,7 @@ class SearchController extends Controller {
 
 		if(!$results->isEmpty()){
 			foreach($results as $result){
-				$new    = ['label' => $result->name , 'desc' => $result->email , 'value' =>  $result->email];
+				$new    = ['label' => $result->name , 'desc' => $result->email , 'value' =>  $result->email, 'id' =>  $result->id, 'user_type' => $result->user_type];
 				$data[] = $new;
 			}
 		}

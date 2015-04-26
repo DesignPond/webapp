@@ -17,6 +17,7 @@ Route::get('sendActivationLink', array('as' => 'send', 'uses' => 'DispatchContro
 Route::group(['middleware' => ['auth','activate']], function()
 {
     Route::post('send', array('as' => 'send', 'uses' => 'DispatchController@send'));
+    Route::get('labels', array('as' => 'labels', 'uses' => 'ActiviteController@labels'));
 
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));

@@ -15,6 +15,8 @@ $( function() {
         $('#filterChange').submit();
     });
 
+    var partage = $('#partageMain');
+
     /**
     * Search autocomplete
     * */
@@ -23,8 +25,17 @@ $( function() {
     $( "#searchEmail" ).autocomplete({
         source: url + "search",
         minLength: 4,
-        select: function( event, ui ) {
+        select: function( event, ui )
+        {
             $('#searchEmail').val(ui.item.value);
+
+            console.log(ui.item.user_type);
+
+            $.get(url + "labels", { user_type: ui.item.user_type }, function( data ) {
+                partage.html( data );
+                //alert( "Load was performed." );
+            });
+
             return false;
         }
     }).autocomplete( "instance" )._renderItem = function( ul, item )

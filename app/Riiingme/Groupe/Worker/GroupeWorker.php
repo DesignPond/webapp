@@ -10,20 +10,19 @@ class GroupeWorker{
 
     public function __construct(GroupeInterface $groupe, TypeInterface $type)
     {
-
         $this->groupe  = $groupe;
         $this->type    = $type;
-
     }
 
     public function getDependencies($user_type){
 
         return [
-            'groupes'      => $this->getGroupes(),
-            'types'        => $this->getTypes(),
-            'status'       => $this->getGroupesStatus(),
-            'groupe_type'  => $this->getGroupesTypes($user_type),
-            'groupes_user' => $this->getGroupesUser($user_type),
+            'groupes'          => $this->getGroupes(),
+            'types'            => $this->getTypes(),
+            'status'           => $this->getGroupesStatus(),
+            'groupe_type'      => $this->getGroupesTypes($user_type),
+            'all_groupe_type'  => $this->getGroupesTypes(),
+            'groupes_user'     => $this->getGroupesUser($user_type),
         ];
 
     }
@@ -48,7 +47,7 @@ class GroupeWorker{
         return $this->getAllGroupes($user_type)->lists('titre','id');
     }
 
-    public function getGroupesTypes($user_type){
+    public function getGroupesTypes($user_type = null){
 
         return $this->getAllGroupes($user_type)->toArray();
     }

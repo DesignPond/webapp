@@ -70,4 +70,29 @@ class ActiviteController extends Controller {
         echo view('backend.timeline.activite', ['activity' => $activity]);
     }
 
+
+    /**
+     * Prepare the partage
+     * POST /labels
+     *
+     * @return Response
+     */
+    public function labels(Request $request)
+    {
+        $depedencies = $this->groupe->getGroupesTypes();
+
+        if($request->input('user_type') == '1' )
+        {
+            $GroupeTypes = [$depedencies[1],$depedencies[2]];
+            $prive       = true;
+        }
+        else
+        {
+            $GroupeTypes = [$depedencies[5]];
+            $prive       = false;
+        }
+
+        echo view('backend.partage.labels', ['GroupeTypes' => $GroupeTypes, 'who' => 'invited', 'prive' => $prive ])->render();
+    }
+
 }

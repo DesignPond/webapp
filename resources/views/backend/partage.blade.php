@@ -23,12 +23,12 @@
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;{{ trans('action.ipartage') }}:</strong></h4>
                             <?php $who = 'host'; ?>
-                            @include('backend.partials.partage-host')
+                            @include('backend.partage.host')
                         </div>
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;{{ trans('action.iwant') }}:</strong></h4>
                             <?php $who = 'invited'; ?>
-                            @include('backend.partials.partage-invited')
+                            @include('backend.partage.invited')
                         </div>
                     </div>
 
