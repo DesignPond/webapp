@@ -38,7 +38,7 @@ class ProcessInvite extends Command implements SelfHandling {
         $invite = $this->invite->find($this->invite_id);
 
         // infos to partage
-        $partage_host    = (!empty($invite->partage_host) ? unserialize($invite->partage_host): []);
+        $partage_host    = (!empty($invite->partage_host)    ? unserialize($invite->partage_host): []);
         $partage_invited = (!empty($invite->partage_invited) ? unserialize($invite->partage_invited): []);
 
         $hosted_link  = $this->getRiiinglink($invite->user_id , $invite->invited_id);

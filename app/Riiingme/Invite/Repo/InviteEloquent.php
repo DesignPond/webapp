@@ -20,6 +20,11 @@ class InviteEloquent implements InviteInterface {
         return $this->invite->where('user_id','=',$user_id)->where('invited_id','=',null)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getToProcess($user_id){
+
+        return $this->invite->where('invited_id','=',$user_id)->where('activated_at','=',null)->get();
+    }
+
     public function getAsked($email){
 
         return $this->invite->where('email','=',$email)->with(['user'])->where('invited_id','=',null)->orderBy('created_at', 'desc')->get();

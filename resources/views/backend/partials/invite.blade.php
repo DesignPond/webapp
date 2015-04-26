@@ -15,7 +15,7 @@
 
                     @if(!empty($invited))
 
-                        <?php if(isset($invited[1])){ unset($invited[1]); } ?>
+                        <?php if(isset($invited[1])){ unset($invited[1]); }  ?>
                         @foreach($invited as $group => $groupe_label)
                             @if(isset($groupes[$group]))
                                 <div class="chat-msg">

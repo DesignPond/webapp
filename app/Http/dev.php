@@ -6,11 +6,13 @@ Route::get('test', function()
     // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
     //throw new Illuminate\Session\TokenMismatchException;
-    /*
+
         $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
-        $meta = $meta->find(1);
-        $labels = $meta->first()->labels;
-    */
+        $meta = $meta->find(21);
+        $labels = $meta->labels;
+
+    $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+    $invite = $invite->find(1);
 
     $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
     $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
@@ -18,21 +20,15 @@ Route::get('test', function()
     $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
 
     //$user = $user->find(2);
-    $user    = $user->getAll();
+/*    $user    = $user->getAll();
     $changes = $change->getLastChanges();
 
     $riiinglinks = $riiinglink->findByHost(1)->lists('id');
-    $results     = $riiinglink->findTags(4,$riiinglinks);
+    $results     = $riiinglink->findTags(4,$riiinglinks);*/
 
-    if($results->isEmpty())
-    {
-        echo 'remove tag';
-        //$tags->delete(4);
-    }
-/*
     echo '<pre>';
-    print_r($results);
-    echo '</pre>';exit;*/
+    print_r(unserialize($invite->partage_invited));
+    echo '</pre>';exit;
 
     // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');

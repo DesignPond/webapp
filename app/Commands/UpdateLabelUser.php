@@ -39,17 +39,19 @@ class UpdateLabelUser extends Command implements SelfHandling {
             $this->interface->updateLabels($this->edit, $user->id, $this->date);
         }
 
-        foreach($this->label as $groupe => $labels)
+        if(isset($this->label))
         {
-            $daterange = (isset($this->date[$groupe]) && !empty($this->date[$groupe]) ? $this->date[$groupe] : null);
-
-            if($daterange && empty($labels))
+            foreach($this->label as $groupe => $labels)
             {
-                throw new  \App\Exceptions\UpdateFailException();
+                $daterange = (isset($this->date[$groupe]) && !empty($this->date[$groupe]) ? $this->date[$groupe] : null);
+
+                if($daterange && empty($labels))
+                {
+                    throw new  \App\Exceptions\UpdateFailException();
+                }
+
+                $this->interface->createLabels($labels, $user->id, $groupe, $daterange);
             }
-
-            $this->interface->createLabels($labels, $user->id, $groupe, $daterange);
-
         }
 	}
 

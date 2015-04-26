@@ -2,6 +2,7 @@
 
 use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
 use App\Riiingme\User\Repo\UserInterface;
+use App\Riiingme\User\Worker\UserWorker;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Tag\Repo\TagInterface;
@@ -19,13 +20,15 @@ class UserController extends Controller {
 	protected $label;
 	protected $groupe;
 	protected $user;
+    protected $worker;
 	protected $activity;
     protected $auth;
     protected $tags;
 
-	public function __construct(UserInterface $user, TagInterface $tags, RiiinglinkWorker $riiinglink, LabelWorker $label, GroupeWorker $groupe, ActiviteWorker $activity)
+	public function __construct(UserInterface $user, UserWorker $worker, TagInterface $tags, RiiinglinkWorker $riiinglink, LabelWorker $label, GroupeWorker $groupe, ActiviteWorker $activity)
 	{
 		$this->user       = $user;
+        $this->worker     = $worker;
 		$this->riiinglink = $riiinglink;
 		$this->label      = $label;
 		$this->groupe     = $groupe;
@@ -80,9 +83,10 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-
         $this->dispatch(new UpdateUser($request->info));
         $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
+
+        $this->worker->proceesPendingInvites(\Auth::user()->id);
 
         return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
 

@@ -136,7 +136,7 @@ class Helper{
 
     }
 
-    public function getUsedMetas($id, $metas,$groupe){
+    public function getUsedMetas($id, $metas, $groupe){
 
         // if we have a label in that group and some metas in that group test if this label is used those metas
         if(isset($id) && isset($metas[$groupe]))
@@ -223,6 +223,37 @@ class Helper{
         }
 
         return $results;
+
+    }
+
+    public function array_flatten($array)
+    {
+        $return = array();
+
+        if( !empty($array) ){
+            foreach($array as $a)
+            {
+                foreach($a as $y)
+                {
+                    $return[] = $y;
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    public function convertForUserType($labels){
+
+        $labels = $this->array_flatten($labels);
+        $exist  = [4,5,6,7,8,9,11];
+        $data   = array_unique(array_intersect($labels, $exist));
+
+        sort($data);
+
+        $result[6] = $data;
+
+        return $result;
 
     }
 

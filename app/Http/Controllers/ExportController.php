@@ -14,7 +14,7 @@ class ExportController extends Controller {
 	 */
 	public function index()
 	{
-        \Excel::create('Filename', function($excel) {
+  /*      \Excel::create('Filename', function($excel) {
 
             $excel->sheet('Sheetname', function($sheet) {
 
@@ -25,7 +25,9 @@ class ExportController extends Controller {
 
             });
 
-        })->export('xls');
+        })->export('xls');*/
+
+        $this->dispatch(new \App\Commands\ProcessInvite(1));
 	}
 
 	/**

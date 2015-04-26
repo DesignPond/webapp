@@ -84,6 +84,24 @@ class LabelWorkerTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
+    public function testConvertPartgeUserType()
+    {
+        $actual1   = $this->worker->convertPartgeUserType([2 => [1,2,3]],1);
+        $expected1 = [2 => [1,2,3]];
+
+        $this->assertEquals($expected1, $actual1);
+
+        $actual2   = $this->worker->convertPartgeUserType([2 => [4,5,10]],15);
+        $expected2 = [6 => [4,5]];
+
+        $this->assertEquals($expected2, $actual2);
+
+        $actual3   = $this->worker->convertPartgeUserType([6 => [1,2,3]],15);
+        $expected3 = [6 => [1,2,3]];
+
+        $this->assertEquals($expected3, $actual3);
+    }
+
     public function testAssignPhotoUser()
     {
 /*        $user_id = 1;

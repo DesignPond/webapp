@@ -103,12 +103,29 @@ class LabelWorker{
         }
     }
 
+    public function convertPartgeUserType($partage,$user){
+
+        $isUser = $this->user->find($user);
+
+        if($isUser->user_type == 2 && ( isset($partage[2]) || isset($partage[3]) ))
+        {
+            return $this->helper->convertForUserType($partage);
+        }
+
+        return $partage;
+
+    }
+
     public function labelForUser($partage,$user){
 
         $metas = [];
 
         if(!empty($partage))
         {
+
+            // Assure we get correct lables to partage
+            $partage = $this->convertPartgeUserType($partage,$user);
+
             foreach($partage as $groupe => $types)
             {
                 foreach($types as $type)

@@ -284,4 +284,26 @@ class HelperTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
+    public function testConvertForChanges()
+    {
+        $labels = [
+            2 => [
+                4,5,10
+            ],
+            3 => [
+                6,11
+            ]
+        ];
+
+        $actual = $this->helper->convertForUserType($labels);
+
+        $expected = [
+            6 => [
+                4, 5, 6, 11
+            ]
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
 }

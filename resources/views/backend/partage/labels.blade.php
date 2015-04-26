@@ -20,7 +20,7 @@
             <h5><strong>{{ $groupe['titre'] }}</strong></h5>
             @foreach($groupe['groupe_type'] as $type)
                 @if(isset($host_group_type) && !empty($host_group_type))
-                    @if(isset($host_group_type[$groupe['id']][$type['id']]))
+                    @if( in_array($type['id'], $host_group_type[$groupe['id']] ))
                         <div class="checkbox {{ $who }}">
                             <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">{{ $type['titre'] }}</label>
                         </div>
