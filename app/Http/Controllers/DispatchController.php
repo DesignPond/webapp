@@ -47,7 +47,10 @@ class DispatchController extends Controller {
 
         if($result['status'] == 'confirmed')
         {
-            return redirect('/user')->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
+            // Log in the user
+            \Auth::login($result['user']);
+
+            return redirect('/user/link/'.$result['link'])->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
         }
         elseif($result['status'] == 'register')
         {

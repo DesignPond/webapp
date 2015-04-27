@@ -50,14 +50,11 @@ class ConfirmInvite extends Command implements SelfHandling {
 
             $invite->save();
 
-            $this->riiinglinkExist($invite->user_id,$user->id);
+            $link = $this->riiinglinkExist($invite->user_id,$user->id);
 
             $this->dispatch(new ProcessInvite($invite->id));
 
-            // Log in the user
-            \Auth::login($user);
-
-            return ['status' => 'confirmed'];
+            return ['status' => 'confirmed', 'link' => $link->id, 'user' => $user];
         }
         elseif($invite && !$user)
         {
@@ -81,10 +78,11 @@ class ConfirmInvite extends Command implements SelfHandling {
         if(!$riiinglink)
         {
             // User is registred and riiinglink doesn't exist, create riiinglink
-            $this->dispatch(new CreateRiiinglink($host_id,$invited_id));
+            $command = new CreateRiiinglink($host_id,$invited_id);
+            return $command->handle();
         }
 
-        return false;
+        return $riiinglink;
     }
 
 }

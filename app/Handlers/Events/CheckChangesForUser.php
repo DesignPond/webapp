@@ -33,8 +33,7 @@ class CheckChangesForUser {
 	{
         $types    = $this->type->getAll()->lists('titre','id');
         $changes  = $this->changes->getChanges($event->user->id);
-
-        $user = $this->user->find(1);
+        $user     = $this->user->find($event->user->id);
 
         if(!empty($changes))
         {

@@ -39,7 +39,7 @@ class ChangeWorker{
     public function calculDiff($oldLabels,$newLabels)
     {
 
-        $all_groupes = range(1,7);
+        $all_groupes = range(1,6);
 
         foreach($all_groupes as $group_id)
         {

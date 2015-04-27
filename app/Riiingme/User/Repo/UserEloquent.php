@@ -12,11 +12,7 @@ class UserEloquent implements UserInterface {
 
     public function getAll(){
 
-        return $this->user->with(array('labels'=> function ($query)
-        {
-            $query->join('types','types.id','=','labels.type_id')->select('types.titre');
-
-        }))->get();
+        return $this->user->all();
     }
 
     public function find($id){

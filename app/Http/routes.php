@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth','activate']], function()
     Route::resource('user', 'UserController');
 
     Route::resource('export', 'ExportController');
+    Route::resource('change', 'ChangeController');
 });
 
 Route::group(['namespace' => 'Auth','prefix' => 'auth'], function()
