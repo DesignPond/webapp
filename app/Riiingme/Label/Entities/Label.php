@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Label extends Model{
 
+    use \Venturecraft\Revisionable\RevisionableTrait;
+
     /**
      * No timestamps
      *
