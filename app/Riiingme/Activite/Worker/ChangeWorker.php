@@ -2,6 +2,7 @@
 
 use App\Riiingme\Activite\Repo\ChangeInterface;
 use App\Riiingme\Label\Repo\LabelInterface;
+use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Activite\Entities\Revision;
 use App\Riiingme\User\Repo\UserInterface;
 
@@ -12,7 +13,7 @@ class ChangeWorker{
     protected $user;
     protected $label;
 
-    public function __construct(ChangeInterface $change, UserInterface $user, LabelInterface $label, Revision $revision){
+    public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, Revision $revision){
 
         $this->changes  = $change;
         $this->user     = $user;
@@ -20,9 +21,9 @@ class ChangeWorker{
         $this->revision = $revision;
     }
 
-    public function getChanges($user_id){
+    public function getChanges($user_id,$period){
 
-        $change = $this->changes->getUpdated($user_id);
+        $change = $this->changes->getUpdated($user_id,$period);
 
         if( $change->count() > 1)
         {
@@ -41,12 +42,29 @@ class ChangeWorker{
 
     }
 
-    public function getLabelChange($user_id){
+    public function convertToLabels($difference)
+    {
+        if(isset($difference['added']) && !empty($difference['added']))
+        {
+            $data['added'] = $this->label->getLabels($difference['added']);
 
-        //$labels = $this->label->findByUser($user_id);
-        $revisions = $this->revision->where('user_id','=',$user_id)->get();
+            return $data;
+        }
+
+        return [];
+    }
+
+    public function getLabelChange($user_id, $period = null){
+
+        $revisions = $this->revision
+            ->where('user_id','=',$user_id)
+            ->where('new_value','!=','')
+            ->period($period)
+            ->with(['label'])
+            ->groupBy('revisionable_id')->get();
 
         return $revisions;
+        return $revisions->lists('new_value','id');
 
     }
 

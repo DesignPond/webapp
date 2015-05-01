@@ -31,23 +31,21 @@ class CheckChangesForUser {
 	 */
 	public function handle(CheckChanges $event)
 	{
-        $types    = $this->type->getAll()->lists('titre','id');
-        $changes  = $this->changes->getChanges($event->user->id);
-        $user     = $this->user->find($event->user->id);
+        $types     = $this->type->getAll()->lists('titre','id');
+        $user      = $this->user->find($event->user->id);
+
+        $changes   = $this->changes->getChanges($event->user->id, $event->user->notification_interval);
+        $changes   = $this->changes->convertToLabels($changes);
+        $revisions = $this->changes->getLabelChange($event->user->id, $event->user->notification_interval);
 
         if(!empty($changes))
         {
-            \Mail::send('emails.changement', ['user' => $user, 'types' => $types , 'changes' => $changes] , function($message) use ($event)
+            \Mail::send('emails.changement', ['user' => $user, 'types' => $types , 'changes' => $changes, 'revisions' => $revisions ] , function($message) use ($event)
             {
                 $message->to($event->user->email)->subject('Notification de changement des données partagées');
             });
         }
 
-    /*
-        echo '<pre>';
-        print_r($change);
-        echo '</pre>';exit;
-    */
 
 	}
 

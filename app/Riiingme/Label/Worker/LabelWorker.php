@@ -122,7 +122,6 @@ class LabelWorker{
 
         if(!empty($partage))
         {
-
             // Assure we get correct lables to partage
             $partage = $this->convertPartgeUserType($partage,$user);
 
