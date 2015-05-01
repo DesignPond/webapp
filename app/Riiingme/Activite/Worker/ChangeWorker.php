@@ -1,6 +1,8 @@
 <?php namespace App\Riiingme\Activite\Worker;
 
 use App\Riiingme\Activite\Repo\ChangeInterface;
+use App\Riiingme\Label\Repo\LabelInterface;
+use App\Riiingme\Activite\Entities\Revision;
 use App\Riiingme\User\Repo\UserInterface;
 
 class ChangeWorker{
@@ -8,11 +10,14 @@ class ChangeWorker{
     protected $activite;
     protected $invite;
     protected $user;
+    protected $label;
 
-    public function __construct(ChangeInterface $change, UserInterface $user){
+    public function __construct(ChangeInterface $change, UserInterface $user, LabelInterface $label, Revisionable $revision){
 
-        $this->changes = $change;
-        $this->user    = $user;
+        $this->changes  = $change;
+        $this->user     = $user;
+        $this->label    = $label;
+        $this->revision = $revision;
     }
 
     public function getChanges($user_id){
@@ -33,6 +38,15 @@ class ChangeWorker{
         }
 
         return [];
+
+    }
+
+    public function getLabelChange($user_id){
+
+        //$labels = $this->label->findByUser($user_id);
+        $revisions = $this->revision->where('user_id','=',$user_id)->get();
+
+        return $revisions;
 
     }
 
@@ -72,5 +86,7 @@ class ChangeWorker{
 
         return $difference;
     }
+
+
 
 }

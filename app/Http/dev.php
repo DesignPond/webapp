@@ -6,28 +6,31 @@ Route::get('test', function()
     // $link = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
     //throw new Illuminate\Session\TokenMismatchException;
+    /*
+       $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
+       $meta = $meta->find(21);
+       $labels = $meta->labels;
 
-        $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
-        $meta = $meta->find(21);
-        $labels = $meta->labels;
+       $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
+       $invite = $invite->find(1);
 
-    $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
-    $invite = $invite->find(1);
+          $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
 
-    $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
-    $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
+       $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
+
+      */
+
     $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-    $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
+    $change      = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
+    $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
 
-    //$user = $user->find(2);
-/*    $user    = $user->getAll();
-    $changes = $change->getLastChanges();
+    $change = $change->getLabelChange(1);
 
-    $riiinglinks = $riiinglink->findByHost(1)->lists('id');
-    $results     = $riiinglink->findTags(4,$riiinglinks);*/
+    //$riiinglinks = $riiinglink->findByHost(1)->lists('id');
+    //$results     = $riiinglink->findTags(4,$riiinglinks);
 
     echo '<pre>';
-    print_r(unserialize($invite->partage_invited));
+    print_r($change);
     echo '</pre>';exit;
 
     // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
