@@ -12,7 +12,7 @@ class ChangeWorker{
     protected $user;
     protected $label;
 
-    public function __construct(ChangeInterface $change, UserInterface $user, LabelInterface $label, Revisionable $revision){
+    public function __construct(ChangeInterface $change, UserInterface $user, LabelInterface $label, Revision $revision){
 
         $this->changes  = $change;
         $this->user     = $user;
