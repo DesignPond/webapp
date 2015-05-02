@@ -29,21 +29,21 @@ class ChangeController extends Controller {
 
         foreach ($users as $user)
         {
-             \Event::fire(new \App\Events\CheckChanges($user));
+         //    \Event::fire(new \App\Events\CheckChanges($user));
         }
 
-        $changes  = $this->changes->getChanges(1,'week');
-        $revision = $this->changes->getLabelChange(1,'week');
-        $labels   = $this->changes->convertToLabels($changes);
+        $changes  = $this->changes->getChangesConverted(1,'week');
+        $revision = $this->changes->getLabelChanges(1,'week');
 
-        foreach($revision as $label){
+        foreach($revision as $label)
+        {
             echo '<ul>';
             echo  '<li>'. $label->label->load('type')->type->titre  .': '.$label->new_value.'</li>';
             echo '</ul>';
         }
 
         echo '<pre>';
-        print_r($labels);
+        print_r($changes);
        // print_r($revision);
         echo '</pre>';
 	}

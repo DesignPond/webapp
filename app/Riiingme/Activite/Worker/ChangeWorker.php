@@ -1,9 +1,8 @@
 <?php namespace App\Riiingme\Activite\Worker;
 
 use App\Riiingme\Activite\Repo\ChangeInterface;
-use App\Riiingme\Label\Repo\LabelInterface;
+use App\Riiingme\Activite\Repo\RevisionInterface;
 use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
-use App\Riiingme\Activite\Entities\Revision;
 use App\Riiingme\User\Repo\UserInterface;
 
 class ChangeWorker{
@@ -13,12 +12,31 @@ class ChangeWorker{
     protected $user;
     protected $label;
 
-    public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, Revision $revision){
+    public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
         $this->changes  = $change;
         $this->user     = $user;
         $this->label    = $label;
         $this->revision = $revision;
+    }
+
+    /* *
+     * Revision changes
+    * */
+    public function getLabelChanges($user_id, $period = null)
+    {
+        return $this->revision->getChanges($user_id, $period);
+    }
+
+    /* *
+     * Partage changes
+    * */
+    public function getChangesConverted($user_id,$period){
+
+        $changes = $this->getChanges($user_id,$period);
+        $changes = $this->convertToLabels($changes,'added');
+
+        return $changes;
     }
 
     public function getChanges($user_id,$period){
@@ -42,30 +60,19 @@ class ChangeWorker{
 
     }
 
-    public function convertToLabels($difference)
+    /**
+     * Which = added or deleted
+     * */
+    public function convertToLabels($difference,$which)
     {
-        if(isset($difference['added']) && !empty($difference['added']))
+        if(isset($difference[$which]) && !empty($difference[$which]))
         {
-            $data['added'] = $this->label->getLabels($difference['added']);
+            $data[$which] = $this->label->getLabels($difference[$which]);
 
             return $data;
         }
 
         return [];
-    }
-
-    public function getLabelChange($user_id, $period = null){
-
-        $revisions = $this->revision
-            ->where('user_id','=',$user_id)
-            ->where('new_value','!=','')
-            ->period($period)
-            ->with(['label'])
-            ->groupBy('revisionable_id')->get();
-
-        return $revisions;
-        return $revisions->lists('new_value','id');
-
     }
 
     public function calculDiff($oldLabels,$newLabels)

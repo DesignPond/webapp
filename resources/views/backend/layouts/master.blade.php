@@ -60,6 +60,7 @@
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/intlTelInput.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery-birthday-picker.min.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/jquery.inputmask.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery.infinitescroll.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>

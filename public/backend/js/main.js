@@ -28,6 +28,8 @@
 
     $.datepicker.setDefaults($.datepicker.regional['fr-CH']);
 
+    $(".phone").inputmask("+99 99 999 99 99");
+
    $( ".mask_date" ).datepicker({
         changeMonth: true,
         changeYear: true,

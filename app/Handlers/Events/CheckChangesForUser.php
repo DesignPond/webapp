@@ -34,9 +34,8 @@ class CheckChangesForUser {
         $types     = $this->type->getAll()->lists('titre','id');
         $user      = $this->user->find($event->user->id);
 
-        $changes   = $this->changes->getChanges($event->user->id, $event->user->notification_interval);
-        $changes   = $this->changes->convertToLabels($changes);
-        $revisions = $this->changes->getLabelChange($event->user->id, $event->user->notification_interval);
+        $changes   = $this->changes->getChangesConverted($event->user->id, $event->user->notification_interval);
+        $revisions = $this->changes->getLabelChanges($event->user->id, $event->user->notification_interval);
 
         if(!empty($changes))
         {
@@ -45,8 +44,6 @@ class CheckChangesForUser {
                 $message->to($event->user->email)->subject('Notification de changement des données partagées');
             });
         }
-
-
 	}
 
 }

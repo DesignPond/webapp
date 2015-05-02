@@ -69,11 +69,13 @@ class Registrar implements RegistrarContract {
             'activation_token' => $activation_token
         ]);
 
+        $group = ($data['user_type'] == 1 ? 1 : 6);
+
         $this->label->create([
             'label'     => $data['email'],
             'user_id'   => $user->id,
             'type_id'   => 1,
-            'groupe_id' => 1
+            'groupe_id' => $group
         ]);
 
         $invite_id = (isset($data['invite_id']) && !empty($data['invite_id']) ? $data['invite_id'] : null);

@@ -12,6 +12,7 @@ use App\Riiingme\Invite\Entities\Invite;
 use App\Riiingme\Country\Entities\Country;
 use App\Riiingme\Activite\Entities\Activite;
 use App\Riiingme\Activite\Entities\Change as Change;
+use App\Riiingme\Activite\Entities\Revision as Revision;
 use App\Riiingme\Tag\Entities\Tag;
 
 class AppServiceProvider extends ServiceProvider {
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerTagService();
         $this->registerAuthService();
         $this->registerChangeService();
+        $this->registerRevisionService();
         $this->registerUploadService();
 
     }
@@ -93,6 +95,17 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind('\App\Riiingme\Activite\Repo\ChangeInterface', function()
         {
             return new \App\Riiingme\Activite\Repo\ChangeEloquent(new Change);
+        });
+    }
+
+    /**
+     * Revision
+     */
+    protected function registerRevisionService(){
+
+        $this->app->bind('\App\Riiingme\Activite\Repo\RevisionInterface', function()
+        {
+            return new \App\Riiingme\Activite\Repo\RevisionEloquent(new Revision);
         });
     }
 

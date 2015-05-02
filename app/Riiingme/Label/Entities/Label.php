@@ -25,9 +25,43 @@ class Label extends Model{
     {
         setlocale(LC_ALL, 'fr_FR.UTF-8');
 
-        return ( isset($this->type_id) && $this->type_id == 10 ? \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y') : $this->label );
+        /**
+         * Swich for format label for types
+         * Format the date if type id 10 birthday
+         * Format telefon numbers if type id = 8 or 9
+        * */
+
+        switch ($this->type_id) {
+            case 8:
+            case 9:
+                $label = $this->format_phone($this->label);
+                break;
+            case 10:
+                $label = \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y');
+                break;
+            default:
+                $label = $this->label;
+        }
+
+        return $label;
     }
 
+    public function format_phone($num)
+    {
+        $num = preg_replace('/[^0-9]/', '', $num);
+
+        $len = strlen($num);
+        if($len == 11)
+            $num = preg_replace('/([0-9]{2})([0-9]{2})([0-9]{3})([0-9]{2})([0-9]{2})/', '+$1 $2 $3 $4 $5', $num);
+        elseif($len == 10)
+            $num = preg_replace('/([0-9]{3})([0-9]{3})([0-9]{2})([0-9]{2})/', '$1 $2 $3 $4', $num);
+        elseif($len == 1)
+            $num = '';
+        elseif($len == 13)
+            $num = preg_replace('/([0-9]{4})([0-9]{2})([0-9]{3})([0-9]{2})([0-9]{2})/', '$1 $2 $3 $4 $5', $num);
+
+        return $num;
+    }
 
     /**
      * Labels belongs to user

@@ -38,8 +38,8 @@ class Helper{
         {
             foreach($data as $label)
             {
-                $groupe[$label['groupe_id']][$label['type_id']]['label'] = (!empty($label['label']) ? $label['label'] : '');
-                $groupe[$label['groupe_id']][$label['type_id']]['id']    = $label['id'];
+                $groupe[$label->groupe_id][$label->type_id]['label'] = (!empty($label->label_text) ? $label->label_text : '');
+                $groupe[$label->groupe_id][$label->type_id]['id']    = $label->id;
             }
         }
 

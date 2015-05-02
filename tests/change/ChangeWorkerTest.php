@@ -3,17 +3,33 @@
 class ChangeWorkerTest extends TestCase {
 
     protected $worker;
+    protected $mock;
 
     public function setUp()
     {
         parent::setUp();
 
+        $this->refreshApplication();
+
         $this->worker = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
+
+        $this->mock = Mockery::mock('App\Riiingme\Activite\Repo\RevisionInterface');
+        $this->app->instance('App\Riiingme\Activite\Repo\RevisionInterface', $this->mock);
     }
 
     public function tearDown()
     {
         Mockery::close();
+    }
+
+    public function testGetChanges(){
+
+        $this->mock->shouldReceive('getChanges')->once()->with([ 'user_id' => 1, 'period' => 'week' ])->andReturn(new Illuminate\Database\Eloquent\Collection);
+
+        $response = $this->worker->getLabelChanges(1, 'week');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
     }
 
     public function testMetaCompareChanges(){

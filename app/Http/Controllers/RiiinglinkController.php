@@ -69,7 +69,7 @@ class RiiinglinkController extends Controller {
         $metas       = $this->meta->getMetas($id);
         $ringlink    = $this->riiinglink->getRiiinglinkPrepared($id);
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
-        $ringlink    = $this->riiinglink->convert($ringlink, $this->auth->labels->toArray());
+        $ringlink    = $this->riiinglink->convert($ringlink, $this->auth->labels);
 
         return view('backend.link')->with( $depedencies + array('user' => $this->auth, 'ringlink' => $ringlink, 'metas' => $metas ));
     }
