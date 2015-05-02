@@ -10,13 +10,9 @@ class ChangeEloquent implements ChangeInterface {
         $this->change = $change;
     }
 
-    public function getAll($user_id){
+    public function getAll($period){
 
-        return $this->change->with(['user','riiinglink'])->whereHas('riiinglink', function ($query) use ($user_id)
-        {
-            $query->where('riiinglinks.invited_id','=',$user_id);
-
-        })->where('user_id','!=',$user_id)->get();
+        return $this->change->with(['riiinglink'])->period($period)->groupBy('user_id')->orderBy('id', 'desc')->get();
     }
 
     public function getUpdated($user_id,$period){

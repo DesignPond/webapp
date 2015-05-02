@@ -25,27 +25,53 @@ class ChangeController extends Controller {
 	public function index()
 	{
 
-        $users = $this->user->getAll();
+        $users = $this->user->getAll('week');
+
+        $all = $this->changes->getUsersHasUpdate('week');
+
+
+        echo '<pre>';
+        print_r($all);
+        echo '</pre>';
 
         foreach ($users as $user)
         {
+            $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
+
+            $intersect = array_intersect($all,$invited);
+
+            echo '<pre>';
+            print_r($invited);
+            print_r($intersect);
+            echo 'end';
+            echo '</pre>';
+
+            //$changes  = $this->changes->getChangesConverted($user->id,'week');
+
+  /*          if(!empty($invited))
+            {
+                foreach($invited as $invite)
+                {
+                    $revision = $this->changes->getLabelChanges($invite,'week');
+                }
+            }*/
+
          //    \Event::fire(new \App\Events\CheckChanges($user));
         }
 
-        $changes  = $this->changes->getChangesConverted(1,'week');
-        $revision = $this->changes->getLabelChanges(1,'week');
 
-        foreach($revision as $label)
+        $changes  = $this->changes->getChangesConverted(1,'week');
+        $revision = $this->changes->getLabelChanges(25,'week');
+
+
+/*        foreach($updates as $update)
         {
             echo '<ul>';
-            echo  '<li>'. $label->label->load('type')->type->titre  .': '.$label->new_value.'</li>';
+           // echo  '<li> '.$update->user_id.'</li>';
             echo '</ul>';
-        }
+        }*/
 
-        echo '<pre>';
-        print_r($changes);
-       // print_r($revision);
-        echo '</pre>';
+
 	}
 
 	/**

@@ -24,13 +24,14 @@ Route::get('test', function()
     $change      = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
     $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
 
-    $change = $change->getLabelChange(1);
+   // $change = $change->getLabelChange(1);
 
     //$riiinglinks = $riiinglink->findByHost(1)->lists('id');
     //$results     = $riiinglink->findTags(4,$riiinglinks);
 
+    $thsuer = $user->find(1);
     echo '<pre>';
-    print_r($change);
+    print_r($thsuer->load('riiinglinks')->riiinglinks->lists('invited_id'));
     echo '</pre>';exit;
 
     // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
@@ -48,12 +49,17 @@ Route::get('test', function()
 Route::get('changement', function()
 {
 
-    $user  = \App::make('App\Riiingme\User\Entities\User');
-    $type  = \App::make('App\Riiingme\Type\Repo\TypeInterface');
-    $user  = $user->find(1);
-    $types = $type->getAll()->lists('titre','id');
+    $users  = \App::make('App\Riiingme\User\Entities\User');
+    $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
+    $change = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
 
-    $changes = [
+    $types     = $type->getAll()->lists('titre','id');
+    $user      = $users->where('id','=',1)->with(['labels'])->get()->first();
+
+    $changes   = $change->getChangesConverted($user->id, $user->notification_interval);
+    $revisions = $change->getLabelChanges($user->id,$user->notification_interval);
+
+/*    $changes = [
         'added'   => [
             2 => [ 1 => 2,  4 => 3, 5 => 4 ],
             3 => [ 1 => 11]
@@ -61,9 +67,9 @@ Route::get('changement', function()
         'deleted' => [
             3 =>  [ 3 => 13,  7 => 17 ]
         ]
-    ];
+    ];*/
 
-    return View::make('emails.changement', array('user' => $user, 'user_photo' => 'avatar.jpg', 'types' => $types , 'name' => 'Cindy Leschaud', 'changes' => $changes));
+    return View::make('emails.changement', array('user' => $user, 'types' => $types ,'changes' => $changes, 'revisions' => $revisions ));
 
 });
 

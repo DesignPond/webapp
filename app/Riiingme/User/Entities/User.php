@@ -99,6 +99,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Link belongs to user
+     *
+     * @var query
+     */
+    public function riiinglinks(){
+
+        return $this->hasMany('App\Riiingme\Riiinglink\Entities\Riiinglink', 'host_id', 'id');
+    }
+
+    /**
      * Group belongs to user
      *
      * @var query

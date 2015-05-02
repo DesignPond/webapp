@@ -10,6 +10,11 @@ class RevisionEloquent implements RevisionInterface {
         $this->revision = $revision;
     }
 
+    public function getUpdatedUser($period)
+    {
+        return $this->revision->select('user_id')->where('new_value','!=','')->period($period)->groupBy('user_id')->get();
+    }
+
     public function getChanges($user_id, $period = null)
     {
         $revisions = $this->revision

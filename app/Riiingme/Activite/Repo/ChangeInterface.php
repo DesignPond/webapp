@@ -3,7 +3,7 @@
 
 interface ChangeInterface{
 
-    public function getAll($user_id);
+    public function getAll($period);
     public function getUpdated($user_id,$period);
     public function getLastChanges();
     public function find($id);

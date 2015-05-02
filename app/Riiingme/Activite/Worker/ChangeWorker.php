@@ -60,6 +60,33 @@ class ChangeWorker{
 
     }
 
+    public function getUsersHasUpdate($period)
+    {
+        $change   = $this->getUsersChange($period);
+        $revision = $this->getUsersRevision($period);
+
+        if(!empty($change) || !empty($revision))
+        {
+            return array_unique(array_merge($revision,$change));
+        }
+
+        return [];
+    }
+
+    public function getUsersRevision($period)
+    {
+        $revision = $this->revision->getUpdatedUser($period);
+
+        return (!$revision->isEmpty() ? $revision->lists('user_id') : []);
+    }
+
+    public function getUsersChange($period)
+    {
+        $change = $this->changes->getAll($period);
+
+        return (!$change->isEmpty() ? $change->lists('user_id') : []);
+    }
+
     /**
      * Which = added or deleted
      * */

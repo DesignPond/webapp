@@ -10,7 +10,12 @@ class UserEloquent implements UserInterface {
         $this->user = $user;
     }
 
-    public function getAll(){
+    public function getAll($period = null){
+
+        if($period)
+        {
+            return $this->user->where('notification_interval','=',$period)->get();
+        }
 
         return $this->user->all();
     }
