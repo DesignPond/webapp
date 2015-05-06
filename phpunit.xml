@@ -28,6 +28,9 @@
         <testsuite name="label">
             <directory>./tests/label/</directory>
         </testsuite>
+        <testsuite name="change">
+            <directory>./tests/change/</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>

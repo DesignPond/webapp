@@ -9,7 +9,7 @@ class ChangeWorkerTest extends TestCase {
     {
         parent::setUp();
 
-        $this->refreshApplication();
+        //$this->refreshApplication();
 
         $this->worker = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
 
@@ -22,14 +22,48 @@ class ChangeWorkerTest extends TestCase {
         Mockery::close();
     }
 
+    public function testSetUser(){
+
+        $this->worker->setUser(12);
+
+        $expected = 12;
+        $this->assertEquals($expected, $this->worker->user_id);
+    }
+
+    public function testSetPeriod(){
+
+        $this->worker->setPeriod('week');
+
+        $expected = 'week';
+        $this->assertEquals($expected, $this->worker->period);
+    }
+
     public function testGetChanges(){
 
-        $this->mock->shouldReceive('getChanges')->once()->with([ 'user_id' => 1, 'period' => 'week' ])->andReturn(new Illuminate\Database\Eloquent\Collection);
+        $this->worker->setUser(1);
+        $this->worker->setPeriod('week');
 
-        $response = $this->worker->getLabelChanges(1, 'week');
+        $response = $this->worker->getLabelChanges();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $response);
+    }
 
+
+    public function testMergeChanges(){
+
+        $metas = [
+            3 => [
+                6 => 16,
+                3 => 13,
+                7 => 17
+            ]
+        ];
+
+        $metas    = serialize($metas);
+        $result   = unserialize('');
+        $result = (isset($result[1]) ? 'ok' : true);
+
+        $this->assertEquals(true, $result);
     }
 
     public function testMetaCompareChanges(){

@@ -29,11 +29,8 @@ $( function() {
         {
             $('#searchEmail').val(ui.item.value);
 
-            console.log(ui.item.user_type);
-
             $.get(url + "labels", { user_type: ui.item.user_type }, function( data ) {
                 partage.html( data );
-                //alert( "Load was performed." );
             });
 
             return false;

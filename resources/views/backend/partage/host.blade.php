@@ -13,7 +13,6 @@
         </div>
 
         <?php
-
             if($user->user_type == '1' ){
                 $GroupeTypes = [$all_groupe_type[1],$all_groupe_type[2]];
                 $prive = true;
@@ -22,7 +21,6 @@
                 $GroupeTypes = [$all_groupe_type[5]];
                 $prive = false;
             }
-
         ?>
 
         @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => $prive, 'host_group_type' => $user->label_groupe ])

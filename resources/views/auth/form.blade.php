@@ -40,4 +40,6 @@
     <input type="hidden" value="{{ $invite_id or '' }}" name="invite_id">
 @endif
 
+{!! Form::honeypot('my_name', 'my_time') !!}
+
 <button type="submit" class="btn btn-block btn-primary mt-lg">Créer le compte</button>

@@ -63,6 +63,7 @@
     <script src="<?php echo asset('backend/js/jquery/jquery.inputmask.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/notify.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/jquery/jquery.infinitescroll.js');?>"></script>
+    <script src="<?php echo asset('backend/js/jquery/jquery.validate.min.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/tag-it.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/main.js');?>"></script>

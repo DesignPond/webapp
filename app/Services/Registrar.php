@@ -69,9 +69,9 @@ class Registrar implements RegistrarContract {
             'activation_token' => $activation_token
         ]);
 
-        $group = ($data['user_type'] == 1 ? 1 : 6);
+        $group = ($data['user_type'] == 1 ? 2 : 6);
 
-        $this->label->create([
+        $label = $this->label->create([
             'label'     => $data['email'],
             'user_id'   => $user->id,
             'type_id'   => 1,
@@ -83,7 +83,6 @@ class Registrar implements RegistrarContract {
         \Event::fire(new \App\Events\AccountWasCreated($user,$invite_id));
 
         return $user;
-
 	}
 
 }

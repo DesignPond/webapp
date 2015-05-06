@@ -10,6 +10,7 @@
             <div class="panel-body">
                 <p class="text-center pv text-bold">{{ trans('message.createcompany') }}</p>
                 <form class="mb-lg" role="form" method="POST" action="/auth/register">
+
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group has-feedback">
                         <input type="text" value="{{ Input::old('company') }}" name="company" placeholder="{{ trans('message.namecompany') }}" class="form-control" />
@@ -17,9 +18,8 @@
                     </div>
                     <input type="hidden" value="2" name="user_type" id="user_type">
 
-                    {!! Form::honeypot('my_name', 'my_time') !!}
-
                     @include('auth.form')
+
                 </form>
                 <p class="pt-lg text-center">{{ trans('message.already') }}</p>
                 <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>{{ trans('action.login') }}</strong></a>

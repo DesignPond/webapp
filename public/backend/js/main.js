@@ -30,7 +30,7 @@
 
     $(".phone").inputmask("+99 99 999 99 99");
 
-   $( ".mask_date" ).datepicker({
+    $( ".mask_date" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd/mm/yy",
@@ -67,20 +67,16 @@
     // $(this).data('daterangepicker').setEndDate('2014-03-31');
     var re_weburl = new RegExp('/^(ftp|http|https):\/\/[^ "]+$/');
 
-    $(".mask_web").blur(function() {
-
+   /* $('.mask_web').on('blur', function() {
         var input = $(this);
         var val   = input.val();
-
         if(val)
         {
-            if(!val.match(/^http([s]?):\/\/.*/))
+            if(!val.match(/^http([s]?):\/\/.*//*))
             {
                 input.val('http://' + val);
             }
-
             var newval = input.val();
-
             if (!validateURL(newval))
             {
                 console.log(newval);
@@ -96,10 +92,8 @@
                 $(this).css({'border':'1px solid #dbd9d9'});
                 $('#urlValidation').remove();
             }
-
         }
-
-    });
+    });*/
 
     function validateURL(textval) {
         var urlregex = new RegExp(
