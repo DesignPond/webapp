@@ -102,12 +102,9 @@ class ConfirmInviteTest extends TestCase {
         $id     = $this->secondinvite->id;
         $token  = $this->token($id,'coralie.95@hotmail.com');
 
-        //$this->mock->shouldReceive('dispatch')->with(new App\Commands\ProcessInvite($id))->once();
-
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('coralie.95@hotmail.com'), 'token' => $token ] ,[], []);
 
         $this->assertRedirectedTo('/user/link/1');
-
     }
 
     /**

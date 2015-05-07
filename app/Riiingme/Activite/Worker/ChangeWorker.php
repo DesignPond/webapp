@@ -15,6 +15,8 @@ class ChangeWorker{
 
     public $user_id;
     public $period;
+    public $updates;
+    public $part;
 
     public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
@@ -25,21 +27,40 @@ class ChangeWorker{
 
         $this->groupes = range(1,6);
         $this->period  = 'semester';
+        $this->part    = 'added';
     }
 
     public function setUser($user_id)
     {
         $this->user_id = $user_id;
+
+        return $this;
     }
 
     public function setPeriod($period)
     {
         $this->period = $period;
+
+        return $this;
+    }
+
+    public function setPart($part)
+    {
+        $this->part = $part;
+
+        return $this;
     }
 
     /* *
      * Revision changes
     * */
+    public function updates()
+    {
+        $this->updates = $this->changes->getUpdated($this->user_id, $this->period);
+
+        return $this;
+    }
+
     public function getLabelChanges()
     {
         return $this->revision->changes($this->user_id, $this->period);
@@ -50,23 +71,17 @@ class ChangeWorker{
     * */
     public function getChangesConverted()
     {
-        return $this->convertToLabels($this->getChanges(),'added');
+        return $this->convertToLabels($this->getChanges(),$this->part);
     }
 
     public function getChanges(){
 
-        $change = $this->changes->getUpdated($this->user_id, $this->period);
-
-        if( $change->count() > 1)
+        if( $this->updates->count() > 1)
         {
-
-            $difference = $this->calculDiff(unserialize($change->last()->labels), unserialize($change->first()->labels));
-
-            return $difference;
+            return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
         }
 
         return [];
-
     }
 
     public function getUsersHasUpdate()
@@ -76,7 +91,6 @@ class ChangeWorker{
 
         return array_unique(array_merge($revision,$change));
     }
-
 
     public function getUsersRevision()
     {
@@ -90,14 +104,13 @@ class ChangeWorker{
 
     /**
      * Which = added or deleted
-     * */
-    public function convertToLabels($difference,$which)
+     * @return array difference
+    * */
+    public function convertToLabels($difference)
     {
-        if(isset($difference[$which]) && !empty($difference[$which]))
+        if( !empty($difference) && isset($difference[$this->part]) && !empty($difference[$this->part]) )
         {
-            $data[$which] = $this->label->getLabels($difference[$which]);
-
-            return $data;
+            return $data[$this->part] = $this->label->getLabels($difference[$this->part]);
         }
 
         return [];
@@ -106,21 +119,28 @@ class ChangeWorker{
     public function calculDiff($oldLabels,$newLabels)
     {
 
+        $difference = [];
+
         foreach($this->groupes as $group_id)
         {
             if( (isset($newLabels[$group_id]) ) && isset($oldLabels[$group_id]) )
             {
                 $deleted = array_diff($oldLabels[$group_id], $newLabels[$group_id]);
 
-                if(!empty($deleted))  $difference['deleted'][$group_id] = $deleted;
+                if(!empty($deleted))
+                    $difference['deleted'][$group_id] = $deleted;
 
                 $added = array_diff($newLabels[$group_id],$oldLabels[$group_id]);
 
-                if(!empty($added)) $difference['added'][$group_id] = $added;
+                if(!empty($added))
+                    $difference['added'][$group_id] = $added;
             }
 
-            if( isset($newLabels[$group_id]) && !isset($oldLabels[$group_id]) ) $difference['added'][$group_id] = $newLabels[$group_id];
-            if( !isset($newLabels[$group_id]) && isset($oldLabels[$group_id]) ) $difference['added'][$group_id] = $oldLabels[$group_id];
+            if( isset($newLabels[$group_id]) && !isset($oldLabels[$group_id]) )
+                $difference['added'][$group_id] = $newLabels[$group_id];
+
+            if( !isset($newLabels[$group_id]) && isset($oldLabels[$group_id]) )
+                $difference['deleted'][$group_id] = $oldLabels[$group_id];
 
         }
 
