@@ -44,19 +44,32 @@ class ChangeController extends Controller {
 
             if(!empty($intersect))
             {
-                echo '<div class="well">';
-/*
-                    echo '<pre>';
-                    echo '<h3>Invited</h3>';
-                    print_r($invited);
-                    echo '</pre>';*/
 
-                    echo '<pre>';
-                    echo '<h3>Intersect</h3>';
-                    print_r($intersect);
-                    echo '</pre>';
+                echo '<pre>';
+                //print_r($intersect);
+                echo '</pre>';
 
-                echo '</div>';
+                $changes   = $this->changes->setUser($user->id)->setPeriod('week')->updates()->getChangesConverted();
+                $revisions = $this->changes->getLabelChanges();
+                echo '<pre>';
+
+                if(!empty($changes)){
+                    print_r($changes);
+                }
+
+                if(!empty($revisions)){
+                   // print_r($revisions);
+                    foreach($revisions as $update)
+                    {
+                        echo '<ul>';
+                        echo '<li> '.$update->label->type_id.'</li>';
+                        echo '<li> '.$update->new_value.'</li>';
+                        echo '</ul>';
+                    }
+                }
+
+                echo '</pre>';
+
             }
 
             /*
@@ -74,9 +87,6 @@ class ChangeController extends Controller {
 
             // \Event::fire(new \App\Events\CheckChanges($user));
         }
-
-        //$changes  = $this->changes->getChangesConverted(1,'week');
-        //$revision = $this->changes->getLabelChanges(25,'week');
 
         /*
         foreach($updates as $update)
