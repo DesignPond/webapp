@@ -28,7 +28,7 @@ class ChangeController extends Controller {
         $users = $this->user->getAll('week');
 
         // Get all users who have made updates last week
-        $all   = $this->changes->setPeriod('week')->getUsersHasUpdate();
+        $all   = $this->changes->setPeriod('week')->getUsersHaveUpdate();
 
         echo '<pre>';
         //print_r($users);
@@ -42,15 +42,18 @@ class ChangeController extends Controller {
             // If the invited have updates get them
             $intersect = array_intersect($all,$invited);
 
+            echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
             if(!empty($intersect))
             {
 
                 echo '<pre>';
-                //print_r($intersect);
+                print_r($intersect);
                 echo '</pre>';
 
                 $changes   = $this->changes->setUser($user->id)->setPeriod('week')->updates()->getChangesConverted();
                 $revisions = $this->changes->getLabelChanges();
+
+                echo $this->changes->user_id;
                 echo '<pre>';
 
                 if(!empty($changes)){
@@ -84,7 +87,7 @@ class ChangeController extends Controller {
               }
 
             */
-
+            echo '</div>';
             // \Event::fire(new \App\Events\CheckChanges($user));
         }
 

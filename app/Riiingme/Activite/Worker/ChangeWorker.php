@@ -13,10 +13,10 @@ class ChangeWorker{
     protected $label;
     protected $groupes;
 
-    public $user_id;
-    public $period;
+    public $part   = 'added';
+    public $period = 'semester';
     public $updates;
-    public $part;
+    public $user_id;
 
     public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
@@ -24,10 +24,7 @@ class ChangeWorker{
         $this->user     = $user;
         $this->label    = $label;
         $this->revision = $revision;
-
-        $this->groupes = range(1,6);
-        $this->period  = 'semester';
-        $this->part    = 'added';
+        $this->groupes  = range(1,6);
     }
 
     public function setUser($user_id)
@@ -66,25 +63,10 @@ class ChangeWorker{
         return $this->revision->changes($this->user_id, $this->period);
     }
 
-    /* *
+    /*
      * Partage changes
     * */
-    public function getChangesConverted()
-    {
-        return $this->convertToLabels($this->getChanges(),$this->part);
-    }
-
-    public function getChanges(){
-
-        if( $this->updates->count() > 1)
-        {
-            return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
-        }
-
-        return [];
-    }
-
-    public function getUsersHasUpdate()
+    public function getUsersHaveUpdate()
     {
         $change   = $this->getUsersChange($this->period);
         $revision = $this->getUsersRevision($this->period);
@@ -100,6 +82,27 @@ class ChangeWorker{
     public function getUsersChange()
     {
         return $this->changes->getAll($this->period)->lists('user_id');
+    }
+
+    /*
+     * Convert change to labels
+     * */
+    public function getChangesConverted()
+    {
+        return $this->convertToLabels($this->getChanges(),$this->part);
+    }
+
+    /*
+     * If there is differences get them but only for last and first
+     * */
+    public function getChanges(){
+
+        if( $this->updates->count() > 1)
+        {
+            return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
+        }
+
+        return [];
     }
 
     /**

@@ -3,23 +3,40 @@
 class ChangeWorkerTest extends TestCase {
 
     protected $worker;
-    protected $mock;
+    protected $revision;
+    protected $change;
+    protected $label;
 
     public function setUp()
     {
         parent::setUp();
 
-        //$this->refreshApplication();
+        $this->createApplication();
 
-        $this->worker = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
+        $user = App\Riiingme\User\Entities\User::find(1);
+        $this->be($user);
 
-        $this->mock = Mockery::mock('App\Riiingme\Activite\Repo\RevisionInterface');
-        $this->app->instance('App\Riiingme\Activite\Repo\RevisionInterface', $this->mock);
+        $this->revision = \Mockery::mock('App\Riiingme\Activite\Repo\RevisionInterface');
+        $this->app->instance('App\Riiingme\Activite\Repo\RevisionInterface', $this->revision);
+
+        $this->change = \Mockery::mock('App\Riiingme\Activite\Repo\ChangeInterface');
+        $this->app->instance('App\Riiingme\Activite\Repo\ChangeInterface', $this->change);
+
+        $this->label = \Mockery::mock('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer');
+        $this->app->instance('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer', $this->label);
+
+        $this->worker = new \App\Riiingme\Activite\Worker\ChangeWorker(
+            $this->change,
+            \App::make('App\Riiingme\User\Repo\UserInterface'),
+            $this->label,
+            $this->revision
+        );
+
     }
 
     public function tearDown()
     {
-        Mockery::close();
+        \Mockery::close();
     }
 
     public function testSetUser(){
@@ -51,9 +68,24 @@ class ChangeWorkerTest extends TestCase {
         $this->worker->setUser(1);
         $this->worker->setPeriod('week');
 
+        $this->revision->shouldReceive('changes')->once()->with(1,'week')->andReturn(new Illuminate\Database\Eloquent\Collection);
+
         $response = $this->worker->getLabelChanges();
 
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $response);
+    }
+
+    public function testGetUserChangesAndRevision(){
+
+        $this->worker->setUser(1);
+        $this->worker->setPeriod('week');
+
+        $this->change->shouldReceive('getAll')->once()->with('week')->andReturn(new Illuminate\Database\Eloquent\Collection);
+        $this->revision->shouldReceive('getUpdatedUser')->once()->with('week')->andReturn(new Illuminate\Database\Eloquent\Collection);
+
+        $response = $this->worker->getUsersHaveUpdate();
+
+        $this->assertTrue(is_array($response));
     }
 
     public function testGetAllChanges(){
@@ -91,7 +123,10 @@ class ChangeWorkerTest extends TestCase {
         $this->worker->updates = new Illuminate\Database\Eloquent\Collection([$change2,$change]);
 
         $difference = $this->worker->setUser(1)->setPeriod('week')->setPart('deleted')->getChanges();
-        $response   = $this->worker->convertToLabels($difference);
+
+        $this->label->shouldReceive('getLabels')->once()->with($difference['deleted'])->andReturn([3 => [ 6 => '2000']]);
+
+        $response = $this->worker->convertToLabels($difference);
 
         $this->assertEquals( [ 3 => [ 6 => '2000' ]] , $response);
 
