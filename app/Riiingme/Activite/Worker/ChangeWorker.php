@@ -53,7 +53,7 @@ class ChangeWorker{
     * */
     public function updates()
     {
-        $this->updates = $this->changes->getUpdated($this->user_id, $this->period);
+        $this->updates = $this->changes->getUserUpdates($this->user_id, $this->period);
 
         return $this;
     }

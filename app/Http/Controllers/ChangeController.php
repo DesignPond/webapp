@@ -42,36 +42,43 @@ class ChangeController extends Controller {
             // If the invited have updates get them
             $intersect = array_intersect($all,$invited);
 
-            echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
             if(!empty($intersect))
             {
-
-                echo '<pre>';
-                print_r($intersect);
-                echo '</pre>';
 
                 $changes   = $this->changes->setUser($user->id)->setPeriod('week')->updates()->getChangesConverted();
                 $revisions = $this->changes->getLabelChanges();
 
-                echo $this->changes->user_id;
-                echo '<pre>';
+                $data = [];
 
-                if(!empty($changes)){
-                    print_r($changes);
-                }
+                if(!empty($changes) || !$revisions->isEmpty())
+                {
 
-                if(!empty($revisions)){
-                   // print_r($revisions);
-                    foreach($revisions as $update)
-                    {
-                        echo '<ul>';
-                        echo '<li> '.$update->label->type_id.'</li>';
-                        echo '<li> '.$update->new_value.'</li>';
-                        echo '</ul>';
+                    if(!empty($changes)){
+                        $data['changes'] = $changes;
                     }
-                }
 
-                echo '</pre>';
+                    if(!empty($revisions)){
+                        $items = [];
+                        foreach($revisions as $update)
+                        {
+                            $items[$update->label->type_id] = $update->new_value;
+                        }
+
+                        $data['revision'] = $items;
+                    }
+
+                    echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
+
+                    echo '<p>User: '.$user->id.'</p>';
+                    echo '<p>For:</p>';
+                    echo '<pre>';
+                    print_r($intersect);
+                    echo '</pre>';
+                    echo '<pre>';
+                    print_r($data);
+                    echo '</pre>';
+                    echo '</div>';
+                }
 
             }
 
@@ -87,7 +94,7 @@ class ChangeController extends Controller {
               }
 
             */
-            echo '</div>';
+
             // \Event::fire(new \App\Events\CheckChanges($user));
         }
 
