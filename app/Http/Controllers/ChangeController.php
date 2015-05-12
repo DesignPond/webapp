@@ -30,10 +30,6 @@ class ChangeController extends Controller {
         // Get all users who have made updates last week
         $all   = $this->changes->setPeriod('week')->getUsersHaveUpdate();
 
-        echo '<pre>';
-        //print_r($users);
-        echo '</pre>';
-
         foreach ($users as $user)
         {
             // Load user riiinglinks to get all invited
@@ -45,40 +41,21 @@ class ChangeController extends Controller {
             if(!empty($intersect))
             {
 
-                $changes   = $this->changes->setUser($user->id)->setPeriod('week')->updates()->getChangesConverted();
-                $revisions = $this->changes->getLabelChanges();
+                $this->changes->setUser($user->id)->setPeriod($user->notification_interval);
+                $data = $this->changes->allChanges();
 
-                $data = [];
-
-                if(!empty($changes) || !$revisions->isEmpty())
-                {
-
-                    if(!empty($changes)){
-                        $data['changes'] = $changes;
-                    }
-
-                    if(!empty($revisions)){
-                        $items = [];
-                        foreach($revisions as $update)
-                        {
-                            $items[$update->label->type_id] = $update->new_value;
-                        }
-
-                        $data['revision'] = $items;
-                    }
-
-                    echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
-
+                echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
                     echo '<p>User: '.$user->id.'</p>';
                     echo '<p>For:</p>';
                     echo '<pre>';
                     print_r($intersect);
+
+                    $ids = $this->user->getEmails($intersect);
                     echo '</pre>';
                     echo '<pre>';
-                    print_r($data);
+                    print_r($ids);
                     echo '</pre>';
-                    echo '</div>';
-                }
+                echo '</div>';
 
             }
 

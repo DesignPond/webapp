@@ -14,10 +14,15 @@ class UserEloquent implements UserInterface {
 
         if($period)
         {
-            return $this->user->where('notification_interval','=',$period)->get();
+            return $this->user->with(array('labels'))->where('notification_interval','=',$period)->get();
         }
 
         return $this->user->all();
+    }
+
+    public function getEmails($ids){
+
+        return $this->user->whereIn('id', [$ids] )->get()->lists('email');
     }
 
     public function find($id){

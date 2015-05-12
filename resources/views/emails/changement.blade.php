@@ -58,55 +58,25 @@
             </tr>
         </table>
 
-        @if(!empty($changes))
+        @if(!empty($data))
 
             <table class="quoteTable" width="100%" border="0" cellspacing="0" cellpadding="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">
                 <tr>
                     <td style="{{ $marginReset }}padding-top: 10px;padding-bottom: 0;padding-left: 16px;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #82858f;border-left: 6px solid #ebebeb;">
 
-                            <?php
-                                $groupes_titres = [
-                                        2 => 'Adresse privé' ,
-                                        3 => 'Adresse professionnelle' ,
-                                        4 => 'Adresse privé temporaire' ,
-                                        5 => 'Adresse professionnelle temporaire',
-                                        6 => 'Adresse entreprise',
-                                        7 => 'Adresse entreprise temporaire'
-                                ];
-                            ?>
+                        @if(isset($data['changes']) && !empty($data['changes']))
+                            <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">Informations ajoutés</h3>
 
-                            @if(isset($changes['added']) && !empty($changes['added']))
-                                <h3>Informations ajoutés</h3>
+                            @include('emails.partials.changes', ['changes' => $data['changes']])
 
-                                @include('emails.partials.changes', ['changes' => $changes['added']])
+                        @endif
 
-                            @endif
+                        @if(isset($data['revision']) && !empty($data['revision']))
+                            <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">Informations édités</h3>
 
-                            @if(isset($changes['deleted']) && !empty($changes['deleted']))
-                                <h3>Informations supprimés</h3>
-                                @foreach($changes['deleted'] as $groupes => $groupe)
-                                    <h4 style="color: #000; margin: 5px 0 10px 0; line-height: 18px; font-size: 14px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">{{ $groupes_titres[$groupes] }}</h4>
-                                    <ul style="margin-left: 5px;padding-left: 5px;margin-right: 30px;">
-                                        @foreach($groupe as $type_id => $type)
-                                            <li style="color: #484848; line-height: 16px; font-size: 12px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                                                {{ $types[$type_id] }} {{ $type }}
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endforeach
-                            @endif
+                            @include('emails.partials.changes', ['changes' => $data['revision']])
 
-                            @if(!empty($revisions))
-                                <h3>Informations édités</h3>
-                                @foreach($revisions as $label)
-                                    <ul style="margin-left: 5px;padding-left: 5px;margin-right: 30px;">
-                                        <li style="color: #484848; line-height: 16px; font-size: 12px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
-                                            {{  $label->label->load('type')->type->titre }} {{ $label->new_value }}
-                                        </li>
-                                    </ul>
-                                @endforeach
-                            @endif
-
+                        @endif
                     </td>
                 </tr>
             </table>

@@ -53,11 +53,13 @@ Route::get('changement', function()
     $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
     $change = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
 
-    $types     = $type->getAll()->lists('titre','id');
-    $user      = $users->where('id','=',1)->with(['labels'])->get()->first();
+    $types  = $type->getAll()->lists('titre','id');
+    $user   = $users->where('id','=',1)->with(['labels'])->get()->first();
 
-    $changes   = $change->getChangesConverted($user->id, $user->notification_interval);
-    $revisions = $change->getLabelChanges($user->id,$user->notification_interval);
+    $change->setUser($user->id)->setPeriod($user->notification_interval);
+    $data = $change->allChanges();
+
+    return View::make('emails.changement', array('user' => $user, 'types' => $types ,'data' => $data));
 
 /*    $changes = [
         'added'   => [
@@ -69,7 +71,7 @@ Route::get('changement', function()
         ]
     ];*/
 
-    return View::make('emails.changement', array('user' => $user, 'types' => $types ,'changes' => $changes, 'revisions' => $revisions ));
+
 
 });
 

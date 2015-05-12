@@ -48,6 +48,34 @@ class ChangeWorker{
         return $this;
     }
 
+    public function allChanges()
+    {
+        $changes   = $this->updates()->getChangesConverted();
+        $revisions = $this->getLabelChanges();
+
+        $data = [];
+
+        if(!empty($changes) || !$revisions->isEmpty())
+        {
+            if(!empty($changes)){
+                $data['changes'] = $changes;
+            }
+
+            if(!empty($revisions))
+            {
+                $items = [];
+                foreach($revisions as $update)
+                {
+                    $items[$update->label->groupe_id][$update->label->type_id] = $update->new_value;
+                }
+
+                $data['revision'] = $items;
+            }
+        }
+
+        return $data;
+    }
+
     /* *
      * Revision changes
     * */
