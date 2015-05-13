@@ -9,14 +9,14 @@ use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
 
-class SendChange extends Command {
+class SendChangeEachUser extends Command {
 
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'change:send';
+    protected $name = 'change:sendeach';
 
     protected $user;
 
@@ -30,7 +30,7 @@ class SendChange extends Command {
      *
      * @var string
      */
-    protected $description = 'Send changes to users from invited';
+    protected $description = 'Send changes to users from invited each';
 
     /**
      * Create a new command instance.
@@ -64,35 +64,31 @@ class SendChange extends Command {
         // Get all users who want notifications every week
         $users = $this->user->getAll($interval);
 
+        // Get all users who have made updates last week
+        $all   = $this->changes->setPeriod($interval)->getUsersHaveUpdate();
+
         foreach ($users as $user)
         {
             // Load user riiinglinks to get all invited
             $invited   = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
+            // If the invited have updates get them
+            $intersect = array_intersect($all,$invited);
 
-            if(!empty($invited))
+            $this->changes->setUser($user->id)->setPeriod($user->notification_interval);
+            $data = $this->changes->allChanges();
+
+            if(!empty($intersect))
             {
-                $data = [];
-
-                foreach($invited as $invite)
-                {
-                    $changes = $this->changes->setUser($invite)->setPeriod($user->notification_interval)->allChanges();
-
-                    if(!empty($changes))
-                    {
-                        $data[$invite] = $changes;
-                        $data[$invite]['user'] = $this->user->simpleFind($invite);
-                    }
-                }
+                $ids = $this->user->getEmails($intersect);
 
                 if(!empty($data))
                 {
-                    \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $data) , function($message) use ($user)
+                    \Mail::send('emails.changement', array('user' => $user, 'types' => $types, 'groupes_titres' => $groupes, 'data' => $data) , function($message) use ($ids)
                     {
-                        $message->to($user->email)->subject('Notification de changement du partage');
+                        $message->to($ids)->subject('Notification de changement du partage');
                     });
                 }
             }
-
         }
 
     }

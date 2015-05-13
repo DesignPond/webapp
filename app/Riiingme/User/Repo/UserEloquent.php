@@ -30,6 +30,11 @@ class UserEloquent implements UserInterface {
         return $this->user->with(array('labels','user_groups','user_tags'))->findOrFail($id);
     }
 
+    public function simpleFind($id){
+
+        return $this->user->with(array('labels'))->findOrFail($id);
+    }
+
     public function search($term){
 
         $id = \Auth::user()->id;

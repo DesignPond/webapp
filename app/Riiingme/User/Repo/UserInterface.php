@@ -4,6 +4,7 @@ interface UserInterface {
 
     public function getAll($period = null);
     public function find($id);
+    public function simpleFind($id);
     public function search($term);
     public function findByEmail($email);
     public function activate($token);

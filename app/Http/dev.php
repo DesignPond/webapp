@@ -49,17 +49,43 @@ Route::get('test', function()
 Route::get('changement', function()
 {
 
-    $users  = \App::make('App\Riiingme\User\Entities\User');
+    $users  = \App::make('App\Riiingme\User\Repo\UserInterface');
     $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
+    $groupe = \App::make('App\Riiingme\Groupe\Worker\GroupeWorker');
     $change = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
 
     $types  = $type->getAll()->lists('titre','id');
-    $user   = $users->where('id','=',1)->with(['labels'])->get()->first();
+    $user   = $users->find(1);
 
+    $groupes = $groupe->getGroupes();
+    unset($groupes[1]);
+
+    /*
     $change->setUser($user->id)->setPeriod($user->notification_interval);
     $data = $change->allChanges();
+    */
 
-    return View::make('emails.changement', array('user' => $user, 'types' => $types ,'data' => $data));
+    // Load user riiinglinks to get all invited
+    $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
+
+    if(!empty($invited))
+    {
+        $data = [];
+
+        foreach ($invited as $invite)
+        {
+            $changes = $change->setUser($invite)->setPeriod($user->notification_interval)->allChanges();
+
+            if (!empty($changes))
+            {
+                $data[$invite] = $changes;
+                $data[$invite]['user'] = $users->simpleFind($invite);
+            }
+        }
+
+        return View::make('emails.changement', array('types' => $types , 'groupes_titres' => $groupes, 'data' => $data));
+    }
+
 
 /*    $changes = [
         'added'   => [

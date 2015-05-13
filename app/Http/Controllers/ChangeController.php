@@ -26,7 +26,6 @@ class ChangeController extends Controller {
 	{
         // Get all users who want notifications every week
         $users = $this->user->getAll('week');
-
         // Get all users who have made updates last week
         $all   = $this->changes->setPeriod('week')->getUsersHaveUpdate();
 
@@ -34,55 +33,24 @@ class ChangeController extends Controller {
         {
             // Load user riiinglinks to get all invited
             $invited   = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
-
             // If the invited have updates get them
             $intersect = array_intersect($all,$invited);
 
             if(!empty($intersect))
             {
-
                 $this->changes->setUser($user->id)->setPeriod($user->notification_interval);
                 $data = $this->changes->allChanges();
-
                 echo '<div style="display: block;padding: 5px;margin: 10px; width: 500px; background: #ccc;">';
-                    echo '<p>User: '.$user->id.'</p>';
-                    echo '<p>For:</p>';
+                    echo '<p>User: '.$user->id.'</p><p>For:</p>';
                     echo '<pre>';
                     print_r($intersect);
-
                     $ids = $this->user->getEmails($intersect);
-                    echo '</pre>';
-                    echo '<pre>';
                     print_r($ids);
                     echo '</pre>';
                 echo '</div>';
-
             }
-
-            /*
-              //$changes  = $this->changes->getChangesConverted($user->id,'week');
-
-              if(!empty($invited))
-              {
-                  foreach($invited as $invite)
-                  {
-                      $revision = $this->changes->getLabelChanges($invite,'week');
-                  }
-              }
-
-            */
-
-            // \Event::fire(new \App\Events\CheckChanges($user));
         }
 
-        /*
-        foreach($updates as $update)
-        {
-            echo '<ul>';
-           // echo  '<li> '.$update->user_id.'</li>';
-            echo '</ul>';
-        }
-        */
 	}
 
 	/**
@@ -92,7 +60,37 @@ class ChangeController extends Controller {
 	 */
 	public function create()
 	{
-		//
+        // Get all users who want notifications every week
+        $users = $this->user->getAll('week');
+
+        foreach($users as $user)
+        {
+            // Load user riiinglinks to get all invited
+            $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
+
+            if(!empty($invited))
+            {
+                $data = [];
+
+                foreach($invited as $invite)
+                {
+                    $changes = $this->changes->setUser($invite)->setPeriod($user->notification_interval)->allChanges();
+
+                    if(!empty($changes)){
+                        $data[$invite] = $changes;
+                        $data[$invite]['user'] = $this->user->simpleFind($invite);
+                    }
+                }
+
+                echo '<div style="display: block;padding: 3px;margin: 5px; width: 600px; background: #ddd;">';
+                echo '<p>User: '.$user->email.'</p><p>Has:</p>';
+                echo '<pre>';
+                print_r($data);
+                echo '</pre>';
+                echo '</div>';
+
+            }
+        }
 	}
 
 	/**
