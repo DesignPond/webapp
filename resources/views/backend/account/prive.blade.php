@@ -1,4 +1,5 @@
 <fieldset class="row border">
+
     <h4 class="title-adresse">{{ trans('label.title_'.$view['id']) }}</h4>
     <div class="col-md-8 col-xs-12">
 
