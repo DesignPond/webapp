@@ -27,6 +27,16 @@ class AuthController extends Controller {
 
     protected $redirectTo = '/user';
 
+    /**
+     * Get the failed login message.
+     *
+     * @return string
+     */
+    protected function getFailedLoginMessage()
+    {
+        return 'Les identifiants email / mot de passe ne correspondent pas.';
+    }
+
 	/**
 	 * Create a new authentication controller instance.
 	 *
