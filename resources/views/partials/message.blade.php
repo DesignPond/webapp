@@ -13,7 +13,7 @@
             {{ Session::get('message') }}
         @endif
 
-        @if( $class != 'danger' && $class != 'success' )
+        @if( $class != 'danger' && $class != 'success' && $class != 'warning' )
             {{ $class }}
         @endif
 

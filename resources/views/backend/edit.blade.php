@@ -25,7 +25,9 @@
                     </div>
                     <div class="panel-body">
 
-                        <?php $informations = $groupe_type[0]; ?>
+                            @if(isset($groupe_type[0]))
+                                $informations = $groupe_type[0];
+                            @endif
 
                             @include('backend.account.photo')
                             @include('backend.account.infos')
