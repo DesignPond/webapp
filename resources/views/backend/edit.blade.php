@@ -30,16 +30,16 @@
 
                             @if($user->user_type == '1')
 
-                                @include('backend.account.prive', ['view' => $groupe_type[1], 'prive' => true])
-                                @include('backend.account.prive', ['view' => $groupe_type[2], 'prive' => false])
+                                @include('backend.account.prive', ['view' => (isset($groupe_type[1]) ? $groupe_type[1] : []), 'prive' => true])
+                                @include('backend.account.prive', ['view' => (isset($groupe_type[2]) ? $groupe_type[2] : []), 'prive' => false])
 
-                                @include('backend.account.temp', ['view' => $groupe_type[3], 'prive' => false])
-                                @include('backend.account.temp', ['view' => $groupe_type[4], 'prive' => false])
+                                @include('backend.account.temp', ['view' => (isset($groupe_type[3]) ? $groupe_type[3] : []), 'prive' => false])
+                                @include('backend.account.temp', ['view' => (isset($groupe_type[4]) ? $groupe_type[4] : []), 'prive' => false])
 
                             @endif
 
                             @if($user->user_type == '2')
-                                @include('backend.account.company', ['view' => $groupe_type[1], 'prive' => true])
+                                @include('backend.account.company', ['view' => (isset($groupe_type[1]) ? $groupe_type[1] : []), 'prive' => true])
                             @endif
                     </div>
                 </div>
