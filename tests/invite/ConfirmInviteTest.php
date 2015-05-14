@@ -70,8 +70,6 @@ class ConfirmInviteTest extends TestCase {
         $id     = $this->oneinvite->id;
         $token  = $this->token($id,'pruntrut@yahoo.fr');
 
-        //$this->mock->shouldReceive('dispatch')->with(new App\Commands\ProcessInvite($id))->once();
-
         $response = $this->call('GET', 'invite', [ 'ref'  => base64_encode('pruntrut@yahoo.fr'), 'token' => $token ] ,[], []);
 
         $this->assertRedirectedTo('/auth/register');
@@ -125,11 +123,6 @@ class ConfirmInviteTest extends TestCase {
     public function token($id,$email)
     {
         return  md5($id.$email);
-    }
-
-    public function testDispatchProcess()
-    {
-
     }
 
     public function getLastInDb()

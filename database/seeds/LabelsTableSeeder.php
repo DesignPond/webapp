@@ -109,7 +109,7 @@ class LabelsTableSeeder extends \Illuminate\Database\Seeder  {
             'Suisse',
 			'032 492 21 20',
             '079 345 06 23',
-			'1984-05-20',
+			'20/05/1984',
             '',
             '');
 

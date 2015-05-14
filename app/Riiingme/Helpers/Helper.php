@@ -172,11 +172,11 @@ class Helper{
 
         $data = [];
 
-        $all_groupes = range(1,7);
+        $all_groupes = range(1,6);
 
         if(!empty($exist))
         {
-            foreach($all_groupes as $group_id) // 1,2,3,4,5,6,7
+            foreach($all_groupes as $group_id) // 1,2,3,4,5,6
             {
                 if(isset($new[$group_id]))
                 {

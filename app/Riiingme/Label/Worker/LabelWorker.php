@@ -96,9 +96,16 @@ class LabelWorker{
 
         if(!empty($label))
         {
-            foreach($label as $id => $label)
+            foreach($label as $id => $item)
             {
-                $this->label->update(array('id' => $id, 'label' => $label));
+                if($item != '')
+                {
+                    $this->label->update(array('id' => $id, 'label' => $item));
+                }
+                else
+                {
+                    $this->label->delete($id);
+                }
             }
         }
     }

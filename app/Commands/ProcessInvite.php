@@ -10,7 +10,7 @@ class ProcessInvite extends Command implements SelfHandling {
     protected $label;
     protected $user;
     protected $invite;
-    protected $meta;
+    public $metas;
 
 	/**
 	 * Create a new command instance.
@@ -43,27 +43,32 @@ class ProcessInvite extends Command implements SelfHandling {
 
         $hosted_link  = $this->getRiiinglink($invite->user_id , $invite->invited_id);
         $invited_link = $this->getRiiinglink($invite->invited_id , $invite->user_id);
-
+        
         // sync labels
         if(!empty($partage_host))
         {
-            $this->syncLabels($hosted_link, $partage_host);
+            $this->convertMetasToLabels($hosted_link,$partage_host)->syncLabels($hosted_link);
         }
 
         if(!empty($partage_invited))
         {
-            $this->syncLabels($invited_link, $partage_invited);
+            $this->convertMetasToLabels($invited_link,$partage_invited)->syncLabels($invited_link);
         }
 	}
 
-    public function syncLabels($riiinglink,$partage){
+    public function syncLabels($riiinglink){
 
-        $metas = $this->label->labelForUser($partage,$riiinglink->host_id);
-
-        if(!empty($metas))
+        if(!empty($this->metas))
         {
-            $this->worker->setMetasForRiiinglink($riiinglink->host_id,$riiinglink->id,$metas);
+            $this->worker->setMetasForRiiinglink($riiinglink->id,$this->metas);
         }
+    }
+
+    public function convertMetasToLabels($riiinglink,$partage)
+    {
+        $this->metas = $this->label->labelForUser($partage,$riiinglink->host_id);
+
+        return $this;
     }
 
     public function getRiiinglink($host,$invited){

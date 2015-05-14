@@ -20,8 +20,6 @@ $('#userpic').fileapi({
 
         $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '")' });
         $("#userPhoto").attr("src",path);
-
-        console.log(uiEvt);
     },
     onSelect: function (evt, ui){
         var file = ui.files[0];

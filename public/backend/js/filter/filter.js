@@ -29,7 +29,9 @@ $( function() {
         {
             $('#searchEmail').val(ui.item.value);
 
-            $.get(url + "labels", { user_type: ui.item.user_type }, function( data ) {
+            $.get(url + "labels", { user_type: ui.item.user_type }, function( data )
+            {
+                $("[data-who='invited']").attr('checked', false);
                 partage.html( data );
             });
 

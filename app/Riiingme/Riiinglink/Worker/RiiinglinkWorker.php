@@ -108,20 +108,18 @@ class RiiinglinkWorker{
         return [ [],[] ];
     }
 
-
     public function convert($riiinglinks,$user_labels){
 
         return $this->helper->convert($riiinglinks,$user_labels);
     }
 
-    public function setMetasForRiiinglink($user_id,$id,$metas){
+    public function setMetasForRiiinglink($id,$metas){
 
         $meta = $this->meta->findByRiiinglink($id);
 
         if(!$meta->isEMpty())
         {
             $meta     = $meta->first();
-            $metas    = $this->transformer->getMetaLabelId($user_id,$metas);
             $newmetas = $this->updateMetas($meta,$metas);
 
             $meta->labels = serialize($newmetas);

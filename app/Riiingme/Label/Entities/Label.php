@@ -37,7 +37,7 @@ class Label extends Model{
                 $label = $this->format_phone($this->label);
                 break;
             case 10:
-                $label = \Carbon\Carbon::parse($this->label)->formatLocalized('%d %B %Y');
+                $label = \Carbon\Carbon::createFromFormat('d/m/Y', $this->label)->formatLocalized('%d %B %Y');
                 break;
             default:
                 $label = $this->label;
