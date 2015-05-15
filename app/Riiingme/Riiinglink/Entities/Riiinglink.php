@@ -62,8 +62,8 @@ class Riiinglink extends Model{
      *
      * @var query
      */
-    public function labels(){
-
+    public function labels()
+    {
         return $this->belongsToMany('App\Riiingme\Label\Entities\Label', 'metas');
     }
 

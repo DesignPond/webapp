@@ -57,14 +57,14 @@ class RiiinglinkWorkerTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testUpdateMetas()
+	public function testSetMetas()
 	{
 
-        $new = [ 3 => [ 6 , 3 , 7]];
+        $new = [ 3 => [ 6 => 16 , 3 => 13 , 7 => 17]];
 
-        $this->worker->setMetasForRiiinglink(1,50,$new);
+        $this->worker->setMetasForRiiinglink($this->stub->riiinglink_id,$new);
 
-        $actual = $this->meta->find($this->stub->id);
+        $actual = $this->meta->findByRiiinglink($this->stub->riiinglink_id);
 
         $expected = [
             2 => [
@@ -80,10 +80,49 @@ class RiiinglinkWorkerTest extends TestCase {
             ]
         ];
 
-       $this->assertEquals($expected, unserialize($actual->labels));
+       $this->assertEquals($expected, unserialize($actual->first()->labels));
 
 	}
 
+    public function testUpdateMetas()
+    {
+
+        $metas = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                6 => 16,
+            ]
+        ];
+
+        $object = new stdClass();
+        $object->labels = serialize($metas);
+
+        $new = [ 3 => [ 6 => 16 , 3 => 13 , 7 => 17]];
+
+        $actual = $this->worker->updateMetas($object,$new);
+
+        $expected = [
+            2 => [
+                1 => 2,
+                4 => 3,
+                5 => 4
+            ],
+            3 => [
+                1 => 11,
+                3 => 13,
+                6 => 16,
+                7 => 17
+            ]
+        ];
+
+        $this->assertEquals($expected, $actual);
+
+    }
 
     public function testSyncLabels()
     {

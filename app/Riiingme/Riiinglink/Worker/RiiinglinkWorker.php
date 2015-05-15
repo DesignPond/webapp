@@ -129,11 +129,9 @@ class RiiinglinkWorker{
         {
             $this->meta->create([
                 'riiinglink_id' => $id,
-                'label_id'      => 0,
                 'labels'        => serialize($metas)
             ]);
         }
-
     }
 
     public function updateMetas($old,$new){
@@ -152,7 +150,7 @@ class RiiinglinkWorker{
 
         if(!empty($metas))
         {
-            $this->setMetasForRiiinglink($riiinglink->host_id,$riiinglink->id,$metas);
+            $this->setMetasForRiiinglink($riiinglink->id,$metas);
         }
     }
 

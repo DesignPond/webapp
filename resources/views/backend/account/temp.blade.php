@@ -1,21 +1,42 @@
 <?php
-    $daterange = '';
-    $exist     = false;
 
-    if(isset($view_dates[$view['id']]))
+    $dates = $user->user_groups->filter(function($item) use ($view) {
+        return $item->pivot->groupe_id == $view['id'];
+    })->first();
+
+    $exist = false; $current = false;
+
+    if($dates)
     {
-        $daterange = $view_dates[$view['id']]['start'].' | '.$view_dates[$view['id']]['end'];
-        $exist     = true;
+       $start = \Carbon\Carbon::parse($dates->pivot->start_at)->toDateString();
+       $end   = \Carbon\Carbon::parse($dates->pivot->end_at)->toDateString();
+
+       $daterange = $start.' | '.$end;
+       $exist     = true;
+       $now       = \Carbon\Carbon::now();
+       $current   = ($start < $now && $end > $now ? true : false);
     }
+
 ?>
 
-<fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $view['id'] }}">
-    <h4 class="title-adresse">{{ $view['titre'] }} <small class="text-danger">{{ trans('menu.temporaire') }}</small></h4>
+<fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in temp-address': ''); ?>" id="collapse_{{ $view['id'] }}">
+
+    <div class="col-md-12 col-xs-12">
+        <div class="row">
+            <h4 class="title-adresse col-md-9">{{ $view['titre'] }} <small class="text-danger">{{ trans('menu.temporaire') }}</small></h4>
+
+            <div class="col-md-3 alert alert-<?php echo ($current ? 'success' : 'danger' ); ?> text-center" role="alert">
+                <?php echo ($current ? 'Affiché chez vos contacts' : 'Période pas en effet' ); ?>
+            </div>
+
+        </div>
+    </div>
+
     <div class="col-md-8 col-xs-12">
         <div class="form-group">
             <label class="col-sm-4 control-label" for="exampleInputEmail1">{{ trans('menu.periode') }}</label>
             <div class="col-sm-8">
-                <input value="{{ $daterange }}" type="text" name="date[{{ $view['id'] }}]" class="form-control daterange">
+                <input value="{{ $daterange or '' }}" type="text" name="date[{{ $view['id'] }}]" class="form-control daterange">
             </div>
         </div>
         @foreach($view['groupe_type'] as $types)

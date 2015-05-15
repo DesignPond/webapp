@@ -11,12 +11,17 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
     protected $user;
     protected $link;
     protected $label;
+    protected $helper;
+
+    public $host;
+    public $invited;
 
     public function __construct()
     {
-        $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
-        $this->link  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-        $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
+        $this->user   = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->link   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+        $this->label  = \App::make('App\Riiingme\Label\Repo\LabelInterface');
+        $this->helper = new \App\Riiingme\Helpers\Helper;
     }
 
     /**
@@ -27,15 +32,18 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
     public function transform(Riiinglink $riiinglink)
     {
+        $this->host    = $this->getUser($riiinglink->host_id);
+        $this->invited = $this->getUser($riiinglink->invited_id);
+
         return [
             'id'             => (int) $riiinglink->id,
             'invited_id'     => (int) $riiinglink->invited_id ,
-            'host_photo'     => $this->getPhoto($riiinglink->host_id),
-            'host_name'      => $this->getName($riiinglink->host_id),
-            'host_email'     => $this->getEmail($riiinglink->host_id),
-            'invited_photo'  => $this->getPhoto($riiinglink->invited_id),
-            'invited_name'   => $this->getName($riiinglink->invited_id),
-            'invited_email'  => $this->getEmail($riiinglink->invited_id),
+            'host_photo'     => $this->host->user_photo,
+            'host_name'      => $this->getName($this->host),
+            'host_email'     => $this->host->email,
+            'invited_photo'  => $this->invited->user_photo,
+            'invited_name'   => $this->getName($this->invited),
+            'invited_email'  => $this->invited->email,
             'host_labels'    => $this->getHostLabels($riiinglink),
             'invited_labels' => $this->getInvitedLabels($riiinglink),
             'tags'           => $this->getTags($riiinglink)
@@ -47,26 +55,9 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         return $this->user->find($user_id);
     }
 
-    public function getName($user_id)
+    public function getName($user)
     {
-        $user = $this->getUser($user_id);
-
         return (isset($user->company) && !empty($user->company) ? $user->company : $user->first_name.' '.$user->last_name );
-
-    }
-
-    public function getEmail($user_id)
-    {
-        $user = $this->user->find($user_id);
-
-        return $user->email;
-    }
-
-    public function getPhoto($user_id)
-    {
-        $photo  = $this->label->findPhotoByUser($user_id);
-
-        return (isset($photo) && !empty($photo->label) ? $photo->label : 'avatar.jpg');
     }
 
     public function getInvited($riiinglink)
@@ -100,6 +91,32 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         return [];
     }
 
+    public function userHasPeriodRange($user,$groupe)
+    {
+        $isGroupe = [ 2 => 4, 3 => 5 ];
+
+        if(isset($isGroupe[$groupe]) && isset($user->user_groups))
+        {
+            $dates = $user->user_groups->filter(function ($item) use ($groupe,$isGroupe) {
+                return $item->pivot->groupe_id == $isGroupe[$groupe];
+            })->first();
+
+            if ($dates)
+            {
+                $start = \Carbon\Carbon::parse($dates->pivot->start_at);
+                $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
+
+                $now   = \Carbon\Carbon::now();
+
+                return ($start < $now && $end > $now ? true : false);
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
     public function getInvitedLabels($riiinglink){
 
         $link = $this->getInvited($riiinglink);
@@ -110,7 +127,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
             {
                 $data = unserialize($link->usermetas->labels);
 
-                return $this->getLabels($data);
+                return $this->getLabels($data,true);
             }
 
             return [];
@@ -132,17 +149,39 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         return '';
     }
 
-    public function getLabels($data)
+    /*
+     * Labels and change if there is a period in effect
+     * */
+    public function getLabels($data,$invited = null)
     {
         if(!empty($data))
         {
             $labels = [];
 
+            $isNormalGroupe = [1,2,3,6];
+            $isGroupeUnset  = [ 4 => 2, 5 => 3 ];
+
             foreach($data as $groupe_id => $groupe)
             {
-                foreach($groupe as $type => $id)
+                $hasPeriodRange = $this->userHasPeriodRange($this->invited,$groupe_id);
+
+                if($invited && $hasPeriodRange)
                 {
-                    $labels[$groupe_id][$type] = $this->getLabelItem($id);
+                    if(isset($isGroupeUnset[$groupe_id]) && isset($labels[$isGroupeUnset[$groupe_id]]))
+                    {
+                        unset($labels[$isGroupeUnset[$groupe_id]]);
+                        $labels = $labels + $this->getInvitedGroupLabels($isGroupeUnset[$groupe_id]);
+                    }
+                }
+                else
+                {
+                    if(in_array($groupe_id,$isNormalGroupe))
+                    {
+                        foreach($groupe as $type => $id)
+                        {
+                            $labels[$groupe_id][$type] = $this->getLabelItem($id);
+                        }
+                    }
                 }
             }
 
@@ -150,6 +189,26 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         }
 
         return [];
+    }
+
+    public function getInvitedGroupLabels($group)
+    {
+        $labels   = $this->invited->labels;
+        $data     = [];
+        $isGroupe = [ 2 => 4, 3 => 5 ];
+
+        if(!$labels->isEmpty())
+        {
+            foreach($labels as $label)
+            {
+                if($isGroupe[$group] == $label->groupe_id)
+                {
+                    $data[$label->groupe_id][$label->type_id] = $label->label_text;
+                }
+            }
+        }
+
+        return $data;
     }
 
     public function getMetaLabelId($user_id,$metas){

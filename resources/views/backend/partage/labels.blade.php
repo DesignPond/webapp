@@ -16,6 +16,9 @@
 <div class="row">
 
     @foreach($GroupeTypes as $groupe)
+
+        {{ $groupe['id'] }}
+
         <div class="col-md-6">
             <h5><strong>{{ $groupe['titre'] }}</strong></h5>
 

@@ -7,9 +7,7 @@ Route::get('test', function()
     // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
     //throw new Illuminate\Session\TokenMismatchException;
     /*
-       $meta = \App::make('App\Riiingme\Meta\Entities\Meta');
-       $meta = $meta->find(21);
-       $labels = $meta->labels;
+
 
        $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
        $invite = $invite->find(1);
@@ -19,7 +17,14 @@ Route::get('test', function()
        $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
 
       */
-
+    $meta   = \App::make('App\Riiingme\Meta\Entities\Meta');
+    $meta   = $meta->find(1);
+    $labels = $meta->labels;
+    
+    echo '<pre>';
+    print_r(unserialize($labels));
+    echo '</pre>';exit;
+    
     $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     $change      = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
     $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
@@ -29,10 +34,11 @@ Route::get('test', function()
     //$riiinglinks = $riiinglink->findByHost(1)->lists('id');
     //$results     = $riiinglink->findTags(4,$riiinglinks);
 
-    $thsuer = $user->find(1);
+/*    $thsuer = $user->find(1);
+    
     echo '<pre>';
     print_r($thsuer->load('riiinglinks')->riiinglinks->lists('invited_id'));
-    echo '</pre>';exit;
+    echo '</pre>';exit;*/
 
     // \Event::fire(new \App\Events\AccountWasCreated($user,$user->activation_token));
     //throw new \App\Exceptions\ActivationFailException(1,'2w3eg24t2t');

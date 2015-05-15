@@ -31,10 +31,10 @@
                             @if($user->user_type == '1')
 
                                 @include('backend.account.prive', ['view' => $groupe_type[1], 'prive' => true])
-                                @include('backend.account.prive', ['view' => $groupe_type[2], 'prive' => false])
+                                @include('backend.account.temp',  ['view' => $groupe_type[3], 'prive' => false])
 
-                                @include('backend.account.temp', ['view' => $groupe_type[3], 'prive' => false])
-                                @include('backend.account.temp', ['view' => $groupe_type[4], 'prive' => false])
+                                @include('backend.account.prive', ['view' => $groupe_type[2], 'prive' => false])
+                                @include('backend.account.temp',  ['view' => $groupe_type[4], 'prive' => false])
 
                             @endif
 

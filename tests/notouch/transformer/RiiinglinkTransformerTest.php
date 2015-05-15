@@ -50,30 +50,44 @@ class RiiinglinkTransformerTest extends TestCase {
 
     public function testGetName()
     {
-        $name = $this->transformer->getName(1);
+        $this->transformer->host = $this->user->find(1);
 
-        $this->assertEquals('Cindy Leschaud', $name);
+        $this->assertEquals('Cindy Leschaud', $this->transformer->host->name);
     }
 
     public function testGetEmail()
     {
-        $email = $this->transformer->getEmail(1);
+        $this->transformer->host = $this->user->find(1);
 
-        $this->assertEquals('cindy.leschaud@gmail.com', $email);
+        $this->assertEquals('cindy.leschaud@gmail.com', $this->transformer->host->email);
     }
 
     public function testGetPhoto()
     {
-        $photo = $this->transformer->getPhoto(1);
+        $this->transformer->host = $this->user->find(1);
 
-        //$this->assertEquals('cindy.jpg', $photo);
+        $this->assertEquals('cindy.jpg', $this->transformer->host->user_photo);
     }
 
     public function testGetPhotoNotExist()
     {
-        $photo = $this->transformer->getPhoto(4);
+        $this->transformer->host = $this->user->find(4);
 
-        $this->assertEquals('avatar.jpg', $photo);
+        $this->assertEquals('avatar.jpg', $this->transformer->host->user_photo);
+    }
+
+    public function testUserHasPeriodRange()
+    {
+        $actual = $this->transformer->userHasPeriodRange($this->user->find(2),2);
+
+        $this->assertTrue($actual);
+    }
+
+    public function testUserHasPeriodRangeEmpty()
+    {
+        $actual = $this->transformer->userHasPeriodRange($this->user->find(2),5);
+
+        $this->assertFalse($actual);
     }
 
     public function testGetHostLabels()
@@ -118,7 +132,7 @@ class RiiinglinkTransformerTest extends TestCase {
             ]
         ];
 
-        $labels = $this->transformer->getInvitedLabels($this->link2->first());
+        //$labels = $this->transformer->getInvitedLabels($this->link2->first());
 
         //$this->assertEquals($expected, $labels);
     }
@@ -136,6 +150,15 @@ class RiiinglinkTransformerTest extends TestCase {
         $label = $this->transformer->getLabelItem(31);
 
         $this->assertEquals('cyril.jpg', $label);
+    }
+
+    public function testLabelInvited()
+    {
+        $this->transformer->invited = $this->user->find(2);
+        
+        $labels = $this->transformer->getInvitedGroupLabels(2);
+
+        $this->assertEquals(4, key($labels));
     }
 
 }
