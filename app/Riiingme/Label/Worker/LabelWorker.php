@@ -67,8 +67,8 @@ class LabelWorker{
         {
             $user = $this->user->find($user_id);
             $daterange = $this->helper->convertDateRange($date);
-            
-            $user->user_groups()->sync([$groupe => $daterange]);
+
+            $user->user_groups()->sync([$groupe => $daterange],false);
         }
 
         foreach($labels as $label)
