@@ -3,6 +3,7 @@
 use App\Riiingme\Label\Repo\LabelInterface;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
+use App\Riiingme\User\Entities\User_group;
 use App\Riiingme\User\Repo\UserInterface;
 
 class LabelWorker{
@@ -66,9 +67,8 @@ class LabelWorker{
         if($date)
         {
             $user = $this->user->find($user_id);
-            $daterange = $this->helper->convertDateRange($date);
 
-            $user->user_groups()->sync([$groupe => $daterange],false);
+            $this->updatePeriodRange($user, $groupe, $date);
         }
 
         foreach($labels as $label)
@@ -77,6 +77,23 @@ class LabelWorker{
         }
 
         return true;
+    }
+
+    public function updatePeriodRange($user, $groupe, $date = null){
+
+        $ug = $user->user_groups()->where('groupe_id','=',$groupe)->get();
+
+        if(!$ug->isEmpty())
+        {
+            $user->user_groups()->detach($ug->first()->id);
+        }
+
+        if($date)
+        {
+            $daterange = $this->helper->convertDateRange($date);
+
+            $user->user_groups()->attach($groupe, $daterange);
+        }
     }
 
     public function updateLabels($label,$user_id,$date){

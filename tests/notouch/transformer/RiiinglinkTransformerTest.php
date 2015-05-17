@@ -12,6 +12,8 @@ class RiiinglinkTransformerTest extends TestCase {
     protected $link2;
     protected $link3;
     protected $link4;
+    protected $mock;
+    protected $worker;
 
     public function setUp()
     {
@@ -21,6 +23,11 @@ class RiiinglinkTransformerTest extends TestCase {
         $this->transformer = new App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer();
         $this->riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->label       = \App::make('App\Riiingme\Label\Repo\LabelInterface');
+        $this->worker      = \App::make('App\Riiingme\Label\Worker\LabelWorker');
+
+        $this->mock = Mockery::mock('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer');
+        $this->app->instance('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer', $this->mock);
+
         $this->link        = $this->riiinglink->find(1);
         $this->link2       = $this->riiinglink->find(5);
         $this->link3       = $this->riiinglink->find(2);
@@ -159,6 +166,23 @@ class RiiinglinkTransformerTest extends TestCase {
         $labels = $this->transformer->getInvitedGroupLabels(2);
 
         $this->assertEquals(4, key($labels));
+    }
+
+    public function testLabelsIfGroupHasPeriodRange()
+    {
+        $coralie = $this->user->find(2);
+        $date    = '2015-03-22 | 2015-05-31';
+
+        $this->worker->updatePeriodRange($coralie, 4, $date);
+
+       // $this->mock->shouldReceive('userHasPeriodRange')->with($coralie,2)->once()->andReturn(true);
+       // $this->mock->shouldReceive('getInvitedGroupLabels')->with(2)->once()->andReturn([4 => [ 4 => 'rue du livre', 5 => '2345', 6 => 'Bâle' ]]);
+
+        $data = [ 2 => [ 4 => 'La Voirde 19', 5 => '2735', 6 => 'Bévilard' ]];
+
+        $labels = $this->transformer->getLabels($data,true);
+
+        $this->assertTrue(in_array(4,array_keys($labels[2])));
     }
 
 }

@@ -181,7 +181,6 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
                         }
                     }
                 }
-
             }
 
             return $labels;

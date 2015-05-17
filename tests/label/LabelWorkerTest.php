@@ -14,11 +14,11 @@ class LabelWorkerTest extends TestCase {
     {
         parent::setUp();
 
+        $this->user   = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->worker = \App::make('App\Riiingme\Label\Worker\LabelWorker');
 
         $this->mock   = $this->mock('App\Riiingme\Label\Worker\LabelWorker');
 
-        VfsStream::setup('users');
     }
 
     public function mock($class)
@@ -34,6 +34,7 @@ class LabelWorkerTest extends TestCase {
     {
         Mockery::close();
         \DB::table('riiinglinks')->truncate();
+      //  \DB::table('user_groups')->truncate();
         $this->seed('RiiinglinksTableSeeder');
     }
 
@@ -100,6 +101,45 @@ class LabelWorkerTest extends TestCase {
         $expected3 = [6 => [1,2,3]];
 
         $this->assertEquals($expected3, $actual3);
+    }
+
+    public function testSetOrUpdatePeriodRange()
+    {
+        $coralie = $this->user->find(2);
+        $date    = '2015-03-22 | 2015-05-31';
+
+        $this->worker->updatePeriodRange($coralie, 4, $date);
+
+        $user = $this->user->find(2);
+
+        $this->assertTrue($this->hasPivotGroupe($user->user_groups,4));
+    }
+
+
+    public function testSetNoPeriodRange()
+    {
+        $coralie = $this->user->find(2);
+
+        $this->worker->updatePeriodRange($coralie, 4, null);
+
+        $user = $this->user->find(2);
+
+        $this->assertFalse($this->hasPivotGroupe($user->user_groups,4));
+    }
+
+    public function hasPivotGroupe($user_groups,$groupe)
+    {
+        if(!$user_groups->isEmpty())
+        {
+            foreach($user_groups as $pivot)
+            {
+                $groupes[] = $pivot->pivot->groupe_id;
+            }
+
+            return in_array($groupe,$groupes);
+        }
+
+        return false;
     }
 
     public function testAssignPhotoUser()
