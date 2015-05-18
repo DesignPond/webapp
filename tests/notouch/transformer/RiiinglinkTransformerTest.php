@@ -19,14 +19,16 @@ class RiiinglinkTransformerTest extends TestCase {
     {
         parent::setUp();
 
+        $this->refreshApplication();
+
         $this->user        = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->transformer = new App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer();
         $this->riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->label       = \App::make('App\Riiingme\Label\Repo\LabelInterface');
         $this->worker      = \App::make('App\Riiingme\Label\Worker\LabelWorker');
 
-        $this->mock = Mockery::mock('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer');
-        $this->app->instance('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer', $this->mock);
+        $this->mock = Mockery::mock('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformerInterface');
+        $this->app->instance('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformerInterface', $this->mock);
 
         $this->link        = $this->riiinglink->find(1);
         $this->link2       = $this->riiinglink->find(5);
@@ -175,7 +177,7 @@ class RiiinglinkTransformerTest extends TestCase {
 
         $this->worker->updatePeriodRange($coralie, 4, $date);
 
-       // $this->mock->shouldReceive('userHasPeriodRange')->with($coralie,2)->once()->andReturn(true);
+        //$this->mock->shouldReceive('userHasPeriodRange')->with($coralie,2)->once()->andReturn(true);
        // $this->mock->shouldReceive('getInvitedGroupLabels')->with(2)->once()->andReturn([4 => [ 4 => 'rue du livre', 5 => '2345', 6 => 'Bâle' ]]);
 
         $data = [ 2 => [ 4 => 'La Voirde 19', 5 => '2735', 6 => 'Bévilard' ]];

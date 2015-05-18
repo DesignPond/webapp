@@ -57,6 +57,17 @@ class AppServiceProvider extends ServiceProvider {
     /**
      * Upload service
      */
+/*    protected function registerTransformerService(){
+
+        $this->app->bind('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformerInterface', function()
+        {
+            return new \App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer();
+        });
+    }*/
+
+    /**
+     * Upload service
+     */
     protected function registerUploadService(){
 
         $this->app->bind('\App\Riiingme\Service\Upload\UploadInterface', function()

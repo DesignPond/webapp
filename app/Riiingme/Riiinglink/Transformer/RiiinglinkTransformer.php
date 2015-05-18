@@ -158,7 +158,7 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
             $labels = [];
 
             $isNormalGroupe = [1,2,3,6];
-            $isGroupeUnset  = [ 4 => 2, 5 => 3];
+            $isGroupeUnset  = [4 => 2, 5 => 3];
 
             foreach($data as $groupe_id => $groupe)
             {
