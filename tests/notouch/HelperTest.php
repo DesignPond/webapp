@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Factory as Faker;
+
 class HelperTest extends TestCase {
 
     protected $helper;
@@ -304,6 +306,51 @@ class HelperTest extends TestCase {
         ];
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testConvertAutoComplete()
+    {
+        $faker = Faker::create();
+
+        $users = [];
+
+        $noms = [
+            'first_name'   => ['','Cindy','Celine','Cyril','Coralie'],
+            'last_name'    => ['','Leschaud','Leschaud','Leschaud','Leschaud'],
+            'email'        => ['','cindy@domaine.ch','celine@domaine.ch','cyril@domaine.ch','coralie@domaine.ch'],
+            'name_search'  => ['','yes','no','yes','no'],
+            'email_search' => ['','yes','no','yes','no'],
+            'user_type'    => ['',1,2,1,2],
+        ];
+
+        for($i = 1; $i < 5;$i++)
+        {
+            $user = new App\Riiingme\User\Entities\User;
+
+            $user->id           = $i;
+            $user->first_name   = $noms['first_name'][$i];
+            $user->last_name    = $noms['last_name'][$i];
+            $user->email        = $noms['email'][$i];
+            $user->name_search  = $noms['name_search'][$i];
+            $user->email_search = $noms['email_search'][$i];
+            $user->user_type    = $noms['user_type'][$i];
+
+            $users[$i] = $user;
+        }
+
+        $collection = new Illuminate\Database\Eloquent\Collection($users);
+
+
+        $actual = $this->helper->convertAutocomplete($collection);
+
+        $expect = [
+            ['label' => 'Cindy Leschaud', 'desc' => 'cindy@domaine.ch', 'value' => 'cindy@domaine.ch', 'id' => 1, 'user_type' => 1],
+            ['label' => 'celine@domaine.ch', 'desc' => 'celine@domaine.ch', 'value' => 'celine@domaine.ch', 'id' => 2, 'user_type' => 2],
+            ['label' => 'Cyril Leschaud', 'desc' => 'cyril@domaine.ch', 'value' => 'cyril@domaine.ch', 'id' => 3, 'user_type' => 1],
+            ['label' => 'coralie@domaine.ch', 'desc' => 'coralie@domaine.ch', 'value' => 'coralie@domaine.ch', 'id' => 4, 'user_type' => 2]
+        ];
+
+        $this->assertEquals($expect,$actual);
     }
 
 }

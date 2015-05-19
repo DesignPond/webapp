@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider {
         $this->registerChangeService();
         $this->registerRevisionService();
         $this->registerUploadService();
-
+        //$this->registerTransformerService();
     }
 
     /**
@@ -57,13 +57,13 @@ class AppServiceProvider extends ServiceProvider {
     /**
      * Upload service
      */
-/*    protected function registerTransformerService(){
+    protected function registerTransformerService(){
 
         $this->app->bind('App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformerInterface', function()
         {
             return new \App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer();
         });
-    }*/
+    }
 
     /**
      * Upload service

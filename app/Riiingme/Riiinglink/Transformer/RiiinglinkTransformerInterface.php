@@ -2,7 +2,7 @@
 
 interface RiiinglinkTransformerInterface
 {
-    public function transform(Riiinglink $riiinglink);
+    public function transform($riiinglink);
     public function getUser($user_id);
     public function getName($user);
     public function getInvited($riiinglink);

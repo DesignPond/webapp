@@ -257,6 +257,26 @@ class Helper{
 
     }
 
+
+    public function convertAutocomplete($results){
+
+        $data = [];
+
+        if(!$results->isEmpty())
+        {
+            foreach($results as $result)
+            {
+                $label  = ($result->name_search == 'yes' ? $result->name : $result->email);
+
+                $new    = ['label' => $label , 'desc' => $result->email , 'value' =>  $result->email, 'id' =>  $result->id, 'user_type' => $result->user_type];
+
+                $data[] = $new;
+            }
+        }
+
+        return $data;
+    }
+
 }
 
 

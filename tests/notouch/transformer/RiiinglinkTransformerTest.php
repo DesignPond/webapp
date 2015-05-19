@@ -177,9 +177,6 @@ class RiiinglinkTransformerTest extends TestCase {
 
         $this->worker->updatePeriodRange($coralie, 4, $date);
 
-        //$this->mock->shouldReceive('userHasPeriodRange')->with($coralie,2)->once()->andReturn(true);
-       // $this->mock->shouldReceive('getInvitedGroupLabels')->with(2)->once()->andReturn([4 => [ 4 => 'rue du livre', 5 => '2345', 6 => 'Bâle' ]]);
-
         $data = [ 2 => [ 4 => 'La Voirde 19', 5 => '2735', 6 => 'Bévilard' ]];
 
         $labels = $this->transformer->getLabels($data,true);
