@@ -2,10 +2,22 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
+use App\Riiingme\Groupe\Worker\GroupeWorker;
 use Illuminate\Http\Request;
 
 class ExportController extends Controller {
+
+    protected $riiinglink;
+    protected $groupe;
+    protected $auth;
+
+    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink)
+    {
+        $this->riiinglink = $riiinglink;
+        $this->groupe     = $groupe;
+        $this->auth       = \Auth::user()->id;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -14,20 +26,35 @@ class ExportController extends Controller {
 	 */
 	public function index()
 	{
-  /*      \Excel::create('Filename', function($excel) {
 
-            $excel->sheet('Sheetname', function($sheet) {
+        $groupes     = $this->groupe->getGroupes();
+        $riiinglinks = $this->riiinglink->findByHost($this->auth);
 
-                $sheet->fromArray(array(
-                    array('data1', 'data2'),
-                    array('data3', 'data4')
-                ));
+        $data = [];
+
+        if(!$riiinglinks->isEMpty())
+        {
+            foreach($riiinglinks->toArray() as $riiinglink)
+            {
+                $user   = array_values($riiinglink['invite']);
+                $data[] = $user;
+            }
+        }
+
+        $data = array_values($data);
+
+
+
+        \Excel::create('Filename', function($excel) use ($data) {
+
+            $excel->sheet('Export', function($sheet) use ($data) {
+
+                $sheet->fromArray( $data );
 
             });
 
-        })->export('xls');*/
+        })->export('xls');
 
-        $this->dispatch(new \App\Commands\ProcessInvite(1));
 	}
 
 	/**
