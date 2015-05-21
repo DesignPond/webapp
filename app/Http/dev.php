@@ -7,27 +7,45 @@ Route::get('test', function()
     // $ring = $link->create([ 'host_id' => 1, 'invited_id' => 23 ]);
     //throw new Illuminate\Session\TokenMismatchException;
     /*
-
-
        $invite = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
        $invite = $invite->find(1);
-
-          $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
-
+       $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
        $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
-
       */
+    $ring   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     $meta   = \App::make('App\Riiingme\Meta\Entities\Meta');
     $meta   = $meta->find(1);
     $labels = $meta->labels;
-    
+
+    $this->command = new App\Commands\ProcessInvite(1);
+
+    $link   = $this->command->getRiiinglink(1,2);
+    $invite =  $this->command->getInvite();
+    $metas  =  $this->command->convertMetasToLabels($link,unserialize($invite->partage_host));
+
+    $this->command->syncLabels($link);
+
+    $new = $ring->find($link->id)->first();
+
     echo '<pre>';
-    print_r(unserialize($labels));
-    echo '</pre>';exit;
+    print_r(unserialize($new->usermetas->labels));
+    echo '</pre>';
+
+    $link2   = $this->command->getRiiinglink(2,1);
+    $invite2 =  $this->command->getInvite();
+    $metas2  =  $this->command->convertMetasToLabels($link2,unserialize($invite2->partage_host));
+
+    $this->command->syncLabels($link2);
+
+    $new2 = $ring->find($link2->id)->first();
+
+    echo '<pre>';
+    print_r(unserialize($new2->usermetas->labels));
+    echo '</pre>';
     
-    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+/*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     $change      = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
-    $user        = \App::make('App\Riiingme\User\Repo\UserInterface');
+    $user        = \App::make('App\Riiingme\User\Repo\UserInterface');*/
 
    // $change = $change->getLabelChange(1);
 

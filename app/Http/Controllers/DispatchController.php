@@ -42,15 +42,14 @@ class DispatchController extends Controller {
      */
     public function invite(InviteRequest $request)
     {
-
         $result = $this->dispatch(new ConfirmInvite($request->token, $request->ref));
-
+        
         if($result['status'] == 'confirmed')
         {
             // Log in the user
-            \Auth::login($result['user']);
+            \Auth::loginUsingId($result['user']->id);
 
-            return redirect('/user/link/'.$result['link'])->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
+            return redirect('user/link/'.$result['link'])->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
         }
         elseif($result['status'] == 'register')
         {

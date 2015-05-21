@@ -10,6 +10,7 @@ class ProcessInvite extends Command implements SelfHandling {
     protected $label;
     protected $user;
     protected $invite;
+
     public $metas;
 
 	/**
@@ -35,7 +36,7 @@ class ProcessInvite extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
-        $invite = $this->invite->find($this->invite_id);
+        $invite = $this->getInvite();
 
         // infos to partage
         $partage_host    = (!empty($invite->partage_host)    ? unserialize($invite->partage_host): []);
@@ -55,6 +56,11 @@ class ProcessInvite extends Command implements SelfHandling {
             $this->convertMetasToLabels($invited_link,$partage_invited)->syncLabels($invited_link);
         }
 	}
+
+    public function getInvite()
+    {
+        return $this->invite->find($this->invite_id);
+    }
 
     public function syncLabels($riiinglink){
 

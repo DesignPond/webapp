@@ -50,7 +50,7 @@ class ConfirmInvite extends Command implements SelfHandling {
 
             $invite->save();
 
-            $link = $this->riiinglinkExist($invite->user_id,$user->id);
+            $link = $this->riiinglinkExist($user->id,$invite->user_id);
 
             $this->dispatch(new ProcessInvite($invite->id));
 

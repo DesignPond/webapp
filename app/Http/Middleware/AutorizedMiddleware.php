@@ -30,7 +30,7 @@ class AutorizedMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-        if (\Auth::check()) {
+/*        if (\Auth::check()) {
             $id = $request->segment(3);
 
             // Get riiinglink from id
@@ -42,7 +42,7 @@ class AutorizedMiddleware {
             }
 
             return $next($request);
-        }
+        }*/
 
         return $next($request);
 	}
