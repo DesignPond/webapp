@@ -20,7 +20,10 @@
 
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
                                         <div class="panel bg-gray panel-small">
-                                            <div class="panel-body text-left">{{ $groupes_user[$items['id']] }}</div>
+                                            <div class="panel-body text-left">
+                                                {{ $groupes_user[$items['id']] }}
+                                                <?php echo ( ($items['id'] == 4) || ($items['id'] == 5) ? ' <span class="text-muted"><small>temporaire</span></small>' : ''); ?>
+                                            </div>
                                         </div>
                                         @foreach($items['groupe_type'] as $label)
                                             @include('backend.partials.label-host')
