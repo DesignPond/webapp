@@ -21,6 +21,8 @@ class UpdateUser extends Command implements SelfHandling {
         $this->infos = $infos;
         $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
+
+
 	}
 
 	/**
@@ -30,19 +32,29 @@ class UpdateUser extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
+
+        $factory = \App::make('Illuminate\Validation\Factory');
+
+        $factory->extend('search_by', function ($attribute, $value, $parameters)
+        {
+            return ( ($this->infos['email_search'] == 0) && ($this->infos['name_search'] == 0) ? false : true );
+        });
+
         $validator = \Validator::make(
             $this->infos , [
                 'first_name'   => 'required_if:user_type,private',
                 'last_name'    => 'required_if:user_type,private',
                 'company'      => 'required_if:user_type,company',
-                'name_search'  => 'required_without:email_search',
-                'email_search' => 'required_without:name_search'
+                'email_search' => 'search_by'
+            ],
+            [
+                'email_search.search_by' => 'Vous devez autoriser au moins un champs de recherche',
             ]
         );
 
-        if ($validator->fails())
+        if ($validator->fails() || ($this->infos['name_search'] == 0 && $this->infos['email_search'] == 0))
         {
-            return redirect()->back()->withErrors($validator->errors());
+            return redirect()->back()->withErrors($validator->errors())->with( array('status' => 'danger' , 'message' => '') );
         }
 
         $user = $this->user->find($this->infos['id']);
@@ -70,7 +82,7 @@ class UpdateUser extends Command implements SelfHandling {
             }
         }
 
-        $user = $this->user->update($this->infos);
+        return $this->user->update($this->infos);
 
     }
 

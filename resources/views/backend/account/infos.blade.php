@@ -34,23 +34,24 @@
 
 <!-- Configuration search -->
 <fieldset class="row border">
-    <h4></h4>
+    <h4>{{ trans('menu.search_by') }}</h4>
     <div class="col-md-8 col-xs-12">
-
         <div class="form-group">
-            <label class="col-sm-4 control-label">{{ trans('menu.search_by') }}</label>
+            <?php $name = ($user->user_type == '1' ? trans('menu.firstname').'/'.trans('menu.lastname') : trans('menu.company') ); ?>
+            <label class="col-sm-4 control-label">{{ $name }}</label>
             <div class="col-md-6">
-                <?php $name = ($user->user_type == '1' ? trans('menu.firstname').'/'.trans('menu.lastname') : trans('menu.company') ); ?>
-                <div class="checkbox">
-                    <label><input type="checkbox" name="infos[name_search]" value="1" checked> {{ $name }}</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name="infos[email_search]" value="1" checked> {{ trans('menu.email') }}</label>
-                </div>
+                <label class="radio-inline"><input type="radio" <?php echo ($user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="1"> oui</label>
+                <label class="radio-inline"><input type="radio" <?php echo (!$user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="0"> non</label>
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="col-sm-4 control-label">{{ trans('menu.email') }}</label>
+            <div class="col-md-6">
+                <label class="radio-inline"><input type="radio" <?php echo ($user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="1"> oui</label>
+                <label class="radio-inline"><input type="radio" <?php echo (!$user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="0"> non</label>
+            </div>
+        </div>
     </div>
-    <span class="clearfix"></span><br/>
+    <br/>
     <button class="btn btn-primary btn-sm pull-right" type="submit">{{ trans('action.save') }}</button>
 </fieldset>

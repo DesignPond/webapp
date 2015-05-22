@@ -83,14 +83,19 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
-
         $this->dispatch(new UpdateUser($request->info));
-        $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
+        $result = $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
 
-        $this->worker->proceesPendingInvites(\Auth::user()->id);
+        $status = \Session::get('status');
 
-        return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
+        if($status != 'danger')
+        {
+            $this->worker->proceesPendingInvites(\Auth::user()->id);
 
+            return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
+        }
+
+        return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'danger' , 'message' => 'Problème avec la mise à jour') );
     }
 
 	/**
