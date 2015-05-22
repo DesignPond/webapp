@@ -80,7 +80,7 @@ class ConfirmInvite extends Command implements SelfHandling {
             // User is registred and riiinglink doesn't exist, create riiinglink
             $riiinglinks =  $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);
 
-            return $riiinglinks[1];
+            return $riiinglinks[0];
         }
 
         return $riiinglink;
