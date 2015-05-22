@@ -32,9 +32,11 @@ class UpdateUser extends Command implements SelfHandling {
 	{
         $validator = \Validator::make(
             $this->infos , [
-                'first_name' => 'required_if:user_type,private',
-                'last_name'  => 'required_if:user_type,private',
-                'company'    => 'required_if:user_type,company'
+                'first_name'   => 'required_if:user_type,private',
+                'last_name'    => 'required_if:user_type,private',
+                'company'      => 'required_if:user_type,company',
+                'name_search'  => 'required_without:email_search',
+                'email_search' => 'required_without:name_search'
             ]
         );
 

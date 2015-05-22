@@ -68,13 +68,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getNameAttribute()
     {
-        if(isset($this->company) && !empty($this->company))
+        if($this->user_type == 1)
         {
-            return $this->company;
+            return $this->first_name.' '.$this->last_name;
         }
         else
         {
-            return $this->first_name.' '.$this->last_name;
+            return $this->company;
         }
     }
 

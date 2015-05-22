@@ -66,6 +66,8 @@ class Registrar implements RegistrarContract {
             'last_name'        => (isset($data['last_name']) && !empty($data['last_name']) ? $data['last_name'] : ''),
             'company'          => (isset($data['company']) && !empty($data['company']) ? $data['company'] : ''),
             'user_type'        => $data['user_type'],
+            'name_search'      => 1,
+            'email_search'     => 1,
             'activation_token' => $activation_token
         ]);
 

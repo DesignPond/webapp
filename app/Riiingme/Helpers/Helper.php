@@ -266,7 +266,7 @@ class Helper{
         {
             foreach($results as $result)
             {
-                $label  = ($result->name_search == 'yes' ? $result->name : $result->email);
+                $label  = ($result->name_search ? $result->name : $result->email);
 
                 $new    = ['label' => $label , 'desc' => $result->email , 'value' =>  $result->email, 'id' =>  $result->id, 'user_type' => $result->user_type];
 

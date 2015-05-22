@@ -53,4 +53,5 @@ return [
     'alpha'         => 'Alphabétique',
     'infopartage'   => 'Données partagées avec',
     'noinfopartage' => 'Vous n\'avez pas encore indiqué vos informations à partager',
+    'search_by'     => 'Me rechercher par'
 ];
