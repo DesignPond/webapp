@@ -33,6 +33,39 @@ class HelperTest extends TestCase {
         $this->assertEquals($expect, $actual);
 	}
 
+    public function testFlattenArray()
+    {
+        $array = [
+            3 => [
+                'Adresse privé' => [ 'coralie.leschaud@orange.ch', 'La Voirde 19'],
+                'Adresse professionnelle' => [ 'Salt', 'ARC']
+            ],
+            4 => [
+                'Adresse privé' => [ 'libelulle867@bluewin.ch', '1950'],
+                'Adresse professionnelle' => [ 'Suisse', 'ARC']
+            ],
+            5 => [
+                'Adresse privé' => [ 'samanta.marks@gmail.com'],
+                'Adresse professionnelle' => [ '02790524922']
+            ]
+        ];
+
+        $actual  = $this->helper->array_flatten($array);
+        $expect  = [
+            'Adresse privé' => [ 'coralie.leschaud@orange.ch', 'La Voirde 19'],
+            'Adresse professionnelle' => [ 'Salt', 'ARC'],
+            'Adresse privé' => [ 'libelulle867@bluewin.ch', '1950'],
+            'Adresse professionnelle' => [ 'Suisse', 'ARC'],
+            'Adresse privé' => [ 'samanta.marks@gmail.com'],
+            'Adresse professionnelle' => [ '02790524922']
+        ];
+
+        echo '<pre>';
+        print_r($actual);
+        echo '</pre>';exit;
+        $this->assertEquals($expect, $actual);
+    }
+
     /**
      * A basic functional test example.
      *

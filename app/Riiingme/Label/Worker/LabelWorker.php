@@ -181,7 +181,29 @@ class LabelWorker{
                 'groupe_id' => 1
             ]);
         }
+    }
 
+    public function periodIsInEffect($users_groups, $data)
+    {
+        $isGroupe  = [4 => 2, 5 => 3];
+
+        foreach($isGroupe as $temp => $normal)
+        {
+            $tempExist = $users_groups->filter(function ($item) use ($temp) {
+                return $item->groupe_id == $temp;
+            })->first();
+
+            if($tempExist && $tempExist->period_range)
+            {
+                unset($data[$normal]);
+            }
+            else
+            {
+                unset($data[$temp]);
+            }
+        }
+
+        return $data;
     }
 
 }

@@ -267,8 +267,9 @@ class Helper{
             foreach($results as $result)
             {
                 $label  = ($result->name_search ? $result->name : $result->email);
+                $email  = ($result->email_search ? $result->email : $result->name);
 
-                $new    = ['label' => $label , 'desc' => $result->email , 'value' =>  $result->email, 'id' =>  $result->id, 'user_type' => $result->user_type];
+                $new    = ['label' => $label , 'desc' => $email, 'value' =>  $result->email, 'id' =>  $result->id, 'user_type' => $result->user_type];
 
                 $data[] = $new;
             }

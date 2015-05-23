@@ -119,6 +119,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Group belongs to user
+     *
+     * @var query
+     */
+    public function users_groups(){
+
+        return $this->hasMany('App\Riiingme\User\Entities\User_group', 'user_id');
+    }
+
+    /**
      * Activites belongs to user
      *
      * @var query

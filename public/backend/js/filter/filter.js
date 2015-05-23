@@ -27,7 +27,8 @@ $( function() {
         minLength: 4,
         select: function( event, ui )
         {
-            $('#searchEmail').val(ui.item.value);
+            $('#searchEmail').val(ui.item.label);
+            $('#searchEmail_post').val(ui.item.value);
 
             $.get(url + "labels", { user_type: ui.item.user_type }, function( data )
             {

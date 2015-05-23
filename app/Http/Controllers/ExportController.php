@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
+use App\Riiingme\Label\Worker\LabelWorker;
 use Illuminate\Http\Request;
 
 class ExportController extends Controller {
@@ -11,11 +12,13 @@ class ExportController extends Controller {
     protected $riiinglink;
     protected $groupe;
     protected $auth;
+    protected $label;
 
-    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink)
+    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label)
     {
         $this->riiinglink = $riiinglink;
         $this->groupe     = $groupe;
+        $this->label      = $label;
         $this->auth       = \Auth::user()->id;
     }
 
@@ -29,33 +32,55 @@ class ExportController extends Controller {
 
         $groupes     = $this->groupe->getGroupes();
         $riiinglinks = $this->riiinglink->findByHost($this->auth);
-
-        $data = [];
+        $user_data   = [];
 
         if(!$riiinglinks->isEMpty())
         {
-            foreach($riiinglinks->toArray() as $riiinglink)
+            foreach($riiinglinks as $riiinglink)
             {
-                $user   = array_values($riiinglink['invite']);
-                $data[] = $user;
+                $data   = [];
+                $invite = $riiinglink->invite->load('labels','users_groups');
+                $labels = $invite->labels;
+
+                foreach($labels as $groupe)
+                {
+                    if($groupe->groupe_id > 1)
+                    {
+                        $data[$groupe->groupe_id][0] =  $invite->name;
+                        $data[$groupe->groupe_id][$groupe->type_id] = $groupe->label;
+                    }
+                }
+
+                $data = $this->label->periodIsInEffect($invite->users_groups,$data);
+
+                $user_data[$riiinglink->invite->id] = $data;
             }
         }
 
+        $lines = [];
+
+        foreach($user_data as $data)
+        {
+           foreach($data as $line){
+               $lines[] = $line;
+           }
+        }
+
+
         $data = array_values($data);
 
+        \Excel::create('Filename', function($excel) use ($lines) {
 
+            $excel->sheet('Export', function($sheet) use ($lines) {
 
-        \Excel::create('Filename', function($excel) use ($data) {
-
-            $excel->sheet('Export', function($sheet) use ($data) {
-
-                $sheet->fromArray( $data );
+                $sheet->fromArray( $lines );
 
             });
 
         })->export('xls');
 
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.

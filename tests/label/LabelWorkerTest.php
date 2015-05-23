@@ -115,7 +115,6 @@ class LabelWorkerTest extends TestCase {
         $this->assertTrue($this->hasPivotGroupe($user->user_groups,4));
     }
 
-
     public function testSetNoPeriodRange()
     {
         $coralie = $this->user->find(2);
@@ -125,6 +124,40 @@ class LabelWorkerTest extends TestCase {
         $user = $this->user->find(2);
 
         $this->assertFalse($this->hasPivotGroupe($user->user_groups,4));
+    }
+
+    public function testPeriodRangeInEffect()
+    {
+        $start = \Carbon\Carbon::now()->toDateString();
+        $end   = \Carbon\Carbon::now()->addWeeks(2)->toDateString();
+
+        $users_groups1  = new App\Riiingme\User\Entities\User_group();
+        $users_groups2  = new App\Riiingme\User\Entities\User_group();
+
+        $users_groups1->groupe_id = 4;
+        $users_groups1->start_at  = $start;
+        $users_groups1->end_at    = $end;
+        $users_groups2->groupe_id = 5;
+        $users_groups2->start_at  = '2014-11-31';
+        $users_groups2->end_at    = '2014-12-31';
+
+        $collection = new Illuminate\Database\Eloquent\Collection([$users_groups1,$users_groups2]);
+
+        $data = [
+            2 => [ 3 => 'label', 4 => 'label'],
+            3 => [ 5 => 'label', 6 => 'label'],
+            4 => [ 7 => 'label', 8 => 'label'],
+            5 => [ 9 => 'label', 1 => 'label']
+        ];
+
+        $expect =  [
+            3 => [ 5 => 'label', 6 => 'label'],
+            4 => [ 7 => 'label', 8 => 'label'],
+        ];
+
+        $actual = $this->worker->periodIsInEffect($collection, $data);
+
+        $this->assertEquals($expect,$actual);
     }
 
     public function hasPivotGroupe($user_groups,$groupe)
