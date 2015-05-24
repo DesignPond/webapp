@@ -12,6 +12,7 @@ class ExportWorker{
     protected $hiddenTypes;
     public $types;
     public $user;
+    public $tags;
     public $user_riiinglinks;
 
     public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label)
@@ -27,6 +28,14 @@ class ExportWorker{
 
         $this->types = $this->groupe->getTypes();
         
+        return $this;
+
+    }
+
+    public function setTags($tags){
+
+        $this->tags = $tags;
+
         return $this;
 
     }
@@ -96,8 +105,6 @@ class ExportWorker{
                 foreach($data as $data_groupe => $line)
                 {
                     $lines[] = $this->label->typeForGroupes($line,$unset);
-
-
                 }
             }
         }
@@ -117,7 +124,7 @@ class ExportWorker{
 
     public function getUserRiiinglinks()
     {
-        $this->user_riiinglinks = $this->riiinglink->findByHost($this->user);
+        $this->user_riiinglinks = $this->riiinglink->findByHost($this->user,$this->tags);
 
         return $this;
     }

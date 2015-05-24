@@ -6,7 +6,7 @@ interface RiiinglinkInterface {
     public function find($id);
     public function findTags($tag_id,$riiinglinks);
     public function findBy($id,$scope,$nbr = null);
-    public function findByHost($user_id);
+    public function findByHost($user_id,$tags = null);
     public function findByHostWithParams($user_id,$params);
     public function findByHostAndInvited($invited_id,$host_id);
     public function latest($user_id);

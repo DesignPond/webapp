@@ -33,11 +33,11 @@ class ExportController extends Controller {
 	public function index()
 	{
 
-        $this->export->setUser($this->auth)->getUserRiiinglinks();
+        $this->export->setUser($this->auth)->setTags([2])->getUserRiiinglinks();
         $this->export->setTypes()->unsetHiddenTypes();
 
         $lines = $this->export->userExport();
-        
+
         \Excel::create('Filename', function($excel) use ($lines) {
 
             $excel->sheet('Export', function($sheet) use ($lines) {

@@ -41,9 +41,19 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
     /**
      * Riiinglinks for host and invited infos
      */
-    public function findByHost($user_id){
+    public function findByHost($user_id,$tags = null){
 
-        return $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'))->get();
+        $riiinglink = $this->riiinglink->where('host_id','=',$user_id)->with(array('invite'));
+
+        if($tags)
+        {
+            $riiinglink->whereHas('tags',function ($q) use ($tags)
+            {
+                $q->whereIn('tag_id',$tags);
+            });
+        }
+
+        return $riiinglink->get();
     }
 
     public function latest($user_id){
