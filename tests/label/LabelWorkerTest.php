@@ -175,6 +175,68 @@ class LabelWorkerTest extends TestCase {
         return false;
     }
 
+    public function testOrderTypesInGroupe(){
+
+        $groupe = [
+            0 => 'Cindy Leschaud',
+            3 => 'Cindy',
+            5 => 'Label',
+            6 => 'Last',
+            9 => 'Other',
+        ];
+
+        $expect = [
+            0  => 'Cindy Leschaud',
+            1  => '',
+            2  => '',
+            3  => 'Cindy',
+            4  => '',
+            5  => 'Label',
+            6  => 'Last',
+            7  => '',
+            8  => '',
+            9  => 'Other',
+            10 => '',
+            11 => '',
+            12 => ''
+        ];
+
+        $actual = $this->worker->typeForGroupes($groupe);
+
+        $this->assertEquals($expect, $actual);
+    }
+
+
+    public function testOrderTypesInGroupeUnset(){
+
+        $groupe = [
+            0 => 'Cindy Leschaud',
+            3 => 'Cindy',
+            5 => 'Label',
+            6 => 'Last',
+            9 => 'Other',
+        ];
+
+        $expect = [
+            0  => 'Cindy Leschaud',
+            1  => '',
+            2  => '',
+            3  => 'Cindy',
+            4  => '',
+            5  => 'Label',
+            6  => 'Last',
+            7  => '',
+            8  => '',
+            9  => 'Other',
+            10 => '',
+            11 => '',
+        ];
+
+        $actual = $this->worker->typeForGroupes($groupe,[12]);
+
+        $this->assertEquals($expect, $actual);
+    }
+
     public function testAssignPhotoUser()
     {
 /*        $user_id = 1;

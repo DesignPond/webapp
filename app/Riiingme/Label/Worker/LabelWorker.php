@@ -41,6 +41,25 @@ class LabelWorker{
 
     }
 
+    public function typeForGroupes($data_groupe,$unset = null)
+    {
+        $data  = [];
+
+        $types = $this->type->getAll()->lists('id');
+        $types = array_merge([0 => 0],$types);
+
+        if($unset){
+            $types = array_diff($types, $unset);
+        }
+
+        foreach($types as $type)
+        {
+            $data[$type] = ( isset($data_groupe[$type]) && !empty($data_groupe[$type]) ? $data_groupe[$type] : '');
+        }
+
+        return $data;
+    }
+
     public function convertLabels($inputs, $user_id, $groupe){
 
         $data = [];
