@@ -48,19 +48,25 @@ class ExportController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function contacts()
+	public function contacts(Request $request)
 	{
 
-        $this->export->setUser($this->auth->id)->setTags([2])->getUserRiiinglinks();
-        $this->export->setTypes()->unsetHiddenTypes();
+        $tags    = $request->input('tags');
+        $labels  = $request->input('labels');
+        $groupes = $request->input('groupes');
 
+        $this->export->setUser($this->auth->id)->setTags($tags)->setLabels($labels)->setGroupes($groupes)->getUserRiiinglinks();
+        $this->export->setTypes();
+
+        $types = $this->export->prepareLabelsTitle();
         $lines = $this->export->userExport();
 
-        \Excel::create('Filename', function($excel) use ($lines) {
+        \Excel::create('Filename', function($excel) use ($lines,$types) {
 
-            $excel->sheet('Export', function($sheet) use ($lines) {
+            $excel->sheet('Export', function($sheet) use ($lines,$types) {
                 $sheet->fromArray($lines);
-                $sheet->row(1,['Pénom et nom', 'Email', 'Entreprise', 'Profession', 'Rue et Numéro', 'NPA','Ville','Pays','Téléphone fixe','Téléphone portable','Date de naissance','Site web']);
+                $sheet->row(1,[null,null,null,null,null,null,null,null,null,null,null,null]);
+                $sheet->row(1,$types);
             });
 
         })->export('xls');

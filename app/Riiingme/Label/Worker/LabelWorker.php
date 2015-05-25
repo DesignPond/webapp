@@ -165,7 +165,7 @@ class LabelWorker{
 
         if(!empty($partage))
         {
-            // Assure we get correct lables to partage
+            // Assure we get correct labels to partage
             $partage = $this->convertPartgeUserType($partage,$user);
 
             foreach($partage as $groupe => $types)

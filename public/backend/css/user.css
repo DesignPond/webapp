@@ -379,6 +379,14 @@ fieldset.border {
     padding-top: 20px;
 }
 
+.list_checkbox .checkbox {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 1px solid #efefef;
+    margin: 4px 0;
+    padding: 3px;
+    max-width: 240px;
+}
+
 /*
 * Navigation
 */

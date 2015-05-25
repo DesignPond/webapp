@@ -3,24 +3,32 @@
 use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Label\Worker\LabelWorker;
+use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
+use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
 
 class ExportWorker{
 
     protected $riiinglink;
     protected $groupe;
     protected $label;
+    protected $worker;
     protected $hiddenTypes;
+    protected $transformer;
+
     public $types;
     public $user;
     public $tags;
+    public $labels;
+    public $groupes;
     public $user_riiinglinks;
 
-    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label)
+    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label, RiiinglinkTransformer $transformer, RiiinglinkWorker $worker )
     {
-        $this->riiinglink = $riiinglink;
-        $this->groupe     = $groupe;
-        $this->label      = $label;
-
+        $this->riiinglink  = $riiinglink;
+        $this->groupe      = $groupe;
+        $this->label       = $label;
+        $this->worker      = $worker;
+        $this->transformer = $transformer;
         $this->hiddenTypes = [12];
     }
 
@@ -29,7 +37,6 @@ class ExportWorker{
         $this->types = $this->groupe->getTypes();
         
         return $this;
-
     }
 
     public function setTags($tags){
@@ -37,7 +44,27 @@ class ExportWorker{
         $this->tags = $tags;
 
         return $this;
+    }
 
+    public function setLabels($labels){
+
+        $this->labels = $labels;
+
+        return $this;
+    }
+
+    public function setGroupes($groupes){
+
+        if(is_array($groupes) && !empty($groupes))
+        {
+            $groupes[] = ( in_array(2,$groupes) ? 4 : null);
+            $groupes[] = ( in_array(3,$groupes) ? 5 : null);
+            $groupes   = array_filter($groupes);
+        }
+
+        $this->groupes = $groupes;
+
+        return $this;
     }
 
     public function setUser($user_id){
@@ -58,11 +85,17 @@ class ExportWorker{
             foreach($this->user_riiinglinks as $riiinglink)
             {
                 $data   = [];
-
+                // Find riinglink inverse
                 $invite = $this->loadLabelsAndGroupes($riiinglink);
                 $data   = $this->userLabelsInGroupes($invite);
 
-                $user_data[$riiinglink->invite->id] = $this->label->periodIsInEffect($invite->users_groups,$data);
+                $user = $this->label->periodIsInEffect($invite->invite->users_groups,$data);
+
+                if(!empty($user))
+                {
+                    $user_data[$riiinglink->invite->id] = $user;
+                }
+
             }
         }
 
@@ -74,24 +107,41 @@ class ExportWorker{
     {
         $data = [];
 
-        if(!$invite->labels->isEmpty())
+        if(!empty($invite->labels))
         {
-            foreach ($invite->labels as $groupe)
+            $labels = $invite->labels;
+            unset($labels[1]);
+
+            foreach ($labels as $groupe_id => $groupe)
             {
-                if ($groupe->groupe_id > 1)
+                if( empty($this->groupes) || (!empty($this->groupes) && in_array($groupe_id,$this->groupes)) )
                 {
-                    $data[$groupe->groupe_id][0] = $invite->name;
-                    $data[$groupe->groupe_id][$groupe->type_id] = $groupe->label;
+                    $data[$groupe_id][0] = $invite->invite->name;
+
+                    foreach ($groupe as $type_id => $label)
+                    {
+                        if(empty($this->labels) || (!empty($this->labels) && in_array($type_id,$this->labels)) )
+                        {
+                           $data[$groupe_id][$type_id] = $label;
+                        }
+                    }
                 }
             }
         }
-
+        
         return $data;
     }
 
     public function loadLabelsAndGroupes($riiinglink)
     {
-        return $riiinglink->invite->load('labels','users_groups');
+
+        $this->transformer->invited =  $this->transformer->getUser($riiinglink->invited_id);
+        $labels = $this->transformer->getInvitedLabels($riiinglink);
+
+        $riiinglink->setAttribute('labels',$labels);
+        $riiinglink->invite->load('users_groups');
+
+        return $riiinglink;
     }
 
     public function dispatchTypes($user_data, $unset = [])
@@ -113,10 +163,17 @@ class ExportWorker{
     }
 
     public function unsetHiddenTypes(){
+
         // Remove hidden from list
         if(!empty($this->hiddenTypes))
         {
-            $this->types = array_diff($this->types,$this->hiddenTypes);
+            foreach($this->hiddenTypes as $hidden)
+            {
+                if(isset($this->types[$hidden]))
+                {
+                    unset($this->types[$hidden]);
+                }
+            }
         }
 
         return $this;
@@ -129,5 +186,30 @@ class ExportWorker{
         return $this;
     }
 
+    public function prepareLabelsTitle(){
+
+        $types = $this->groupe->getTypes();
+
+        if(!empty($this->hiddenTypes))
+        {
+            foreach($this->hiddenTypes as $hidden)
+            {
+                if(isset($types[$hidden])){ unset($types[$hidden]); }
+            }
+        }
+
+        if(!empty($this->labels))
+        {
+            foreach($this->labels as $label)
+            {
+                $new[$label] = $types[$label];
+            }
+
+            return [0 => 'Pénom et nom'] + $new;
+        }
+
+        return [0 => 'Pénom et nom'] + $types;
+
+    }
 
 }

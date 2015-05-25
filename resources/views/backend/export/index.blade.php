@@ -4,48 +4,79 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="panel">
-                <div class="panel-heading">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-small">
                     <div class="panel-title">
                         {{ trans('menu.export') }}
                     </div>
                 </div>
-                <div class="panel-body">
-                    <form action="{{ url('export/contacts') }}" method="post" class="form-horizontal">
+                <form action="{{ url('export/contacts') }}" method="post" class="form-horizontal">
+                    <div class="panel-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Qui</label>
+                            <div class="col-sm-10">
+                                <div class="checkbox">
+                                    <label><input checked id="allContacts" type="checkbox"> Tous mes contacts</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10 list_checkbox">
+                                <p class="text-danger"><strong>Ou exporter par tags</strong></p>
+                                @if(!empty($tags))
+                                    @foreach($tags as $tag_id => $tag)
+                                        <div class="checkbox">
+                                            <label><input value="{{ $tag_id }}" name="tags[]" type="checkbox"> {{ $tag }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <hr/>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">Quoi</label>
                             <div class="col-sm-10">
                                 <div class="checkbox">
-                                    <label><input type="checkbox"> Tous mes contacts</label>
+                                    <label><input checked id="allLabels" type="checkbox"> Toutes les informations</label><br/>
                                 </div>
                             </div>
                         </div>
-
-                        <hr/>
-
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Que certaines infos</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label"></label>
 
-                            @if(!empty($types))
-                                <?php  unset($types[12]); $chuncks = array_chunk($types,6); ?>
-                                @foreach($chuncks as $all_type)
-                                    <div class="col-sm-5">
-                                        @foreach($all_type as $type_id => $type)
-                                            <div class="checkbox">
-                                                <label><input value="{{ $type_id }}" name="labels[]" type="checkbox"> {{ $type }}</label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            @endif
+                            <div class="col-sm-5 list_checkbox">
+                                <p class="text-danger"><strong>Choisir les informations à exporter</strong></p>
+                                @if(!empty($types))
+                                    <?php unset($types[12]); ?>
+                                    @foreach($types as $type_id => $type)
+                                        <div class="checkbox">
+                                            <label><input value="{{ $type_id }}" name="labels[]" type="checkbox"> {{ $type }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="col-sm-5 list_checkbox">
+                                <p class="text-danger">&nbsp;</p>
+                                @if(!empty($groupes))
+                                    <?php unset($groupes[1],$groupes[4],$groupes[5]); ?>
+                                    @foreach($groupes as $groupe_id => $groupe)
+                                        <div class="checkbox">
+                                            <label><input value="{{ $groupe_id }}" name="groupes[]" type="checkbox"> {{ $groupe }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+
                         </div>
-                    </form>
-                </div>
-                <div class="panel-footer">
-                    <button class="btn btn-primary" type="submit">{{ trans('menu.export_title') }}</button>
-                </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" type="submit">{{ trans('menu.export_title') }}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -1,5 +1,39 @@
 (function($) {
 
+
+    $('#allContacts').on('change',function(){
+
+        var checked = ($(this).is(':checked') ? false : true);
+
+        $('input[name="tags[]"]').prop('checked', checked);
+
+    });
+
+    $('#allLabels').on('change',function(){
+
+        var checked = ($(this).is(':checked') ? false : true);
+
+        $('input[name="labels[]"]').prop('checked', checked);
+        $('input[name="groupes[]"]').prop('checked', checked);
+
+    });
+
+    $('input[name="labels[]"],input[name="groupes[]"]').on('change',function(){
+
+        var checked = ($(this).is(':checked') ? false : true);
+
+        $('#allLabels').prop('checked', checked);
+
+    });
+
+    $('input[name="tags[]"]').on('change',function(){
+
+        var checked = ($(this).is(':checked') ? false : true);
+
+        $('#allContacts').prop('checked', checked);
+
+    });
+
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
         var tab   = $(e.target).attr('rel');
