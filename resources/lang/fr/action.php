@@ -17,6 +17,7 @@ return [
     'login'          => 'Login',
     'back'           => 'Retour à la liste',
     'backto'         => 'Retour',
+    'ok'             => 'Ok',
     'destroy'        => 'Détruire le partage',
     'delete'         => 'Supprimer',
     'search'         => 'Rechercher',

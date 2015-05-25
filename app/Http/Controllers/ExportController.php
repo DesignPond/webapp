@@ -2,27 +2,32 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
-use App\Riiingme\Groupe\Worker\GroupeWorker;
-use App\Riiingme\Label\Worker\LabelWorker;
+use App\Riiingme\Activite\Worker\ActiviteWorker;
 use App\Riiingme\Export\Worker\ExportWorker;
+use App\Riiingme\User\Repo\UserInterface;
+use App\Riiingme\Groupe\Worker\GroupeWorker;
 use Illuminate\Http\Request;
 
 class ExportController extends Controller {
 
-    protected $riiinglink;
-    protected $groupe;
+    protected $activity;
     protected $auth;
-    protected $label;
+    protected $user;
+    protected $groupe;
     protected $export;
 
-    public function __construct(ExportWorker $export, GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label)
+    public function __construct(UserInterface $user,ExportWorker $export, ActiviteWorker $activity, GroupeWorker $groupe)
     {
-        $this->riiinglink = $riiinglink;
-        $this->groupe     = $groupe;
-        $this->label      = $label;
+        $this->activity   = $activity;
         $this->export     = $export;
-        $this->auth       = \Auth::user()->id;
+        $this->user       = $user;
+        $this->groupe     = $groupe;
+
+        $this->auth       = $this->user->find(\Auth::user()->id);
+        \View::share('user',  $this->auth);
+
+        $demandes = $this->activity->getAskInvites($this->auth->email);
+        \View::share('demandes', $demandes);
     }
 
 	/**
@@ -32,8 +37,21 @@ class ExportController extends Controller {
 	 */
 	public function index()
 	{
+        $tags        = $this->auth->user_tags->lists('title','id');
+        $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-        $this->export->setUser($this->auth)->setTags([2])->getUserRiiinglinks();
+        return view('backend.export.index')->with($depedencies + array('tags' => $tags));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function contacts()
+	{
+
+        $this->export->setUser($this->auth->id)->setTags([2])->getUserRiiinglinks();
         $this->export->setTypes()->unsetHiddenTypes();
 
         $lines = $this->export->userExport();
@@ -46,72 +64,6 @@ class ExportController extends Controller {
             });
 
         })->export('xls');
-
-	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }

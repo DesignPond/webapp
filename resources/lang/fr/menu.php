@@ -39,6 +39,8 @@ return [
     'periode'       => 'Pour la période',
     'indiquer'      => 'Indiquer une',
     'envoyer'       => 'Envoyer',
+    'export'        => 'Exporter mes contacts',
+    'export_title'  => 'Exporter',
     'uploading'     => 'Téléchargement',
     'majinfos'      => 'Mettre à jour vos données',
     'search'        => 'Recherche email ou nom/prénom',

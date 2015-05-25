@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="panel panel-default" id="filters">
         <div class="panel-body">
-            <div class="col-md-8 col-xs-12">
+            <div class="col-md-5 col-xs-12">
 
                 <form id="filterChange" action="{{ Request::url() }}" method="post">
 
@@ -21,7 +21,7 @@
                             @endforeach
                         @endif
                     </select>
-                    &nbsp;&nbsp;<a href="{{ Request::url() }}" class="btn btn-primary collapseButton">{{ trans('menu.all') }}</a>
+                    &nbsp;<a href="{{ Request::url() }}" class="btn btn-primary collapseButton">{{ trans('menu.all') }}</a>
                 </form>
 
             </div><!-- /.col-lg-6 -->
@@ -29,14 +29,16 @@
                 <form id="filterSearch" action="{{ Request::url() }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="{{ trans('action.search') }}...">
+                        <input type="text" name="search" class="form-control search-input" placeholder="{{ trans('action.search') }}...">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button>
+                            <button class="btn btn-primary" type="submit">{{ trans('action.ok') }}</button>
                         </span>
                     </div><!-- /input-group -->
                 </form>
             </div><!-- /.col-lg-6 -->
-
+            <div class="col-md-3 col-xs-12">
+                <a href="{{ url('export') }}" class="btn btn-success pull-right">{{ trans('menu.export') }}</a>
+            </div>
         </div>
     </div>
 </div>

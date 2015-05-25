@@ -1,3 +1,7 @@
+/*
+* Latests riiinglinks on activity page
+*/
+
 .lasted-riiinglink{
     line-height: 30px;
 }
@@ -6,9 +10,9 @@
     margin-bottom: 0;
 }
 
-.chat li .chat-header{
-    padding: 15px 20px;
-}
+/*
+* Panel
+*/
 
 .panel-label{
     margin-bottom: 2px;
@@ -52,16 +56,24 @@
     margin-bottom: 5px;
 }
 
-.chat-msg .panel-small .panel-body{
-    padding:5px 10px;
-}
-
 .panel-heading.panel-small{
     padding:8px 10px;
 }
 
 .temp-address{
     background: #f5f5f5;
+}
+
+/*
+* Partgae label
+*/
+
+.chat-msg .panel-small .panel-body{
+    padding:5px 10px;
+}
+
+.chat li .chat-header{
+    padding: 15px 20px;
 }
 
 .chat-msg-item{
@@ -166,6 +178,12 @@
     margin-top: 5px;
 }
 
+.riiinglink{
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+}
+
 .panel .dl-horizontal{
     margin-top: 20px;
 }
@@ -174,57 +192,20 @@
     margin-bottom: 3px;
 }
 
-.riiinglink{
-    display: block;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.isEditable .used {
-    background: #f5f5f5;
-}
-
 .panel .list-group .list-group-item:first-child {
     border-top: 1px solid #f1f2f3;
-}
-
-.element-item{
-    line-height: 50px;
-}
-
-.element-item span img{
-    margin-right: 10px;
 }
 
 .panel .list-group{
     margin-bottom:0;
 }
 
-.isEditable .linked:not(.used) {
-    background: #ffe9e9;
-}
-
-.isEditable .linked:not(.used):hover {
-    background: #ffcfcf;
-}
-
-.finishRiiinglink{
-    display: none;
-}
-
-.btn-riiinglink{
-    padding: 15px 8px 0 0;
-}
-
-fieldset .form-group {
-    margin-bottom: 5px;
-}
-
 .list-group-item strong{
     line-height: 20px;
 }
 
-.partage .panel-body, .partage .chat li .chat-msg{
+.partage .panel-body,
+.partage .chat li .chat-msg{
     padding: 0;
     margin:0;
 }
@@ -247,6 +228,11 @@ fieldset .form-group {
 .chat-img{
     margin-top: 0;
     margin-left: 0;
+}
+
+.chat-msg-content.chat-msg-host.bg-grey label,
+.chat-msg-content.chat-msg-host.bg-grey p{
+    color: #666;
 }
 
 .chat{
@@ -276,30 +262,22 @@ fieldset .form-group {
     margin-right: 10px;
 }
 
-.navbar-nav > li > a {
-    padding-bottom: 15px;
-    padding-top: 15px;
-}
-
-.navbar-form {
-    margin: 0;
-}
-
-.navbar-form .form-control {
-    margin-top: 5px;
-}
-
-.navbar-nav a{
-    cursor: pointer;
-}
-
-
 .uploadBtn{
     margin-top: 10px;
 }
 
 .ui-front{
     z-index: 1000;
+}
+
+.clear{
+    clear: both;
+}
+
+.title-adresse{
+    margin-bottom: 30px;
+    font-size: 17px;
+    color: #777;
 }
 
 #partage{
@@ -318,6 +296,58 @@ fieldset .form-group {
     background: #f2f2f2;
 }
 
+.app .alert > p{
+    font-size: 14px;
+    line-height: 15px;
+}
+
+.app .alert > a{
+    margin-top: 2px;
+}
+
+/*
+* riinglink plugin
+*/
+
+.isEditable .used {
+    background: #f5f5f5;
+}
+
+.isEditable .linked:not(.used) {
+    background: #ffe9e9;
+}
+
+.isEditable .linked:not(.used):hover {
+    background: #ffcfcf;
+}
+
+.finishRiiinglink{
+    display: none;
+}
+
+.btn-riiinglink{
+    padding: 15px 8px 0 0;
+}
+
+/*
+* Form
+*/
+
+fieldset .form-group {
+    margin-bottom: 5px;
+}
+
+form.mb-lg .c-checkbox p{
+    left: 35px;
+    position: absolute;
+    top: 0;
+    font-size: 13px;
+}
+
+form.mb-lg .clearfix{
+    height: 40px;
+}
+
 form .nav-tabs > li > a,
 form .nav-tabs > li.active > a {
     padding: 5px 15px;
@@ -333,6 +363,43 @@ form .nav-tabs > li {
     padding: 0;
 }
 
+.form-edit fieldset{
+    position: relative;
+}
+
+fieldset {
+    border-bottom: none;
+    margin-bottom: 0px;
+    padding:0px 20px 20px 20px;
+}
+
+fieldset.border {
+    border-top: 1px dashed #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/*
+* Navigation
+*/
+
+.navbar-nav > li > a {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.navbar-form {
+    margin: 0;
+}
+
+.navbar-form .form-control {
+    margin-top: 5px;
+}
+
+.navbar-nav a{
+    cursor: pointer;
+}
+
 .nav-tabs > li {
     float: left;
     margin-bottom: -1px;
@@ -350,57 +417,48 @@ form .nav-tabs > li {
     display: block;
     position: relative;
 }
-* {
-    box-sizing: border-box;
-}
-* {
-    box-sizing: border-box;
-}
 .nav {
     list-style: outside none none;
 }
-.nav {
-    list-style: outside none none;
-}
-body {
-    color: #585f69;
-    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+
+/*
+* Buttons
+*/
+
+.btn-collapse{
+    display: block;
+    height: auto;
+    line-height: 20px;
+    min-height: 40px;
+    text-align: center;
+    width: 80%;
     font-size: 13px;
-    background: #f2f2f2;
-    line-height: 1.52857;
-}
-body {
-    color: #333;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857;
-}
-html {
-    direction: ltr;
-}
-html {
-    font-size: 10px;
-}
-html {
-    font-family: sans-serif;
-}
-html {
-    font-size: 10px;
+    white-space: normal;
 }
 
-.clear{
+.btn-collapse span{
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn-save{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* ---- isotope ---- */
+
+.isotope:after {
+    content: '';
+    display: block;
     clear: both;
 }
 
-.app .alert > p{
-    font-size: 14px;
-    line-height: 15px;
-}
-
-.app .alert > a{
-   margin-top: 2px;
-}
-
+/*
+* Upload plugins
+*/
 .cropArea {
     background: #E4E4E4;
     overflow: hidden;
@@ -426,69 +484,6 @@ html {
     z-index: 2;
 }
 
-.title-adresse{
-    margin-bottom: 30px;
-    font-size: 17px;
-    color: #777;
-}
-
-.btn-collapse{
-    display: block;
-    height: auto;
-    line-height: 20px;
-    min-height: 40px;
-    text-align: center;
-    width: 80%;
-    font-size: 13px;
-    white-space: normal;
-}
-
-.btn-collapse span{
-    display: block;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.form-edit fieldset{
-    position: relative;
-}
-
-.btn-save{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-}
-
-fieldset {
-    border-bottom: none;
-    margin-bottom: 0px;
-    padding:0px 20px 20px 20px;
-}
-
-fieldset.border {
-    border-top: 1px dashed #eee;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-
-.bg-grey{
-/*    background: #f0f0f0;*/
-}
-
-.chat-msg-content.chat-msg-host.bg-grey label,.chat-msg-content.chat-msg-host.bg-grey p{
-    color: #666;
-}
-
-/* ---- isotope ---- */
-
-/* clear fix */
-.isotope:after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
 .webcam,
 .userpic {
     width: 200px;
@@ -502,12 +497,6 @@ fieldset.border {
 .webcam__preview,
 .userpic__preview {
     position: absolute;
-}
-
-.webcam {
-    background-size: auto;
-    background-image: url('../images/uploader/webcam.png');
-    background-position: center 10px;
 }
 
 .b-upload {
@@ -671,7 +660,6 @@ fieldset.border {
     background-color: #f60;
 }
 
-
 .fileprogress {
     padding: 1px;
     height: 5px;
@@ -693,7 +681,6 @@ fieldset.border {
 .userpic__preview {
     position: absolute;
 }
-
 
 .b-upload {
     white-space: nowrap;
@@ -763,18 +750,20 @@ fieldset.border {
     margin: 10px 10px 5px;
 }
 
+/*
+* Jquery plugins
+*/
+
+/* telephone */
 .intl-tel-input input,
 .intl-tel-input input[type="text"],
 .intl-tel-input input[type="tel"]{
 
 }
 
-#copyright{
-    position: absolute;;
-    bottom: 5px;
-    width: 100%;
-    text-align: center;
-}
+/*
+* Register food
+*/
 
 .auth-login{
     padding: 20px;
@@ -813,15 +802,13 @@ fieldset.border {
     font-size: 14px;
 }
 
-form.mb-lg .c-checkbox p{
-    left: 35px;
-    position: absolute;
-    top: 0;
-    font-size: 13px;
-}
+/*
+* Media
+*/
 
-form.mb-lg .clearfix{
-    height: 40px;
+.media-heading {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .media-left, .media > .pull-left {
@@ -832,6 +819,9 @@ form.mb-lg .clearfix{
     width: 100%;
 }
 
+/*
+* Texts
+*/
 .text-bold{
     margin-bottom: 0;
 }
@@ -840,12 +830,9 @@ form.mb-lg .clearfix{
     line-height: 40px;
 }
 
-.media-heading {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-
+/*
+* Timeline
+*/
 
 #updateTimeline{
     width: 100%;
@@ -859,9 +846,9 @@ form.mb-lg .clearfix{
     display: none;
 }
 
-#orderFilter,#selectFilter{
-    width: 190px;
-}
+/*
+* Footer
+*/
 
 #footer{
   margin-top: 30px;
@@ -873,8 +860,15 @@ form.mb-lg .clearfix{
     color: #333;
 }
 
+#copyright{
+    position: absolute;;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
 /*
-Autocomplete ui
+* Autocomplete ui
 */
 
 .ui-widget-content {
@@ -906,3 +900,24 @@ Autocomplete ui
     font-weight: normal;
 }
 
+
+/*
+* Filters on list riiinglinks
+*/
+
+#orderFilter,#selectFilter{
+    width: 145px;
+}
+
+#filters .panel-body{
+    padding: 10px 0;
+}
+
+#filters .btn, #filters .chosen-single{
+    padding: 8px 10px 7px;
+    border-radius: 2px;
+}
+
+#filterSearch .search-input{
+    padding: 8px 14px;
+}
