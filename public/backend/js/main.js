@@ -5,7 +5,7 @@
 
         var checked = ($(this).is(':checked') ? false : true);
 
-        $('input[name="tags[]"]').prop('checked', checked);
+        //$('input[name="tags[]"]').prop('checked', checked);
 
     });
 
@@ -13,8 +13,8 @@
 
         var checked = ($(this).is(':checked') ? false : true);
 
-        $('input[name="labels[]"]').prop('checked', checked);
-        $('input[name="groupes[]"]').prop('checked', checked);
+       // $('input[name="labels[]"]').prop('checked', checked);
+       // $('input[name="groupes[]"]').prop('checked', checked);
 
     });
 
@@ -22,7 +22,7 @@
 
         var checked = ($(this).is(':checked') ? false : true);
 
-        $('#allLabels').prop('checked', checked);
+       // $('#allLabels').prop('checked', checked);
 
     });
 
@@ -30,7 +30,7 @@
 
         var checked = ($(this).is(':checked') ? false : true);
 
-        $('#allContacts').prop('checked', checked);
+       // $('#allContacts').prop('checked', checked);
 
     });
 

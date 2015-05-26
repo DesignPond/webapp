@@ -106,26 +106,24 @@ class ExportTest extends TestCase {
 
     public function testSetUserLabels()
     {
-        $invite = new \App\Riiingme\Invite\Entities\invite;
+        $link   = new \App\Riiingme\Riiinglink\Entities\Riiinglink();
+        $invite = new \App\Riiingme\Invite\Entities\Invite();
 
-        $label1 = new \App\Riiingme\Label\Entities\Label;
-        $label1->groupe_id = 2;
-        $label1->type_id   = 1;
-        $label1->label     = 'label 1';
-        $label2 = new \App\Riiingme\Label\Entities\Label;
-        $label2->groupe_id = 2;
-        $label2->type_id   = 2;
-        $label2->label     = 'label 2';
-        $label3 = new \App\Riiingme\Label\Entities\Label;
-        $label3->groupe_id = 3;
-        $label3->type_id   = 1;
-        $label3->label     = 'label 3';
+        $labels = [
+            2 => [
+                1 => 'label 1',
+                2 => 'label 2'
+            ],
+            3 => [
+                1 => 'label 3',
+            ]
+        ];
 
-        $invite->labels = new \Illuminate\Database\Eloquent\Collection([$label1,$label2,$label3]);
+        $link->labels  = new \Illuminate\Database\Eloquent\Collection($labels);
+        $invite->name  = 'Cindy Leschaud';
+        $link->invite  = $invite;
 
-        $invite->name = 'Cindy Leschaud';
-
-        $actual = $this->worker->userLabelsInGroupes($invite);
+        $actual = $this->worker->userLabelsInGroupes($link);
 
         $expect = [
             2 => [
@@ -155,7 +153,7 @@ class ExportTest extends TestCase {
 
         $this->worker->labels = [1];
 
-        $actual2 = $this->worker->userLabelsInGroupes($invite);
+        $actual2 = $this->worker->userLabelsInGroupes($link);
         $this->assertEquals($actual2, $expect2);
     }
 }
