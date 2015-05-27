@@ -18,5 +18,5 @@ return [
    'title_3'  => 'Adresse professionnelle',
    'title_4'  => 'Adresse privé',
    'title_5'  => 'Adresse professionnelle',
-   'title_6'  => 'Adresse entreprise'
+   'title_6'  => 'Adresse entreprise',
 ];

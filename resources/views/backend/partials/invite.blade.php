@@ -38,7 +38,7 @@
                     @else
                         <div style="border-top: 1px solid #f4f5f5" class="chat-msg">
                              <div class="well-sm">
-                                 {{ $ringlink['invited_name'] }} n'a pas encore partagé d'informations
+                                 {{ $ringlink['invited_name'] }} {{ trans('menu.no_partage') }}
                              </div>
                         </div>
                     @endif

@@ -42,7 +42,7 @@
                     <li><hr></li>
                     <li>
                         <a href="{{ url('logout') }}" title="Tables" class="ng-scope">
-                            <em class="sidebar-item-icon icon-power"></em><span>Log out</span>
+                            <em class="sidebar-item-icon icon-power"></em><span>{{ trans('menu.logout') }}</span>
                         </a>
                     </li>
                 </ul>

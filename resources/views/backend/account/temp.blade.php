@@ -34,7 +34,7 @@
 
     <div class="col-md-8 col-xs-12">
         <div class="form-group">
-            <label class="col-sm-4 control-label" for="exampleInputEmail1">{{ trans('menu.periode') }}</label>
+            <label class="col-sm-4 control-label">{{ trans('menu.periode') }}</label>
             <div class="col-sm-8">
                 <input value="{{ $daterange or '' }}" type="text" name="date[{{ $view['id'] }}]" class="form-control daterange">
             </div>

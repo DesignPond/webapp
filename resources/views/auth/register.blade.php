@@ -8,7 +8,7 @@
                 {{ trans('action.create') }} <span>{{ trans('menu.prive') }}</span>
             </a>
         </div>
-        <strong class="col-md-12 text-center">ou</strong>
+        <strong class="col-md-12 text-center">{{ trans('action.ou') }}</strong>
         <div class="col-md-12">
             <a href="{{ url('auth/register_company') }}" class="btn btn-block btn-primary mt-lg">
                 <i class="fa fa-users"></i><br/>

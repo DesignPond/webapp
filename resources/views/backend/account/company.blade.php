@@ -5,10 +5,10 @@
         @if($prive)
             <?php unset($view['groupe_type'][0]); ?>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Email</label>
+                <label class="col-sm-4 control-label">{{ trans('action.email') }}</label>
                 <div class="col-sm-8 col-xs-12">
                     <input value="{{ $user->email }}" type="text" name="info[email]" class="form-control">
-                    <p class="help-block"><small>vaut aussi comme adresse de login</small></p>
+                    <p class="help-block"><small>{{ trans('menu.addresse_login') }}</small></p>
                 </div>
             </div>
         @endif

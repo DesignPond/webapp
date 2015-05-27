@@ -18,14 +18,14 @@
                             <label for="inputPassword3" class="col-sm-2 control-label">Qui</label>
                             <div class="col-sm-10">
                                 <div class="checkbox">
-                                    <label><input checked id="allContacts" type="checkbox"> Tous mes contacts</label>
+                                    <label><input checked id="allContacts" type="checkbox"> {{ trans('menu.export_all') }}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
                             <div class="col-sm-10 list_checkbox">
-                                <p class="text-danger"><strong>Ou exporter par tags</strong></p>
+                                <p class="text-danger"><strong>{{ trans('menu.export_tags') }}</strong></p>
                                 @if(!empty($tags))
                                     @foreach($tags as $tag_id => $tag)
                                         <div class="checkbox">
@@ -37,10 +37,10 @@
                         </div>
                         <hr/>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Quoi</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">{{ trans('menu.quoi') }}</label>
                             <div class="col-sm-10">
                                 <div class="checkbox">
-                                    <label><input checked id="allLabels" type="checkbox"> Toutes les informations</label><br/>
+                                    <label><input checked id="allLabels" type="checkbox"> {{ trans('menu.export_all_info') }}</label><br/>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
 
                             <div class="col-sm-5 list_checkbox">
-                                <p class="text-danger"><strong>Choisir les informations à exporter</strong></p>
+                                <p class="text-danger"><strong>{{ trans('menu.export_choix') }}</strong></p>
                                 @if(!empty($types))
                                     <?php unset($types[12]); ?>
                                     @foreach($types as $type_id => $type)

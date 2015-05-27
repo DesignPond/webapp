@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="Riiingme">
-    <title>Riiingme</title>
+    <title>RiiingMe</title>
 
     <!-- App CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="center-block mt-xl wd-xl">
-                    <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="Image" class="center-block img-rounded" /></a>
+                    <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="RiiingMe" class="center-block img-rounded" /></a>
                 </div>
 
                 <!-- Contenu -->

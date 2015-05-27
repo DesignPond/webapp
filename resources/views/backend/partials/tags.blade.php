@@ -8,6 +8,6 @@
                 @endforeach
             @endif
         </ul>
-        <button id="tagging" class="btn btn-primary btn-sm" type="submit">ajouter</button>
+        <button id="tagging" class="btn btn-primary btn-sm" type="submit">{{ trans('menu.ajouter') }}</button>
     </div>
 </div>

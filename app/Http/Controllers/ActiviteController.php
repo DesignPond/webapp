@@ -17,7 +17,6 @@ class ActiviteController extends Controller {
 
     public function __construct(UserInterface $user, GroupeWorker $groupe, ActiviteWorker $activity)
     {
-
         $this->user       = $user;
         $this->groupe     = $groupe;
         $this->activity   = $activity;

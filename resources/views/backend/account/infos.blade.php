@@ -40,15 +40,15 @@
             <?php $name = ($user->user_type == '1' ? trans('menu.firstname').'/'.trans('menu.lastname') : trans('menu.company') ); ?>
             <label class="col-sm-4 control-label">{{ $name }}</label>
             <div class="col-md-6">
-                <label class="radio-inline"><input type="radio" <?php echo ($user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="1"> oui</label>
-                <label class="radio-inline"><input type="radio" <?php echo (!$user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="0"> non</label>
+                <label class="radio-inline"><input type="radio" <?php echo ($user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="1"> {{ trans('action.oui') }}</label>
+                <label class="radio-inline"><input type="radio" <?php echo (!$user->name_search ? 'checked' : ''); ?> name="info[name_search]" value="0"> {{ trans('action.non') }}</label>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label">{{ trans('menu.email') }}</label>
             <div class="col-md-6">
-                <label class="radio-inline"><input type="radio" <?php echo ($user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="1"> oui</label>
-                <label class="radio-inline"><input type="radio" <?php echo (!$user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="0"> non</label>
+                <label class="radio-inline"><input type="radio" <?php echo ($user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="1"> {{ trans('action.oui') }}</label>
+                <label class="radio-inline"><input type="radio" <?php echo (!$user->email_search ? 'checked' : ''); ?> name="info[email_search]" value="0"> {{ trans('action.non') }}</label>
             </div>
         </div>
     </div>

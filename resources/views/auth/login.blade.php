@@ -31,7 +31,7 @@
 
                 {!! Form::close() !!}
 
-                <p class="text-center text-muted">Ou</p>
+                <p class="text-center text-muted">{{ trans('action.ou') }}</p>
                 <a href="{{ url('auth/register') }}" class="btn btn-block btn-primary"><strong>{{ trans('message.createaccount') }}</strong></a>
             </div>
         </div>

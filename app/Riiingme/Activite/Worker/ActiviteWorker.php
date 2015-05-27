@@ -38,7 +38,7 @@ class ActiviteWorker{
 
         $result = $activites->merge($invites);
         $result->sortByDesc('created_at');
-
+        
         return $result;
     }
 

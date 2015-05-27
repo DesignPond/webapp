@@ -23,7 +23,7 @@
                     @include('auth.form')
                 </form>
                 <p class="pt-lg text-center">{{ trans('message.already') }}</p>
-                <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>Login</strong></a>
+                <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>{{ trans('action.login') }}</strong></a>
             </div>
         </div>
     </section>

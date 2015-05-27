@@ -19,13 +19,15 @@ class Activite extends Model {
 
             if($this->user_id == \Auth::user()->id)
             {
+                $email = (isset($this->invite->name) ? $this->invite->name : '');
+
                 if($this->invited_id == null)
                 {
-                    return ['color' => 'warning', 'quoi' => 'Invitation envoyé à', 'qui' => $this->invite->email];
+                    return ['color' => 'warning', 'quoi' => 'Invitation envoyé à', 'qui' => $email];
                 }
                 else
                 {
-                    return ['color' => 'success', 'quoi' => 'Invitation accepté par', 'qui' => $this->invited->name];
+                    return ['color' => 'success', 'quoi' => 'Invitation accepté par', 'qui' => $email];
                 }
             }
             else

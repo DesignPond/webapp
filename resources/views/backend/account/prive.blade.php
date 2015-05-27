@@ -6,7 +6,7 @@
         @if($prive)
             <?php unset($view['groupe_type'][0]); ?>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Email</label>
+                <label class="col-sm-4 control-label">{{ trans('menu.email') }}</label>
                 <div class="col-sm-8 col-xs-12">
                     <input value="{{ $user->email }}" type="text" name="info[email]" class="form-control">
                     <p class="help-block"><small>{{ trans('menu.loginemail') }}</small></p>
