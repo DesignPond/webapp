@@ -14,6 +14,8 @@ class LabelWorker{
     protected $helper;
     protected $user;
 
+    public $all_types;
+
     public function __construct(UserInterface $user, LabelInterface $label, GroupeInterface $groupe, TypeInterface $type)
     {
         $this->label  = $label;
@@ -21,6 +23,9 @@ class LabelWorker{
         $this->type   = $type;
         $this->user   = $user;
         $this->helper = new \App\Riiingme\Helpers\Helper;
+
+        $this->all_types = $this->type->getAll()->lists('id');
+        unset($this->all_types[12]);
     }
 
     public function labelByGroupeType($id){
@@ -41,16 +46,12 @@ class LabelWorker{
 
     }
 
-    public function typeForGroupes($data_groupe,$unset = null)
+    public function typeForGroupes($data_groupe,$labels = null)
     {
         $data  = [];
 
-        $types = $this->type->getAll()->lists('id');
+        $types = ($labels && !empty($labels) ? $labels : $this->all_types);
         $types = array_merge([0 => 0],$types);
-
-        if($unset){
-            $types = array_diff($types, $unset);
-        }
 
         foreach($types as $type)
         {

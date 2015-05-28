@@ -126,6 +126,28 @@ class LabelWorkerTest extends TestCase {
         $this->assertFalse($this->hasPivotGroupe($user->user_groups,4));
     }
 
+    public function testSetAllTypes()
+    {
+        $data_groupe = [
+            1 => 'label 1',
+            2 => 'label 2',
+            3 => 'label 3',
+            4 => 'label 4',
+            5 => 'label 5'
+        ];
+
+        $groupes = $this->worker->typeForGroupes($data_groupe,[2,3,4]);
+
+        $actual = [
+            0 => '',
+            2 => 'label 2',
+            3 => 'label 3',
+            4 => 'label 4',
+        ];
+
+        $this->assertEquals($actual,$groupes);
+    }
+
     public function testPeriodRangeInEffect()
     {
         $start = \Carbon\Carbon::now()->toDateString();
@@ -232,7 +254,7 @@ class LabelWorkerTest extends TestCase {
             11 => '',
         ];
 
-        $actual = $this->worker->typeForGroupes($groupe,[12]);
+        $actual = $this->worker->typeForGroupes($groupe,[1,2,3,4,5,6,7,8,9,10,11]);
 
         $this->assertEquals($expect, $actual);
     }

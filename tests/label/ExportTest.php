@@ -28,22 +28,8 @@ class ExportTest extends TestCase {
 
     public function testUnsetHiddenTypes()
     {
-        $types = [
-            1 => 'Email',
-            2 => 'Entreprise',
-            3 => 'Profession',
-            4 => 'Rue et Numéro',
-            5 => 'NPA',
-            6 => 'Ville',
-            7 => 'Pays',
-            8 => 'Téléphone fixe',
-            9 => 'Téléphone portable',
-            10 => 'Date de naissance',
-            11 => 'Site web',
-            12 => 'Photo'
-        ];
 
-        $this->worker->types = $types;
+        $this->worker->setTypes();
 
         $this->worker->unsetHiddenTypes();
 
@@ -58,7 +44,8 @@ class ExportTest extends TestCase {
             8 => 'Téléphone fixe',
             9 => 'Téléphone portable',
             10 => 'Date de naissance',
-            11 => 'Site web'];
+            11 => 'Site web'
+        ];
 
         $this->assertEquals($this->worker->types, $expect);
     }
@@ -112,7 +99,10 @@ class ExportTest extends TestCase {
         $labels = [
             2 => [
                 1 => 'label 1',
-                2 => 'label 2'
+                2 => 'label 2',
+                3 => 'label 3',
+                4 => 'label 4',
+                5 => 'label 5'
             ],
             3 => [
                 1 => 'label 3',
@@ -129,7 +119,10 @@ class ExportTest extends TestCase {
             2 => [
                 0 => 'Cindy Leschaud',
                 1 => 'label 1',
-                2 => 'label 2'
+                2 => 'label 2',
+                3 => 'label 3',
+                4 => 'label 4',
+                5 => 'label 5'
             ],
             3 => [
                 0 => 'Cindy Leschaud',
@@ -143,7 +136,9 @@ class ExportTest extends TestCase {
         $expect2 = [
             2 => [
                 0 => 'Cindy Leschaud',
-                1 => 'label 1'
+                1 => 'label 1',
+                4 => 'label 4',
+                5 => 'label 5'
             ],
             3 => [
                 0 => 'Cindy Leschaud',
@@ -151,7 +146,7 @@ class ExportTest extends TestCase {
             ]
         ];
 
-        $this->worker->labels = [1];
+        $this->worker->labels = [1,4,5];
 
         $actual2 = $this->worker->userLabelsInGroupes($link);
         $this->assertEquals($actual2, $expect2);

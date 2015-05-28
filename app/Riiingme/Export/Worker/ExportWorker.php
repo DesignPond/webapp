@@ -18,7 +18,7 @@ class ExportWorker{
     public $types;
     public $user;
     public $tags;
-    public $labels;
+    public $labels = null;
     public $groupes;
     public $user_riiinglinks;
 
@@ -30,6 +30,7 @@ class ExportWorker{
         $this->worker      = $worker;
         $this->transformer = $transformer;
         $this->hiddenTypes = [12];
+
     }
 
     public function setTypes(){
@@ -144,7 +145,7 @@ class ExportWorker{
         return $riiinglink;
     }
 
-    public function dispatchTypes($user_data, $unset = [])
+    public function dispatchTypes($user_data)
     {
         $lines = [];
 
@@ -154,7 +155,7 @@ class ExportWorker{
             {
                 foreach($data as $data_groupe => $line)
                 {
-                    $lines[] = $this->label->typeForGroupes($line,$unset);
+                    $lines[] = $this->label->typeForGroupes($line,$this->labels);
                 }
             }
         }
