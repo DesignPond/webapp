@@ -1,38 +1,56 @@
 (function($) {
 
 
-    $('#allContacts').on('change',function(){
+    $('#allContacts').on('change', function () {
 
-        var checked = ($(this).is(':checked') ? false : true);
-
-        //$('input[name="tags[]"]').prop('checked', checked);
-
-    });
-
-    $('#allLabels').on('change',function(){
-
-        var checked = ($(this).is(':checked') ? false : true);
-
-       // $('input[name="labels[]"]').prop('checked', checked);
-       // $('input[name="groupes[]"]').prop('checked', checked);
+        if ($(this).is(':checked')) {
+            $('input[name="tags[]"]').prop('checked', false);
+        }
 
     });
 
-    $('input[name="labels[]"],input[name="groupes[]"]').on('change',function(){
+    $('#allLabels').on('change', function () {
 
-        var checked = ($(this).is(':checked') ? false : true);
+        if ($(this).is(':checked')) {
+            $('input[name="labels[]"]').prop('checked', false);
+            $('input[name="groupes[]"]').prop('checked', false);
+        }
 
-       // $('#allLabels').prop('checked', checked);
+    });
+
+    /*
+    var $tags_list = $('#tags_list').find(':checkbox');
+
+    $tags_list.change(function () {
+
+    });*/
+
+    $('input[name="tags[]"]').on('change', function () {
+
+        if ($("#tags_list input:checkbox:checked").length > 0){
+
+            $('#allContacts').prop('checked', false);
+        }
+        else
+        {
+            $('#allContacts').prop('checked', true);
+        }
 
     });
 
-    $('input[name="tags[]"]').on('change',function(){
+    $('input[name="labels[]"],input[name="groupes[]"]').on('change', function () {
 
-        var checked = ($(this).is(':checked') ? false : true);
+        if( $("#types_list input:checkbox:checked").length > 0 || $("#groupe_list input:checkbox:checked").length > 0 ){
 
-       // $('#allContacts').prop('checked', checked);
+            $('#allLabels').prop('checked', false);
+        }
+        else
+        {
+            $('#allLabels').prop('checked', true);
+        }
 
     });
+
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 

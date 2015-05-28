@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
-                            <div class="col-sm-10 list_checkbox">
+                            <div class="col-sm-10 list_checkbox" id="tags_list">
                                 <p class="text-danger"><strong>{{ trans('menu.export_tags') }}</strong></p>
                                 @if(!empty($tags))
                                     @foreach($tags as $tag_id => $tag)
@@ -46,8 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
-
-                            <div class="col-sm-5 list_checkbox">
+                            <div class="col-sm-5 list_checkbox" id="types_list">
                                 <p class="text-danger"><strong>{{ trans('menu.export_choix') }}</strong></p>
                                 @if(!empty($types))
                                     <?php unset($types[12]); ?>
@@ -58,7 +57,7 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="col-sm-5 list_checkbox">
+                            <div class="col-sm-5 list_checkbox" id="groupe_list">
                                 <p class="text-danger">&nbsp;</p>
                                 @if(!empty($groupes))
                                     <?php unset($groupes[1],$groupes[4],$groupes[5]); ?>
