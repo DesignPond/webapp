@@ -65,7 +65,7 @@ class ExportController extends Controller {
 
             $excel->sheet('Export', function($sheet) use ($lines,$types) {
                 $sheet->fromArray($lines);
-                $sheet->row(1,[null,null,null,null,null,null,null,null,null,null,null,null]);
+                $sheet->row(1,[null,null,null,null,null,null,null,null,null,null,null,null,null]);
                 $sheet->row(1,$types);
             });
 
