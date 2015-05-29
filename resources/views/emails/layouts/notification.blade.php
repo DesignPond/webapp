@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-    <title>Riiingme | Notifications</title><!-- Responsive Styles and Valid Styles -->
+    <title>{{ trans('text.main_title') }}</title><!-- Responsive Styles and Valid Styles -->
 
     <style type="text/css">
 
@@ -175,7 +175,7 @@
                 <tr><td height="30"></td></tr>
                 <tr>
                     <td align="center" mc:edit="copy1" style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-header">
-                        Ceci est un email automatique envoyé par
+                        {{ trans('text.email_auto') }}
                         <a href="http//www.riiingme.ch" style="color: #243266; font-size: 10px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">www.riiingme.ch</a>
                     </td>
                 </tr>

@@ -15,7 +15,7 @@
     <td class="highlight pdTp32" style="{{$marginReset}}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #f6f6f7;">
         <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #465059;">
             <a href="#" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #235daa;">
-                <span style="text-decoration: none;color: #465059;">Demande de partage</span>
+                <span style="text-decoration: none;color: #465059;">{{ trans('text.demande') }}</span>
             </a>
         </h1><br/>
     </td>
@@ -49,7 +49,7 @@
                             <td style="{{ $marginReset }}{{ $paddingReset }}border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;line-height: 0 !important;font-size: 0 !important;" class="emptyCell">&nbsp;</td>
                             <td valign="middle" align="left" style="{{ $marginReset }}padding-top: 12px;padding-bottom: 0;padding-left: 12px;padding-right: 12px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;" class="bubbleContent">
                                 <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 14px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;color: #54565c;">
-                                    <strong>{{ $user->name }}</strong> <br/>souhaite partager ses informations avec vous.
+                                    <strong>{{ $user->name }}</strong> <br/>{{ trans('text.souhaite') }}
                                 </p>
                             </td>
                         </tr>
@@ -76,7 +76,7 @@
                             ?>
                             <br/>
                             <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">
-                                {{ $invite->user->first_name }} souhaiterai obtenir les informations suivantes:
+                                {{ $invite->user->first_name }} {{ trans('text.obtenir') }}
                             </p>
 
                             @foreach($partage as $groupes => $groupe)
@@ -94,10 +94,10 @@
         @endif
         <br/>
         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 16px;line-height: 22px;">
-            Pour confirmer la demande de partage veuillez suivre ce lien:
+           {{ trans('text.confirmer') }}
         </p>
         <?php  $url = url('invite?token='.$invite->token.'&ref='.base64_encode($invite->email).''); ?>
-        @include('emails.partials.button', ['url' => $url, 'titre' => 'Accepter le partage' ])
+        @include('emails.partials.button', ['url' => $url, 'titre' => trans('text.accepter') ])
 
     </td>
     <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>

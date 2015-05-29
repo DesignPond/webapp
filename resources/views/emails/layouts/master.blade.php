@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="format-detection" content="address=no;email=no;telephone=no">
-    <title>Bienvenue sur RiiingMe</title>
+    <title>{{ trans('menu.welcome') }}</title>
     <style type="text/css">
         /* Modified:30/10/2014 */
         /* Global Reset */
@@ -1214,7 +1214,7 @@
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;{{ $marginReset }}{{ $paddingReset }} margin-left:auto;margin-right:auto;height: 100%;width: 600px;background-color: #ebebeb;">
 
 <div class="emailSummary" style="mso-hide: all;display: none !important;font-size: 0 !important;max-height: 0 !important;line-height: 0 !important;padding: 0 !important;overflow: hidden !important;float: none !important;width: 0 !important;height: 0 !important;">
-   Notification automatique depuis www.riiingme.ch
+    {{ trans('menu.title_notification') }}
 </div>
 
 <table id="emailBody" width="600" border="0" cellspacing="0" cellpadding="0" style="{{ $marginReset }}{{ $paddingReset }}margin-left:auto;margin-right:auto;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;height: 100%;width: 100%;background-color: #ebebeb;">

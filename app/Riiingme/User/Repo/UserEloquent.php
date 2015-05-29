@@ -14,7 +14,7 @@ class UserEloquent implements UserInterface {
 
         if($period)
         {
-            return $this->user->with(array('labels'))->where('notification_interval','=',$period)->get();
+            return $this->user->with(array('labels','riiinglinks'))->where('notification_interval','=',$period)->get();
         }
 
         return $this->user->all();

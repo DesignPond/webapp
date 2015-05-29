@@ -38,6 +38,8 @@ return [
     'all'           => 'Tous',
     'ajouter'       => 'ajouter',
     'logout'        => 'Log out',
+    'inscription'   => 'S\'inscrire',
+    'deja_inscrit'  => 'Déja inscrit?',
     'quoi'          => 'Quoi',
     'periode'       => 'Pour la période',
     'indiquer'      => 'Indiquer une',

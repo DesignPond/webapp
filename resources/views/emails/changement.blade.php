@@ -15,7 +15,7 @@
     <td class="highlight pdTp32" style="{{$marginReset}}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #f6f6f7;">
         <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #465059;">
             <a href="#" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #235daa;">
-                <span style="text-decoration: none;color: #465059;">Notification de changement du partage</span>
+                <span style="text-decoration: none;color: #465059;">{{ trans('text.notification') }}</span>
             </a>
         </h1><br/>
     </td>
@@ -52,7 +52,7 @@
                                     <td style="{{ $marginReset }}{{ $paddingReset }}border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;line-height: 0 !important;font-size: 0 !important;" class="emptyCell">&nbsp;</td>
                                     <td valign="middle" align="left" style="{{ $marginReset }}padding-top: 12px;padding-bottom: 0;padding-left: 12px;padding-right: 12px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;" class="bubbleContent">
                                         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 14px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;color: #54565c;">
-                                            <strong>{{ $datauser['user']->name }}</strong> <br/>a changé les informations qu'il/elle partage avec vous
+                                            <strong>{{ $datauser['user']->name }}</strong> <br/>{{ trans('text.change') }}
                                         </p>
                                     </td>
                                 </tr>
@@ -66,14 +66,14 @@
                         <td style="{{ $marginReset }}padding-top: 10px;padding-bottom: 0;padding-left: 16px;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #82858f;border-left: 6px solid #ebebeb;">
 
                             @if(isset($datauser['changes']) && !empty($datauser['changes']))
-                                <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">Informations ajoutés</h3>
+                                <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">{{ trans('text.info_ajoute') }}</h3>
 
                                 @include('emails.partials.changes', ['changes' => $datauser['changes']])
 
                             @endif
 
                             @if(isset($datauser['revision']) && !empty($datauser['revision']))
-                                <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">Informations édités</h3>
+                                <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">{{ trans('text.info_edit') }}</h3>
 
                                 @include('emails.partials.changes', ['changes' => $datauser['revision']])
 

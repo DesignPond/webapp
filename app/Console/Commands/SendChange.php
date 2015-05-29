@@ -55,14 +55,12 @@ class SendChange extends Command {
     public function handle()
     {
 
-        $types   = $this->type->getAll()->lists('titre','id');
-        $groupes = $this->groupe->getGroupes();
+        $interval = $this->option('interval');
+        $types    = $this->type->getAll()->lists('titre','id');
+        $groupes  = $this->groupe->getGroupes();
         unset($groupes[1]);
 
-        $interval = $this->option('interval');
-
-        // Get all users who want notifications every week
-        $users = $this->user->getAll($interval);
+        $users = $this->worker->setInterval($interval)->getUsers();
 
         foreach ($users as $user)
         {

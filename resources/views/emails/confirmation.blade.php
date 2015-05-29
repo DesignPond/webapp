@@ -17,15 +17,14 @@
     <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
     <td class="eBody alignCenter pdTp32" style="{{ $marginReset }}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #54565c;background-color: #ffffff;">
         <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 20px;line-height: 36px;font-weight: bold;color: #465059;">
-            <span style="color: #465059;">Inscription sur RiiingMe</span>
+            <span style="color: #465059;">{{ trans('text.inscription') }}</span>
         </h1>
         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">
-            Vous êtes prêt à configurer votre nouveau compte RiiingMe.<br>
-            Cliquez sur le bouton ci-dessous pour...
+            {{ trans('text.ready') }}
         </p>
 
         <?php  $url = url('activation?token='.$token); ?>
-        @include('emails.partials.button', ['url' => $url, 'titre' => 'Activer votre compte' ])
+        @include('emails.partials.button', ['url' => $url, 'titre' =>  trans('text.activer') ])
 
     </td>
     <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>

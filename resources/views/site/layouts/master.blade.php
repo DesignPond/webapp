@@ -7,7 +7,7 @@
 <head>
 
     <!-- title -->
-    <title>Riiingme</title>
+    <title>RiiingMe</title>
 
     <!-- meta tags -->
     <meta charset="utf-8">

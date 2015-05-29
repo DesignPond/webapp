@@ -20,27 +20,27 @@ Route::get('test', function()
     $this->command = new App\Commands\ProcessInvite(1);
 
     $link   = $this->command->getRiiinglink(1,2);
-    $invite =  $this->command->getInvite();
-    $metas  =  $this->command->convertMetasToLabels($link,unserialize($invite->partage_host));
+    //$invite =  $this->command->getInvite();
+   // $metas  =  $this->command->convertMetasToLabels($link,unserialize($invite->partage_host));
 
-    $this->command->syncLabels($link);
+    //$this->command->syncLabels($link);
 
-    $new = $ring->find($link->id)->first();
+    //$new = $ring->find($link->id)->first();
 
     echo '<pre>';
-    print_r(unserialize($new->usermetas->labels));
+    //print_r(unserialize($new->usermetas->labels));
     echo '</pre>';
 
     $link2   = $this->command->getRiiinglink(2,1);
-    $invite2 =  $this->command->getInvite();
-    $metas2  =  $this->command->convertMetasToLabels($link2,unserialize($invite2->partage_host));
+    //$invite2 =  $this->command->getInvite();
+   // $metas2  =  $this->command->convertMetasToLabels($link2,unserialize($invite2->partage_host));
 
-    $this->command->syncLabels($link2);
+    //$this->command->syncLabels($link2);
 
-    $new2 = $ring->find($link2->id)->first();
+    $new2 = $ring->find(1)->first();
 
     echo '<pre>';
-    print_r(unserialize($new2->usermetas->labels));
+    print_r($new2);
     echo '</pre>';
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
