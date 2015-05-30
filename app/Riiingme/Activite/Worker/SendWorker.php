@@ -6,11 +6,9 @@ use App\Riiingme\User\Repo\UserInterface;
 class SendWorker{
 
     protected $user;
-
     protected $change;
 
     public $interval;
-
     public $users;
     public $changeForInvite;
 
@@ -50,8 +48,7 @@ class SendWorker{
 
                         if(!empty($this->changeForInvite))
                         {
-                            $data[$user->id][$invite]['infos'] = $this->changeForInvite;
-                            $data[$user->id][$invite]['user']  = $this->user->simpleFind($invite);
+                            $data[$user->id][$invite] = $this->prepareChangeForinvite($invite,$user);
                         }
                     }
                 }
@@ -59,6 +56,13 @@ class SendWorker{
         }
 
         return $data;
+    }
+
+    public function prepareChangeForInvite($invite,$user)
+    {
+        $invited = $this->user->simpleFind($invite);
+
+        return ['changes' => $this->changeForInvite, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo] , 'email' => $user->email];
     }
 
     public function getChangesForInvite($invite){

@@ -39,12 +39,17 @@ Route::get('test', function()
 
     $new2 = $ring->find(1)->first();
 
+    $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+
+    $send->setInterval('week')->getUsers();
+    $all_changes = $send->send();
+
     echo '<pre>';
-    print_r($new2);
+    print_r($all_changes);
     echo '</pre>';
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-    $change      = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
+
     $user        = \App::make('App\Riiingme\User\Repo\UserInterface');*/
 
    // $change = $change->getLabelChange(1);

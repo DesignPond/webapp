@@ -7,6 +7,7 @@ class SendWorkerTest extends TestCase {
     protected $mock;
     protected $worker;
     protected $faker;
+    protected $user;
 
     public function setUp()
     {
@@ -14,10 +15,18 @@ class SendWorkerTest extends TestCase {
 
         parent::setUp();
 
-        $this->worker = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+        $this->refreshApplication();
 
-        $this->mock = Mockery::mock('App\Droit\User\Repo\UserInterface');
-        $this->app->instance('App\Droit\User\Repo\UserInterface', $this->mock);
+        $this->worker = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+        $this->user   = \App::make('App\Riiingme\User\Repo\UserInterface');
+        $this->mock   = \Mockery::mock('App\Riiingme\User\Repo\UserInterface');
+        $this->app->instance('App\Riiingme\User\Repo\UserInterface', $this->mock);
+
+    }
+
+    public function tearDown(){
+
+        \Mockery::close();
     }
 
 	/**
@@ -27,16 +36,30 @@ class SendWorkerTest extends TestCase {
 	 */
 	public function testSendWorker()
 	{
-        $expect = [];
-        $users = $this->createUsers();
-       // $this->mock->shouldReceive('simpleFind')->once()->andReturn($users);
+        //$users = $this->createUsers();
+        //$this->mock->shouldReceive('simpleFind')->once()->andReturn($user);
+
+        $invited = $this->user->simpleFind(2);
+        $user    = $this->user->simpleFind(1);
+
+        $changes = [
+            'added'   => [
+                2 => [ 1 => 2,  4 => 3, 5 => 4 ],
+                3 => [ 1 => 11]
+            ],
+            'deleted' => [
+                3 =>  [ 3 => 13,  7 => 17 ]
+            ]
+        ];
+
         $this->worker->setInterval('week');
-        $this->worker->users = $users;
-        
-        $result = $this->worker->send();
+        $this->worker->changeForInvite = $changes;
 
+        $result = $this->worker->prepareChangeForInvite(2,$user);
 
-       // $this->assertEquals($expect, $result);
+        $expect = ['changes' => $changes, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo], 'email' => $user->email];
+
+        $this->assertEquals($expect, $result);
 	}
 
     public function createUsers()
