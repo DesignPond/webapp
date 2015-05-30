@@ -56,7 +56,7 @@ class SendWorkerTest extends TestCase {
 
         $result = $this->worker->prepareChangeForInvite(2);
 
-        $expect = ['changes' => $changes, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo]];
+        $expect = $this->worker->changeForInvite + [ 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo]];
 
         $this->assertEquals($expect, $result);
 	}

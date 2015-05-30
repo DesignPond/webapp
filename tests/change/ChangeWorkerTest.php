@@ -27,6 +27,7 @@ class ChangeWorkerTest extends TestCase {
 
         $this->worker = new \App\Riiingme\Activite\Worker\ChangeWorker(
             $this->change,
+            \App::make('App\Riiingme\Label\Worker\LabelWorker'),
             \App::make('App\Riiingme\User\Repo\UserInterface'),
             $this->label,
             $this->revision
@@ -124,7 +125,7 @@ class ChangeWorkerTest extends TestCase {
 
         $difference = $this->worker->setUser(1)->setPeriod('week')->setPart('deleted')->getChanges();
 
-        $this->label->shouldReceive('getLabels')->once()->with($difference['deleted'])->andReturn([3 => [ 6 => '2000']]);
+        $this->label->shouldReceive('getLabels')->once()->with($difference['deleted'],true)->andReturn([3 => [ 6 => '2000']]);
 
         $response = $this->worker->convertToLabels($difference);
 
