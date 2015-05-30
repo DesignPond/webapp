@@ -5,6 +5,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use App\Riiingme\Activite\Worker\ChangeWorker;
+use App\Riiingme\Activite\Worker\SendWorker;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Type\Repo\TypeInterface;
@@ -25,6 +26,8 @@ class SendChange extends Command {
     protected $type;
 
     protected $groupe;
+
+    protected $worker;
     /**
      * The console command description.
      *
@@ -37,13 +40,14 @@ class SendChange extends Command {
      *
      * @return void
      */
-    public function __construct(ChangeWorker $change, UserInterface $user, TypeInterface $type, GroupeWorker $groupe)
+    public function __construct(SendWorker $worker,ChangeWorker $change, UserInterface $user, TypeInterface $type, GroupeWorker $groupe)
     {
         parent::__construct();
 
         $this->changes = $change;
         $this->user    = $user;
         $this->type    = $type;
+        $this->worker  = $worker;
         $this->groupe  = $groupe;
     }
 
@@ -56,41 +60,22 @@ class SendChange extends Command {
     {
 
         $interval = $this->option('interval');
+
         $types    = $this->type->getAll()->lists('titre','id');
         $groupes  = $this->groupe->getGroupes();
         unset($groupes[1]);
 
-        $users = $this->worker->setInterval($interval)->getUsers();
+        $users = $this->worker->setInterval($interval)->getUsers()->send();
 
-        foreach ($users as $user)
+        if(!empty($users))
         {
-            // Load user riiinglinks to get all invited
-            $invited   = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
-
-            if(!empty($invited))
+            foreach($users as $user)
             {
-                $data = [];
-
-                foreach($invited as $invite)
+                \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
                 {
-                    $changes = $this->changes->setUser($invite)->setPeriod($user->notification_interval)->allChanges();
-
-                    if(!empty($changes))
-                    {
-                        $data[$invite] = $changes;
-                        $data[$invite]['user'] = $this->user->simpleFind($invite);
-                    }
-                }
-
-                if(!empty($data))
-                {
-                    \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $data) , function($message) use ($user)
-                    {
-                        $message->to($user->email)->subject('Notification de changement du partage');
-                    });
-                }
+                    $message->to($user['email'])->subject('Notification de changement du partage');
+                });
             }
-
         }
 
     }

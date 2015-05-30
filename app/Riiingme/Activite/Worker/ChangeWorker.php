@@ -3,6 +3,7 @@
 use App\Riiingme\Activite\Repo\ChangeInterface;
 use App\Riiingme\Activite\Repo\RevisionInterface;
 use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
+use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\User\Repo\UserInterface;
 
 class ChangeWorker{
@@ -12,17 +13,20 @@ class ChangeWorker{
     protected $user;
     protected $label;
     protected $groupes;
+    protected $worker;
 
     public $part   = 'added';
     public $period = 'semester';
     public $updates;
     public $user_id;
+    public $invited;
 
-    public function __construct(ChangeInterface $change, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
+    public function __construct(ChangeInterface $change, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
         $this->changes  = $change;
         $this->user     = $user;
         $this->label    = $label;
+        $this->worker   = $worker;
         $this->revision = $revision;
         $this->groupes  = range(1,6);
     }
@@ -30,6 +34,7 @@ class ChangeWorker{
     public function setUser($user_id)
     {
         $this->user_id = $user_id;
+        $this->invited = $this->user->find($user_id);
 
         return $this;
     }
@@ -57,17 +62,21 @@ class ChangeWorker{
 
         if(!empty($changes) || !$revisions->isEmpty())
         {
-            if(!empty($changes)){
+            if(!empty($changes))
+            {
                 $data['changes'] = $changes;
             }
 
             if(!empty($revisions))
             {
                 $items = [];
+
                 foreach($revisions as $update)
                 {
                     $items[$update->label->groupe_id][$update->label->type_id] = $update->new_value;
                 }
+
+                $items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
 
                 $data['revision'] = $items;
             }
@@ -139,9 +148,11 @@ class ChangeWorker{
     * */
     public function convertToLabels($difference)
     {
+        $this->label->invited = $this->invited;
+
         if( !empty($difference) && isset($difference[$this->part]) && !empty($difference[$this->part]) )
         {
-            return $data[$this->part] = $this->label->getLabels($difference[$this->part]);
+            return $data[$this->part] = $this->label->getLabels($difference[$this->part],true);
         }
 
         return [];

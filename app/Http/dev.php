@@ -18,26 +18,25 @@ Route::get('test', function()
     $labels = $meta->labels;
 
     $this->command = new App\Commands\ProcessInvite(1);
-
     $link   = $this->command->getRiiinglink(1,2);
     //$invite =  $this->command->getInvite();
    // $metas  =  $this->command->convertMetasToLabels($link,unserialize($invite->partage_host));
-
     //$this->command->syncLabels($link);
-
     //$new = $ring->find($link->id)->first();
-
     echo '<pre>';
     //print_r(unserialize($new->usermetas->labels));
     echo '</pre>';
-
-    $link2   = $this->command->getRiiinglink(2,1);
+    //$link2   = $this->command->getRiiinglink(2,1);
     //$invite2 =  $this->command->getInvite();
    // $metas2  =  $this->command->convertMetasToLabels($link2,unserialize($invite2->partage_host));
-
     //$this->command->syncLabels($link2);
+    //$new2 = $ring->find(1)->first();
+    $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
+    $groupe = \App::make('App\Riiingme\Groupe\Worker\GroupeWorker');
 
-    $new2 = $ring->find(1)->first();
+    $types    = $type->getAll()->lists('titre','id');
+    $groupes  = $groupe->getGroupes();
+    unset($groupes[1]);
 
     $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
 
@@ -46,7 +45,19 @@ Route::get('test', function()
 
     echo '<pre>';
     print_r($all_changes);
-    echo '</pre>';
+    echo '</pre>';exit;
+    
+    if(!empty($all_changes)) {
+        foreach ($all_changes as $user) {
+
+            \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
+            {
+                $message->to($user['email'])->subject('Notification de changement du partage');
+            });
+
+        }
+    }
+
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
 
@@ -89,10 +100,13 @@ Route::get('changement', function()
     $groupes = $groupe->getGroupes();
     unset($groupes[1]);
 
-    /*
+    
     $change->setUser($user->id)->setPeriod($user->notification_interval);
-    $data = $change->allChanges();
-    */
+    $data = $change->setUser(1)->setPeriod('week')->allChanges();
+   
+echo '<pre>';
+print_r($data);
+echo '</pre>';exit;
 
     // Load user riiinglinks to get all invited
     $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');

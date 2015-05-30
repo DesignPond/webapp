@@ -48,7 +48,8 @@ class SendWorker{
 
                         if(!empty($this->changeForInvite))
                         {
-                            $data[$user->id][$invite] = $this->prepareChangeForinvite($invite,$user);
+                            $data[$user->id]['email'] = $user->email;
+                            $data[$user->id]['invite'][$invite] = $this->prepareChangeForinvite($invite,$user);
                         }
                     }
                 }
@@ -58,11 +59,11 @@ class SendWorker{
         return $data;
     }
 
-    public function prepareChangeForInvite($invite,$user)
+    public function prepareChangeForInvite($invite)
     {
         $invited = $this->user->simpleFind($invite);
 
-        return ['changes' => $this->changeForInvite, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo] , 'email' => $user->email];
+        return  $this->changeForInvite  + ['user' => ['name' => $invited->name, 'photo' => $invited->user_photo]];
     }
 
     public function getChangesForInvite($invite){

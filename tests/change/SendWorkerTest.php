@@ -40,7 +40,6 @@ class SendWorkerTest extends TestCase {
         //$this->mock->shouldReceive('simpleFind')->once()->andReturn($user);
 
         $invited = $this->user->simpleFind(2);
-        $user    = $this->user->simpleFind(1);
 
         $changes = [
             'added'   => [
@@ -55,9 +54,9 @@ class SendWorkerTest extends TestCase {
         $this->worker->setInterval('week');
         $this->worker->changeForInvite = $changes;
 
-        $result = $this->worker->prepareChangeForInvite(2,$user);
+        $result = $this->worker->prepareChangeForInvite(2);
 
-        $expect = ['changes' => $changes, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo], 'email' => $user->email];
+        $expect = ['changes' => $changes, 'user' => ['name' => $invited->name, 'photo' => $invited->user_photo]];
 
         $this->assertEquals($expect, $result);
 	}
