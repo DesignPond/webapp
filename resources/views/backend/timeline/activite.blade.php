@@ -24,7 +24,7 @@
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     <h4 class="timeline-title">
-                        <strong>{!! $activite->type_activite['quoi'] !!}</strong>
+                        <strong>{{ trans('label.'.$activite->type_activite['quoi']) }}</strong>
                         <div class="text-primary">{!! $activite->type_activite['qui'] !!}</div>
                     </h4>
                 </div>

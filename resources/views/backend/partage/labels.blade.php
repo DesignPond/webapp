@@ -18,19 +18,23 @@
     @foreach($GroupeTypes as $groupe)
 
         <div class="col-md-6">
-            <h5><strong>{{ $groupe['titre'] }}</strong></h5>
+            <h5><strong>{{ trans('label.title_'.$groupe['id']) }}</strong></h5>
 
             @foreach($groupe['groupe_type'] as $type)
                 @if(isset($host_group_type[$groupe['id']]) && !empty($host_group_type))
                     @if( in_array($type['id'], $host_group_type[$groupe['id']] ))
                         <div class="checkbox {{ $who }}">
-                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">{{ $type['titre'] }}</label>
+                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
+                                {{ trans('label.label_'.$type['id']) }}
+                            </label>
                         </div>
                     @endif
                 @else
                     @if($who != 'host')
                         <div class="checkbox {{ $who }}">
-                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">{{ $type['titre'] }}</label>
+                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
+                                {{ trans('label.label_'.$type['id']) }}
+                            </label>
                         </div>
                     @endif
                 @endif

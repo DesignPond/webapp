@@ -72,4 +72,5 @@ return [
     'droits'         => 'Tous droits réservés',
     'conditions'     => 'Conditions d\'utilisation',
     'confiential'    => 'Politique de confidentialité',
+    'new_tag'        => 'Nouveau tag',
 ];

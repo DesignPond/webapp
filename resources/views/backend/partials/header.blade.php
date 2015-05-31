@@ -19,6 +19,15 @@
 
         <!-- START Nav wrapper-->
         <div class="nav-wrapper collapse navbar-collapse" id="collapseAlertes" style="height: 0px;">
+            <ul class="nav navbar-nav navbar-left">
+                <?php $locale = \Session::get('locale'); ?>
+                <li class="<?php echo ($locale == 'fr' ? 'active' : ''); ?>">
+                    <a href="{{ url('setlang/fr') }}"><img src="{{ asset('backend/images/flags/France.png') }}"></a>
+                </li>
+                <li class="<?php echo ($locale == 'en' ? 'active' : ''); ?>">
+                    <a href="{{ url('setlang/en') }}"><img src="{{ asset('backend/images/flags/United-kingdom.png') }}"></a>
+                </li>
+            </ul>
             @include('backend.partials.alertes')
         </div>
         <!-- END Nav wrapper-->

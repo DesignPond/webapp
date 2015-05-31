@@ -21,7 +21,7 @@
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
                                         <div class="panel bg-gray panel-small">
                                             <div class="panel-body text-left">
-                                                {{ $groupes_user[$items['id']] }}
+                                                {{ trans('label.title_'.$items['id']) }}
                                                 <?php echo ( ($items['id'] == 4) || ($items['id'] == 5) ? ' <span class="text-muted"><small>'.trans('menu.temporaire').'</span></small>' : ''); ?>
                                             </div>
                                         </div>

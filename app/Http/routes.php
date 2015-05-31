@@ -69,11 +69,19 @@ Route::get('logout', function()
     Auth::logout();
     Session::flush();
     return Redirect::to('/');
+});
 
+/*
+ * Languages
+ * */
+Route::get('/setlang/{lang}', function($lang)
+{
+    \Session::put('locale', $lang);
+
+    return Redirect::back();
 });
 
 /*
  * Only for development
  * */
 require app_path().'/Http/dev.php';
-

@@ -8,7 +8,7 @@
 @if($label_text)
     <div class="chat-msg-item riiinglink linked <?php echo ($used ? 'used' : ''); ?>">
         <div class="chat-msg-content chat-msg-host bg-<?php echo ($used ? 'activated' : 'grey'); ?>">
-            <label class="text-left">{{ $types[$label['id']] }}</label>
+            <label class="text-left">{{ trans('label.label_'.$label['id']) }}</label>
             <p>{{ $label_text }}</p>
         </div>
         <div class="chat-msg-switch chat-switch-host">

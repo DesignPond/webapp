@@ -71,4 +71,5 @@ return [
     'droits'         => 'All rights reserved',
     'conditions'     => 'Terms of Use',
     'confiential'    => 'Privacy Policy',
+    'new_tag'        => 'New tag',
 ];

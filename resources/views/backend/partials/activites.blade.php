@@ -10,7 +10,7 @@
                         <li>
                             <div class="timeline-badge timeline-badge-sm thumb-32 bg-{{ $event->type_activite['color'] }}"><em class="fa fa-link"></em></div>
                             <div class="timeline-panel">
-                                <strong>{{ $event->type_activite['quoi'] }}</strong>
+                                <strong>{{ trans('label.'.$event->type_activite['quoi']) }}</strong>
                                 <div class="text-muted"><a href="">{{ $event->type_activite['qui'] }}</a></div>
                             </div>
                         </li>

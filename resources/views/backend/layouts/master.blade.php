@@ -54,7 +54,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
     <script src="<?php echo asset('backend/js/bootstrap/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/moment.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/daterangepicker.js');?>"></script>
@@ -66,6 +65,8 @@
     <script src="<?php echo asset('backend/js/jquery/jquery.validate.min.js');?>"></script>
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/tag-it.min.js');?>"></script>
+
+    <script>  var new_tag_txt = '{{ trans('menu.new_tag') }}'; </script>
     <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/js/timeline.js');?>"></script>
 
@@ -84,31 +85,7 @@
             staticPath: 'backend/js/jquery.fileapi/FileAPI/'
         };
     </script>
-    <script>
-        (function($) {
-
-            var $inputs = $(".mask_tel");
-
-            $inputs.intlTelInput({
-                defaultCountry: "auto",
-                autoHideDialCode:true,
-                autoFormat:true,
-                nationalMode:false,
-                utilsScript: "../../backend/js/utils.js"
-            });
-
-            $("#editForm").submit(function (e) {
-                $inputs.each( function( index, element ){
-                    var intlNumber = $(this).intlTelInput("getNumber");
-                    if(intlNumber != ''){
-                        $(this).val(intlNumber);
-                    }
-                });
-            });
-
-        })(jQuery);
-
-    </script>
+    <script src="<?php echo asset('backend/js/tel-input.js');?>"></script>
     <script src="<?php echo asset('backend/js/FileAPI/FileAPI.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/FileAPI/FileAPI.exif.js');?>"></script>
     <script src="<?php echo asset('backend/js/FileAPI/jquery.fileapi.js');?>"></script>

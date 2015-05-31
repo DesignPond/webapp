@@ -23,16 +23,16 @@ class Activite extends Model {
 
                 if($this->invited_id == null)
                 {
-                    return ['color' => 'warning', 'quoi' => 'Invitation envoyé à', 'qui' => $email];
+                    return ['color' => 'warning', 'quoi' => 'invite_send', 'qui' => $email];
                 }
                 else
                 {
-                    return ['color' => 'success', 'quoi' => 'Invitation accepté par', 'qui' => $email];
+                    return ['color' => 'success', 'quoi' => 'invite_accepted', 'qui' => $email];
                 }
             }
             else
             {
-                return ['color' => 'primary', 'quoi' => 'Invitation de', 'qui' => $this->host->name.' accepté'];
+                return ['color' => 'primary', 'quoi' => 'invite_from', 'qui' => $this->host->name];
             }
         }
 
@@ -40,11 +40,11 @@ class Activite extends Model {
 
             if($this->user_id == \Auth::user()->id)
             {
-                return ['color' => 'success', 'quoi' => 'Vous partagez avec', 'qui' => $this->invited->name];
+                return ['color' => 'success', 'quoi' => 'share_with', 'qui' => $this->invited->name];
             }
             else
             {
-                return ['color' => 'success', 'quoi' => 'Nouveau partage', 'qui' => $this->host->name.' partage avec vous'];
+                return ['color' => 'success', 'quoi' => 'share_new', 'qui' => $this->host->name];
             }
         }
 

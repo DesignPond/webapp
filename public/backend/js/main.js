@@ -171,7 +171,7 @@
     var base_url = location.protocol + "//" + location.host+"/";
 
     $("#myTags").tagit({
-        placeholderText: "Nouveau tag",
+        placeholderText: new_tag_txt,
         removeConfirmation: true,
         afterTagAdded: function(event, ui) {
             if(!ui.duringInitialization){

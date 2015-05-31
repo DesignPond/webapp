@@ -37,7 +37,7 @@
     <div class="col-md-4 col-xs-12">
         <?php $collapsible = $view['id'] + 2 ; ?>
         <a class="btn btn-info btn-sm btn-collapse" data-toggle="collapse" href="#collapse_{{ $collapsible }}" aria-expanded="false" aria-controls="collapseExample">
-            {{ trans('menu.indiquer') }} <span>{{ $view['titre'] }}</span> {{ trans('menu.temporaire') }}
+            {{ trans('menu.indiquer') }} <span>{{ trans('label.title_'.$view['id']) }}</span> {{ trans('menu.temporaire') }}
         </a>
     </div>
     <span class="clearfix"></span><br/>

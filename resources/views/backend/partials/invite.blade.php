@@ -21,12 +21,12 @@
                             @if(isset($groupes[$group]))
                                 <div class="chat-msg">
                                     <div class="panel bg-info panel-small">
-                                        <div class="panel-body text-left">{{ $groupes[$group] }}</div>
+                                        <div class="panel-body text-left">{{ trans('label.title_'.$group) }}</div>
                                     </div>
                                     <dl class="dl-horizontal">
                                     @foreach($groupe_label as $type_id => $label)
                                         @if(!empty($label))
-                                            <dt>{{ $types[$type_id] or ''}}</dt>
+                                            <dt>{{ trans('label.label_'.$type_id) }}</dt>
                                             <dd>{{ $label }}</dd>
                                         @endif
                                     @endforeach
