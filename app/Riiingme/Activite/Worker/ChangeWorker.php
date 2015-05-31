@@ -73,12 +73,16 @@ class ChangeWorker{
 
                 foreach($revisions as $update)
                 {
-                    $items[$update->label->groupe_id][$update->label->type_id] = $update->new_value;
+                    if(isset($update->label))
+                    {
+                        $items[$update->label->groupe_id][$update->label->type_id] = $update->new_value;
+                    }
                 }
 
                 $items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
 
-                if(!empty($items)){
+                if(!empty($items))
+                {
                     $data['revision'] = $items;
                 }
 

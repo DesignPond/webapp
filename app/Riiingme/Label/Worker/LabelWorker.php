@@ -223,7 +223,7 @@ class LabelWorker{
             }
         }
 
-        return $data;
+        return (!empty($data) ? $data : []);
     }
 
 }
