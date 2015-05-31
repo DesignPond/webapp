@@ -5,6 +5,7 @@ use App\Riiingme\Activite\Repo\RevisionInterface;
 use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\User\Repo\UserInterface;
+use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 
 class ChangeWorker{
 
@@ -14,20 +15,23 @@ class ChangeWorker{
     protected $label;
     protected $groupes;
     protected $worker;
+    protected $link;
 
     public $part   = 'added';
     public $period = 'semester';
     public $updates;
     public $user_id;
     public $invited;
+    public $riiinglink;
 
-    public function __construct(ChangeInterface $change, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
+    public function __construct(ChangeInterface $change, RiiinglinkInterface $link, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
         $this->changes  = $change;
         $this->user     = $user;
         $this->label    = $label;
         $this->worker   = $worker;
         $this->revision = $revision;
+        $this->link     = $link;
         $this->groupes  = range(1,6);
     }
 
@@ -35,6 +39,15 @@ class ChangeWorker{
     {
         $this->user_id = $user_id;
         $this->invited = $this->user->find($user_id);
+
+        return $this;
+    }
+
+    public function setRiiinglink($riiinglink)
+    {
+        $riiinglink = $this->link->findByHostAndInvited($riiinglink->invited_id,$riiinglink->host_id);
+
+        $this->riiinglink = $riiinglink;
 
         return $this;
     }
@@ -97,7 +110,10 @@ class ChangeWorker{
     * */
     public function updates()
     {
-        $this->updates = $this->changes->getUserUpdates($this->user_id, $this->period);
+        if(isset($this->riiinglink))
+        {
+            $this->updates = $this->changes->getUserUpdates($this->user_id, $this->riiinglink->id, $this->period);
+        }
 
         return $this;
     }

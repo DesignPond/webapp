@@ -24,9 +24,9 @@ class ChangeEloquent implements ChangeInterface {
         })->where('user_id','!=',$user_id)->where('name','=','updated_meta')->period($period)->orderBy('id', 'desc')->get();
     }
 
-    public function getUserUpdates($user_id,$period){
+    public function getUserUpdates($user_id,$riiinglink_id,$period){
 
-        return $this->change->where('user_id','=',$user_id)->where('name','=','updated_meta')->period($period)->orderBy('id', 'desc')->get();
+        return $this->change->where('user_id','=',$user_id)->where('riiinglink_id','=',$riiinglink_id)->where('name','=','updated_meta')->period($period)->orderBy('id', 'desc')->get();
     }
 
     public function getLastChanges(){

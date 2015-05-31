@@ -40,16 +40,16 @@ class SendWorker{
             {
                 $invited = $user->riiinglinks->lists('invited_id');
 
-                if(!empty($invited))
+                if(!$user->riiinglinks->isEmpty())
                 {
-                    foreach($invited as $invite)
+                    foreach($user->riiinglinks as $invite)
                     {
                         $this->getChangesForInvite($invite);
 
                         if(!empty($this->changeForInvite))
                         {
                             $data[$user->id]['email'] = $user->email;
-                            $data[$user->id]['invite'][$invite] = $this->prepareChangeForinvite($invite,$user);
+                            $data[$user->id]['invite'][$invite->invited_id] = $this->prepareChangeForinvite($invite,$user);
                         }
                     }
                 }
@@ -61,14 +61,14 @@ class SendWorker{
 
     public function prepareChangeForInvite($invite)
     {
-        $invited = $this->user->simpleFind($invite);
+        $invited = $this->user->simpleFind($invite->invited_id);
 
         return  $this->changeForInvite  + ['user' => ['name' => $invited->name, 'photo' => $invited->user_photo]];
     }
 
-    public function getChangesForInvite($invite){
-
-        $this->changeForInvite = $this->changes->setUser($invite)->setPeriod($this->interval)->allChanges();
+    public function getChangesForInvite($riiinglink)
+    {
+        $this->changeForInvite = $this->changes->setRiiinglink($riiinglink)->setUser($riiinglink->invited_id)->setPeriod($this->interval)->allChanges();
 
         return $this;
     }
