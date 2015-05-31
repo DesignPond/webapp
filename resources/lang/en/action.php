@@ -14,6 +14,7 @@ return [
     'seealert'       => 'See alerts',
     'save'           => 'Save',
     'change'         => 'Change',
+    'inscription'    => 'Register',
     'login'          => 'Login',
     'back'           => 'Back to list',
     'backto'         => 'Back',

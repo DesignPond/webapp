@@ -5,7 +5,7 @@
         <div class="row">
 
             <div class="col-md-6 col-xs-12">
-                <p class="text-center">{{ trans('menu.droits') }}<strong>&copy; RiiingMe 2015</strong></p>
+                <p class="text-center">{{ trans('menu.droits') }}<strong> &copy; RiiingMe 2015</strong></p>
             </div><!-- end of copyrights -->
             <div class="col-md-6 col-xs-12">
                 <ul class="nav nav-pills">

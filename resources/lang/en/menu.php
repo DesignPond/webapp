@@ -41,6 +41,7 @@ return [
     'inscription'   => 'Sign up',
     'deja_inscrit'  => 'Already registered?',
     'quoi'          => 'What',
+    'who'           => 'Who',
     'periode'       => 'For the period',
     'indiquer'      => 'Indicate',
     'envoyer'       => 'Send',

@@ -15,7 +15,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Qui</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label"> {{ trans('menu.who') }}</label>
                             <div class="col-sm-10">
                                 <div class="checkbox">
                                     <label><input checked id="allContacts" type="checkbox"> {{ trans('menu.export_all') }}</label>
@@ -52,7 +52,9 @@
                                     <?php unset($types[12]); ?>
                                     @foreach($types as $type_id => $type)
                                         <div class="checkbox">
-                                            <label><input value="{{ $type_id }}" name="labels[]" type="checkbox"> {{ $type }}</label>
+                                            <label><input value="{{ $type_id }}" name="labels[]" type="checkbox">
+                                                {{ trans('label.label_'.$type_id) }}
+                                            </label>
                                         </div>
                                     @endforeach
                                 @endif
@@ -63,7 +65,9 @@
                                     <?php unset($groupes[1],$groupes[4],$groupes[5]); ?>
                                     @foreach($groupes as $groupe_id => $groupe)
                                         <div class="checkbox">
-                                            <label><input value="{{ $groupe_id }}" name="groupes[]" type="checkbox"> {{ $groupe }}</label>
+                                            <label><input value="{{ $groupe_id }}" name="groupes[]" type="checkbox">
+                                                {{ trans('label.title_'.$groupe_id) }}
+                                            </label>
                                         </div>
                                     @endforeach
                                 @endif

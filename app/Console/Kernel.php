@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('change:send --interval=week')->dailyAt('13:25');
+		$schedule->command('change:send --interval=week')->everyFiveMinutes();
 	}
 
 }

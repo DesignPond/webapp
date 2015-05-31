@@ -14,6 +14,7 @@ return [
     'seealert'       => 'Voir Alertes',
     'save'           => 'Enregistrer',
     'change'         => 'Changer',
+    'inscription'    => 'Inscription',
     'login'          => 'Login',
     'back'           => 'Retour à la liste',
     'backto'         => 'Retour',

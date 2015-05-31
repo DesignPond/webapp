@@ -72,6 +72,10 @@ footer p strong{
     margin: 0 0 5px 0;
 }
 
+.navbar-nav > li.active a{
+    background: #eee;
+}
+
 @media screen and (min-width: 1024px) {
     .intro {
        height: 530px;
