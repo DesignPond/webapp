@@ -55,3 +55,30 @@
     <br/>
     <button class="btn btn-primary btn-sm pull-right" type="submit">{{ trans('action.save') }}</button>
 </fieldset>
+
+<!-- Configuration notifications -->
+<fieldset class="row border">
+    <h4>{{ trans('menu.notification') }}</h4>
+    <div class="col-md-8 col-xs-12">
+        <div class="form-group">
+
+            <label class="col-sm-4 control-label">{{ trans('menu.email') }} {{ trans('action.chaque') }}</label>
+            <div class="col-md-8">
+                <label class="radio-inline">
+                    <input type="radio" <?php echo ($user->notification_interval == 'day' ? 'checked' : ''); ?> name="info[notification_interval]" value="day"> {{ trans('action.day') }}
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" <?php echo ($user->notification_interval == 'week' ? 'checked' : ''); ?> name="info[notification_interval]" value="week"> {{ trans('action.week') }}
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" <?php echo ($user->notification_interval == 'month' ? 'checked' : ''); ?> name="info[notification_interval]" value="month"> {{ trans('action.month') }}
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" <?php echo ($user->notification_interval == 'semester' ? 'checked' : ''); ?> name="info[notification_interval]" value="semester"> {{ trans('action.semester') }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <button class="btn btn-primary btn-sm pull-right" type="submit">{{ trans('action.save') }}</button>
+</fieldset>

@@ -11,7 +11,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     use Authenticatable, CanResetPassword;
 
-    protected $fillable = ['first_name','last_name','company','email','name_search','email_search','user_type','password','activation_token','activated_at'];
+    protected $fillable = ['first_name','last_name','company','email','name_search','email_search','notification_interval','user_type','password','activation_token','activated_at'];
 
     /**
      * Dates as carbon objects

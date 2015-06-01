@@ -73,4 +73,5 @@ return [
     'conditions'     => 'Terms of Use',
     'confiential'    => 'Privacy Policy',
     'new_tag'        => 'New tag',
+    'notification'   => 'Frequency of notifications',
 ];

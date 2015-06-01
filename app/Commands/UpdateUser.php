@@ -22,7 +22,6 @@ class UpdateUser extends Command implements SelfHandling {
         $this->user  = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->label = \App::make('App\Riiingme\Label\Repo\LabelInterface');
 
-
 	}
 
 	/**
