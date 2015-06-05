@@ -25,7 +25,7 @@ trait RecordsChanges
 
             if (!$exist)
             {
-                Change::create([
+                $change = Change::create([
                     'meta_id'       => $this->id,
                     'riiinglink_id' => $this->riiinglink_id,
                     'name'          => $this->getChangeName($this, $event),
@@ -33,6 +33,10 @@ trait RecordsChanges
                     'user_id'       => \Auth::user()->id,
                     'changed_at'    => date('Y-m-d')
                 ]);
+
+                $new = Change::find($change->id);
+                $new->labels = $this->labels;
+                $new->save();
             }
             else
             {

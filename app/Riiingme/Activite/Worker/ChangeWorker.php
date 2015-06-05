@@ -77,7 +77,12 @@ class ChangeWorker{
         {
             if(!empty($changes))
             {
-                $data['changes'] = $changes;
+                $changes = $this->worker->periodIsInEffect($this->invited->users_groups, $changes);
+
+                if(!empty($changes))
+                {
+                    $data['changes'] = $changes;
+                }
             }
 
             if(!empty($revisions))
