@@ -70,9 +70,9 @@ class UserController extends Controller {
 	{
         $tags = $this->auth->user_tags->lists('title','id');
 
-		list($pagination,$riiinglinks) = $this->riiinglink->getRiiinglinkWithParams($id,$request);
-
-		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'pagination' => $pagination,'tags' => $tags, 'filtres' => $request->all()));
+        $riiinglinks = $this->riiinglink->getRiiinglinkWithParams($id,$request);
+        
+		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'pagination' => $riiinglinks,'tags' => $tags, 'filtres' => $request->all()));
 	}
 
     /**

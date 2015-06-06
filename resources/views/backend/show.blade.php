@@ -10,13 +10,13 @@
         <div class="row">
             @foreach($riiinglinks as $link)
 
+                <?php $link->invite->load('labels'); ?>
                  <div class="col-lg-4 col-md-4 col-xs-12">
                      <a href="{{ url('user/link/'.$link->id) }}">
                         <div class="panel">
                             <div class="panel-body riiinglink-card">
                                 <span class="pull-left">
-                                   <?php $photo = (!empty($link->photo) ? $link->photo :'avatar.jpg'); ?>
-                                   <img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$photo) }}">
+                                   <img class="img-circle thumb48" alt="Image" src="{{ asset('users/'.$link->invite->user_photo) }}">
                                 </span>
                                 <strong class="title">{{ $link->invite->name }}</strong>
                             </div>

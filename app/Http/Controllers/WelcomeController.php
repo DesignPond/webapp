@@ -22,24 +22,4 @@ class WelcomeController extends Controller {
 		return view('site.index');
 	}
 
-    /**
-     * About page
-     *
-     * @return void
-     */
-    public function about()
-    {
-        return view('site.about');
-    }
-
-    /**
-     * Contact page
-     *
-     * @return void
-     */
-    public function contact()
-    {
-        return view('site.contact');
-    }
-
 }

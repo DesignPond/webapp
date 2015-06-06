@@ -65,6 +65,11 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         $results = $this->riiinglink->where('host_id','=',$user_id);
 
+        if(!empty($params))
+        {
+            $results->with(array('invite'));
+        }
+
         if(isset($params['tag']) && !empty($params['tag']))
         {
             $results->with(array('tags','invite'))->whereHas('tags', function($q) use($params)

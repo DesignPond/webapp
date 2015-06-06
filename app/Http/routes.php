@@ -7,8 +7,6 @@
 */
 
 Route::get('/', array('as' => 'home', 'uses' => 'WelcomeController@index'));
-Route::get('about', array('as' => 'about', 'uses' => 'WelcomeController@about'));
-Route::get('contact', array('as' => 'contact', 'uses' => 'WelcomeController@contact'));
 
 Route::get('activation', array('as' => 'activation', 'uses' => 'DispatchController@activation'));
 Route::get('invite', array('as' => 'invite', 'uses' => 'DispatchController@invite'));
@@ -32,12 +30,6 @@ Route::group(['middleware' => ['auth','activate']], function()
     // Search
     Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));
 
-    // Tags, Ajax
-    Route::get('tags', 'TagController@tags');
-    Route::get('allTags', 'TagController@allTags');
-    Route::post('addTag', 'TagController@addTag');
-    Route::post('removeTag', 'TagController@removeTag');
-
     // User
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'RiiinglinkController@show'));
     Route::get('user/partage', array('as' => 'partage', 'uses' => 'ActiviteController@partage'));
@@ -47,6 +39,13 @@ Route::group(['middleware' => ['auth','activate']], function()
     Route::match(['get', 'post'],'user/{id}', array('as' => 'show', 'uses' => 'UserController@show'));
     Route::resource('user', 'UserController');
 
+    // Tags, Ajax routes
+    Route::get('tags', 'TagController@tags');
+    Route::get('allTags', 'TagController@allTags');
+    Route::post('addTag', 'TagController@addTag');
+    Route::post('removeTag', 'TagController@removeTag');
+
+    // Export routes
     Route::resource('export', 'ExportController');
     Route::post('export/contacts', array('as' => 'contacts', 'uses' => 'ExportController@contacts'));
     Route::resource('change', 'ChangeController');

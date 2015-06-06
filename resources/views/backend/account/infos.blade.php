@@ -73,9 +73,6 @@
                 <label class="radio-inline">
                     <input type="radio" <?php echo ($user->notification_interval == 'month' ? 'checked' : ''); ?> name="info[notification_interval]" value="month"> {{ trans('action.month') }}
                 </label>
-                <label class="radio-inline">
-                    <input type="radio" <?php echo ($user->notification_interval == 'semester' ? 'checked' : ''); ?> name="info[notification_interval]" value="semester"> {{ trans('action.semester') }}
-                </label>
             </div>
         </div>
     </div>

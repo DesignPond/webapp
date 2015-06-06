@@ -5,6 +5,7 @@ use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Groupe\Repo\GroupeInterface;
 use App\Riiingme\Meta\Repo\MetaInterface;
 use App\Riiingme\Label\Worker\LabelWorker;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 use League\Fractal;
 use League\Fractal\Manager;
@@ -87,11 +88,11 @@ class RiiinglinkWorker{
      * */
     public function getRiiinglinkWithParams($user_id,$params)
     {
-        $pagination = $this->riiinglink->findByHostWithParams($user_id,$params);
+        $results = $this->riiinglink->findByHostWithParams($user_id,$params);
 
-        if($pagination->count() > 0 )
+        if($results->count() > 0 )
         {
-            $riiinglinks = $pagination->map(function($linked)
+/*            $riiinglinks = $results->map(function($linked)
             {
                 $labels = $linked->invite->labels;
                 $photo  = $this->helper->getKeyValue($labels,'type_id',12);
@@ -100,9 +101,11 @@ class RiiinglinkWorker{
                 $linked->setAttribute('photo',$photo);
 
                 return $linked;
-            });
+            });*/
 
-            return [$pagination,$riiinglinks];
+            //return Paginator::make($riiinglinks->all(), $riiinglinks->getTotal() , \Input::get('limit') ?: '9');
+
+            return $results;
         }
 
         return [ [],[] ];
