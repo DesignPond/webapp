@@ -105,7 +105,6 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
             {
                 $start = \Carbon\Carbon::parse($dates->pivot->start_at);
                 $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
-
                 $now   = \Carbon\Carbon::now();
 
                 return ($start < $now && $end > $now ? true : false);

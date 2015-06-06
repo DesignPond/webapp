@@ -4,6 +4,11 @@
     <div class="row">
         <div class="col-md-12">
 
+            <?php
+                echo '<pre>';
+                print_r($riiinglinks);
+                echo '</pre>';
+                ?>
             <div class="panel panel-default">
                 <div class="panel-heading panel-small">
                     <div class="panel-title">

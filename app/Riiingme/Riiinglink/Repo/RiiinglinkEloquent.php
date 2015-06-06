@@ -8,9 +8,15 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         $this->riiinglink = $riiinglink;
     }
+
     public function getAll(){
 
         return $this->riiinglink->with(array('user'))->get();
+    }
+
+    public function count($user_id){
+
+        return $this->riiinglink->where('host_id','=',$user_id)->count();
     }
 
     public function find($id){

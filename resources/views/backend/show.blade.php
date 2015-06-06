@@ -5,7 +5,7 @@
         @include('backend.partials.filter')
     </div>
 
-    @if(!empty($riiinglinks))
+    @if($riiinglinks->count() > 0)
 
         <div class="row">
             @foreach($riiinglinks as $link)
@@ -27,10 +27,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">{!! $pagination->render() !!}</div>
+            <div class="col-md-12">{!! $riiinglinks->render() !!}</div>
         </div>
 
-    @elseif(!$pagination && !empty($filtres))
+    @elseif($riiinglinks->count() > 0 && !empty($filtres))
         <div class="row">
             <div class="col-md-12">
                 <div class="panel">

@@ -4,6 +4,7 @@ interface RiiinglinkInterface {
 
     public function getAll();
     public function find($id);
+    public function count($user_id);
     public function findTags($tag_id,$riiinglinks);
     public function findBy($id,$scope,$nbr = null);
     public function findByHost($user_id,$tags = null);

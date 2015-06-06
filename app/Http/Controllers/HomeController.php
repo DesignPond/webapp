@@ -1,26 +1,21 @@
 <?php namespace App\Http\Controllers;
 
+use App\Riiingme\User\Repo\UserInterface;
+
 class HomeController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
+    protected $user;
 
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(UserInterface $user)
 	{
-		$this->middleware('auth');
+        $this->user       = $user;
+        $this->auth = $this->user->find(\Auth::user()->id);
+        \View::share('user',  $this->auth);
 	}
 
 	/**
@@ -30,7 +25,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		return view('test');
 	}
 
 }

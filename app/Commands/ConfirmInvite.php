@@ -16,7 +16,7 @@ class ConfirmInvite extends Command implements SelfHandling {
     protected $ref;
     protected $riiinglink;
 
-    public function __construct($token,$ref )
+    public function __construct($token,$ref)
     {
         $this->user       = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->invite     = \App::make('App\Riiingme\Invite\Repo\InviteInterface');
@@ -69,6 +69,10 @@ class ConfirmInvite extends Command implements SelfHandling {
         {
             return ['status' => 'error'];
         }
+    }
+
+    public function confirm($invite,$user){
+
     }
 
     public function riiinglinkExist($host_id,$invited_id)

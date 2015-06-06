@@ -20,12 +20,12 @@
        ?>
 
        <li class="<?php echo $class; ?>">
-            <div class="timeline-badge bg-{!! $activite->type_activite['color'] !!}"><i class="fa fa-link"></i></div>
+            <div class="timeline-badge bg-{!! $activite->couleur_activite !!}"><i class="fa fa-link"></i></div>
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     <h4 class="timeline-title">
-                        <strong>{{ trans('label.'.$activite->type_activite['quoi']) }}</strong>
-                        <div class="text-primary">{!! $activite->type_activite['qui'] !!}</div>
+                        <strong>{{ trans('label.'.$activite->user_activite['quoi']) }}</strong>
+                        <div class="text-primary">{!! $activite->user_activite['qui'] !!}</div>
                     </h4>
                 </div>
                 <div class="timeline-body">

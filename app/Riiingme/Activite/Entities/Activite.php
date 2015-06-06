@@ -11,43 +11,43 @@ class Activite extends Model {
      */
     protected $fillable = array('type','name', 'activite_id', 'user_id','invited_id','token');
 
-    public function getTypeActiviteAttribute()
+    public function getCouleurActiviteAttribute()
     {
-        setlocale(LC_ALL, 'fr_FR.UTF-8');
+        if($this->user_id == \Auth::user()->id)
+        {
+            return ($this->invited_id == null ? 'warning' : 'success');
+        }
+        else
+        {
+            return 'primary';
+        }
+    }
 
-        if($this->name == 'updated_invite'){
-
-            if($this->user_id == \Auth::user()->id)
+    public function getUserActiviteAttribute()
+    {
+        if($this->user_id == \Auth::user()->id)
+        {
+            if($this->name == 'updated_invite')
             {
-                $email = (isset($this->invite->name) ? $this->invite->name : '');
-
                 if($this->invited_id == null)
                 {
-                    return ['color' => 'warning', 'quoi' => 'invite_send', 'qui' => $email];
+                    return ['quoi' => 'invite_send', 'qui' => $this->invite->email];
                 }
                 else
                 {
-                    return ['color' => 'success', 'quoi' => 'invite_accepted', 'qui' => $email];
+                    return ['quoi' => 'invite_accepted', 'qui' => $this->invited->name];
                 }
             }
-            else
+
+            if($this->name == 'created_riiinglink')
             {
-                return ['color' => 'primary', 'quoi' => 'invite_from', 'qui' => $this->host->name];
+                return ['quoi' => 'share_with', 'qui' => $this->invited->name];
             }
         }
-
-        if($this->name == 'created_riiinglink'){
-
-            if($this->user_id == \Auth::user()->id)
-            {
-                return ['color' => 'success', 'quoi' => 'share_with', 'qui' => $this->invited->name];
-            }
-            else
-            {
-                return ['color' => 'success', 'quoi' => 'share_new', 'qui' => $this->host->name];
-            }
+        else
+        {
+            return ['quoi' => 'invite_from', 'qui' => $this->host->name];
         }
-
     }
 
     public function invited()

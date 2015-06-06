@@ -29,7 +29,7 @@ class ActiviteWorker{
         // We only keep the update for the invite sent
         $invites = $invitations->filter(function($invite)
         {
-            if ( $invite->name == 'created_invite' && $invite->token == null ) {
+            if ( $invite->name == 'created_invite' && $invite->token == null) {
                 return false;
             }
 

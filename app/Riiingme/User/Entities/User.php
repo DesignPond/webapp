@@ -66,6 +66,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function getUserLabelAttribute()
+    {
+        $data = [];
+
+        if(isset($this->labels) && isset($this->user_groups))
+        {
+            foreach($this->labels as $label)
+            {
+                if($label->groupe_id > 1)
+                {
+                    $data[$label->groupe_id][$label->type_id] = $label->label;
+                }
+            }
+
+            return $data;
+        }
+
+        return [];
+    }
+
     public function getNameAttribute()
     {
         if($this->user_type == 1)

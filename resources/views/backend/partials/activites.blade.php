@@ -8,10 +8,10 @@
 
                         <li data-datetime="{{ $event->created_at->formatLocalized('%d %B %Y') }}" class="timeline-separator"></li>
                         <li>
-                            <div class="timeline-badge timeline-badge-sm thumb-32 bg-{{ $event->type_activite['color'] }}"><em class="fa fa-link"></em></div>
+                            <div class="timeline-badge timeline-badge-sm thumb-32 bg-{{ $event->couleur_activite }}"><em class="fa fa-link"></em></div>
                             <div class="timeline-panel">
-                                <strong>{{ trans('label.'.$event->type_activite['quoi']) }}</strong>
-                                <div class="text-muted"><a href="">{{ $event->type_activite['qui'] }}</a></div>
+                                <strong>{{ trans('label.'.$event->user_activite['quoi']) }}</strong>
+                                <div class="text-muted"><a href="">{{ $event->user_activite['qui'] }}</a></div>
                             </div>
                         </li>
 

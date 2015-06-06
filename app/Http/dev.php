@@ -1,5 +1,8 @@
 <?php
 
+
+Route::get('userlabels', 'HomeController@index');
+
 Route::get('test', function()
 {
     // return DB::table('riiinglinks')->orderBy('id', 'desc')->first()->id;
@@ -31,6 +34,7 @@ Route::get('test', function()
    // $metas2  =  $this->command->convertMetasToLabels($link2,unserialize($invite2->partage_host));
     //$this->command->syncLabels($link2);
     //$new2 = $ring->find(1)->first();
+
     $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
     $groupe = \App::make('App\Riiingme\Groupe\Worker\GroupeWorker');
 
@@ -47,7 +51,7 @@ Route::get('test', function()
     print_r($all_changes);
     echo '</pre>';exit;
     
-    if(!empty($all_changes)) {
+/*    if(!empty($all_changes)) {
         foreach ($all_changes as $user) {
 
             \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
@@ -56,7 +60,7 @@ Route::get('test', function()
             });
 
         }
-    }
+    }*/
 
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');

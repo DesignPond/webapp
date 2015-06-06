@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder {
 
         if (app()->environment('local'))
         {
-            $this->call('UsersTableSeeder');
-            $this->call('LabelsTableSeeder');
-            $this->call('RiiinglinksTableSeeder');
-            $this->call('MetasTableSeeder');
+           // $this->call('UsersTableSeeder');
+           // $this->call('LabelsTableSeeder');
+           // $this->call('RiiinglinksTableSeeder');
+           // $this->call('MetasTableSeeder');
         }
 	}
 

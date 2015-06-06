@@ -16,20 +16,22 @@
                             <div class="riiinglink-list">
                                 <input type="hidden" name="riiinglink_id" value="{{ $ringlink['id'] }}">
 
+                                <?php $visible = [2,3]; ?>
                                 @foreach($groupe_type as $items)
-
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
-                                        <div class="panel bg-gray panel-small">
-                                            <div class="panel-body text-left">
-                                                {{ trans('label.title_'.$items['id']) }}
-                                                <?php echo ( ($items['id'] == 4) || ($items['id'] == 5) ? ' <span class="text-muted"><small>'.trans('menu.temporaire').'</span></small>' : ''); ?>
-                                            </div>
-                                        </div>
-                                        @foreach($items['groupe_type'] as $label)
-                                            @include('backend.partials.label-host')
-                                        @endforeach
-                                    @endif
 
+                                        @if(in_array($items['id'],$visible))
+                                            <div class="panel bg-gray panel-small">
+                                                <div class="panel-body text-left">
+                                                    {{ trans('label.title_'.$items['id']) }}
+                                                </div>
+                                            </div>
+
+                                            @foreach($items['groupe_type'] as $label)
+                                                @include('backend.partials.label-host')
+                                            @endforeach
+                                        @endif
+                                    @endif
                                 @endforeach
                             </div>
                         </form>

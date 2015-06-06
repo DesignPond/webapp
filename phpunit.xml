@@ -31,6 +31,9 @@
         <testsuite name="change">
             <directory>./tests/change/</directory>
         </testsuite>
+        <testsuite name="convert">
+            <directory>./tests/convert/</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>
