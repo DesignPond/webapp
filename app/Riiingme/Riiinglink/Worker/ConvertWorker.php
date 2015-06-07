@@ -12,9 +12,9 @@ class ConvertWorker{
     protected $riiinglink;
     protected $user;
 
-    public $labels;
+    public $labels = [];
     public $userGroup;
-    public $metas;
+    public $metas = [];
 
     public function __construct( RiiinglinkInterface $riiinglink, GroupeInterface $groupe, MetaInterface $meta, UserInterface $user)
     {
@@ -39,10 +39,9 @@ class ConvertWorker{
 
     public function labelsInEffect()
     {
-        if(!empty($this->metas) && !empty($this->labels))
-        {
-            return array_map("array_keys", $this->metas);
-        }
+        return array_map("array_keys", $this->metas);
+        $metas = array_map("array_keys", $this->metas);
+
     }
 
     public function userHasPeriodRange($user_groups,$groupe)

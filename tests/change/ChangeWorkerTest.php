@@ -27,12 +27,12 @@ class ChangeWorkerTest extends TestCase {
 
         $this->worker = new \App\Riiingme\Activite\Worker\ChangeWorker(
             $this->change,
+            \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface'),
             \App::make('App\Riiingme\Label\Worker\LabelWorker'),
             \App::make('App\Riiingme\User\Repo\UserInterface'),
             $this->label,
             $this->revision
         );
-
     }
 
     public function tearDown()
