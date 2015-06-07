@@ -23,6 +23,7 @@ class UpdateLabelUser extends Command implements SelfHandling {
         $this->date       = $date;
         $this->interface  = \App::make('App\Riiingme\Label\Worker\LabelWorker');
         $this->helper     = new \App\Riiingme\Helpers\Helper;
+        $this->labelinterface = \App::make('App\Riiingme\Label\Repo\LabelInterface');
 	}
 
 	/**

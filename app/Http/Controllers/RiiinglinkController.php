@@ -9,6 +9,7 @@ use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Meta\Worker\MetaWorker;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Activite\Worker\ActiviteWorker;
+use App\Riiingme\Riiinglink\Worker\ConvertWorker;
 
 class RiiinglinkController extends Controller {
 
@@ -17,8 +18,9 @@ class RiiinglinkController extends Controller {
     protected $meta;
     protected $groupe;
     protected $activity;
+    protected $converter;
 
-    public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink, ActiviteWorker $activity)
+    public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink, ActiviteWorker $activity, ConvertWorker $converter)
     {
         $this->middleware('auth');
         $this->middleware('autorized', ['only' => ['show']]);
@@ -28,6 +30,7 @@ class RiiinglinkController extends Controller {
         $this->riiinglink = $riiinglink;
         $this->groupe     = $groupe;
         $this->activity   = $activity;
+        $this->converter  = $converter;
 
         $this->auth = $this->user->find(\Auth::user()->id);
 
@@ -67,11 +70,16 @@ class RiiinglinkController extends Controller {
     public function show($id)
     {
         $metas       = $this->meta->getMetas($id);
+        $riiinglink  = $this->riiinglink->riiinglinkItem($id);
         $ringlink    = $this->riiinglink->getRiiinglinkPrepared($id);
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
         $ringlink    = $this->riiinglink->convert($ringlink, $this->auth->labels);
 
-        return view('backend.link')->with( $depedencies + array('user' => $this->auth, 'ringlink' => $ringlink, 'metas' => $metas ));
+        $invited_user = $this->user->find($riiinglink->invited_id);
+
+        $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect()->convertPeriodRange()->labelsToShow();
+
+        return view('backend.link')->with( $depedencies + ['user' => $this->auth, 'invited_user' => $invited_user->user_groups, 'ringlink' => $ringlink, 'metas' => $metas ,'labels' => $this->converter->labels]);
     }
 
     /**

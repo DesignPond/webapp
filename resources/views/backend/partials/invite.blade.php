@@ -13,23 +13,42 @@
                         </div>
                     </div>
 
-                    @if(!empty($invited))
+                    @if(!empty($labels))
 
-                        <?php if(isset($invited[1])){ unset($invited[1]); }  ?>
-
-                        @foreach($invited as $group => $groupe_label)
+                        @foreach($labels as $group => $groupe_label)
                             @if(isset($groupes[$group]))
+
+                                <?php $temp = (in_array($group,[3,4]) ? true : false);  ?>
                                 <div class="chat-msg">
                                     <div class="panel bg-info panel-small">
-                                        <div class="panel-body text-left">{{ trans('label.title_'.$group) }}</div>
+                                        <div class="panel-body text-left">
+                                            {{ trans('label.title_'.$group) }}
+                                            @if($temp)
+                                                <br/>
+                                                <span class="text-muted">Valable
+                                                <?php
+                                                    $dates = $invited_user->filter(function ($item) use ($group) {
+                                                        return $item->pivot->groupe_id == $group;
+                                                    })->first();
+
+                                                    if ($dates)
+                                                    {
+                                                        $start = \Carbon\Carbon::parse($dates->pivot->start_at)->formatLocalized('%d %B %Y');
+                                                        $end   = \Carbon\Carbon::parse($dates->pivot->end_at)->formatLocalized('%d %B %Y');
+
+                                                        echo ' du '.$start.' au '.$end.'</span>';
+                                                    }
+                                                ?>
+                                            @endif
+                                        </div>
                                     </div>
                                     <dl class="dl-horizontal">
-                                    @foreach($groupe_label as $type_id => $label)
-                                        @if(!empty($label))
-                                            <dt>{{ trans('label.label_'.$type_id) }}</dt>
-                                            <dd>{{ $label }}</dd>
-                                        @endif
-                                    @endforeach
+                                        @foreach($groupe_label as $type_id => $label)
+                                            @if(!empty($label))
+                                                <dt>{{ trans('label.label_'.$type_id) }}</dt>
+                                                <dd>{{ $label }}</dd>
+                                            @endif
+                                        @endforeach
                                     </dl>
                                 </div>
                             @endif

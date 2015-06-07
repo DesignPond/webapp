@@ -13,8 +13,10 @@ class ConvertWorker{
     protected $user;
 
     public $labels = [];
-    public $userGroup;
     public $metas = [];
+    public $link;
+    public $userGroup;
+    public $userType;
 
     public function __construct( RiiinglinkInterface $riiinglink, GroupeInterface $groupe, MetaInterface $meta, UserInterface $user)
     {
@@ -27,48 +29,104 @@ class ConvertWorker{
 
     public function loadUserLabels($riiinglink)
     {
-        $labels = $this->user->find($riiinglink->invited_id);
-        $metas  = $this->meta->findByRiiinglink($riiinglink->id);
+        $this->link = $this->riiinglink->findByHostAndInvited($riiinglink->invited_id,$riiinglink->host_id);
+
+        $labels = $this->user->find($this->link->host_id);
+        $metas  = $this->meta->findByRiiinglink($this->link->id);
 
         $this->metas     = (!$metas->isEmpty() ? unserialize($metas->first()->labels) : '');
+
         $this->labels    = $labels->labels;
         $this->userGroup = $labels->users_groups;
+        $this->userType  = $labels->user_type;
 
         return $this;
     }
 
-    public function labelsInEffect()
+    public function metasInEffect()
     {
-        return array_map("array_keys", $this->metas);
         $metas = array_map("array_keys", $this->metas);
 
-    }
-
-    public function userHasPeriodRange($user_groups,$groupe)
-    {
-        $isGroupe = [
-            2 => 4,
-            3 => 5
-        ];
-
-        if(isset($isGroupe[$groupe]) && isset($user_groups))
+        if($this->userType == 1)
         {
-            $dates = $user_groups->filter(function ($item) use ($groupe,$isGroupe) {
-                return $item->pivot->groupe_id == $isGroupe[$groupe];
-            })->first();
-
-            if ($dates)
-            {
-                $start = \Carbon\Carbon::parse($dates->pivot->start_at);
-                $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
-
-                return ($start < \Carbon\Carbon::now() && $end > \Carbon\Carbon::now() ? true : false);
-            }
-
-            return false;
+            // Duplicate temp groups
+            $metas[4] = (isset($metas[2]) && !empty($metas[2]) ? $metas[2] : []);
+            $metas[5] = (isset($metas[3]) && !empty($metas[3]) ? $metas[3] : []);
         }
 
-        return false;
+        $this->metas = $metas;
+
+        return $this;
+    }
+
+    public function labelsToShow()
+    {
+        $labels = [];
+
+        if(!empty($this->labels))
+        {
+            foreach($this->labels as $groupe => $types)
+            {
+                if(isset($this->metas[$groupe]))
+                {
+                    foreach($types as $type => $label)
+                    {
+                        if(in_array($type,$this->metas[$groupe]))
+                        {
+                            $labels[$groupe][$type] = $label;
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->labels = $labels;
+
+        return $this;
+    }
+
+    public function prepareLabels(){
+
+        if(!empty($this->labels))
+        {
+            foreach($this->labels as $label)
+            {
+                $labels[$label->groupe_id][$label->type_id] = $label->label_text;
+            }
+        }
+
+        $this->labels = $labels;
+
+        return $this;
+    }
+
+    public function convertPeriodRange(){
+
+        if(!empty($this->labels))
+        {
+            $this->labels = $this->periodIsInEffect($this->userGroup,$this->labels);
+        }
+
+        return $this;
+    }
+
+    public function periodIsInEffect($users_groups, $data)
+    {
+        $isGroupe  = [4 => 2, 5 => 3];
+
+        foreach($isGroupe as $temp => $normal)
+        {
+            $tempExist = $users_groups->filter(function ($item) use ($temp) {
+                return $item->groupe_id == $temp;
+            })->first();
+
+            if($tempExist && $tempExist->period_range)
+                unset($data[$normal]);
+            else
+                unset($data[$temp]);
+        }
+
+        return (!empty($data) ? $data : []);
     }
 
 }
