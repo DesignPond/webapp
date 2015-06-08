@@ -15,13 +15,13 @@ Route::get('test', function()
        $change      = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
        $tags        = \App::make('App\Riiingme\Tag\Repo\TagInterface');
       */
-    $ring   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+/*    $ring   = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
     $meta   = \App::make('App\Riiingme\Meta\Entities\Meta');
     $meta   = $meta->find(1);
     $labels = $meta->labels;
 
     $this->command = new App\Commands\ProcessInvite(1);
-    $link   = $this->command->getRiiinglink(1,2);
+    $link   = $this->command->getRiiinglink(1,2);*/
     //$invite =  $this->command->getInvite();
    // $metas  =  $this->command->convertMetasToLabels($link,unserialize($invite->partage_host));
     //$this->command->syncLabels($link);

@@ -25,10 +25,14 @@ $( function() {
     $( "#searchEmail" ).autocomplete({
         source: url + "search",
         minLength: 4,
+        change: function( event, ui ) {
+            $('#searchEmail').attr('value', '');
+            $('#searchEmail_email').attr('value', '');
+        },
         select: function( event, ui )
         {
             $('#searchEmail').val(ui.item.label);
-            $('#searchEmail_post').val(ui.item.value);
+            $('#searchEmail_email').val(ui.item.value);
 
             $.get(url + "labels", { user_type: ui.item.user_type }, function( data )
             {
@@ -42,4 +46,14 @@ $( function() {
     {
         return $( "<li>" ).append( "<a>" + item.label + "<span>" + item.desc + "</span></a>" ).appendTo( ul );
     };
+/*
+    $( "#searchEmail" ).focus(function() {
+        $('#searchEmail_email').attr('value', '');
+    });
+
+    $( "#searchEmail" ).blur(function() {
+        var $email = $('#searchEmail').val();
+        $('#searchEmail_email').val($email);
+    });*/
+
 });

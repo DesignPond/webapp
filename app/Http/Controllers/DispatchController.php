@@ -71,10 +71,12 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
-        $email_new   = $request->email_new;
-        $email_exist = $request->email_exist;
 
-        $email = (!empty($email_new) ? $email_new : $email_exist);
+        echo '<pre>';
+        print_r($request->all());
+        echo '</pre>';exit;
+
+        $email   = $request->email;
 
         $this->dispatch(new SendInvite($email, $request->user_id, $request->partage_host, $request->partage_invited));
 
