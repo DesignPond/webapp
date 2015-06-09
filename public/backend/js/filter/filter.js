@@ -26,12 +26,20 @@ $( function() {
         source: url + "search",
         minLength: 4,
         change: function( event, ui ) {
-            $('#searchEmail').attr('value', '');
-            $('#searchEmail_email').attr('value', '');
+            //$('#searchEmail').attr('value', '');
+           // $('#searchEmail_email').attr('value', '');
+        },
+        response: function(event, ui) {
+            // ui.content is the array that's about to be sent to the response callback.
+            if (ui.content.length === 0)
+            {
+               // $('#searchEmail_email').attr('value', '');
+            }
         },
         select: function( event, ui )
         {
-            $('#searchEmail').val(ui.item.label);
+            $('#searchEmail').val(ui.item.value);
+           // $('#searchEmail').val(ui.item.label);
             $('#searchEmail_email').val(ui.item.value);
 
             $.get(url + "labels", { user_type: ui.item.user_type }, function( data )
@@ -46,8 +54,8 @@ $( function() {
     {
         return $( "<li>" ).append( "<a>" + item.label + "<span>" + item.desc + "</span></a>" ).appendTo( ul );
     };
-/*
-    $( "#searchEmail" ).focus(function() {
+
+/*    $( "#searchEmail" ).change(function() {
         $('#searchEmail_email').attr('value', '');
     });
 

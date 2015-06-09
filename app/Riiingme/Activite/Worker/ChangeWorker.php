@@ -16,6 +16,7 @@ class ChangeWorker{
     protected $groupes;
     protected $worker;
     protected $link;
+    protected $converter;
 
     public $part   = 'added';
     public $period = 'semester';
@@ -26,13 +27,14 @@ class ChangeWorker{
 
     public function __construct(ChangeInterface $change, RiiinglinkInterface $link, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
 
-        $this->changes  = $change;
-        $this->user     = $user;
-        $this->label    = $label;
-        $this->worker   = $worker;
-        $this->revision = $revision;
-        $this->link     = $link;
-        $this->groupes  = range(1,6);
+        $this->changes    = $change;
+        $this->user       = $user;
+        $this->label      = $label;
+        $this->worker     = $worker;
+        $this->revision   = $revision;
+        $this->link       = $link;
+        $this->groupes    = range(1,6);
+        $this->converter  = \App::make('App\Riiingme\Riiinglink\Worker\ConvertWorker');
     }
 
     public function setUser($user_id)
@@ -97,11 +99,14 @@ class ChangeWorker{
                     }
                 }
 
-                $items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
+                //$items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
+                $this->converter->loadUserLabels($this->riiinglink,true)->prepareLabels()->metasInEffect();
+                $this->converter->labels = $items;
+                $this->converter->convertPeriodRange()->labelsToShow();
 
-                if(!empty($items))
+                if(!empty($this->converter->labels))
                 {
-                    $data['revision'] = $items;
+                    $data['revision'] = $this->converter->labels;
                 }
 
             }

@@ -257,7 +257,6 @@ class Helper{
 
     }
 
-
     public function convertAutocomplete($results){
 
         $data = [];

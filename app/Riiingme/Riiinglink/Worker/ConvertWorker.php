@@ -27,9 +27,16 @@ class ConvertWorker{
         $this->helper      = new \App\Riiingme\Helpers\Helper;
     }
 
-    public function loadUserLabels($riiinglink)
+    public function loadUserLabels($riiinglink, $host = null)
     {
-        $this->link = $this->riiinglink->findByHostAndInvited($riiinglink->invited_id,$riiinglink->host_id);
+        if($host)
+        {
+            $this->link = $riiinglink;
+        }
+        else
+        {
+            $this->link = $this->riiinglink->findByHostAndInvited($riiinglink->invited_id,$riiinglink->host_id);
+        }
 
         $labels = $this->user->find($this->link->host_id);
         $metas  = $this->meta->findByRiiinglink($this->link->id);

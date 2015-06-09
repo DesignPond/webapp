@@ -72,13 +72,7 @@ class DispatchController extends Controller {
     public function send(SendInviteRequest $request)
     {
 
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';exit;
-
-        $email   = $request->email;
-
-        $this->dispatch(new SendInvite($email, $request->user_id, $request->partage_host, $request->partage_invited));
+        $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
     }
