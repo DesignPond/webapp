@@ -64,7 +64,7 @@ class ExportController extends Controller {
         $types = $this->export->prepareLabelsTitle();
         $lines = $this->export->userExport();
         
-        \Excel::create('Filename', function($excel) use ($lines,$types) {
+        \Excel::create('Exportation', function($excel) use ($lines,$types) {
 
             $excel->sheet('Export', function($sheet) use ($lines,$types) {
                 $sheet->fromArray($lines);
