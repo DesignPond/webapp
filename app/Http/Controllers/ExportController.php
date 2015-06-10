@@ -42,9 +42,8 @@ class ExportController extends Controller {
 	{
         $tags        = $this->auth->user_tags->lists('title','id');
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
-        $riiinglinks = $this->riiinglink->count($this->auth->id);
 
-        return view('backend.export.index')->with($depedencies + array('tags' => $tags, 'riiinglinks' => $riiinglinks));
+        return view('backend.export.index')->with($depedencies + array('tags' => $tags));
 	}
 
 	/**

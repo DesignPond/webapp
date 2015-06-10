@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Riiingme\Invite\Repo\InviteInterface;
+use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 
 use Illuminate\Http\Request;
 use App\Commands\CreateRiiinglink;
@@ -44,11 +45,13 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar, InviteInterface $invite)
+	public function __construct(Guard $auth, Registrar $registrar, InviteInterface $invite, RiiinglinkInterface $riiinglink)
 	{
 		$this->auth      = $auth;
 		$this->registrar = $registrar;
         $this->invite    = $invite;
+
+        $this->riiinglink = $riiinglink;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -139,7 +142,8 @@ class AuthController extends Controller {
             $invite->save();
 
             // Create riiinglink between users
-            $this->dispatch(new CreateRiiinglink($invite_id,$user->id));
+            //$this->dispatch(new CreateRiiinglink($invite_id,$user->id));
+            $this->riiinglink->create(['host_id' => $invite->user_id, 'invited_id' => $invite->invited_id]);
             $this->dispatch(new ProcessInvite($invite_id));
 
         }

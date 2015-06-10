@@ -8,13 +8,13 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'secure'     => 'Vos données sécurisés',
-    'activites'  => 'Aucune activités pour le moment',
+    'secure'     => 'Votre annuaire personnalisé et toujours actualisé',
+    'activites'  => 'Aucune activité pour le moment',
     'noinfo'     => 'Vous n\'avez pas indiqué vos informations',
-    'accessible' => 'Accessible dans le monde entier',
+    'accessible' => 'Restez en contact avec celles et ceux qui comptent vraiment',
     'title_notification' => 'Notification automatique depuis www.riiingme.ch',
     'main_title' => 'RiiingMe | Notifications',
-    'email_auto' => ' Ceci est un email automatique envoyé par',
+    'email_auto' => ' Ceci est un e-mail automatique envoyé par',
     'notification' => 'Notification de changement du partage',
     'change'      => 'a changé les informations qu\'il/elle partage avec vous',
     'info_ajoute' => 'Informations ajoutées',
@@ -25,10 +25,10 @@ return [
     'demande'     => 'Demande de partage',
     'accepter'    => 'Accepter le partage',
     'souhaite'    => 'souhaite partager ses informations avec vous.',
-    'obtenir'     => 'souhaiterai obtenir les informations suivantes:',
-    'confirmer'   => 'Pour confirmer la demande de partage veuillez suivre ce lien:',
+    'obtenir'     => 'souhaite obtenir les informations suivantes de votre part:',
+    'confirmer'   => 'Pour confirmer la demande de partage et choisir les informations à partager, veuillez suivre ce lien:',
     'password_rappel'  => 'Rappel de mot de passe',
-    'password_text'    => 'Vous avez demandé un nouveau mot de passe pour votre compte RiiingMe. Celui-ci est valide durant 1 heure.',
+    'password_text'    => 'Vous avez requis un nouveau mot de passe pour votre compte RiiingMe. Ce message est valable durant 1 heure.',
     'password_button'  => 'Cliquez ici pour réinitialiser votre mot de passe',
 
 ];

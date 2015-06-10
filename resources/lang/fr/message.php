@@ -9,7 +9,7 @@ return [
     */
 
     'activation'          => 'Activation!',
-    'confirmer'           => 'Afin d\'activer votre compte, veuillez confirmer votre adresse email avec le lien qui vous à été envoyé.',
+    'confirmer'           => 'Afin d\'activer votre compte RiiingMe, veuillez confirmer votre adresse e-mail à l’aide du lien qui vous a été envoyé.',
     'renvoyer'            => 'Renvoyer le lien',
     'createcompany'       => 'Création du compte Entreprise/Association',
     'already'             => 'Déjà inscrit?',
@@ -20,9 +20,9 @@ return [
     'from'                => 'de RiiingMe',
     'already'             => 'Déjà inscrit?',
     'cg'                  => 'Conditions d\'utilisation',
-    'youremail'           => 'Votre email',
+    'youremail'           => 'Votre e-mail',
     'yourpassword'        => 'Votre mot de passe',
-    'rememberme'          => 'Remember me',
+    'rememberme'          => 'Se souvenir de moi',
     'createaccount'       => 'Créer un compte',
     'createprivate'       => 'Création du compte Privé',
     'lostpassword'        => 'Mot de passe perdu',
@@ -31,5 +31,5 @@ return [
     'sentinvites'         => 'Envoyer des invitations',
     'nocorrespondfilter'  => 'Aucun contact ne correspond au filtre',
     'nocorrespondsearch'  => 'Aucun contact ne correspond à votre recherche',
-    'recoverpassword'     => 'Veuillez saisir votre adresse email.<br/> Un lien permettant de créer un nouveau mot de passe vous sera envoyé par e-mail.',
+    'recoverpassword'     => 'Veuillez saisir votre adresse e-mail.<br/> Un lien permettant de définir un nouveau mot de passe vous sera envoyé par e-mail.',
 ];

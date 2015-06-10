@@ -37,7 +37,9 @@
                 </form>
             </div><!-- /.col-lg-6 -->
             <div class="col-md-3 col-xs-12">
-                <a href="{{ url('export') }}" class="btn btn-success pull-right">{{ trans('menu.export') }}</a>
+                @if($riiinglinks->count() > 0)
+                    <a href="{{ url('export') }}" class="btn btn-success pull-right">{{ trans('menu.export') }}</a>
+                @endif
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@ class ChangeEloquent implements ChangeInterface {
         {
             $query->where('riiinglinks.invited_id','=',$user_id);
 
-        })->where('user_id','!=',$user_id)->where('name','=','updated_meta')->period($period)->orderBy('id', 'desc')->get();
+        })->where('user_id','!=',$user_id)->period($period)->orderBy('id', 'desc')->get();
     }
 
     public function getUserUpdates($user_id,$riiinglink_id,$period){
