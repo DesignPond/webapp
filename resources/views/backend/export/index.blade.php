@@ -10,7 +10,7 @@
                         {{ trans('menu.export') }}
                     </div>
                 </div>
-                <form action="{{ url('export/contacts') }}" method="post" class="form-horizontal">
+                <form action="{{ url('export/generate') }}" method="post" class="form-horizontal">
                     <div class="panel-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -72,7 +72,26 @@
                                     @endforeach
                                 @endif
                             </div>
+                        </div>
+                        <hr/>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ trans('menu.format') }}</label>
+                            <div class="col-sm-5">
+
+                                <select class="form-control" name="format">
+                                    <option value="xls">Excel [xls]</option>
+                                    <option value="csv">CSV</option>
+                                    @if($configs)
+                                        <optgroup label="Etiquettes">
+                                            @foreach($configs as $code => $config)
+                                                <option value="pdf|{{$code}}">{{ $config['etiquettes'] }} par page</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endif
+                                </select>
+
+                            </div>
                         </div>
 
                     </div>

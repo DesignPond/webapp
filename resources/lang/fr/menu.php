@@ -42,6 +42,7 @@ return [
     'deja_inscrit'  => 'Déjà inscrit?',
     'quoi'          => 'Quoi',
     'who'           => 'Qui',
+    'format'        => 'Format',
     'periode'       => 'Pour la période',
     'indiquer'      => 'Indiquer une',
     'envoyer'       => 'Envoyer',

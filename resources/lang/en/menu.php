@@ -42,6 +42,7 @@ return [
     'deja_inscrit'  => 'Already registered?',
     'quoi'          => 'What',
     'who'           => 'Who',
+    'format'        => 'Format',
     'periode'       => 'For the period',
     'indiquer'      => 'Indicate',
     'envoyer'       => 'Send',

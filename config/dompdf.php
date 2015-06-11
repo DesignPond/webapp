@@ -260,7 +260,7 @@ return array(
         "DOMPDF_ENABLE_HTML5PARSER" => false,
 
 
-        'DEBUG_LAYOUT' => true
+        //'DEBUG_LAYOUT' => true
     ),
 
 

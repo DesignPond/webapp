@@ -21,6 +21,7 @@ class ExportController extends Controller {
     public $exportLines;
     public $exportTypes;
     public $exportConfig;
+    public $format;
 
     public function __construct(UserInterface $user,ExportWorker $export, ActiviteWorker $activity, GroupeWorker $groupe, RiiinglinkInterface $riiinglink)
     {
@@ -37,14 +38,14 @@ class ExportController extends Controller {
         \View::share('demandes', $demandes);
     }
 
-    public function setConfig()
+    public function setConfig($type)
     {
 
         $all = config('badge');
 
-        if(isset($all['avery_L4744REV']))
+        if(isset($all[$type]))
         {
-            $this->exportConfig = $all['avery_L4744REV'];
+            $this->exportConfig = $all[$type];
         }
 
         return $this;
@@ -57,19 +58,43 @@ class ExportController extends Controller {
 	 */
 	public function index()
 	{
+        $configs     = config('badge');
         $tags        = $this->auth->user_tags->lists('title','id');
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-        return view('backend.export.index')->with($depedencies + array('tags' => $tags));
+        return view('backend.export.index')->with($depedencies + array('tags' => $tags, 'configs' => $configs));
 	}
+
+    public function generate(Request $request)
+    {
+        $format = $request->input('format');
+
+        if($format == 'xls' || $format == 'csv')
+        {
+            $this->contacts($request,$format);
+        }
+        else
+        {
+            $tags    = $request->input('tags');
+            $labels  = $request->input('labels');
+            $groupes = $request->input('groupes');
+
+            $config = explode('|',$format);
+
+            $this->exportData($tags, $labels, $groupes)->setConfig($config[1]);
+
+            $config = $this->exportLabels();
+
+            return \PDF::loadView('backend.export.bagde', $config)->setPaper('a4')->stream('download.pdf');
+        }
+    }
 
 	/**
 	 *
 	 * @return Response
 	 */
-	public function contacts(Request $request)
+	public function contacts($request,$format)
 	{
-
         $tags    = $request->input('tags');
         $labels  = $request->input('labels');
         $groupes = $request->input('groupes');
@@ -87,7 +112,7 @@ class ExportController extends Controller {
                 $sheet->row(1,$types);
             });
 
-        })->export('xls');
+        })->export($format);
 	}
 
     public function exportData($tags = null, $labels = null, $groupes = null)
@@ -103,22 +128,12 @@ class ExportController extends Controller {
 
     public function exportLabels()
     {
-        $this->exportData(null, [1], null);
-        $data = $this->export->chunkData($this->exportLines,2,8);
+        $data = $this->export->chunkData($this->exportLines,$this->exportConfig['cols'],$this->exportConfig['etiquettes']);
 
-/*        echo '<pre>';
-        print_r($data);
-        echo '</pre>';*/
+        $config = ['cols' => $this->exportConfig['cols'], 'height' => $this->exportConfig['height'], 'blocheight' => $this->exportConfig['blocheight'], 'margin' => $this->exportConfig['margin'], 'width' => $this->exportConfig['width'] ,'data' => $data];
 
-        $data = $this->fake();
+        return $config;
 
-        $this->setConfig();
-
-        $config = ['cols' => $this->exportConfig['cols'], 'height' => $this->exportConfig['height'], 'margin' => $this->exportConfig['margin'], 'width' => $this->exportConfig['width'] ,'data' => $data];
-
-        return \PDF::loadView('backend.export.bagde', $config)
-            ->setPaper('a4')
-            ->stream('download.pdf');
     }
 
     public function fake(){

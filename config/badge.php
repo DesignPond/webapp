@@ -17,7 +17,8 @@ return array(
         'etiquettes' => '8',
         'margin'     => '13mm 8mm 8mm 8mm',
         'cols'       => '2',
-        'height'     => '67.7mm',
+        'height'     => '69mm',
+        'blocheight' => '52mm',
         'width'      => '50%'
     ],
     'avery_L4744REV' => [
@@ -26,6 +27,7 @@ return array(
         'margin'     => '13mm 8mm 8mm 8mm',
         'cols'       => '2',
         'height'     => '55.15mm',
+        'blocheight' => '38mm',
         'width'      => '50%'
     ],
 

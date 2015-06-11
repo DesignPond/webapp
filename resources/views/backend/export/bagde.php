@@ -15,15 +15,14 @@
                 box-sizing: border-box;
                 position: relative;
             }
-            span{
-                position: absolute;
-                display: block;
+            div{
                 color: #000;
                 line-height: 25px;
-                width: 100%;
-                height: 100%;
+                width: auto;
+                height: auto;
+                margin: auto;
+                text-align: center;
                 font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-                box-sizing: border-box;
             }
         </style>
     </head>
@@ -39,7 +38,7 @@
                         foreach($row as $name)
                         {
                             echo '<td width="'.$width.'" height="'.$height.'" class="normalize height">';
-                            echo '<span>'.implode('<br/>',$name).'</span>';
+                            echo '<div>'.implode('<br/>',$name).'</div>';
                             echo '</td>';
                         }
                         echo '</tr>';
