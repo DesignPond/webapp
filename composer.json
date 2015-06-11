@@ -11,7 +11,8 @@
         "maatwebsite/excel": "~2.0.0",
         "msurguy/honeypot": "dev-master",
 		"intervention/image": "~2.1",
-        "venturecraft/revisionable": "1.*"
+        "venturecraft/revisionable": "1.*",
+        "barryvdh/laravel-dompdf": "0.5.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

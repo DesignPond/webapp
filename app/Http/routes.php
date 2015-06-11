@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth','activate']], function()
     // Export routes
     Route::resource('export', 'ExportController');
     Route::post('export/contacts', array('as' => 'contacts', 'uses' => 'ExportController@contacts'));
+    Route::get('exportLabels', array('as' => 'exportLabels', 'uses' => 'ExportController@exportLabels'));
+
     Route::resource('change', 'ChangeController');
 });
 

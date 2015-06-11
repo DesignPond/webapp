@@ -18,6 +18,10 @@ class ExportController extends Controller {
     protected $export;
     protected $riiinglink;
 
+    public $exportLines;
+    public $exportTypes;
+    public $exportConfig;
+
     public function __construct(UserInterface $user,ExportWorker $export, ActiviteWorker $activity, GroupeWorker $groupe, RiiinglinkInterface $riiinglink)
     {
         $this->activity   = $activity;
@@ -31,6 +35,19 @@ class ExportController extends Controller {
 
         $demandes = $this->activity->getAskInvites($this->auth->email);
         \View::share('demandes', $demandes);
+    }
+
+    public function setConfig()
+    {
+
+        $all = config('badge');
+
+        if(isset($all['avery_L4744REV']))
+        {
+            $this->exportConfig = $all['avery_L4744REV'];
+        }
+
+        return $this;
     }
 
 	/**
@@ -47,7 +64,6 @@ class ExportController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
@@ -58,11 +74,10 @@ class ExportController extends Controller {
         $labels  = $request->input('labels');
         $groupes = $request->input('groupes');
 
-        $this->export->setUser($this->auth->id)->setTags($tags)->setLabels($labels)->setGroupes($groupes)->getUserRiiinglinks();
-        $this->export->setTypes();
+        $this->exportData($tags, $labels, $groupes);
 
-        $types = $this->export->prepareLabelsTitle();
-        $lines = $this->export->userExport();
+        $types = $this->exportTypes;
+        $lines = $this->exportLines;
         
         \Excel::create('Exportation', function($excel) use ($lines,$types) {
 
@@ -75,4 +90,47 @@ class ExportController extends Controller {
         })->export('xls');
 	}
 
+    public function exportData($tags = null, $labels = null, $groupes = null)
+    {
+        $this->export->setUser($this->auth->id)->setTags($tags)->setLabels($labels)->setGroupes($groupes)->getUserRiiinglinks();
+        $this->export->setTypes();
+
+        $this->exportLines = $this->export->userExport();
+        $this->exportTypes = $this->export->prepareLabelsTitle();
+
+        return $this;
+    }
+
+    public function exportLabels()
+    {
+        $this->exportData(null, [1], null);
+        $data = $this->export->chunkData($this->exportLines,2,8);
+
+/*        echo '<pre>';
+        print_r($data);
+        echo '</pre>';*/
+
+        $data = $this->fake();
+
+        $this->setConfig();
+
+        $config = ['cols' => $this->exportConfig['cols'], 'height' => $this->exportConfig['height'], 'margin' => $this->exportConfig['margin'], 'width' => $this->exportConfig['width'] ,'data' => $data];
+
+        return \PDF::loadView('backend.export.bagde', $config)
+            ->setPaper('a4')
+            ->stream('download.pdf');
+    }
+
+    public function fake(){
+
+        $fakerobj = new \Faker\Factory;
+        $faker    = $fakerobj::create();
+
+        for( $x = 1 ; $x < 16; $x++ )
+        {
+            $data[] = [$faker->name];
+        }
+
+        return $this->export->chunkData($data,2,10);
+    }
 }

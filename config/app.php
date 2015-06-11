@@ -150,6 +150,7 @@ return [
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Laracasts\Generators\GeneratorsServiceProvider',
         'Msurguy\Honeypot\HoneypotServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider',
 
 	],
 
@@ -179,8 +180,10 @@ return [
 		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
 		'Event'     => 'Illuminate\Support\Facades\Event',
         'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
+        'PDF'       => 'Barryvdh\DomPDF\Facade',
 		'File'      => 'Illuminate\Support\Facades\File',
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
+        'Honeypot'  => 'Msurguy\Honeypot\HoneypotFacade',
         'Form'      => 'Illuminate\Html\FormFacade',
         'HTML'      => 'Illuminate\Html\HtmlFacade',
         'Image'     => 'Intervention\Image\Facades\Image',
