@@ -18,7 +18,7 @@
                         @foreach($labels as $group => $groupe_label)
                             @if(isset($groupes[$group]))
 
-                                <?php $temp = (in_array($group,[3,4]) ? true : false);  ?>
+                                <?php $temp = (in_array($group,[4,5]) ? true : false); ?>
                                 <div class="chat-msg">
                                     <div class="panel bg-info panel-small">
                                         <div class="panel-body text-left">

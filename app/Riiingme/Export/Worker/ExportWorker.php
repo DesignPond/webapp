@@ -215,11 +215,15 @@ class ExportWorker{
 
     public function chunkData($data,$cols,$nbr){
 
-        $chunks = array_chunk($data,$cols);
-        $chunks = array_chunk($chunks,$nbr/$cols);
+        if(!empty($data))
+        {
+            $chunks = array_chunk($data,$cols);
+            $chunks = array_chunk($chunks,$nbr/$cols);
 
-        return $chunks;
+            return $chunks;
+        }
 
+        return [];
     }
 
 }

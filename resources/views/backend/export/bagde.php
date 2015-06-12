@@ -11,19 +11,27 @@
             }
             .height{
                 height: <?php echo $height; ?>;
+                max-height: <?php echo $height; ?>;;
                 page-break-inside:avoid;
                 box-sizing: border-box;
                 position: relative;
             }
             div{
-                color: #000;
-                line-height: 25px;
                 width: auto;
                 height: auto;
                 margin: auto;
                 text-align: center;
-                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
             }
+            span{
+                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+                color: #000;
+                line-height: 20px;
+                font-size: 15px;
+                max-resolution: 0;
+                padding: 0;
+                display: block;
+            }
+
         </style>
     </head>
     <body>
@@ -38,7 +46,12 @@
                         foreach($row as $name)
                         {
                             echo '<td width="'.$width.'" height="'.$height.'" class="normalize height">';
-                            echo '<div>'.implode('<br/>',$name).'</div>';
+
+                            //echo '<div>'.implode('<br/>',$name).'</div>';
+                            echo '<div>';
+                            echo '<span>'.implode('</span><span>', $name).'</span>';
+                            echo '</div>';
+
                             echo '</td>';
                         }
                         echo '</tr>';
