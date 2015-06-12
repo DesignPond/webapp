@@ -52,16 +52,19 @@ class ConvertWorker{
 
     public function metasInEffect()
     {
-        $metas = array_map("array_keys", $this->metas);
-
-        if($this->userType == 1)
+        if(!empty($this->metas))
         {
-            // Duplicate temp groups
-            $metas[4] = (isset($metas[2]) && !empty($metas[2]) ? $metas[2] : []);
-            $metas[5] = (isset($metas[3]) && !empty($metas[3]) ? $metas[3] : []);
-        }
+            $metas = array_map("array_keys", $this->metas);
 
-        $this->metas = $metas;
+            if($this->userType == 1)
+            {
+                // Duplicate temp groups
+                $metas[4] = (isset($metas[2]) && !empty($metas[2]) ? $metas[2] : []);
+                $metas[5] = (isset($metas[3]) && !empty($metas[3]) ? $metas[3] : []);
+            }
+
+            $this->metas = $metas;
+        }
 
         return $this;
     }

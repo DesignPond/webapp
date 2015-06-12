@@ -118,7 +118,6 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
             $results->orderBy('created_at', 'desc');
         }
 
-
         return $results->paginate(9);
     }
 

@@ -46,8 +46,8 @@ class ConvertTest extends TestCase {
         // Delete labels
         \App\Riiingme\Label\Entities\Label::where('user_id','=',3)->delete();
         \DB::table('user_groups')->truncate();
-        \DB::table('riiinglinks')->truncate();
-        \DB::table('metas')->truncate();
+        // \DB::table('riiinglinks')->truncate();
+        //\DB::table('metas')->truncate();
         // Delete riiinglink
         $this->riiinglink->delete($this->link->id);
         $this->riiinglink->delete($this->link2->id);

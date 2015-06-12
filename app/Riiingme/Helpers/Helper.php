@@ -60,7 +60,7 @@ class Helper{
                 break;
             case 10:
                 $class = 'mask_date';
-                $placeholder = '1982-10-01';
+                $placeholder = '01/10/1982';
                 break;
             case 11:
                 $class = 'mask_web';

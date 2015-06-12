@@ -66,7 +66,9 @@
     <script src="<?php echo asset('backend/vendor/slimscroll/jquery.slimscroll.min.js');?>"></script>
     <script src="<?php echo asset('backend/js/tag-it.min.js');?>"></script>
 
-    <script>  var new_tag_txt = '{{ trans('menu.new_tag') }}'; </script>
+    <script> var new_tag_txt = '{{ trans('menu.new_tag') }}'; </script>
+    <script> var delete_link = '{{ trans('message.delete_link') }}'; </script>
+
     <script src="<?php echo asset('backend/js/main.js');?>"></script>
     <script src="<?php echo asset('backend/js/timeline.js');?>"></script>
 
@@ -81,8 +83,7 @@
     <script src="<?php echo asset('backend/js/jquery/jquery.modal.js');?>"></script>
     <script>
         window.FileAPI = {
-            debug: false ,
-            staticPath: 'backend/js/jquery.fileapi/FileAPI/'
+            debug: false , staticPath: 'backend/js/jquery.fileapi/FileAPI/'
         };
     </script>
     <script src="<?php echo asset('backend/js/tel-input.js');?>"></script>

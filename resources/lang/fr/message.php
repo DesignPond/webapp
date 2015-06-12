@@ -28,6 +28,8 @@ return [
     'lostpassword'        => 'Mot de passe perdu',
     'newpassword'         => 'Définir un nouveau mot de passe',
     'nocontact'           => 'Vous n\'avez encore aucun contact',
+    'delete_partage'      => 'Le partage avec ce contact a été supprimé',
+    'delete_link'         => 'Voulez-vous vraiment supprimer le partage avec',
     'sentinvites'         => 'Envoyer des invitations',
     'nocorrespondfilter'  => 'Aucun contact ne correspond au filtre',
     'nocorrespondsearch'  => 'Aucun contact ne correspond à votre recherche',

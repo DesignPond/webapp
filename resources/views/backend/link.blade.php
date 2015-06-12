@@ -16,7 +16,7 @@
                         <a href="{{ url('user/'.$user->id) }}" class="btn btn-xs btn-primary">{{ trans('action.back') }}</a>
                     </div>
                     <div class="col-md-6 col-xs-6">
-                        <button type="button" class="btn btn-danger btn-xs pull-right">{{ trans('action.destroy') }}</button>
+                        <a href="{{ url('destroyLink/'.$ringlink_id) }}" data-action="{{ $ringlink['invited_name'] }}" class="btn btn-danger btn-xs pull-right deleteAction">{{ trans('action.destroy') }}</a>
                     </div>
                 </div>
             </div>

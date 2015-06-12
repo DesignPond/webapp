@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth','activate']], function()
 
     // Ajax
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
+    Route::get('destroyLink/{id}', array('as' => 'destroyLink', 'uses' => 'RiiinglinkController@destroy'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
     Route::post('updateMetas', 'MetasController@update');
 

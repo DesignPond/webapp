@@ -49,4 +49,14 @@ class MetaWorker{
         return $data;
 
     }
+
+    public function destroy($id){
+
+        $metas = $this->meta->findByRiiinglink($id);
+
+        if(!$metas->isEmpty())
+        {
+            $metas->delete($id);
+        }
+    }
 }

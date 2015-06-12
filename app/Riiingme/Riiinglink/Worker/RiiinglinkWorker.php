@@ -143,4 +143,22 @@ class RiiinglinkWorker{
         return $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);
     }
 
+    public function destroy($id){
+
+        // Get link and reverse link
+        $link    = $this->riiinglink->find($id)->first();
+        $reverse = $this->riiinglink->findByHostAndInvited($link->invited_id,$link->host_id);
+
+        // Get metas for links
+        $linkmeta    = $this->meta->findByRiiinglink($id)->first();
+        $reversemeta = $this->meta->findByRiiinglink($reverse->id)->first();
+
+        $this->meta->delete($linkmeta->id);
+        $this->meta->delete($reversemeta->id);
+
+        $this->riiinglink->delete($link->id);
+        $this->riiinglink->delete($reverse->id);
+
+    }
+
 }

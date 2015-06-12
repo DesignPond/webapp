@@ -42,9 +42,9 @@ class ChangeWorkerTest extends TestCase {
 
     public function testSetUser(){
 
-        $this->worker->setUser(12);
+        $this->worker->setUser(1);
 
-        $expected = 12;
+        $expected = 1;
         $this->assertEquals($expected, $this->worker->user_id);
     }
 

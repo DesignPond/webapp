@@ -18,12 +18,18 @@
 
     });
 
-    /*
-    var $tags_list = $('#tags_list').find(':checkbox');
+    $('body').on('click','.deleteAction',function(event){
 
-    $tags_list.change(function () {
+        var $this  = $(this);
+        var action = $this.data('action');
+        var answer = confirm(delete_link + ' : '+ action +' ?');
 
-    });*/
+        if (answer){
+            return true;
+        }
+        return false;
+
+    });
 
     $('input[name="tags[]"]').on('change', function () {
 

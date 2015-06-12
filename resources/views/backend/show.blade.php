@@ -1,11 +1,11 @@
 @extends('backend.layouts.master')
 @section('content')
 
-    <div class="row">
-        @include('backend.partials.filter')
-    </div>
-
     @if($riiinglinks->count() > 0)
+
+        <div class="row">
+            @include('backend.partials.filter')
+        </div>
 
         <div class="row">
             @foreach($riiinglinks as $link)

@@ -79,7 +79,8 @@ class RiiinglinkController extends Controller {
 
         $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect()->convertPeriodRange()->labelsToShow();
 
-        return view('backend.link')->with( $depedencies + ['user' => $this->auth, 'invited_user' => $invited_user->user_groups, 'ringlink' => $ringlink, 'metas' => $metas ,'labels' => $this->converter->labels]);
+        return view('backend.link')
+            ->with( $depedencies + ['ringlink_id' => $id, 'user' => $this->auth, 'invited_user' => $invited_user->user_groups, 'ringlink' => $ringlink, 'metas' => $metas ,'labels' => $this->converter->labels]);
     }
 
     /**
@@ -92,6 +93,8 @@ class RiiinglinkController extends Controller {
     public function destroy($id)
     {
         $this->riiinglink->destroy($id);
+
+        return redirect('user/'.$this->auth->id)->with(array('status' => 'success' , 'message' =>  trans('message.delete_partage') ));
     }
 
 }
