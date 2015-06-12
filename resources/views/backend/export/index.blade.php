@@ -22,19 +22,19 @@
                                 </div>
                             </div>
                         </div>
+                        @if(!empty($tags))
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
                             <div class="col-sm-10 list_checkbox" id="tags_list">
                                 <p class="text-danger"><strong>{{ trans('menu.export_tags') }}</strong></p>
-                                @if(!empty($tags))
-                                    @foreach($tags as $tag_id => $tag)
-                                        <div class="checkbox">
-                                            <label><input value="{{ $tag_id }}" name="tags[]" type="checkbox"> {{ $tag }}</label>
-                                        </div>
-                                    @endforeach
-                                @endif
+                                @foreach($tags as $tag_id => $tag)
+                                    <div class="checkbox">
+                                        <label><input value="{{ $tag_id }}" name="tags[]" type="checkbox"> {{ $tag }}</label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
+                        @endif
                         <hr/>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{ trans('menu.quoi') }}</label>
@@ -48,6 +48,12 @@
                             <label for="inputPassword3" class="col-sm-2 control-label"></label>
                             <div class="col-sm-5 list_checkbox" id="types_list">
                                 <p class="text-danger"><strong>{{ trans('menu.export_choix') }}</strong></p>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="0" name="labels[]" checked="checked" type="checkbox">
+                                        {{ trans('menu.firstname') }} et {{ trans('menu.lastname') }}
+                                    </label>
+                                </div>
                                 @if(!empty($types))
                                     <?php unset($types[12]); ?>
                                     @foreach($types as $type_id => $type)

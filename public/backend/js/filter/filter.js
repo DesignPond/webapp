@@ -22,12 +22,33 @@ $( function() {
     * */
     var url = location.protocol + "//" + location.host+"/";
 
+    function IsEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
     $( "#searchEmail" ).autocomplete({
         source: url + "search",
         minLength: 4,
-        change: function( event, ui ) {
-            //$('#searchEmail').attr('value', '');
-           // $('#searchEmail_email').attr('value', '');
+        change: function( event, ui )
+        {
+            console.log('changemet');
+
+            var email = $('#searchEmail').val();
+            if(IsEmail(email)){
+                $('#inputEmail').val(email);
+            }
+
+        },
+        focus: function( event, ui )
+        {
+            console.log('focus');
+
+            var email = $('#searchEmail').val();
+            if(IsEmail(email)){
+                $('#inputEmail').val(email);
+            }
+
         },
         response: function(event, ui) {
             // ui.content is the array that's about to be sent to the response callback.
@@ -38,9 +59,9 @@ $( function() {
         },
         select: function( event, ui )
         {
-            $('#searchEmail').val(ui.item.value);
-           // $('#searchEmail').val(ui.item.label);
-            $('#searchEmail_email').val(ui.item.value);
+            console.log('selected');
+            $('#searchEmail').val(ui.item.label);
+            $('#inputEmail').val(ui.item.value);
 
             $.get(url + "labels", { user_type: ui.item.user_type }, function( data )
             {

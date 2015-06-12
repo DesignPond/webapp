@@ -5,6 +5,7 @@ use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Riiinglink\Worker\RiiinglinkWorker;
+use App\Riiingme\Riiinglink\Worker\ConvertWorker;
 
 class ExportWorker{
 
@@ -14,6 +15,7 @@ class ExportWorker{
     protected $worker;
     protected $hiddenTypes;
     protected $transformer;
+    protected $converter;
 
     public $types;
     public $user;
@@ -22,13 +24,14 @@ class ExportWorker{
     public $groupes;
     public $user_riiinglinks;
 
-    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label, RiiinglinkTransformer $transformer, RiiinglinkWorker $worker )
+    public function __construct(GroupeWorker $groupe, RiiinglinkInterface $riiinglink, LabelWorker $label, RiiinglinkTransformer $transformer, RiiinglinkWorker $worker , ConvertWorker $converter)
     {
         $this->riiinglink  = $riiinglink;
         $this->groupe      = $groupe;
         $this->label       = $label;
         $this->worker      = $worker;
         $this->transformer = $transformer;
+        $this->converter   = $converter;
         $this->hiddenTypes = [12];
 
     }
@@ -86,22 +89,48 @@ class ExportWorker{
             foreach($this->user_riiinglinks as $riiinglink)
             {
                 $data   = [];
-                // Find riinglink inverse
-                $invite = $this->loadLabelsAndGroupes($riiinglink);
-                $data   = $this->userLabelsInGroupes($invite);
 
-                $user = $this->label->periodIsInEffect($invite->invite->users_groups,$data);
+                $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect()->convertPeriodRange()->labelsToShow()->addName();
+
+                //$invite = $this->loadLabelsAndGroupes($riiinglink);
+                //$data   = $this->userLabelsInGroupes($invite);
+                //$user = $this->label->periodIsInEffect($invite->invite->users_groups,$data);
+
+                $user = $this->dataLabelsInGroupes($this->converter->labels);
 
                 if(!empty($user))
                 {
                     $user_data[$riiinglink->invite->id] = $user;
                 }
-
             }
         }
 
         return $this->dispatchTypes($user_data, $this->hiddenTypes);
 
+    }
+
+    public function dataLabelsInGroupes($datas)
+    {
+        $data = [];
+
+        if(!empty($datas))
+        {
+            foreach ($datas as $groupe_id => $groupe)
+            {
+                if( empty($this->groupes) || (!empty($this->groupes) && in_array($groupe_id,$this->groupes)) )
+                {
+                    foreach ($groupe as $type_id => $label)
+                    {
+                        if(empty($this->labels) || (!empty($this->labels) && in_array($type_id,$this->labels)) )
+                        {
+                            $data[$groupe_id][$type_id] = $label;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
     public function userLabelsInGroupes($invite)
@@ -190,6 +219,7 @@ class ExportWorker{
     public function prepareLabelsTitle(){
 
         $types = $this->groupe->getTypes();
+        $types = [0] + $types;
 
         if(!empty($this->hiddenTypes))
         {

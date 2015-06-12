@@ -92,6 +92,24 @@ class ConvertWorker{
         return $this;
     }
 
+    public function addName(){
+
+        $this->link->load('host');
+        $name = $this->link->host->name;
+        
+        if(!empty($this->labels))
+        {
+            foreach($this->labels as $groupe => $labels)
+            {
+                $data[$groupe] = [0 => $name] + $labels;
+            }
+        }
+
+        $this->labels = $data;
+
+        return $this;
+    }
+
     public function prepareLabels(){
 
         if(!empty($this->labels))

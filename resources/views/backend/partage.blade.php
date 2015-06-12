@@ -14,10 +14,10 @@
 
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input type="text" id="searchEmail" required name="email" class="form-control" placeholder="{{ trans('menu.search') }}">
-                            {{--<input type="hidden" id="searchEmail_email" required class="form-control" name="email">--}}
-
+                            <input type="text" id="searchEmail" class="form-control" placeholder="{{ trans('menu.search') }}">
+                            <input type="hidden" id="inputEmail" required class="form-control" name="email">
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
+
                             <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
                         </div><!-- /input-group -->
                     </div>

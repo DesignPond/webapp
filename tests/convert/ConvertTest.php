@@ -169,6 +169,34 @@ class ConvertTest extends TestCase {
 
     }
 
+    public function testLabelsWithName()
+    {
+        \DB::table('user_groups')->truncate();
+
+        $this->converter->loadUserLabels($this->link);
+        $this->converter->metas = [3 => [1,7]];
+
+        $this->converter->labels = [
+            3 => [
+                1 => 'gaga@domain.ch',
+                6 => 'Bienne',
+                7 => 'Suisse'
+            ]
+        ];
+
+        $expected = [
+            3 => [
+                0 => 'Bob Dupond',
+                1 => 'gaga@domain.ch',
+                7 => 'Suisse'
+            ]
+        ];
+
+        $this->converter->labelsToShow()->addName();
+
+        $this->assertEquals( $this->converter->labels, $expected );
+
+    }
 
     public function testPeriodRangeInEffect()
     {
