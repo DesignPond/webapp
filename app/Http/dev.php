@@ -44,7 +44,7 @@ Route::get('test', function()
 
     $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
 
-    $send->setInterval('week')->getUsers();
+    $send->setInterval('day')->getUsers();
     $all_changes = $send->send();
 
     echo '<pre>';
