@@ -44,10 +44,20 @@ Route::get('test', function()
 
     $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
 
-    $send->setInterval('day')->getUsers();
+    $send->setInterval('week')->getUsers();
     $all_changes = $send->send();
 
     echo '<pre>';
+    echo 'Week';
+    print_r($all_changes);
+    echo '</pre>';
+
+    $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+    $send1->setInterval('day')->getUsers();
+    $all_changes = $send1->send();
+
+    echo '<pre>';
+    echo 'Day';
     print_r($all_changes);
     echo '</pre>';exit;
     
