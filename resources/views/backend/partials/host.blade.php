@@ -16,7 +16,7 @@
                             <div class="riiinglink-list">
                                 <input type="hidden" name="riiinglink_id" value="{{ $ringlink['id'] }}">
 
-                                <?php $visible = [2,3]; ?>
+                                <?php $visible = [2,3,6]; ?>
                                 @foreach($groupe_type as $items)
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
 
