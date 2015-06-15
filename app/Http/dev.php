@@ -52,15 +52,16 @@ Route::get('test', function()
     print_r($all_changes);
     echo '</pre>';
 
-/*    $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+   $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
     $send1->setInterval('day')->getUsers();
     $all_changes = $send1->send();
 
     echo '<pre>';
     echo 'Day';
     print_r($all_changes);
-    echo '</pre>';*/
-    
+    echo '</pre>';
+
+/*
     if(!empty($all_changes))
     {
         foreach ($all_changes as $user)
@@ -70,7 +71,7 @@ Route::get('test', function()
                 $message->to($user['email'])->subject('Notification de changement du partage');
             });
         }
-    }
+    }*/
 
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
