@@ -64,7 +64,7 @@ class Helper{
                 break;
             case 11:
                 $class = 'mask_web';
-                $placeholder = 'wwww.domaine.ch';
+                $placeholder = 'www.domaine.ch';
                 break;
             default:
                 $class = '';
@@ -132,7 +132,10 @@ class Helper{
 
         $dates =  array_map('trim', explode('|', $date));
 
-        return ['start_at' => $dates[0], 'end_at' => $dates[1]];
+        $start = \Carbon\Carbon::createFromFormat('d/m/Y', $dates[0])->toDateString(); // 1975-05-21
+        $end   = \Carbon\Carbon::createFromFormat('d/m/Y', $dates[1])->toDateString(); // 1975-05-21
+
+        return ['start_at' => $start, 'end_at' => $end];
 
     }
 

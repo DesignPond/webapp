@@ -12,7 +12,7 @@
                     <h3 class="serviceName">{{ trans('text.secure') }}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis.
                         Pellentesque cursus arcu id magna euismod in elementum purus molestie.</p>
-                        <a class="btn btn-info btn-xl btn-blue" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
+                        <a class="btn btn-default btn-xl" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
                         <a class="btn btn-default btn-xl" href="{{ url('auth/login') }}">{{ trans('action.login') }}</a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <h3 class="serviceName">{{ trans('text.accessible') }}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis.
                         Pellentesque cursus arcu id magna euismod in elementum purus molestie.</p>
-                        <a class="btn btn-info btn-xl btn-blue" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
+                        <a class="btn btn-default btn-xl" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
                         <a class="btn btn-default btn-xl" href="{{ url('auth/login') }}">{{ trans('action.login') }}</a>
                 </div>
             </div>

@@ -37,6 +37,9 @@
         <testsuite name="link">
             <directory>./tests/link/</directory>
         </testsuite>
+        <testsuite name="help">
+            <directory>./tests/help/</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>

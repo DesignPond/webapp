@@ -101,7 +101,7 @@
     });
 
     $('.daterange').daterangepicker({
-        format: 'YYYY-MM-DD',
+        format: 'DD/MM/YYYY',
         separator: ' | ',
         locale: {
             applyLabel: 'Appliquer',

@@ -20,9 +20,6 @@
                 {!! Form::open(array( 'url' => 'user/labels' , 'id' => 'editForm',  'class' => 'form-horizontal form-edit')) !!}
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">{{ trans('menu.vosdonnees') }}</div>
-                    </div>
                     <div class="panel-body">
 
                             @include('backend.account.photo')

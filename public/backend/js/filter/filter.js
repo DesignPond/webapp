@@ -29,7 +29,7 @@ $( function() {
 
     $( "#searchEmail" ).autocomplete({
         source: url + "search",
-        minLength: 4,
+        minLength: 3,
         change: function( event, ui )
         {
             console.log('changemet');

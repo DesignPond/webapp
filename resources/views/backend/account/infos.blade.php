@@ -1,5 +1,5 @@
 <fieldset class="row border">
-    <h4>{{ trans('menu.informations') }}</h4>
+    <h4 class="title-adresse">{{ trans('menu.informations') }}</h4>
     <div class="col-md-8 col-xs-12">
         @if($user->user_type == '1')
             <div class="form-group">
@@ -34,7 +34,7 @@
 
 <!-- Configuration search -->
 <fieldset class="row border">
-    <h4>{{ trans('menu.search_by') }}</h4>
+    <h4 class="title-adresse">{{ trans('menu.search_by') }}</h4>
     <div class="col-md-8 col-xs-12">
         <div class="form-group">
             <?php $name = ($user->user_type == '1' ? trans('menu.firstname').'/'.trans('menu.lastname') : trans('menu.company') ); ?>
@@ -58,7 +58,7 @@
 
 <!-- Configuration notifications -->
 <fieldset class="row border">
-    <h4>{{ trans('menu.notification') }}</h4>
+    <h4 class="title-adresse">{{ trans('menu.notification') }}</h4>
     <div class="col-md-8 col-xs-12">
         <div class="form-group">
 

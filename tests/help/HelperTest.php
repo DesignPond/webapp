@@ -93,7 +93,7 @@ class HelperTest extends TestCase {
      */
     public function testConvertDateRange()
     {
-        $date = '2015-03-22 | 2015-05-31';
+        $date = '22/03/2015 | 31/05/2015';
 
         $actual  = $this->helper->convertDateRange($date);
         $expect  = ['start_at' => '2015-03-22', 'end_at' => '2015-05-31'];

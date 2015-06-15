@@ -137,8 +137,8 @@
 }
 
 .switch input:checked + span {
-    background-color: #7ed6c2;
-    border-color: #66c7b1;
+    background-color: #88bf57;
+    border-color: #88bf57;
     transition: all 0.5s ease 0s;
 }
 

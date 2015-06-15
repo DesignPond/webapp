@@ -20,7 +20,6 @@
                 width: auto;
                 height: auto;
                 margin: auto;
-                text-align: center;
             }
             span{
                 font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -48,7 +47,7 @@
                             echo '<td width="'.$width.'" height="'.$height.'" class="normalize height">';
 
                             //echo '<div>'.implode('<br/>',$name).'</div>';
-                            echo '<div>';
+                            echo '<div style="width: 80%;margin: 0 auto; display: block;text-align: left;">';
                             echo '<span>'.implode('</span><span>', $name).'</span>';
                             echo '</div>';
 

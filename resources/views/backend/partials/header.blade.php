@@ -9,7 +9,7 @@
             <!-- Mobile buttons-->
             <div class="mobile-toggles">
                 <!-- Button to show/hide the header menu on mobile. Visible on mobile only.-->
-                <a class="menu-toggle" data-toggle="collapse" href="#collapseAlertes"><em class="fa fa-cog"></em></a>
+                <a class="menu-toggle" data-toggle="collapse" href="#collapseAlertes"><em class="fa fa-bell"></em></a>
                 <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
                 <a class="sidebar-toggle" data-toggle="collapse" href="#collapseSidebar"><em class="fa fa-navicon"></em></a>
             </div>

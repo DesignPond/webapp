@@ -1,5 +1,10 @@
 var url  = location.protocol + "//" + location.host+"/";
 
+function randomIntFromInterval(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
 $('#userpic').fileapi({
     url: url + 'upload',
     accept: 'image/*',
@@ -18,8 +23,9 @@ $('#userpic').fileapi({
 
         var path = url + 'users/' + uiEvt.result;
 
-        $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '")' });
-        $("#userPhoto").attr("src",path);
+        $("#userpic").css({ "background-image" : '' }).css({ "background-image" : 'url("' + path + '?'+ randomIntFromInterval(1,123) +'")' });
+        $("#userPhoto").attr("src",path +'?'+randomIntFromInterval(1,123) );
+        $("#flow-img").attr("value", uiEvt.result);
     },
     onSelect: function (evt, ui){
         var file = ui.files[0];

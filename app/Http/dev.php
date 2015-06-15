@@ -52,25 +52,25 @@ Route::get('test', function()
     print_r($all_changes);
     echo '</pre>';
 
-    $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+/*    $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
     $send1->setInterval('day')->getUsers();
     $all_changes = $send1->send();
 
     echo '<pre>';
     echo 'Day';
     print_r($all_changes);
-    echo '</pre>';exit;
+    echo '</pre>';*/
     
-/*    if(!empty($all_changes)) {
-        foreach ($all_changes as $user) {
-
+    if(!empty($all_changes))
+    {
+        foreach ($all_changes as $user)
+        {
             \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
             {
                 $message->to($user['email'])->subject('Notification de changement du partage');
             });
-
         }
-    }*/
+    }
 
     
 /*    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
@@ -113,14 +113,18 @@ Route::get('changement', function()
 
     $groupes = $groupe->getGroupes();
     unset($groupes[1]);
-
     
     $change->setUser($user->id)->setPeriod($user->notification_interval);
     $data = $change->setUser(1)->setPeriod('week')->allChanges();
+
+    $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+
+    $send->setInterval('week')->getUsers();
+    $all_changes = $send->send();
    
-echo '<pre>';
+/*echo '<pre>';
 print_r($data);
-echo '</pre>';exit;
+echo '</pre>';exit;*/
 
     // Load user riiinglinks to get all invited
     $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');

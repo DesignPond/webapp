@@ -8,8 +8,8 @@
 
     if($dates)
     {
-       $start = \Carbon\Carbon::parse($dates->pivot->start_at)->toDateString();
-       $end   = \Carbon\Carbon::parse($dates->pivot->end_at)->toDateString();
+       $start = \Carbon\Carbon::parse($dates->pivot->start_at)->format('d/m/Y');
+       $end   = \Carbon\Carbon::parse($dates->pivot->end_at)->format('d/m/Y');
 
        $daterange = $start.' | '.$end;
        $exist     = true;
@@ -23,12 +23,10 @@
 
     <div class="col-md-12 col-xs-12">
         <div class="row">
-            <h4 class="title-adresse col-md-9">{{ $view['titre'] }} <small class="text-danger">{{ trans('menu.temporaire') }}</small></h4>
-
-            <div class="col-md-3 alert alert-<?php echo ($current ? 'success' : 'danger' ); ?> text-center" role="alert">
-                <?php echo ($current ? 'Affiché chez vos contacts' : 'Période pas en effet' ); ?>
-            </div>
-
+            <h4 class="title-adresse col-md-9">{{ trans('label.title_'.$view['id']) }}
+                <i class="text-danger">{{ trans('menu.temporaire') }}</i>
+                &nbsp;<?php echo ($current ? trans('menu.affiche_temp') : trans('menu.non_affiche_temp') ); ?>
+            </h4>
         </div>
     </div>
 

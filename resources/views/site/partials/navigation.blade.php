@@ -15,7 +15,7 @@
                     </li>
                 </ul>
             </div>
-            <p class="navbar-text navbar-right">{{ trans('menu.deja_inscrit') }} &nbsp;&nbsp; <a href="{{ url('auth/login') }}" class="navbar-link btn btn-sm btn-primary">{{ trans('action.login') }}</a></p>
+            <p class="navbar-text navbar-right">{{ trans('menu.deja_inscrit') }} &nbsp;&nbsp; <a href="{{ url('auth/login') }}" class="navbar-link btn btn-sm btn-default">{{ trans('action.login') }}</a></p>
         </div>
     </nav>
 </div><!-- end of all wrapper -->

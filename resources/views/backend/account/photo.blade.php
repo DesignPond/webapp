@@ -1,4 +1,4 @@
-<h4>{{ trans('menu.photo') }}</h4>
+<h4 class="title-adresse">{{ trans('menu.photo') }}</h4>
 
 <fieldset class="row">
     <div class="col-md-8">
@@ -23,7 +23,8 @@
         <div class="form-group">
             <div class="col-md-4"></div>
             <div class="col-sm-8">
-                <div id="userpic" class="userpic" style="background-image: url('{{ asset('users/'.$image) }}');">
+                <?php $rand = rand(1,123); ?>
+                <div id="userpic" class="userpic" style="background-image: url('{{ asset('users/'.$image) }}?{{ $rand }}');">
                     <div class="btn js-fileapi-wrapper">
                         <div class="js-browse">
                             <span class="btn btn-info btn-sm">{{ trans('action.change') }}</span>

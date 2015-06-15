@@ -17,10 +17,10 @@
     <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>
     <td class="eBody alignCenter pdTp32" style="{{ $marginReset }}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;width: 512px;color: #54565c;background-color: #ffffff;">
         <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 20px;line-height: 36px;font-weight: bold;color: #465059;">
-            <span style="color: #465059;">{{ trans('text.inscription') }}</span>
+            <span style="color: #465059;">{!! trans('text.inscription') !!}</span>
         </h1>
         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 14px;line-height: 22px;">
-            {{ trans('text.ready') }}
+            {!! trans('text.ready') !!}
         </p>
 
         <?php  $url = url('activation?token='.$token); ?>
