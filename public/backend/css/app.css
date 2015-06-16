@@ -2424,8 +2424,8 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #ffffff !important;
-  background-color: #8293b9;
-  border-color: #7f90b7;
+    background-color: #444444;
+    border-color: #404040;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -2434,8 +2434,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
   color: #ffffff !important;
-  background-color: #7588b2;
-  border-color: #657aa9;
+  background-color: #444444;
+  border-color: #404040;
 }
 .btn-info:active,
 .btn-info.active,
@@ -10287,7 +10287,7 @@ flot .legend .legendColorBox > div > div {
  ========================================================================== */
 /**
  * Custom form elements
- *    - Checkbox 
+ *    - Checkbox
  *    - Radios
  */
 .c-checkbox,
@@ -10535,7 +10535,7 @@ body .ng-table-pager:after {
 }
 /* ========================================================================
    Component: plugins.less
-   - User this stylesheet to include single css styles and fixes 
+   - User this stylesheet to include single css styles and fixes
      for plugins
  ========================================================================== */
 /**
@@ -10827,9 +10827,9 @@ body .toast-warning {
  ========================================================================== */
 .gmap {
   height: 300px;
-  /* 
+  /*
   Fixes Bootstrap issues with Google Maps
-  see http://stackoverflow.com/a/9170756 
+  see http://stackoverflow.com/a/9170756
   */
 }
 .gmap img {
@@ -10876,7 +10876,7 @@ body .jvectormap-zoomout {
    Component: utils-background.less
  ========================================================================== */
 .bg-gray {
-  background-color: #a0aab2 !important;
+  background-color: #929ca3 !important;
   color: #ffffff;
 }
 .bg-gray a {

@@ -73,7 +73,7 @@ class SendChange extends Command {
             {
                 \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
                 {
-                    $message->to($user['email'])->subject('Notification de changement du partage');
+                    $message->to($user['email'])->subject(trans('text.notification'));
                     $message->to('cindy.leschaud@gmail.com')->subject('Notification de changement du partage pour:'.$user['email']);
                 });
             }

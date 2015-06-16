@@ -30,5 +30,9 @@ return [
     'password_rappel'  => 'Rappel de mot de passe',
     'password_text'    => 'Vous avez requis un nouveau mot de passe pour votre compte RiiingMe. Ce message est valable durant 1 heure.',
     'password_button'  => 'Cliquez ici pour réinitialiser votre mot de passe',
+    'notification'    => 'Notification de changement du partage',
 
+    // Textes de la page d'accueil
+    'texte_annuaire'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis.Pellentesque cursus arcu id magna euismod in elementum purus molestie.',
+    'texte_monde'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam, adipiscing condimentum tristique vel, eleifend sed turpis.Pellentesque cursus arcu id magna euismod in elementum purus molestie.',
 ];
