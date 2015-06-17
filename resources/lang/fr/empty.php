@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'contact'   => 'Vous n\'avez pas encore de contacts',
+    'contact'   => 'Vous n\'avez pas encore de contact(s)',
     'activites' => 'Aucune activité pour le moment',
-    'noinfo'    => 'Vous n\'avez pas indiqué vos informations',
+    'noinfo'    => 'Vous n\'avez pas indiqué vos données',
 ];

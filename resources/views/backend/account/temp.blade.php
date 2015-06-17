@@ -13,7 +13,7 @@
 
        $daterange = $start.' | '.$end;
        $exist     = true;
-       $now       = \Carbon\Carbon::now();
+       $now       = \Carbon\Carbon::now()->format('d/m/Y');
        $current   = ($start < $now && $end > $now ? true : false);
     }
 

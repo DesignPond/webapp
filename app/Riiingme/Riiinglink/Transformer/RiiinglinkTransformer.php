@@ -161,8 +161,9 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
 
             foreach($data as $groupe_id => $groupe)
             {
-                $hasPeriodRange = $this->userHasPeriodRange($this->invited,$groupe_id);
+                //$hasPeriodRange = $this->userHasPeriodRange($this->invited,$groupe_id);
 
+                /*
                 if($invited && $hasPeriodRange)
                 {
                     if(in_array($groupe_id,$isGroupeUnset) )
@@ -170,16 +171,17 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
                         $labels = $labels + $this->getInvitedGroupLabels($groupe_id);
                     }
                 }
-                else
-                {
-                    if(in_array($groupe_id,$isNormalGroupe))
-                    {
+                */
+                //else
+                //{
+                    //if(in_array($groupe_id,$isNormalGroupe))
+                    //{
                         foreach($groupe as $type => $id)
                         {
                             $labels[$groupe_id][$type] = $this->getLabelItem($id);
                         }
-                    }
-                }
+                   // }
+                //}
             }
 
             return $labels;

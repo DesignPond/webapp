@@ -23,6 +23,7 @@ class GroupeWorker{
             'groupe_type'      => $this->getGroupesTypes($user_type),
             'all_groupe_type'  => $this->getGroupesTypes(),
             'groupes_user'     => $this->getGroupesUser($user_type),
+            'group_type_data'  => $this->groupTypesData($user_type),
         ];
 
     }
@@ -55,6 +56,23 @@ class GroupeWorker{
     public function getTypes()
     {
         return $this->type->getAll()->lists('titre','id');
+    }
+
+    public function groupTypesData($user_type = null)
+    {
+
+        $groupeTypes = $this->getAllGroupes($user_type);
+        $data = [];
+
+        foreach($groupeTypes as $groupe)
+        {
+            foreach($groupe->groupe_type as $types)
+            {
+                $data[$groupe->id][] = $types->id;
+            }
+        }
+
+        return $data;
     }
 
 }
