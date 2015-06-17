@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    {!! Form::honeypot('my_name', 'my_time') !!}
+                    {!! Honeypot::generate('my_name', 'my_time') !!}
 
                     <button type="submit" class="btn btn-block btn-info mt-lg">{{ trans('menu.envoyer') }}</button>
                 </form>

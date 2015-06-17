@@ -25,8 +25,6 @@
                     </div>
                     <br/>
 
-                    {!! Honeypot::generate('my_name', 'my_time') !!}
-
                     <button type="submit" class="btn btn-block btn-info mt-lg">{{ trans('action.login') }}</button>
 
                 {!! Form::close() !!}
