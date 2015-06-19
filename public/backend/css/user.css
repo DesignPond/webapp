@@ -65,24 +65,22 @@
 }
 
 .dl-horizontal dt {
-    width: 145px;
+    width: 150px;
 }
 
 .dl-horizontal dd {
-    margin-left: 155px;
+    margin-left: 160px;
 }
 
 .dl-horizontal dd p{
     position: relative;
-    width: 95%;
+    width: 97%;
+    margin-bottom: 0;
 }
 
-.dl-horizontal dd p span.text-muted{
-    position: absolute;
-    max-width: 170px;
+.dl-horizontal dd span.text-warning{
     font-size: 12px;
-    top: 0;
-    right: 0;
+    margin-top: 5px;
 }
 
 /*
@@ -297,7 +295,7 @@
 
 .title-adresse{
     margin-bottom: 30px;
-    font-size: 17px;
+    font-size: 16px;
     color: #777;
 }
 
@@ -406,6 +404,10 @@ fieldset.border {
     margin: 4px 0;
     padding: 3px;
     max-width: 240px;
+}
+
+.radio, .checkbox{
+    font-weight: normal;
 }
 
 /*

@@ -291,7 +291,7 @@ class Helper{
             $start = \Carbon\Carbon::parse($dates->pivot->start_at);
             $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
 
-            $format = ($start->month == $end->month ? '%d' : '%d %B %Y');
+            $format = ($start->month == $end->month ? '%d' : '%d %B');
 
             $startPeriod = $start->formatLocalized($format);
             $endPeriod   = $end->formatLocalized('%d %B %Y');

@@ -19,6 +19,7 @@ return [
     'vosdonnees'       => 'Vos données',
     'company'          => 'Société/Association/Ecole',
     'prive'            => 'Privé',
+    'password'         => 'Mot de passe',
     'firstname'        => 'Prénom',
     'lastname'         => 'Nom',
     'photo'            => 'Photo',
@@ -75,7 +76,10 @@ return [
     'conditions'       => 'Conditions d\'utilisation',
     'confiential'      => 'Politique de confidentialité',
     'new_tag'          => 'Nouveau tag',
-    'notification'     => 'Fréquence des notifications',
+    'notification'     => 'Fréquence des notifications (nouveaux partages, modifications par les contacts, news)',
     'affiche_temp'     => 'actuellement affichées chez vos contacts',
-    'non_affiche_temp' => 'non affichées chez vos contacts (hors période)'
+    'non_affiche_temp' => 'non affichées chez vos contacts (hors période)',
+    'send_day'         => 'e-mail envoyé tous les jours à 20h',
+    'send_week'        => 'e-mail envoyé tous les jeudis à 20h',
+    'send_month'       => 'e-mail envoyé tous les 1er du mois à 20h',
 ];

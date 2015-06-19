@@ -118,7 +118,7 @@
     $('.daterange').on('apply.daterangepicker', function(ev, picker) {
 
         var date   = $(this).val();
-        var groupe = $('.daterange').data('groupe');
+        var groupe = $(this).data('groupe');
 
         console.log(date);
         console.log(groupe);

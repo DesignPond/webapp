@@ -25,6 +25,13 @@
             <input type="hidden" name="info[first_name]" value=""><input type="hidden" name="info[last_name]" value="">
         @endif
 
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-danger">{{ trans('menu.password') }}</label>
+            <div class="col-sm-8">
+                <input value="" type="password" name="info[password]" class="form-control" placeholder="Changer le mot de passe">
+            </div>
+        </div>
+
         <input type="hidden" name="info[id]" value="{{ $user->id }}">
         <input type="hidden" name="info[user_type]" value="{{ $user->user_type }}">
     </div>
@@ -64,14 +71,20 @@
 
             <label class="col-sm-4 control-label">{{ trans('menu.email') }} {{ trans('action.chaque') }}</label>
             <div class="col-md-8">
-                <label class="radio-inline">
-                    <input type="radio" <?php echo ($user->notification_interval == 'day' ? 'checked' : ''); ?> name="info[notification_interval]" value="day"> {{ trans('action.day') }}
+                <label class="radio">
+                    <input type="radio" <?php echo ($user->notification_interval == 'day' ? 'checked' : ''); ?> name="info[notification_interval]" value="day">
+                    {{ trans('action.day') }}<br/>
+                    <span class="text-muted">{{ trans('menu.send_day') }}</span>
                 </label>
-                <label class="radio-inline">
-                    <input type="radio" <?php echo ($user->notification_interval == 'week' ? 'checked' : ''); ?> name="info[notification_interval]" value="week"> {{ trans('action.week') }}
+                <label class="radio">
+                    <input type="radio" <?php echo ($user->notification_interval == 'week' ? 'checked' : ''); ?> name="info[notification_interval]" value="week">
+                    {{ trans('action.week') }}<br/>
+                    <span class="text-muted">{{ trans('menu.send_week') }}</span>
                 </label>
-                <label class="radio-inline">
-                    <input type="radio" <?php echo ($user->notification_interval == 'month' ? 'checked' : ''); ?> name="info[notification_interval]" value="month"> {{ trans('action.month') }}
+                <label class="radio">
+                    <input type="radio" <?php echo ($user->notification_interval == 'month' ? 'checked' : ''); ?> name="info[notification_interval]" value="month">
+                    {{ trans('action.month') }}<br/>
+                    <span class="text-muted">{{ trans('menu.send_month') }}</span>
                 </label>
             </div>
         </div>

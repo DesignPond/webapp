@@ -110,6 +110,10 @@ class UserEloquent implements UserInterface {
 
         $user->fill($data);
 
+        if(!empty($data['password'])){
+            $user->password = bcrypt($data['password']);
+        }
+
         $user->save();
 
         return $user;

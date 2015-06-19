@@ -34,4 +34,5 @@ return [
     'nocorrespondfilter'  => 'Aucun contact ne correspond au filtre',
     'nocorrespondsearch'  => 'Aucun contact ne correspond à votre recherche',
     'recoverpassword'     => 'Veuillez saisir votre adresse e-mail.<br/> Un lien permettant de définir un nouveau mot de passe vous sera envoyé par e-mail.',
+    'recoverpassword_msg' => 'Lien de réinitialisation du mot de passe',
 ];

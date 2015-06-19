@@ -47,10 +47,8 @@ echo '</pre>';
                                         @if( isset($groupe_label[$type_data_id]) && !empty($groupe_label[$type_data_id]) )
                                             <dt>{{ trans('label.label_'.$type_data_id) }}</dt>
                                             <dd>
-                                                <p>
-                                                    {{ $groupe_label[$type_data_id] }}
-                                                    <span class="text-muted">{{ $valable }}</span>
-                                                </p>
+                                                {{ $groupe_label[$type_data_id] }}<br/>
+                                                <span class="text-warning">{{ $valable }}</span>
                                             </dd>
 
                                         @elseif($temp && isset($isGroupe[$group]) && isset($alllabels[$isGroupe[$group]][$type_data_id]) && !empty($group_type_data[$isGroupe[$group]][$type_data_id]) )
