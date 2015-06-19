@@ -102,20 +102,21 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         {
             if($params['orderBy'] == 'created_at')
             {
-                $results->orderBy('created_at', 'asc');
+                $results->orderBy('created_at', 'desc');
             }
 
             if($params['orderBy'] == 'last_name')
             {
+
                 $results->join('users', 'users.id', '=', 'riiinglinks.invited_id')
-                    ->orderBy('users.last_name', 'asc')
-                    ->select('riiinglinks.*','users.last_name')       // just to avoid fetching anything from joined table
-                    ->with(['tags','invite']);
+                    ->with(['tags','invite'])
+                    ->select('riiinglinks.*', 'users.last_name', 'users.company', \DB::raw("CONCAT( COALESCE(users.last_name,''),'', COALESCE(users.company,'')) AS thename")) // just to avoid fetching anything from joined table
+                    ->orderBy('thename', 'asc');
             }
         }
         else
         {
-            $results->orderBy('created_at', 'desc');
+            $results->orderBy('created_at', 'asc');
         }
 
         return $results->paginate(9);

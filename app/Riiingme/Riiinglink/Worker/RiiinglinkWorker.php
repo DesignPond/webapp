@@ -87,7 +87,7 @@ class RiiinglinkWorker{
      * */
     public function getRiiinglinkWithParams($user_id,$params)
     {
-        $results = $this->riiinglink->findByHostWithParams($user_id,$params);
+        $results = $this->riiinglink->findByHostWithParams($user_id, $params);
 
         return $results;
     }
