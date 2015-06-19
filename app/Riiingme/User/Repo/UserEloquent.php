@@ -108,7 +108,26 @@ class UserEloquent implements UserInterface {
             return false;
         }
 
-        $user->fill($data);
+        if(!empty($data['first_name']))
+        {
+            $user->first_name = $data['first_name'];
+        }
+
+        if(!empty($data['last_name']))
+        {
+            $user->last_name = $data['last_name'];
+        }
+
+        if(!empty($data['company']))
+        {
+            $user->company = $data['company'];
+        }
+
+        if(!empty($data['email']))
+        {
+            $user->email = $data['email'];
+        }
+        //$user->fill($data);
 
         if(!empty($data['password'])){
             $user->password = bcrypt($data['password']);
