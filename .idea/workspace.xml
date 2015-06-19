@@ -63,11 +63,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RiiinglinkEloquent.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RiiinglinkEloquent.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Repo/RiiinglinkEloquent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37369207" vertical-offset="2350" max-vertical-offset="4525">
-              <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
+            <state vertical-scroll-proportion="-7.6923075" vertical-offset="2350" max-vertical-offset="4525">
+              <caret line="102" column="50" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConvertWorker.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Worker/ConvertWorker.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7399103" vertical-offset="2580" max-vertical-offset="4100">
+              <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -76,8 +86,8 @@
       <file leaf-file-name="laravel-2015-06-19.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2015-06-19.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.5" vertical-offset="9385" max-vertical-offset="10050">
-              <caret line="388" column="34" selection-start-line="388" selection-start-column="34" selection-end-line="388" selection-end-column="118" />
+            <state vertical-scroll-proportion="-10.5" vertical-offset="54235" max-vertical-offset="54900">
+              <caret line="2182" column="34" selection-start-line="388" selection-start-column="34" selection-end-line="388" selection-end-column="118" />
               <folding />
             </state>
           </provider>
@@ -100,16 +110,6 @@
         <entry file="file://$PROJECT_DIR$/app/Http/dev.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="175.23077" vertical-offset="4556" max-vertical-offset="5225">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/backend/show.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1675">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -141,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/backend/export/bagde.php" />
         <option value="$PROJECT_DIR$/phpunit.xml" />
         <option value="$PROJECT_DIR$/tests/help/HelperTest.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/partials/changes.blade.php" />
@@ -192,6 +191,7 @@
         <option value="$PROJECT_DIR$/storage/logs/laravel-2015-06-19.log" />
         <option value="$PROJECT_DIR$/app/Riiingme/Riiinglink/Worker/RiiinglinkWorker.php" />
         <option value="$PROJECT_DIR$/app/Riiingme/Riiinglink/Repo/RiiinglinkEloquent.php" />
+        <option value="$PROJECT_DIR$/app/Riiingme/Riiinglink/Worker/ConvertWorker.php" />
       </list>
     </option>
   </component>
@@ -721,14 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Worker/ConvertWorker.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.251121" vertical-offset="0" max-vertical-offset="4050">
-          <caret line="90" column="9" selection-start-line="90" selection-start-column="9" selection-end-line="90" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Transformer/RiiinglinkTransformer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7847534" vertical-offset="0" max-vertical-offset="6050">
@@ -1013,8 +1005,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2015-06-19.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.5" vertical-offset="9385" max-vertical-offset="10050">
-          <caret line="388" column="34" selection-start-line="388" selection-start-column="34" selection-end-line="388" selection-end-column="118" />
+        <state vertical-scroll-proportion="-10.5" vertical-offset="54235" max-vertical-offset="54900">
+          <caret line="2182" column="34" selection-start-line="388" selection-start-column="34" selection-end-line="388" selection-end-column="118" />
           <folding />
         </state>
       </provider>
@@ -1024,8 +1016,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Repo/RiiinglinkEloquent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37369207" vertical-offset="2350" max-vertical-offset="4525">
-          <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
+        <state vertical-scroll-proportion="-7.6923075" vertical-offset="2350" max-vertical-offset="4525">
+          <caret line="102" column="50" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Riiingme/Riiinglink/Worker/ConvertWorker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7399103" vertical-offset="2580" max-vertical-offset="4100">
+          <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
           <folding />
         </state>
       </provider>

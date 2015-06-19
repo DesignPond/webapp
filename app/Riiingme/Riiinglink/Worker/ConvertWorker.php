@@ -123,7 +123,9 @@ class ConvertWorker{
             }
         }
 
-        $this->labels = $labels;
+        if(!empty($labels)){
+            $this->labels = $labels;
+        }
 
         return $this;
     }
