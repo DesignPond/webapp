@@ -64,6 +64,27 @@
     background: #f5f5f5;
 }
 
+.dl-horizontal dt {
+    width: 145px;
+}
+
+.dl-horizontal dd {
+    margin-left: 155px;
+}
+
+.dl-horizontal dd p{
+    position: relative;
+    width: 95%;
+}
+
+.dl-horizontal dd p span.text-muted{
+    position: absolute;
+    max-width: 170px;
+    font-size: 12px;
+    top: 0;
+    right: 0;
+}
+
 /*
 * Partgae label
 */

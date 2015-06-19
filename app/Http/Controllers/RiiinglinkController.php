@@ -19,6 +19,7 @@ class RiiinglinkController extends Controller {
     protected $groupe;
     protected $activity;
     protected $converter;
+    public $helper;
 
     public function __construct(UserInterface $user, MetaWorker $meta, GroupeWorker $groupe, RiiinglinkWorker $riiinglink, ActiviteWorker $activity, ConvertWorker $converter)
     {
@@ -36,6 +37,10 @@ class RiiinglinkController extends Controller {
 
         $demandes = $this->activity->getAskInvites($this->auth->email);
         \View::share('demandes', $demandes);
+
+        $helper = new \App\Riiingme\Helpers\Helper;
+        \View::share('helper', $helper);
+
     }
 
 	/**

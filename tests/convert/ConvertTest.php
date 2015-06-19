@@ -6,6 +6,8 @@ class ConvertTest extends TestCase {
     protected $riiinglink;
     protected $link;
     protected $link2;
+    protected $linkPrivate;
+    protected $linkPrivate2;
     protected $meta;
     protected $user;
     protected $label;
@@ -26,31 +28,44 @@ class ConvertTest extends TestCase {
 
         $this->link  = $link1;
         $this->link2 = $link2;
+
+        list($linkPrivate , $linkPrivate2) = $this->createRiiinglinkAndCoCompany();
+
+        $this->linkPrivate  = $linkPrivate;
+        $this->linkPrivate2 = $linkPrivate2;
+
     }
 
     public function tearDown()
     {
 
         // Delete user
-        $model = new App\Riiingme\User\Entities\User();
-        $user = $model->find(3);
+        $model   = new App\Riiingme\User\Entities\User();
+        $user    = $model->find(10);
+        $comapny = $model->find(11);
 
-        if($user){
+        if($user && $comapny){
             $this->worker->updatePeriodRange($user, 4, null);
-            $user->delete(3);
+            $user->delete(10);
+            $comapny->delete(11);
         }
 
         // Delete meta
         $meta = $this->meta->findByRiiinglink($this->link2->id)->first();
+        $metaCompany = $this->meta->findByRiiinglink($this->linkPrivate2->id)->first();
         $this->meta->delete($meta->id);
+        $this->meta->delete($metaCompany->id);
+
         // Delete labels
-        \App\Riiingme\Label\Entities\Label::where('user_id','=',3)->delete();
+        \App\Riiingme\Label\Entities\Label::where('user_id','=',10)->delete();
+        \App\Riiingme\Label\Entities\Label::where('user_id','=',11)->delete();
         \DB::table('user_groups')->truncate();
-        // \DB::table('riiinglinks')->truncate();
-        //\DB::table('metas')->truncate();
+
         // Delete riiinglink
         $this->riiinglink->delete($this->link->id);
         $this->riiinglink->delete($this->link2->id);
+        $this->riiinglink->delete($this->linkPrivate->id);
+        $this->riiinglink->delete($this->linkPrivate2->id);
     }
 
 	/**
@@ -123,6 +138,18 @@ class ConvertTest extends TestCase {
 
     }
 
+    public function testConvertMetasFormLabelsCompany()
+    {
+        $this->converter->loadUserLabels($this->linkPrivate)->metasInEffect();
+
+        $metas  = [
+            6 => [ 1 , 6 ]
+        ];
+
+        $this->assertEquals($metas,$this->converter->metas);
+
+    }
+
     public function testLabelsToShow()
     {
         $this->converter->metas = [3 => [1,7]];
@@ -143,14 +170,35 @@ class ConvertTest extends TestCase {
 
     }
 
+    public function testLabelsToShowCompany()
+    {
+        $this->converter->metas = [6 => [1,7]];
+
+        $this->converter->labels = [
+            6 => [
+                1 => 'jane.doe@domaine.ch',
+                6 => 'Mallery',
+                7 => 'Espagne'
+            ]
+        ];
+
+        $expected = [6 => [ 1 => 'jane.doe@domaine.ch',7 => 'Espagne']];
+
+        $this->converter->labelsToShow();
+
+        $this->assertEquals( $this->converter->labels, $expected );
+
+    }
+
     public function testLabelsToShowWithPeriod()
     {
         \DB::table('user_groups')->truncate();
 
-        $user    = $this->user->find(3);
+        $user    = $this->user->find(10);
         $carbon  = \Carbon\Carbon::now();
-        $start   = $carbon->toDateString();
-        $end     = $carbon->addMonth();
+        $dt      = $carbon;
+        $start   = $dt->format('d/m/Y');
+        $end     = $carbon->addMonth()->format('d/m/Y');
         $date    = $start.' | '.$end;
         $this->worker->updatePeriodRange($user, 5, $date);
 
@@ -237,14 +285,14 @@ class ConvertTest extends TestCase {
 
         $user  = new App\Riiingme\User\Entities\User();
 
-        $user->id = 3;
+        $user->id = 10;
         $user->first_name  = 'Bob';
         $user->last_name   = 'Dupond';
         $user->email       = 'gaga@bob.com';
         $user->user_type    = 1;
         $user->save();
 
-        list($link1 , $link2) = $this->riiinglink->create(['host_id' => 1, 'invited_id' => 3]);
+        list($link1 , $link2) = $this->riiinglink->create(['host_id' => 1, 'invited_id' => 10]);
 
         $metas  =  [
             2 => [  1 => 2,  6 => 3 ],
@@ -253,23 +301,52 @@ class ConvertTest extends TestCase {
 
         $this->meta->create([ 'riiinglink_id' => $link2->id, 'labels' => serialize($metas) ]);
 
-        $this->label->create(['label' => 'gaga@bob.com', 'user_id' => 3, 'type_id' => 1, 'groupe_id' => 2]);
-        $this->label->create(['label' => 'Villars', 'user_id' => 3, 'type_id' => 6, 'groupe_id' => 2]);
-        $this->label->create(['label' => 'France', 'user_id' => 3, 'type_id' => 7, 'groupe_id' => 2]);
+        $this->label->create(['label' => 'gaga@bob.com', 'user_id' => 10, 'type_id' => 1, 'groupe_id' => 2]);
+        $this->label->create(['label' => 'Villars', 'user_id' => 10, 'type_id' => 6, 'groupe_id' => 2]);
+        $this->label->create(['label' => 'France', 'user_id' => 10, 'type_id' => 7, 'groupe_id' => 2]);
 
-        $this->label->create(['label' => 'gaga@domain.ch', 'user_id' => 3, 'type_id' => 1, 'groupe_id' => 3]);
-        $this->label->create(['label' => 'Bienne', 'user_id' => 3, 'type_id' => 6, 'groupe_id' => 3]);
-        $this->label->create(['label' => 'Suisse', 'user_id' => 3, 'type_id' => 7, 'groupe_id' => 3]);
+        $this->label->create(['label' => 'gaga@domain.ch', 'user_id' => 10, 'type_id' => 1, 'groupe_id' => 3]);
+        $this->label->create(['label' => 'Bienne', 'user_id' => 10, 'type_id' => 6, 'groupe_id' => 3]);
+        $this->label->create(['label' => 'Suisse', 'user_id' => 10, 'type_id' => 7, 'groupe_id' => 3]);
 
-        $this->label->create(['label' => 'bob@new.ch', 'user_id' => 3, 'type_id' => 1, 'groupe_id' => 4]);
-        $this->label->create(['label' => 'Bévilard', 'user_id' => 3, 'type_id' => 6, 'groupe_id' => 4]);
-        $this->label->create(['label' => 'Canada', 'user_id' => 3, 'type_id' => 7, 'groupe_id' => 4]);
+        $this->label->create(['label' => 'bob@new.ch', 'user_id' => 10, 'type_id' => 1, 'groupe_id' => 4]);
+        $this->label->create(['label' => 'Bévilard', 'user_id' => 10, 'type_id' => 6, 'groupe_id' => 4]);
+        $this->label->create(['label' => 'Canada', 'user_id' => 10, 'type_id' => 7, 'groupe_id' => 4]);
 
-        $this->label->create(['label' => 'gaga@new.ch', 'user_id' => 3, 'type_id' => 1, 'groupe_id' => 5]);
-        $this->label->create(['label' => 'Nidau', 'user_id' => 3, 'type_id' => 6, 'groupe_id' => 5]);
-        $this->label->create(['label' => 'USA', 'user_id' => 3, 'type_id' => 7, 'groupe_id' => 5]);
+        $this->label->create(['label' => 'gaga@new.ch', 'user_id' => 10, 'type_id' => 1, 'groupe_id' => 5]);
+        $this->label->create(['label' => 'Nidau', 'user_id' => 10, 'type_id' => 6, 'groupe_id' => 5]);
+        $this->label->create(['label' => 'USA', 'user_id' => 10, 'type_id' => 7, 'groupe_id' => 5]);
 
         return [$link1,$link2];
 
     }
+
+    public function createRiiinglinkAndCoCompany()
+    {
+
+        $user  = new App\Riiingme\User\Entities\User();
+
+        $user->id = 11;
+        $user->first_name  = 'Jane';
+        $user->last_name   = 'Doe';
+        $user->email       = 'doe@domain.com';
+        $user->user_type    = 2;
+        $user->save();
+
+        list($link1 , $link2) = $this->riiinglink->create(['host_id' => 1, 'invited_id' => 11]);
+
+        $metas  =  [
+            6 => [ 1 => 11,  6 => 16 ]
+        ];
+
+        $this->meta->create([ 'riiinglink_id' => $link2->id, 'labels' => serialize($metas) ]);
+
+        $this->label->create(['label' => 'jane.doe@domaine.ch', 'user_id' => 11, 'type_id' => 1, 'groupe_id' => 6]);
+        $this->label->create(['label' => 'Mallery', 'user_id' => 11, 'type_id' => 6, 'groupe_id' => 6]);
+        $this->label->create(['label' => 'Espagne', 'user_id' => 11, 'type_id' => 7, 'groupe_id' => 6]);
+
+        return [$link1,$link2];
+
+    }
+
 }

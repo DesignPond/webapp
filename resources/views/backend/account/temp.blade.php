@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class="col-sm-4 control-label">{{ trans('menu.periode') }}</label>
             <div class="col-sm-8">
-                <input value="{{ $daterange or '' }}" type="text" name="date[{{ $view['id'] }}]" class="form-control daterange">
+                <input value="{{ $daterange or '' }}" type="text" data-groupe="{{ $view['id'] }}" name="date[{{ $view['id'] }}]" class="form-control daterange">
             </div>
         </div>
         @foreach($view['groupe_type'] as $types)

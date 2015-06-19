@@ -113,6 +113,8 @@ class LabelWorker{
             $daterange = $this->helper->convertDateRange($date);
 
             $user->user_groups()->attach($groupe, $daterange);
+
+            return true;
         }
     }
 

@@ -23,7 +23,7 @@ class GroupeWorker{
             'groupe_type'      => $this->getGroupesTypes($user_type),
             'all_groupe_type'  => $this->getGroupesTypes(),
             'groupes_user'     => $this->getGroupesUser($user_type),
-            'group_type_data'  => $this->groupTypesData($user_type),
+            'group_type_data'  => $this->groupTypesData(),
         ];
 
     }

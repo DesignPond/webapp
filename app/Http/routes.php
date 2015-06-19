@@ -21,7 +21,9 @@ Route::group(['middleware' => ['auth','activate']], function()
     Route::get('riiinglinks', array('as' => 'riiinglinks', 'uses' => 'RiiinglinkController@index'));
     Route::get('destroyLink/{id}', array('as' => 'destroyLink', 'uses' => 'RiiinglinkController@destroy'));
     Route::get('total', array('as' => 'total', 'uses' => 'RiiinglinkController@total'));
+
     Route::post('updateMetas', 'MetasController@update');
+    Route::post('updatePeriod', 'MetasController@updatePeriod');
 
     Route::post('activites', array('as' => 'activites', 'uses' => 'ActiviteController@activites'));
 

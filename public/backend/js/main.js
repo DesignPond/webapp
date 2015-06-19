@@ -115,6 +115,29 @@
         }
     });
 
+    $('.daterange').on('apply.daterangepicker', function(ev, picker) {
+
+        var date   = $(this).val();
+        var groupe = $('.daterange').data('groupe');
+
+        console.log(date);
+        console.log(groupe);
+
+        $.ajax({
+            dataType: "json",
+            type    : 'POST',
+            url     : base_url + 'updatePeriod',
+            data: {  groupe  : groupe,  date : date , _token: $("meta[name='token']").attr('content') },
+            success: function( data ) {
+                console.log('added');
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+
+    });
+
     var ranges = $(".daterange");
 
     $( ranges).each( function( index, element ){

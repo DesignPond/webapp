@@ -280,6 +280,28 @@ class Helper{
         return $data;
     }
 
+    public function validityPeriod($invited_user,$group){
+
+        $dates = $invited_user->filter(function ($item) use ($group) {
+            return $item->pivot->groupe_id == $group;
+        })->first();
+
+        if ($dates)
+        {
+            $start = \Carbon\Carbon::parse($dates->pivot->start_at);
+            $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
+
+            $format = ($start->month == $end->month ? '%d' : '%d %B %Y');
+
+            $startPeriod = $start->formatLocalized($format);
+            $endPeriod   = $end->formatLocalized('%d %B %Y');
+
+            return 'Valable du '.$startPeriod.' au '.$endPeriod;
+        }
+
+        return '';
+    }
+
 }
 
 

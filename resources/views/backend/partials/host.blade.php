@@ -1,7 +1,6 @@
 @if(!empty($host))
 
     <?php unset($groupe_type[0]); ?>
-
     <div class="panel panel-info">
         <div class="panel-body">
             <ul class="chat">
@@ -17,6 +16,7 @@
                                 <input type="hidden" name="riiinglink_id" value="{{ $ringlink['id'] }}">
 
                                 <?php $visible = [2,3,6]; ?>
+
                                 @foreach($groupe_type as $items)
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
 
