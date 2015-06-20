@@ -40,7 +40,7 @@ class MetasController extends Controller {
             if(!$meta->isEmpty())
             {
                 $meta = $meta->first();
-                $meta->labels = serialize($metas);
+                $meta->labels  = serialize($metas);
 
                 $meta->save();
             }

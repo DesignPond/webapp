@@ -30,7 +30,12 @@
             <div class="col-md-12">{!! $riiinglinks->render() !!}</div>
         </div>
 
-    @elseif($riiinglinks->count() > 0 && !empty($filtres))
+    @elseif($riiinglinks->count() == 0 && !empty($filtres))
+
+        <div class="row">
+            @include('backend.partials.filter')
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="panel">

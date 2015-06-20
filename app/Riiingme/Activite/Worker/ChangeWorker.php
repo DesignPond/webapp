@@ -177,41 +177,35 @@ class ChangeWorker{
      * */
     public function getChanges(){
 
+        $metas = $this->getLastMetas();
+
         if( $this->updates->count() > 1)
         {
-/*            echo '<pre>';
-            echo 'first' ;
-            $first = $this->updates->first()->toArray();
-            $last  = $this->updates->last()->toArray();
-
-            print_r($first['labels']);
-            echo 'last' ;
-            print_r($last['labels']);
-            echo '</pre>';
-
-            echo '<pre>';
-            print_r( $this->calculDiff(unserialize($last['labels']), unserialize($first['labels'])) );
-            echo '</pre>';
-
-            $added = $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
-            echo '<pre>';
-            print_r($added);
-            echo $this->riiinglink->id;
-            echo '</pre>';*/
-
             return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
         }
-        else if( $this->updates->count() == 1)
+        elseif( $this->updates->count() == 1)
         {
-            $metas = $this->getLastMetas();
-
             if($metas)
             {
-                return $this->calculDiff(unserialize($this->updates->first()->labels), unserialize($metas));
+                if($this->updates->first()->name == 'created_meta')
+                {
+                    return $this->calculDiff([], unserialize($metas));
+                }
+                else
+                {
+                    return $this->calculDiff(unserialize($this->updates->first()->labels), unserialize($metas));
+                }
             }
 
             return [];
 
+        }
+        elseif($this->updates->count() == 0)
+        {
+            if($metas)
+            {
+               return $this->calculDiff([], unserialize($metas));
+            }
         }
 
         return [];
@@ -219,7 +213,7 @@ class ChangeWorker{
 
     public function getLastMetas()
     {
-        $meta  = $this->meta->findByRiiinglink($this->riiinglink);
+        $meta = $this->meta->findByRiiinglink($this->riiinglink->id);
 
         if(!$meta->isEmpty())
         {

@@ -30,7 +30,7 @@ trait RecordsChanges
                     'riiinglink_id' => $this->riiinglink_id,
                     'name'          => $this->getChangeName($this, $event),
                     'labels'        => $this->labels,
-                    'user_id'       => \Auth::user()->id,
+                    'user_id'       => ($this->host_id ? $this->host_id : \Auth::user()->id),
                     'changed_at'    => date('Y-m-d')
                 ]);
 
