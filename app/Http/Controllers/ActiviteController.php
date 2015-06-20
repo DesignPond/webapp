@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Groupe\Worker\GroupeWorker;
 use App\Riiingme\Activite\Worker\ActiviteWorker;
+use App\Riiingme\Meta\Worker\MetaWorker;
 
 use Illuminate\Http\Request;
 
@@ -14,12 +15,14 @@ class ActiviteController extends Controller {
     protected $user;
     protected $activity;
     protected $auth;
+    protected $meta;
 
-    public function __construct(UserInterface $user, GroupeWorker $groupe, ActiviteWorker $activity)
+    public function __construct(UserInterface $user, GroupeWorker $groupe, ActiviteWorker $activity, MetaWorker $meta)
     {
         $this->user       = $user;
         $this->groupe     = $groupe;
         $this->activity   = $activity;
+        $this->meta       = $meta;
 
         $this->auth = $this->user->find(\Auth::user()->id);
         \View::share('user',  $this->auth);
@@ -48,12 +51,16 @@ class ActiviteController extends Controller {
      *
      * @return Response
      */
-    public function partage()
+    public function partage($with = null)
     {
+        $invitemetas = ($with ? $this->meta->getPartageMetas($with) : []);
+        $userMetas   = ($with ? $this->meta->getUserMetas($with) : []);
+        $email       = $this->meta->getInvitedEmail($with);
+
         $invites     = $this->activity->getPendingInvites($this->auth->id);
         $depedencies = $this->groupe->getDependencies($this->auth->user_type);
 
-        return view('backend.partage')->with($depedencies + array('invites' => $invites));
+        return view('backend.partage')->with($depedencies + array('invites' => $invites, 'invitemetas' => $invitemetas, 'userMetas' => $userMetas, 'email' => $email));
     }
 
     /**

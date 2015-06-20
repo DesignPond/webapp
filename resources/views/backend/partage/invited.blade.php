@@ -11,7 +11,7 @@
     <?php $GroupeTypes = [$all_groupe_type[1],$all_groupe_type[2]]; ?>
 
     <div id="partageMain">
-        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => true ])
+        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => true , 'metas' => $invitemetas])
     </div>
 
 </div>

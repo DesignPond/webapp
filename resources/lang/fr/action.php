@@ -36,4 +36,5 @@ return [
     'ipartage'       => 'Je partage les informations',
     'iwant'          => 'Je souhaite obtenir les informations',
     'moreactivites'  => 'Afficher plus d\'activités',
+    'more_infos'     => 'Demander plus d\'informations',
 ];

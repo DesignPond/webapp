@@ -17,6 +17,8 @@
 
     @foreach($GroupeTypes as $groupe)
 
+        <?php $checked = ''; ?>
+
         <div class="col-md-6">
             <h5><strong>{{ trans('label.title_'.$groupe['id']) }}</strong></h5>
 
@@ -24,7 +26,14 @@
                 @if(isset($host_group_type[$groupe['id']]) && !empty($host_group_type))
                     @if( in_array($type['id'], $host_group_type[$groupe['id']] ))
                         <div class="checkbox {{ $who }}">
-                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
+                            <label>
+                                <?php
+                                if(!empty($metas))
+                                {
+                                    $checked = ( isset($metas[$groupe['id']]) && isset($metas[$groupe['id']][$type['id']]) ? 'checked' : '');
+                                }
+                                ?>
+                                <input {{ $checked }} name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
                                 {{ trans('label.label_'.$type['id']) }}
                             </label>
                         </div>
@@ -32,7 +41,14 @@
                 @else
                     @if($who != 'host')
                         <div class="checkbox {{ $who }}">
-                            <label><input name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
+                            <label>
+                                <?php
+                                if(!empty($metas))
+                                {
+                                    $checked = ( isset($metas[$groupe['id']]) && isset($metas[$groupe['id']][$type['id']]) ? 'checked' : '');
+                                }
+                                ?>
+                                <input {{ $checked }} name="partage_{{ $who }}[{{ $groupe['id'] }}][]" value="{{ $type['id'] }}" type="checkbox">
                                 {{ trans('label.label_'.$type['id']) }}
                             </label>
                         </div>

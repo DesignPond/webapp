@@ -22,10 +22,18 @@ $( function() {
     * */
     var url = location.protocol + "//" + location.host+"/";
 
+    /*
     function IsEmail(email) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
-    }
+    }*/
+
+    $('#sendInvites').on('submit', function(e) { //use on if jQuery 1.7+
+
+        var email = $('#searchEmail').val();
+        $('#inputEmail').val(email);
+
+    });
 
     $( "#searchEmail" ).autocomplete({
         source: url + "search",
@@ -33,22 +41,14 @@ $( function() {
         change: function( event, ui )
         {
             console.log('changemet');
-
             var email = $('#searchEmail').val();
-            if(IsEmail(email)){
-                $('#inputEmail').val(email);
-            }
-
+            $('#inputEmail').val(email);
         },
         focus: function( event, ui )
         {
             console.log('focus');
-
             var email = $('#searchEmail').val();
-            if(IsEmail(email)){
-                $('#inputEmail').val(email);
-            }
-
+            $('#inputEmail').val(email);
         },
         response: function(event, ui) {
             // ui.content is the array that's about to be sent to the response callback.
@@ -75,14 +75,5 @@ $( function() {
     {
         return $( "<li>" ).append( "<a>" + item.label + "<span>" + item.desc + "</span></a>" ).appendTo( ul );
     };
-
-/*    $( "#searchEmail" ).change(function() {
-        $('#searchEmail_email').attr('value', '');
-    });
-
-    $( "#searchEmail" ).blur(function() {
-        var $email = $('#searchEmail').val();
-        $('#searchEmail_email').val($email);
-    });*/
 
 });

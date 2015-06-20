@@ -1,12 +1,5 @@
 @include('backend.partials.tags')
 
-<?php
-/*-echo '<pre>';
-print_r($labels);
-echo '</pre>';
--*/
-?>
-
 <div class="panel panel-primary">
     <div class="panel-body">
         <ul class="chat">
@@ -60,20 +53,10 @@ echo '</pre>';
                                         @endif
                                     @endforeach
 
-                                    {{--
-                                    @foreach($groupe_label as $type_id => $label)
-                                        @if(!empty($label))
-                                            <dt>{{ trans('label.label_'.$type_id) }}</dt>
-                                            <dd>{{ $label }}</dd>
-                                        @endif
-                                    @endforeach
-                                    --}}
-
                                 </dl>
                             </div>
                         @endif
                     @endforeach
-
                 @else
                     <div style="border-top: 1px solid #f4f5f5" class="chat-msg">
                          <div class="well-sm">{{ $ringlink['invited_name'] }} {{ trans('menu.no_partage') }}</div>
@@ -83,3 +66,5 @@ echo '</pre>';
         </ul>
     </div>
 </div>
+
+<p class="text-right"><a href="{{ url('user/partage', ['with' => $ringlink['invited_link']]) }}" class="btn btn-primary">{{ trans('action.more_infos') }}</a></p>

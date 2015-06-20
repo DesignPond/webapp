@@ -35,8 +35,11 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         $this->host    = $this->getUser($riiinglink->host_id);
         $this->invited = $this->getUser($riiinglink->invited_id);
 
+        $invited_link  = $this->getInvited($riiinglink)->id;
+
         return [
             'id'             => (int) $riiinglink->id,
+            'invited_link'   => (int) $invited_link,
             'invited_id'     => (int) $riiinglink->invited_id ,
             'host_photo'     => $this->host->user_photo,
             'host_name'      => $this->getName($this->host),
@@ -66,7 +69,6 @@ class RiiinglinkTransformer extends Fractal\TransformerAbstract
         $invited_id = $riiinglink->invited_id;
 
         return $this->link->findByHostAndInvited($invited_id,$host_id);
-
     }
 
     public function getTags($riiinglink)

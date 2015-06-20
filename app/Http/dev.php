@@ -42,8 +42,18 @@ Route::get('test', function()
     $groupes  = $groupe->getGroupes();
     unset($groupes[1]);
 
-    $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
 
+    $send2 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+    $send2->setInterval('month')->getUsers();
+    $all_changes2 = $send2->send();
+
+    echo '<pre>';
+    echo 'Mois';
+    print_r($all_changes2);
+    echo '</pre>';
+
+
+    $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
     $send->setInterval('week')->getUsers();
     $all_changes = $send->send();
 
@@ -52,7 +62,7 @@ Route::get('test', function()
     print_r($all_changes);
     echo '</pre>';
 
-   $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+    $send1 = \App::make('App\Riiingme\Activite\Worker\SendWorker');
     $send1->setInterval('day')->getUsers();
     $all_changes = $send1->send();
 

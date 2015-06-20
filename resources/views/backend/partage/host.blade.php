@@ -23,7 +23,7 @@
             }
         ?>
 
-        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => $prive, 'host_group_type' => $user->label_groupe ])
+        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => $prive, 'host_group_type' => $user->label_groupe, 'metas' => $userMetas ])
 
     </div>
 

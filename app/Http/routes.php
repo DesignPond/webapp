@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth','activate']], function()
 
     // User
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'RiiinglinkController@show'));
-    Route::get('user/partage', array('as' => 'partage', 'uses' => 'ActiviteController@partage'));
+    Route::get('user/partage/{with?}', array('as' => 'partage', 'uses' => 'ActiviteController@partage'));
     Route::get('user/timeline', array('as' => 'timeline', 'uses' => 'ActiviteController@index'));
     Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
     Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));

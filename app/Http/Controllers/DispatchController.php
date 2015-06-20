@@ -15,6 +15,8 @@ use App\Commands\SendInvite;
 
 class DispatchController extends Controller {
 
+    protected $user;
+
     public function __construct(UserInterface $user)
     {
         $this->middleware('guest');
@@ -28,11 +30,9 @@ class DispatchController extends Controller {
 	 */
     public function activation(Request $request)
     {
-
         $this->dispatch(new ActivateAccount($request->input('token')));
 
         return redirect('/user')->with(array('status' => 'success', 'message' => 'Votre compte est maintenant actif!'));
-
     }
 
     /**
@@ -71,17 +71,39 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
-        /*
-            $pos = strpos($haystack,$needle);
 
-            if($pos === false) {
-             // string needle NOT found in haystack
+        $pos = strpos($request->email,',');
+
+        if($pos === false)
+        {
+            $validator = \Validator::make(['email' => $request->email] , [ 'email' => 'email' ]);
+
+            if ($validator->fails())
+            {
+                return redirect()->back()->withInput($request->only('email'))->withErrors($validator->errors())->with( array('status' => 'danger'));
             }
-            else {
-             // string needle found in haystack
+
+            $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
+        }
+        else
+        {
+            $emails = explode(',', $request->email);
+
+            if(!empty($emails))
+            {
+                foreach($emails as $email)
+                {
+                    $validator = \Validator::make(['email' => $email] , [ 'email' => 'email' ]);
+
+                    if ($validator->fails())
+                    {
+                        return redirect()->back()->withInput($request->only('email'))->withErrors($validator->errors())->with( array('status' => 'danger'));
+                    }
+
+                    $this->dispatch(new SendInvite($email, $request->user_id, $request->partage_host, $request->partage_invited));
+                }
             }
-        */
-        $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
+        }
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
     }

@@ -45,7 +45,7 @@ class SendInviteRequest extends Request {
 	public function rules()
 	{
 		return [
-            'email'    => 'required|email',
+            'email'    => 'required',
             'user_id'  => 'required|exists:users,id|labels'
 		];
 	}
