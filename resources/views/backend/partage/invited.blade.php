@@ -8,10 +8,25 @@
         </div>
     </div>
 
-    <?php $GroupeTypes = [$all_groupe_type[1],$all_groupe_type[2]]; ?>
+    <?php
+
+        $keys  = array_keys($invitemetas);
+
+        if(in_array(6,$keys))
+        {
+            $GroupeTypes = [$all_groupe_type[5]];
+            $prive = false;
+        }
+        else
+        {
+            $GroupeTypes = [$all_groupe_type[1],$all_groupe_type[2]];
+            $prive = true;
+        }
+
+    ?>
 
     <div id="partageMain">
-        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => true , 'metas' => $invitemetas])
+        @include('backend.partage.labels', [ 'GroupeTypes' => $GroupeTypes, 'who' => $who, 'prive' => $prive , 'metas' => $invitemetas])
     </div>
 
 </div>

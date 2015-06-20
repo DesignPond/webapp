@@ -4,14 +4,6 @@
 <div class="row">
     <div class="col-md-12">
 
-        <?php
-            if(!empty($metas)){
-                echo '<pre>';
-                print_r($metas);
-                echo '</pre>';
-            }
-        ?>
-
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">{{ trans('action.send') }}</div>
