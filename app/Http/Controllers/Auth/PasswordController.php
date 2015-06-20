@@ -35,6 +35,8 @@ class PasswordController extends Controller {
 		$this->auth = $auth;
 		$this->passwords = $passwords;
 
+        $this->subject = trans('message.recoverpassword_msg'); //  < --JUST ADD THIS LINE
+
 		$this->middleware('guest');
 	}
 
