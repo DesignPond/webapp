@@ -86,12 +86,12 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
 
         if(isset($params['search']) && !empty($params['search']))
         {
-
             $results->join('users', 'users.id', '=', 'riiinglinks.invited_id')
                 ->where(function($query) use($params)
                 {
                     $query->where('first_name', 'like', '%'.$params['search'].'%');
                     $query->orWhere('last_name', 'like', '%'.$params['search'].'%');
+                    $query->orWhere('company', 'like', '%'.$params['search'].'%');
                     $query->orWhere('email', 'like', '%'.$params['search'].'%');
                 })
                 ->select('riiinglinks.*','users.first_name','users.last_name','users.email')

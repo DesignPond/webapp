@@ -91,12 +91,6 @@ class ChangeWorker{
                 $this->converter1->convertPeriodRange();
                 $this->converter1->labelsToShow();
 
-               /* echo '<pre>';
-                print_r( $this->converter1->labels );
-                echo '</pre>';*/
-
-                //$changes = $this->worker->periodIsInEffect($this->invited->users_groups, $changes);
-
                 if(!empty($this->converter1->labels))
                 {
                     $data['changes'] = $this->converter1->labels;

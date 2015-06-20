@@ -127,9 +127,17 @@ class UserEloquent implements UserInterface {
         {
             $user->email = $data['email'];
         }
-        //$user->fill($data);
 
-        if(!empty($data['password'])){
+        $user->name_search  = $data['name_search'];
+        $user->email_search = $data['email_search'];
+
+        if(!empty($data['notification_interval']))
+        {
+            $user->notification_interval = $data['notification_interval'];
+        }
+
+        if(!empty($data['password']))
+        {
             $user->password = bcrypt($data['password']);
         }
 

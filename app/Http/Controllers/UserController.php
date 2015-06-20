@@ -83,6 +83,7 @@ class UserController extends Controller {
      */
     public function labels(UpdateUserRequest $request)
     {
+
         $this->dispatch(new UpdateUser($request->info));
         $result = $this->dispatch(new UpdateLabelUser($request->edit,$request->label, $request->date));
 
