@@ -6,6 +6,7 @@ use App\Riiingme\Riiinglink\Transformer\RiiinglinkTransformer;
 use App\Riiingme\Label\Worker\LabelWorker;
 use App\Riiingme\User\Repo\UserInterface;
 use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
+use App\Riiingme\Meta\Repo\MetaInterface;
 
 class ChangeWorker{
 
@@ -16,7 +17,9 @@ class ChangeWorker{
     protected $groupes;
     protected $worker;
     protected $link;
-    protected $converter;
+    protected $converter1;
+    protected $converter2;
+    protected $meta;
 
     public $part   = 'added';
     public $period = 'semester';
@@ -25,7 +28,7 @@ class ChangeWorker{
     public $invited;
     public $riiinglink;
 
-    public function __construct(ChangeInterface $change, RiiinglinkInterface $link, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision){
+    public function __construct(ChangeInterface $change, RiiinglinkInterface $link, LabelWorker $worker, UserInterface $user, RiiinglinkTransformer $label, RevisionInterface $revision, MetaInterface $meta){
 
         $this->changes    = $change;
         $this->user       = $user;
@@ -33,8 +36,10 @@ class ChangeWorker{
         $this->worker     = $worker;
         $this->revision   = $revision;
         $this->link       = $link;
+        $this->meta       = $meta;
         $this->groupes    = range(1,6);
-        $this->converter  = \App::make('App\Riiingme\Riiinglink\Worker\ConvertWorker');
+        $this->converter1  = \App::make('App\Riiingme\Riiinglink\Worker\ConvertWorker');
+        $this->converter2  = \App::make('App\Riiingme\Riiinglink\Worker\ConvertWorker');
     }
 
     public function setUser($user_id)
@@ -79,11 +84,22 @@ class ChangeWorker{
         {
             if(!empty($changes))
             {
-                $changes = $this->worker->periodIsInEffect($this->invited->users_groups, $changes);
+                $this->converter1->loadUserLabels($this->riiinglink,true)->prepareLabels();
+                $this->converter1->metas  = $changes;
+                $this->converter1->convertChanges($changes);
+                $this->converter1->metasInEffect();
+                $this->converter1->convertPeriodRange();
+                $this->converter1->labelsToShow();
 
-                if(!empty($changes))
+               /* echo '<pre>';
+                print_r( $this->converter1->labels );
+                echo '</pre>';*/
+
+                //$changes = $this->worker->periodIsInEffect($this->invited->users_groups, $changes);
+
+                if(!empty($this->converter1->labels))
                 {
-                    $data['changes'] = $changes;
+                    $data['changes'] = $this->converter1->labels;
                 }
             }
 
@@ -100,13 +116,13 @@ class ChangeWorker{
                 }
 
                 //$items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
-                $this->converter->loadUserLabels($this->riiinglink,true)->prepareLabels()->metasInEffect();
-                $this->converter->labels = $items;
-                $this->converter->convertPeriodRange()->labelsToShow();
+                $this->converter2->loadUserLabels($this->riiinglink,true)->prepareLabels()->metasInEffect();
+                $this->converter2->labels = $items;
+                $this->converter2->convertPeriodRange()->labelsToShow();
 
-                if(!empty($this->converter->labels))
+                if(!empty($this->converter2->labels))
                 {
-                    $data['revision'] = $this->converter->labels;
+                    $data['revision'] = $this->converter2->labels;
                 }
 
             }
@@ -169,10 +185,56 @@ class ChangeWorker{
 
         if( $this->updates->count() > 1)
         {
+/*            echo '<pre>';
+            echo 'first' ;
+            $first = $this->updates->first()->toArray();
+            $last  = $this->updates->last()->toArray();
+
+            print_r($first['labels']);
+            echo 'last' ;
+            print_r($last['labels']);
+            echo '</pre>';
+
+            echo '<pre>';
+            print_r( $this->calculDiff(unserialize($last['labels']), unserialize($first['labels'])) );
+            echo '</pre>';
+
+            $added = $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
+            echo '<pre>';
+            print_r($added);
+            echo $this->riiinglink->id;
+            echo '</pre>';*/
+
             return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
+        }
+        else if( $this->updates->count() == 1)
+        {
+            $metas = $this->getLastMetas();
+
+            if($metas)
+            {
+                return $this->calculDiff(unserialize($this->updates->first()->labels), unserialize($metas));
+            }
+
+            return [];
+
         }
 
         return [];
+    }
+
+    public function getLastMetas()
+    {
+        $meta  = $this->meta->findByRiiinglink($this->riiinglink);
+
+        if(!$meta->isEmpty())
+        {
+            return $meta->first()->labels;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**

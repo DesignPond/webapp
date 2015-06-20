@@ -30,8 +30,7 @@ class ChangeEloquent implements ChangeInterface {
             ->where('riiinglink_id','=',$riiinglink_id)
             ->where(function($query)
             {
-                $query->where('name','=','updated_meta')
-                    ->orWhere('name','=','created_meta');
+                $query->where('name','=','updated_meta')->orWhere('name','=','created_meta');
 
             })->period($period)->orderBy('id', 'desc')->get();
     }

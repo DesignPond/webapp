@@ -71,6 +71,16 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
+        /*
+            $pos = strpos($haystack,$needle);
+
+            if($pos === false) {
+             // string needle NOT found in haystack
+            }
+            else {
+             // string needle found in haystack
+            }
+        */
         $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));

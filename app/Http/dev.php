@@ -163,6 +163,18 @@ echo '</pre>';exit;*/
 
 });
 
+Route::get('changes', function()
+{
+    $change = \App::make('App\Riiingme\Activite\Repo\RevisionInterface');
+
+    $changes = $change->changes(1, 'day');
+
+    echo '<pre>';
+    print_r($changes->toArray());
+    echo '</pre>';
+
+});
+
 Route::get('notification', function()
 {
     $user = \App::make('App\Riiingme\User\Entities\User');

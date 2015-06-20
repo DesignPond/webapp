@@ -170,6 +170,47 @@ class ConvertTest extends TestCase {
 
     }
 
+    public function testLabelsForChanges()
+    {
+        $labels = [
+            2 => [
+                1 => 'gaga@bob.com',
+                6 => 'Villars',
+                7 => 'France'
+            ],
+            3 => [
+                1 => 'gaga@domain.ch',
+                6 => 'Bienne',
+                7 => 'Suisse'
+            ],
+            4 => [
+                1 => 'bob@new.ch',
+                6 => 'Bévilard',
+                7 => 'Canada'
+            ],
+            5 => [
+                1 => 'gaga@new.ch',
+                6 => 'Nidau',
+                7 => 'USA'
+            ]
+        ];
+
+        $this->converter->metas = [3 => [1,7]];
+        $this->converter->labels = $labels;
+
+        $data     = [3 => [ 1 => 'gaga@domain.ch', 7 => 'Suisse']];
+        $expected = [3 => [ 1 => 'gaga@domain.ch', 7 => 'Suisse'],  5 => [1 => 'gaga@new.ch', 7 => 'USA']];
+
+        $actual = $this->converter->convertChanges($data);
+        
+        echo '<pre>';
+        print_r($actual);
+        echo '</pre>';exit;
+
+        $this->assertEquals( $actual , $expected );
+
+    }
+
     public function testLabelsToShowCompany()
     {
         $this->converter->metas = [6 => [1,7]];

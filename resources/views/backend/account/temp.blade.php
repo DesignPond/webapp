@@ -8,13 +8,16 @@
 
     if($dates)
     {
-       $start = \Carbon\Carbon::parse($dates->pivot->start_at)->format('d/m/Y');
-       $end   = \Carbon\Carbon::parse($dates->pivot->end_at)->format('d/m/Y');
+        $start = \Carbon\Carbon::parse($dates->pivot->start_at);
+        $end   = \Carbon\Carbon::parse($dates->pivot->end_at);
 
-       $daterange = $start.' | '.$end;
-       $exist     = true;
-       $now       = \Carbon\Carbon::now()->format('d/m/Y');
-       $current   = ($start < $now && $end > $now ? true : false);
+        $startRange =  $start;
+        $endRange   =  $end;
+
+        $daterange = $startRange->format('d/m/Y').' | '.$endRange->format('d/m/Y');
+        $exist     = true;
+        $now       = \Carbon\Carbon::now();
+        $current   = ( ($start < $now) && ($end > $now) ? true : false);
     }
 
 ?>

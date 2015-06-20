@@ -42,7 +42,6 @@ class ConvertWorker{
         $metas  = $this->meta->findByRiiinglink($this->link->id);
 
         $this->metas     = (!$metas->isEmpty() ? unserialize($metas->first()->labels) : '');
-
         $this->labels    = $labels->labels;
         $this->userGroup = $labels->users_groups;
         $this->userType  = $labels->user_type;
@@ -123,11 +122,46 @@ class ConvertWorker{
             }
         }
 
-        if(!empty($labels)){
+        if(!empty($labels))
+        {
             $this->labels = $labels;
         }
 
         return $this;
+    }
+
+    public function convertChanges($changes){
+
+        foreach($changes as $groupe => $types)
+        {
+
+            if($groupe == 2 && isset($this->labels[4]))
+            {
+                $used = $this->labels[2];
+                $temp = $this->labels[4];
+
+                foreach($types as $type => $label)
+                {
+                    $changes[4][$type] = (isset($temp[$type]) && !empty($temp[$type]) ? $temp[$type] : $used[$type]);
+                }
+            }
+
+            if($groupe == 3 && isset($this->labels[5]))
+            {
+                $used = $this->labels[3];
+                $temp = $this->labels[5];
+
+                foreach($types as $type => $label)
+                {
+                    $changes[5][$type] = (isset($temp[$type]) && !empty($temp[$type]) ? $temp[$type] : $used[$type]);
+                }
+            }
+        }
+
+        $this->labels = $changes;
+
+        return $this;
+
     }
 
     public function convertPeriodRange(){
@@ -151,9 +185,13 @@ class ConvertWorker{
             })->first();
 
             if($tempExist && $tempExist->period_range)
+            {
                 unset($data[$normal]);
+            }
             else
+            {
                 unset($data[$temp]);
+            }
         }
 
         return (!empty($data) ? $data : []);

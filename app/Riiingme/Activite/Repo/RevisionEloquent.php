@@ -18,11 +18,18 @@ class RevisionEloquent implements RevisionInterface {
     public function changes($user_id, $period = null)
     {
         $revisions = $this->revision
-            ->where('user_id','=',$user_id)
+            ->from(\DB::raw(
+                'revisions NATURAL JOIN (
+                SELECT   user_id, MAX(created_at) created_at
+                FROM     revisions
+                GROUP BY revisionable_id
+            ) t'
+            ))
             ->where('new_value','!=','')
+            ->where('user_id','=',$user_id)
             ->period($period)
             ->with(['label'])
-            ->groupBy('revisionable_id')->get();
+            ->get();
 
         return $revisions;
     }
