@@ -200,13 +200,13 @@ class ChangeWorker{
             return [];
 
         }
-        elseif($this->updates->count() == 0)
+/*        elseif($this->updates->count() == 0)
         {
             if($metas)
             {
                return $this->calculDiff([], unserialize($metas));
             }
-        }
+        }*/
 
         return [];
     }
