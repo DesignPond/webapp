@@ -178,6 +178,7 @@ class ChangeWorker{
     public function getChanges(){
 
         $metas = $this->getLastMetas();
+        $last  = $this->changes->getUserLastUpdates($this->user_id,$this->riiinglink->id);
 
         if( $this->updates->count() > 1)
         {
@@ -185,29 +186,24 @@ class ChangeWorker{
         }
         elseif( $this->updates->count() == 1)
         {
-            $last = $this->changes->getUserLastUpdates($this->user_id,$this->riiinglink->id);
-
+/*
             if( $this->riiinglink->id== 1009)
             {
-
                 echo '<pre>';
                 echo $this->riiinglink->id.'<br/>';
                 print_r($last->first()->toArray());
                 print_r($this->updates->first()->toArray());
-
                 $diff =  $this->calculDiff([], unserialize($metas));
-
-                echo '<pre>';
                 print_r($diff);
                 echo '</pre>';
-
             }
+*/
 
             if($metas && !$last->isEmpty())
             {
                 if($this->updates->first()->name == 'created_meta')
                 {
-                    $this->calculDiff([], unserialize($metas));
+                    return $this->calculDiff([], unserialize($metas));
                 }
                 else
                 {
@@ -216,12 +212,9 @@ class ChangeWorker{
             }
 
             return [];
-
         }
         elseif($this->updates->count() == 0)
         {
-            $last = $this->changes->getUserLastUpdates($this->user_id,$this->riiinglink->id);
-
             if($metas && !$last->isEmpty())
             {
                return $this->calculDiff(unserialize($last->first()->labels), unserialize($metas));
