@@ -207,7 +207,11 @@ class ChangeWorker{
                 }
                 else
                 {
-                    return $this->calculDiff(unserialize($this->updates->first()->labels),unserialize($metas));
+                    if(!$last->isEmpty())
+                    {
+                        return $this->calculDiff(unserialize($last->first()->labels),unserialize($metas));
+                    }
+
                 }
             }
 
@@ -215,6 +219,7 @@ class ChangeWorker{
         }
         elseif($this->updates->count() == 0)
         {
+
             if($metas && !$last->isEmpty())
             {
                return $this->calculDiff(unserialize($last->first()->labels),unserialize($metas));
