@@ -85,7 +85,7 @@ class ChangeWorker{
             if(!empty($changes))
             {
                 $this->converter1->loadUserLabels($this->riiinglink,true)->prepareLabels();
-                $this->converter1->metas  = $changes;
+                $this->converter1->metas = $changes;
                 $this->converter1->convertChanges($changes);
                 $this->converter1->metasInEffect();
                 $this->converter1->convertPeriodRange();
@@ -185,28 +185,48 @@ class ChangeWorker{
         }
         elseif( $this->updates->count() == 1)
         {
-            if($metas)
+            $last = $this->changes->getUserLastUpdates($this->user_id,$this->riiinglink->id);
+
+            if( $this->riiinglink->id== 1009)
+            {
+
+                echo '<pre>';
+                echo $this->riiinglink->id.'<br/>';
+                print_r($last->first()->toArray());
+                print_r($this->updates->first()->toArray());
+
+                $diff =  $this->calculDiff([], unserialize($metas));
+
+                echo '<pre>';
+                print_r($diff);
+                echo '</pre>';
+
+            }
+
+            if($metas && !$last->isEmpty())
             {
                 if($this->updates->first()->name == 'created_meta')
                 {
-                    return $this->calculDiff([], unserialize($metas));
+                    $this->calculDiff([], unserialize($metas));
                 }
                 else
                 {
-                    return $this->calculDiff(unserialize($this->updates->first()->labels), unserialize($metas));
+                    return $this->calculDiff(unserialize($last->first()->labels),unserialize($this->updates->first()->labels));
                 }
             }
 
             return [];
 
         }
-/*        elseif($this->updates->count() == 0)
+        elseif($this->updates->count() == 0)
         {
-            if($metas)
+            $last = $this->changes->getUserLastUpdates($this->user_id,$this->riiinglink->id);
+
+            if($metas && !$last->isEmpty())
             {
-               return $this->calculDiff([], unserialize($metas));
+               return $this->calculDiff(unserialize($last->first()->labels), unserialize($metas));
             }
-        }*/
+        }
 
         return [];
     }
