@@ -68,6 +68,12 @@ class UserController extends Controller {
 	 */
 	public function show($id, Request $request)
 	{
+
+        if($id != \Auth::user()->id)
+        {
+            throw new \App\Exceptions\UserException('False user');
+        }
+
         $tags = $this->auth->user_tags->lists('title','id');
 
         $riiinglinks = $this->riiinglink->getRiiinglinkWithParams($id,$request);

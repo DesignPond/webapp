@@ -79,7 +79,16 @@ class RiiinglinkWorker{
      * */
     public function riiinglinkItem($id)
     {
-        return $this->riiinglink->find($id)->first();
+
+        $item = $this->riiinglink->find($id)->first();
+
+        if($item && $item->host_id == \Auth::user()->id)
+        {
+            return $this->riiinglink->find($id)->first();
+        }
+
+        throw new \App\Exceptions\AutorisedException('Partage non existant');
+
     }
 
     /*

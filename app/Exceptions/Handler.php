@@ -36,11 +36,19 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+        $user = \Auth::user()->id;
+
         if ($e instanceof \App\Exceptions\UpdateFailException)
             return \Redirect::back()->with(array('status' => 'danger' , 'message' => 'Veuillez indiquer les informations pour l\'adresse temporaire'))->withInput();
 
         if ($e instanceof \App\Exceptions\ActivationFailException)
             \Log::info('Problème avec l\'activation du compte', ['token' => $e->getToken()]);
+
+        if ($e instanceof \App\Exceptions\AutorisedException)
+            return \Redirect::to('user/'.$user)->with(array('status' => 'warning' , 'message' => 'Ce partage n\'existe pas'));
+
+        if ($e instanceof \App\Exceptions\UserException)
+            return \Redirect::to('user');
 
         if ($e instanceof \Illuminate\Session\TokenMismatchException)
             return \Redirect::to('auth/login');
