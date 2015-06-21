@@ -30,32 +30,25 @@ class MetasController extends Controller {
 	{
 		parse_str($request->input('riiinglink'), $data);
 
-		$id = $data['riiinglink_id'];
+		$id    = $data['riiinglink_id'];
+        $meta  = $this->meta->findByRiiinglink($id);
+        $meta  = (!$meta->isEmpty() ? $meta->first() : []);
+        $metas = (isset($data['metas']) ? $data['metas'] : []);
 
-        if(isset($data['metas']))
+        if(!empty($meta))
         {
-            $metas = $data['metas'];
-            $meta  = $this->meta->findByRiiinglink($id);
-
-            if(!$meta->isEmpty())
-            {
-                $meta = $meta->first();
-                $meta->labels  = serialize($metas);
-
-                $meta->save();
-            }
-            else
-            {
-                $this->meta->create([
-                    'riiinglink_id' => $id,
-                    'labels'        => serialize($metas)
-                ]);
-            }
-
-            return \Response::json($metas,200);
+            $meta->labels  = serialize($metas);
+            $meta->save();
+        }
+        elseif(!empty($metas) && empty($meta))
+        {
+            $this->meta->create([
+                'riiinglink_id' => $id,
+                'labels'        => serialize($metas)
+            ]);
         }
 
-        return \Response::json('',200);
+        return \Response::json($metas,200);
 
 	}
 

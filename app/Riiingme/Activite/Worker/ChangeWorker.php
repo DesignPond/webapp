@@ -199,7 +199,7 @@ class ChangeWorker{
             }
 */
 
-            if($metas && !$last->isEmpty())
+            if($metas)
             {
                 if($this->updates->first()->name == 'created_meta')
                 {
@@ -207,7 +207,7 @@ class ChangeWorker{
                 }
                 else
                 {
-                    return $this->calculDiff(unserialize($last->first()->labels),unserialize($this->updates->first()->labels));
+                    return $this->calculDiff(unserialize($this->updates->first()->labels),unserialize($metas));
                 }
             }
 
@@ -217,7 +217,7 @@ class ChangeWorker{
         {
             if($metas && !$last->isEmpty())
             {
-               return $this->calculDiff(unserialize($last->first()->labels), unserialize($metas));
+               return $this->calculDiff(unserialize($last->first()->labels),unserialize($metas));
             }
         }
 
