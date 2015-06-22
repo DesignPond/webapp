@@ -22,16 +22,18 @@ $( function() {
     * */
     var url = location.protocol + "//" + location.host+"/";
 
-    /*
+
     function IsEmail(email) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
-    }*/
+    }
 
     $('#sendInvites').on('submit', function(e) { //use on if jQuery 1.7+
 
- /*       var email = $('#searchEmail').val();
-        $('#inputEmail').val(email);*/
+        var email = $('#searchEmail').val();
+        if(IsEmail(email)){
+            $('#inputEmail').val(email);
+        }
 
     });
 
@@ -41,14 +43,21 @@ $( function() {
         change: function( event, ui )
         {
             console.log('changemet');
+
             var email = $('#searchEmail').val();
-            $('#inputEmail').val(email);
+
+            if(IsEmail(email)){
+                $('#inputEmail').val(email);
+            }
+
         },
         focus: function( event, ui )
         {
             console.log('focus');
             var email = $('#searchEmail').val();
-            $('#inputEmail').val(email);
+            if(IsEmail(email)){
+                $('#inputEmail').val(email);
+            }
         },
         response: function(event, ui) {
             // ui.content is the array that's about to be sent to the response callback.
