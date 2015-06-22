@@ -64,6 +64,18 @@ class DispatchController extends Controller {
 
     }
 
+    public function sendEmail($email,$request)
+    {
+        $validator = \Validator::make(['email' => $email] , [ 'email' => 'email' ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validator->errors())->with( array('status' => 'danger'));
+        }
+
+        $this->dispatch(new SendInvite($email, $request->user_id, $request->partage_host, $request->partage_invited));
+    }
+
     /**
      * Send invitation
      * @param  $request
@@ -71,38 +83,23 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
+        $multiple = $request->multiple;
 
-        $pos = strpos($request->email,',');
-
-        if($pos === false)
+        if(!empty($multiple))
         {
-            $validator = \Validator::make(['email' => $request->email] , [ 'email' => 'email' ]);
-
-            if ($validator->fails())
-            {
-                return redirect()->back()->withInput($request->only('email'))->withErrors($validator->errors())->with( array('status' => 'danger'));
-            }
-
-            $this->dispatch(new SendInvite($request->email, $request->user_id, $request->partage_host, $request->partage_invited));
-        }
-        else
-        {
-            $emails = explode(',', $request->email);
+            $emails = array_map('trim', explode(',', $request->multiple));
 
             if(!empty($emails))
             {
                 foreach($emails as $email)
                 {
-                    $validator = \Validator::make(['email' => $email] , [ 'email' => 'email' ]);
-
-                    if ($validator->fails())
-                    {
-                        return redirect()->back()->withInput($request->only('email'))->withErrors($validator->errors())->with( array('status' => 'danger'));
-                    }
-
-                    $this->dispatch(new SendInvite($email, $request->user_id, $request->partage_host, $request->partage_invited));
+                    $this->sendEmail($email,$request);
                 }
             }
+        }
+        else
+        {
+            $this->sendEmail($request->email,$request);
         }
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));

@@ -22,6 +22,20 @@ $( function() {
     * */
     var url = location.protocol + "//" + location.host+"/";
 
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+
+    $('#myTabs a').on('shown.bs.tab', function (e) {
+
+        var $input = $(this).data('div');
+        var $div   = $('#'+$input).find('input');
+
+        $('.send_input').prop( "disabled", true );
+        $div.prop( "disabled", false );
+
+    })
 
     function IsEmail(email) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;

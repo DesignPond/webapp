@@ -12,23 +12,44 @@
 
                 {!! Form::open(array( 'url' => 'send' , 'id' => 'sendInvites' , 'class' => 'form-horizontal')) !!}
 
-                    <div class="panel-footer">
-                        <div class="input-group">
-                            <?php
+                <?php
+                    $old   = old('email'); $value = '';
+                    if(isset($email)){$value = $email;}
+                    if($old){$value = $old;}
+                ?>
 
-                                $old   = old('email');
-                                $value = '';
-
-                                if(isset($email)){$value = $email;}
-                                if($old){$value = $old;}
-                            ?>
-                            <input type="text" id="searchEmail" class="form-control" value="{{ $value }}" placeholder="{{ trans('menu.search') }}">
-                            <input type="hidden" id="inputEmail" required class="form-control" name="email" value="{{ $value }}">
-                            <input type="hidden" name="user_id" value="{{ $user->id }}">
-
-                            <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
-                        </div><!-- /input-group -->
+                    <div id="tabs_partage">
+                        <ul role="tablist" class="nav nav-tabs" id="myTabs">
+                            <li class="active" role="presentation">
+                                <a aria-expanded="true" aria-controls="home" data-div="simple" data-input="inputEmail" data-toggle="tab" role="tab" id="home-tab" href="#simple">{{ trans('menu.email_simple') }}</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a aria-controls="multiple" data-toggle="tab" data-div="multiple" data-input="inputMultiple" id="multiple-tab" role="tab" href="#multiple" aria-expanded="false">{{ trans('menu.email_multiple') }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div aria-labelledby="simple-tab" id="simple" class="tab-pane fade active in" role="tabpanel">
+                                <div class="panel-footer">
+                                    <div class="input-group">
+                                        <input type="text" id="searchEmail" class="form-control send_input" value="{{ $value }}" placeholder="{{ trans('menu.search') }}">
+                                        <input type="hidden" id="inputEmail" class="form-control send_input" name="email" value="{{ $value }}">
+                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
+                                    </div><!-- /input-group -->
+                                </div>
+                            </div>
+                            <div aria-labelledby="multiple-tab" id="multiple" class="tab-pane fade" role="tabpanel">
+                                <div class="panel-footer">
+                                    <div class="input-group">
+                                        <input type="text" disabled class="form-control send_input" id="inputMultiple" name="multiple" value="{{ $value }}" placeholder="{{ trans('menu.search_multiple') }}">
+                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
+                                    </div><!-- /input-group -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div id="partage" class="row">
                         <div class="col-md-6">
                             <h4><strong><em class="icon-repeat"></em> &nbsp;{{ trans('action.ipartage') }}:</strong></h4>
