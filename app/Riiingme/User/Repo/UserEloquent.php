@@ -128,8 +128,15 @@ class UserEloquent implements UserInterface {
             $user->email = $data['email'];
         }
 
-        $user->name_search  = $data['name_search'];
-        $user->email_search = $data['email_search'];
+        if(isset($data['name_search']))
+        {
+            $user->name_search = $data['name_search'];
+        }
+
+        if(isset($data['email_search']))
+        {
+            $user->email_search = $data['email_search'];
+        }
 
         if(!empty($data['notification_interval']))
         {
