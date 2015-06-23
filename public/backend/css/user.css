@@ -60,10 +60,6 @@
     padding:8px 10px;
 }
 
-.temp-address{
-    background: #f5f5f5;
-}
-
 .dl-horizontal dt {
     width: 150px;
 }
@@ -346,6 +342,26 @@
 
 .btn-riiinglink{
     padding: 15px 8px 0 0;
+}
+
+.btn-mauve{
+    background: #d8e9f4;
+    color: #363C47;
+    border: 1px solid #cee2ef;
+}
+
+.btn-mauve:hover{
+    background: #b1d9f3;
+    color: #363C47;
+}
+
+.temp-address{
+    background: #d8e9f4;
+    color: #363C47;
+}
+
+.temp-address h4{
+    color: #363C47;
 }
 
 /*

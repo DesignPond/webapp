@@ -31,6 +31,10 @@
                 display: block;
             }
 
+            span.label_badge_5,span.label_badge_6{
+                display: inline;
+            }
+
         </style>
     </head>
     <body>
@@ -45,12 +49,18 @@
                         foreach($row as $name)
                         {
                             echo '<td width="'.$width.'" height="'.$height.'" class="normalize height">';
+                                echo '<div style="width: 80%;margin: 0 auto; display: block;text-align: left;">';
 
-                            //echo '<div>'.implode('<br/>',$name).'</div>';
-                            echo '<div style="width: 80%;margin: 0 auto; display: block;text-align: left;">';
-                            echo '<span>'.implode('</span><span>', $name).'</span>';
-                            echo '</div>';
+                                if(!empty($name))
+                                {
+                                    foreach($name as $id => $info)
+                                    {
+                                        echo '<span class="label_badge_'.$id.'">'.$info.'</span>';
+                                        echo ($id == 5 ? '&nbsp;' : '');
+                                    }
+                                }
 
+                                echo '</div>';
                             echo '</td>';
                         }
                         echo '</tr>';

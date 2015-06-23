@@ -27,7 +27,7 @@
     <div class="col-md-12 col-xs-12">
         <div class="row">
             <h4 class="title-adresse col-md-12">{{ trans('label.title_'.$view['id']) }}
-                <i class="text-danger">{{ trans('menu.temporaire') }}</i>
+                <b>{{ trans('menu.temporaire') }}</b>
                 <?php echo ($current ? trans('menu.affiche_temp') : trans('menu.non_affiche_temp') ); ?>
             </h4>
         </div>

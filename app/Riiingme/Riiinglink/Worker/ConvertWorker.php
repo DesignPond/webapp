@@ -96,6 +96,8 @@ class ConvertWorker{
 
     public function addName(){
 
+        $data = [];
+
         $this->link->load('host');
         $name = $this->link->host->name;
         

@@ -6,7 +6,7 @@
 
         $email = (!empty($session_email) ? $session_email: $input_email);
     ?>
-    <input required type="email" name="email" value="{{ $email or '' }}" placeholder="Email" class="form-control" />
+    <input required type="email" name="email" value="{{ $email or '' }}" placeholder="{{ trans('menu.email') }}" class="form-control" />
     <span class="fa fa-envelope form-control-feedback text-muted"></span>
 </div>
 <div class="form-group has-feedback">
