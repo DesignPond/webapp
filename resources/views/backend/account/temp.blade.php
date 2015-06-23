@@ -22,7 +22,7 @@
 
 ?>
 
-<fieldset class="row border accordion-body collapse <?php echo ($exist ? 'in temp-address': ''); ?>" id="collapse_{{ $view['id'] }}">
+<fieldset class="row border accordion-body temp-address collapse <?php echo ($exist ? 'in': ''); ?>" id="collapse_{{ $view['id'] }}">
 
     <div class="col-md-12 col-xs-12">
         <div class="row">
