@@ -217,13 +217,13 @@ class ChangeWorker{
 
             return [];
         }
-/*        elseif($this->updates->count() == 0)
+        elseif($this->updates->count() == 0)
         {
             if($metas && !$last->isEmpty())
             {
                return $this->calculDiff(unserialize($last->first()->labels),unserialize($metas));
             }
-        }*/
+        }
 
         return [];
     }
