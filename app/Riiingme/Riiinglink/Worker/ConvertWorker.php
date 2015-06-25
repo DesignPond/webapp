@@ -80,7 +80,7 @@ class ConvertWorker{
                 {
                     foreach($types as $type => $label)
                     {
-                        if(in_array($type,$this->metas[$groupe]))
+                        if(in_array($type,$this->metas[$groupe]) && !empty($label))
                         {
                             $labels[$groupe][$type] = $label;
                         }
