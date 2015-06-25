@@ -202,6 +202,14 @@ Route::get('notification', function()
     return View::make('emails.confirmation', array('user' => $user, 'user_photo' => 'avatar.jpg', 'name' => 'Cindy Leschaud', 'token' => '2rw3t342t2t'));
 });
 
+Route::get('sendEmail', function()
+{
+    $send = new App\Commands\SendEmail(2);
+
+    $send->handle();
+
+});
+
 Route::get('invitation', function()
 {
     $user   = \App::make('App\Riiingme\User\Entities\User');

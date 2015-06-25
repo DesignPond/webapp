@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel {
 		$schedule->command('change:send --interval=day')->dailyAt('20:00');
         $schedule->command('change:send --interval=week')->weeklyOn(4, '20:00');
         $schedule->command('change:send --interval=month')->cron('0 20 1 * * *');
+
+        $schedule->command('queue:work')->everyThirtyMinutes();
 	}
 
 }

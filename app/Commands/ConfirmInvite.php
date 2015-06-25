@@ -3,6 +3,7 @@
 use App\Commands\Command;
 use App\Commands\CreateRiiinglink;
 use App\Commands\ProcessInvite;
+use App\Commands\SendEmail;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
