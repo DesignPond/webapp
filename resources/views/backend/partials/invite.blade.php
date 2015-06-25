@@ -19,15 +19,16 @@
                         $alllabels = $ringlink['invited_labels'] + $labels;
                     }
                 ?>
-
                 @if(!empty($alllabels))
                     @foreach($ringlink['invited_labels'] as $group => $groupe_label)
-                        @if(isset($groupes[$group]))
+
+                        @if(isset($groupes[$group]) && in_array($group,[2,3,6]))
 
                             <?php
                                 $otherGroupe  = [2 => 4, 3 => 5];
                                 $valable      = '';
                                 $alllabels    = $ringlink['invited_labels'] + $labels;
+
                                 if(isset($otherGroupe[$group])){
                                     $valable = $helper->validityPeriod($invited_user,$otherGroupe[$group]);
                                 }
@@ -60,7 +61,7 @@
                     @endforeach
                 @else
                     <div style="border-top: 1px solid #f4f5f5" class="chat-msg">
-                         <div class="well-sm">{{ $ringlink['invited_name'] }} {{ trans('menu.no_partage') }}</div>
+                        <div class="well-sm">{{ $ringlink['invited_name'] }} {{ trans('menu.no_partage') }}</div>
                     </div>
                 @endif
             </li>
