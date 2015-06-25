@@ -31,7 +31,8 @@ return [
     'password_text'    => 'Vous avez requis un nouveau mot de passe pour votre compte RiiingMe. Ce message est valable 1 heure.',
     'password_button'  => 'Cliquez ici pour réinitialiser votre mot de passe',
     'notification'    => 'Notification de changement du partage',
-
+    'accepted'      => 'a accepté votre demande de partage de données sur RiiingMe',
+    'seeprofile'    => 'Vers votre compte',
     // Textes de la page d'accueil
     'texte_annuaire'  => 'RiiingMe permet de faire ce que vous ne faites pas sur un réseau social ordinaire: partager vos données de contact personnelles et professionnelles; plus besoin d\'être inscrit dans un annuaire public à la merci du démarchage téléphonique.',
     'texte_monde'     => 'Lorsque vous éditez vos données, les amis et contacts professionnels en sont immédiatement informés: plus de carnets d\'adresses obsolètes.',

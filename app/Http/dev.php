@@ -169,8 +169,12 @@ echo '</pre>';exit;*/
         ]
     ];*/
 
+});
 
-
+Route::get('sendEmail', function()
+{
+    $send = new App\Commands\SendEmail(1,2);
+    $send->handle();
 });
 
 Route::get('changes', function()
@@ -201,6 +205,18 @@ Route::get('notification', function()
 
     return View::make('emails.confirmation', array('user' => $user, 'user_photo' => 'avatar.jpg', 'name' => 'Cindy Leschaud', 'token' => '2rw3t342t2t'));
 });
+
+Route::get('accepted', function()
+{
+    $user   = \App::make('App\Riiingme\User\Repo\UserInterface');
+
+    $host    = $user->find(1);
+    $invited = $user->find(2);
+
+    return View::make('emails.welcome', array('invited' => $invited));
+
+});
+
 
 Route::get('invitation', function()
 {

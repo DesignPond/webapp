@@ -182,12 +182,8 @@ class ChangeWorker{
 
         if( $this->updates->count() > 1)
         {
-            return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
-        }
-        elseif( $this->updates->count() == 1)
-        {
-/*
-            if( $this->riiinglink->id== 1009)
+
+/*            if( $this->riiinglink->id == 2)
             {
                 echo '<pre>';
                 echo $this->riiinglink->id.'<br/>';
@@ -196,9 +192,12 @@ class ChangeWorker{
                 $diff =  $this->calculDiff([], unserialize($metas));
                 print_r($diff);
                 echo '</pre>';
-            }
-*/
+            }*/
 
+            return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
+        }
+        elseif( $this->updates->count() == 1)
+        {
             if($metas)
             {
                 if($this->updates->first()->name == 'created_meta')
