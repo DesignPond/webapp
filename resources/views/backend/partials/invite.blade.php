@@ -26,8 +26,12 @@
 
                             <?php
                                 $otherGroupe  = [2 => 4, 3 => 5];
+                                $valable = '';
                                 $alllabels    = $ringlink['invited_labels'] + $labels;
-                                $valable      = $helper->validityPeriod($invited_user,$otherGroupe[$group]);
+                                if(isset($otherGroupe[$group])){
+                                    $valable = $helper->validityPeriod($invited_user,$otherGroupe[$group]);
+                                }
+
                             ?>
 
                             <div class="chat-msg">
