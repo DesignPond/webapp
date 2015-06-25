@@ -13,43 +13,41 @@
                     </div>
                 </div>
 
-                @if(!empty($labels))
+                <?php
+                    $alllabels = [];
+                    if(!empty( $ringlink['invited_labels'] ) && !empty($labels)){
+                        $alllabels = $ringlink['invited_labels'] + $labels;
+                    }
+                ?>
 
-                    @foreach($labels as $group => $groupe_label)
+                @if(!empty($alllabels))
+                    @foreach($ringlink['invited_labels'] as $group => $groupe_label)
                         @if(isset($groupes[$group]))
 
                             <?php
-                                $temp = (in_array($group,[4,5]) ? true : false);
-                                $isGroupe  = [4 => 2, 5 => 3];
-                                $alllabels = $ringlink['invited_labels'];
-                                $valable   = '';
+                                $otherGroupe  = [2 => 4, 3 => 5];
+                                $alllabels    = $ringlink['invited_labels'] + $labels;
+                                $valable      = $helper->validityPeriod($invited_user,$otherGroupe[$group]);
                             ?>
 
                             <div class="chat-msg">
                                 <div class="panel bg-info panel-small">
-                                    <div class="panel-body text-left">
-                                        {{ trans('label.title_'.$group) }}
-                                    </div>
+                                    <div class="panel-body text-left">{{ trans('label.title_'.$group) }}</div>
                                 </div>
                                 <dl class="dl-horizontal">
 
-                                    <?php $valable = $helper->validityPeriod($invited_user,$group); ?>
-
-                                    @foreach($group_type_data[$group] as $type_data_id)
-
-                                        @if( isset($groupe_label[$type_data_id]) && !empty($groupe_label[$type_data_id]) )
-                                            <dt>{{ trans('label.label_'.$type_data_id) }}</dt>
+                                    @foreach($groupe_label as $type_id => $label_text)
+                                        @if(isset($otherGroupe[$group]) && isset($alllabels[$otherGroupe[$group]]) && !empty($alllabels[$otherGroupe[$group]][$type_id]))
+                                            <dt>{{ trans('label.label_'.$type_id) }}</dt>
                                             <dd>
-                                                {{ $groupe_label[$type_data_id] }}<br/>
+                                                {{ $alllabels[$otherGroupe[$group]][$type_id] }}<br/>
                                                 <span class="text-warning">{{ $valable }}</span>
                                             </dd>
-
-                                        @elseif($temp && isset($isGroupe[$group]) && isset($alllabels[$isGroupe[$group]][$type_data_id]) && !empty($group_type_data[$isGroupe[$group]][$type_data_id]) )
-                                            <dt>{{ trans('label.label_'.$type_data_id) }}</dt>
+                                        @elseif(isset($alllabels[$group][$type_id]) && !empty($alllabels[$group][$type_id]) && !empty($label_text))
+                                            <dt>{{ trans('label.label_'.$type_id) }}</dt>
                                             <dd>
-                                                {{ $alllabels[$isGroupe[$group]][$type_data_id] }}
+                                                {{ $label_text }}
                                             </dd>
-
                                         @endif
                                     @endforeach
 
