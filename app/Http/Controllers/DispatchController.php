@@ -91,15 +91,30 @@ class DispatchController extends Controller {
 
             if(!empty($emails))
             {
+                if(in_array(\Auth::user()->email,$emails) && count($emails) == 1)
+                {
+                    return redirect('user/partage')->with(array('status' => 'danger', 'message' => 'Vous ne pouvez pas vous envoyer vous-même une invitation'));
+                }
+
                 foreach($emails as $email)
                 {
-                    $this->sendEmail($email,$request);
+                    if($email != \Auth::user()->email)
+                    {
+                        $this->sendEmail($email,$request);
+                    }
                 }
             }
         }
         else
         {
-            $this->sendEmail($request->email,$request);
+            if($request->email != \Auth::user()->email)
+            {
+                $this->sendEmail($request->email, $request);
+            }
+            else
+            {
+                return redirect('user/partage')->with(array('status' => 'danger', 'message' => 'Vous ne pouvez pas vous envoyer vous-même une invitation'));
+            }
         }
 
         return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
