@@ -89,6 +89,7 @@ class ConvertWorker{
             }
         }
 
+        ksort($labels);
         $this->labels = $labels;
 
         return $this;

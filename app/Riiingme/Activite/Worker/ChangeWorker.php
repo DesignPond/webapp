@@ -112,7 +112,8 @@ class ChangeWorker{
                 //$items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
                 $this->converter2->loadUserLabels($this->riiinglink,true)->prepareLabels()->metasInEffect();
                 $this->converter2->labels = $items;
-                $this->converter2->convertPeriodRange()->labelsToShow();
+                $this->converter2->labelsToShow();
+                //$this->converter2->convertPeriodRange()->labelsToShow();
 
                 if(!empty($this->converter2->labels))
                 {
