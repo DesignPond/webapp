@@ -50,7 +50,7 @@
                                 <p class="text-danger"><strong>{{ trans('menu.export_choix') }}</strong></p>
                                 <div class="checkbox">
                                     <label>
-                                        <input value="0" name="labels[]" checked="checked" type="checkbox">
+                                        <input value="0" name="labels[]" type="checkbox">
                                         {{ trans('menu.firstname') }} et {{ trans('menu.lastname') }}
                                     </label>
                                 </div>

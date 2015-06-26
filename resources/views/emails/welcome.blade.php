@@ -24,7 +24,7 @@
                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;text-align: center;width: 64px;height: 64px;" class="profilePicture">
                         <tr>
                             <td style="{{ $marginReset }}padding-top: 0;padding-bottom: 14px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;">
-                                <img src="<?php echo asset('users/'.$invited->user_photo);?>" width="70" height="70" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;{{ $paddingReset }}height: 70px;width: 70px;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" alt="Profil">
+                                <img src="<?php echo asset('users/'.$user_photo);?>" width="70" height="70" style="margin-top: 0;margin-left: auto;margin-right: auto;margin-bottom: 0;{{ $paddingReset }}height: 70px;width: 70px;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" alt="Profil">
                             </td>
                         </tr>
                     </table>
@@ -36,7 +36,7 @@
                             <td style="{{ $marginReset }}{{ $paddingReset }}border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;line-height: 0 !important;font-size: 0 !important;" class="emptyCell">&nbsp;</td>
                             <td valign="middle" align="left" style="{{ $marginReset }}padding-top: 12px;padding-bottom: 0;padding-left: 12px;padding-right: 12px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;" class="bubbleContent">
                                 <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 14px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;color: #54565c;">
-                                    <strong>{{ $invited->name }}</strong> <br/>{{ trans('text.accepted') }}
+                                    <strong>{{ $user_name }}</strong> <br/>{{ trans('text.accepted') }}
                                 </p>
                             </td>
                         </tr>

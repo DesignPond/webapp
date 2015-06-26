@@ -6,6 +6,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Queue;
 
 class SendEmail extends Command implements SelfHandling, ShouldBeQueued {
 
@@ -34,13 +35,21 @@ class SendEmail extends Command implements SelfHandling, ShouldBeQueued {
 	 */
 	public function handle()
 	{
+
         $host    = $this->user->find($this->host_id);
         $invited = $this->user->find($this->invited_id);
 
-        \Mail::later(180, 'emails.welcome', ['invited' => $invited], function($message) use ($host)
+        $user_name  = $invited->name;
+        $user_photo = $invited->user_photo;
+
+        $host_email = $host->email;
+        $host_name  = $host->name;
+
+       \Mail::later(3600, 'emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name], function($message) use ($host_email,$host_name)
         {
-            $message->to($host->email, $host->name)->subject('RiiingMe!');
+            $message->to($host_email, $host_name)->subject('RiiingMe!');
         });
+
 	}
 
 }

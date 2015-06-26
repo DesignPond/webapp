@@ -9,6 +9,7 @@ use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 
 use Illuminate\Http\Request;
 use App\Commands\CreateRiiinglink;
+use App\Commands\SendEmail;
 use App\Commands\ProcessInvite;
 
 class AuthController extends Controller {
@@ -142,8 +143,9 @@ class AuthController extends Controller {
             $invite->save();
 
             // Create riiinglink between users
-            //$this->dispatch(new CreateRiiinglink($invite_id,$user->id));
             $this->riiinglink->create(['host_id' => $invite->user_id, 'invited_id' => $invite->invited_id]);
+
+            $this->dispatch(new SendEmail($invite->user_id,$invite->invited_id));
             $this->dispatch(new ProcessInvite($invite_id));
 
         }

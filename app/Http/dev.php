@@ -3,6 +3,8 @@
 
 Route::get('userlabels', 'HomeController@index');
 
+Route::get('sendTestEmail', 'WelcomeController@test');
+
 Route::get('test', function()
 {
     // return DB::table('riiinglinks')->orderBy('id', 'desc')->first()->id;
@@ -173,8 +175,23 @@ echo '</pre>';exit;*/
 
 Route::get('sendEmail', function()
 {
-    $send = new App\Commands\SendEmail(1,2);
+    $send = new App\Commands\SendEmail(1,3);
     $send->handle();
+});
+
+Route::get('sendEmail', function()
+{
+
+    $user = \App::make('App\Riiingme\User\Repo\UserInterface');
+
+    $host    = $user->find(1);
+    $invited = $user->find(3);
+
+    return View::make('emails.welcome', array('invited' => $invited));
+
+    $send = new App\Commands\SendEmail(1,3);
+    $send->handle();
+
 });
 
 Route::get('changes', function()

@@ -3,6 +3,7 @@
 use App\Commands\Command;
 use App\Commands\CreateRiiinglink;
 use App\Commands\ProcessInvite;
+use App\Commands\SendEmail;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
@@ -52,6 +53,7 @@ class ConfirmInvite extends Command implements SelfHandling {
 
             $link = $this->riiinglinkExist($user->id,$invite->user_id);
 
+            $this->dispatch(new SendEmail($invite->user_id,$user->id));
             $this->dispatch(new ProcessInvite($invite->id));
 
             return ['status' => 'confirmed', 'link' => $link->id, 'user' => $user];
@@ -71,10 +73,6 @@ class ConfirmInvite extends Command implements SelfHandling {
         }
     }
 
-    public function confirm($invite,$user){
-
-    }
-
     public function riiinglinkExist($host_id,$invited_id)
     {
         $riiinglink = $this->riiinglink->findByHostAndInvited($host_id,$invited_id);
@@ -82,7 +80,7 @@ class ConfirmInvite extends Command implements SelfHandling {
         if(!$riiinglink)
         {
             // User is registred and riiinglink doesn't exist, create riiinglink
-            $riiinglinks =  $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);
+            $riiinglinks = $this->riiinglink->create(['host_id' => $host_id, 'invited_id' => $invited_id]);
 
             return $riiinglinks[0];
         }

@@ -1,6 +1,7 @@
 <?php namespace App\Riiingme\Traits;
 
 use App\Riiingme\Activite\Entities\Change;
+use App\Riiingme\Riiinglink\Repo\RiiinglinkInterface;
 
 trait RecordsChanges
 {
@@ -21,7 +22,15 @@ trait RecordsChanges
     {
         if( \Auth::check())
         {
-            $exist = $this->itExist($this);
+            $host       = 0;
+            $exist      = $this->itExist($this);
+            $riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+            $link       = $riiinglink->find($this->riiinglink_id);
+
+            if(!$link->isEmpty())
+            {
+                $host = $link->first()->host_id;
+            }
 
             if (!$exist)
             {
@@ -30,7 +39,7 @@ trait RecordsChanges
                     'riiinglink_id' => $this->riiinglink_id,
                     'name'          => $this->getChangeName($this, $event),
                     'labels'        => $this->labels,
-                    'user_id'       => ($this->host_id ? $this->host_id : \Auth::user()->id),
+                    'user_id'       => ($host ? $host : \Auth::user()->id),
                     'changed_at'    => date('Y-m-d')
                 ]);
 
