@@ -200,7 +200,7 @@ Route::get('sendEmail', function()
     $host_email = $host->email;
     $host_name  = $host->name;
 
-    return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
+    //return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
 
     $send = new App\Commands\SendEmail(1,4);
     $send->handle();
