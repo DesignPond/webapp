@@ -495,6 +495,12 @@ fieldset.border {
     right: 20px;
 }
 
+.btn.btn-default {
+    color: #eb615f !important;
+    border: 1px solid #dbd9d9;
+    margin-top: 4px;
+}
+
 /* ---- isotope ---- */
 
 .isotope:after {

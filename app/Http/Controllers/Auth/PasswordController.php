@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Riiingme\User\Repo\UserInterface;
 
 class PasswordController extends Controller {
 
@@ -22,6 +23,7 @@ class PasswordController extends Controller {
 	use ResetsPasswords;
 
     protected $redirectTo = '/user';
+    protected $user;
 
 	/**
 	 * Create a new password controller instance.
@@ -30,15 +32,26 @@ class PasswordController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\PasswordBroker  $passwords
 	 * @return void
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords)
+	public function __construct(Guard $auth, PasswordBroker $passwords, UserInterface $user)
 	{
 		$this->auth = $auth;
 		$this->passwords = $passwords;
+        $this->user      = $user;
 
         $this->subject = trans('message.recoverpassword_msg'); //  < --JUST ADD THIS LINE
 
 		$this->middleware('guest');
 	}
+
+    /**
+     * Display the password new form
+     *
+     * @return Response
+     */
+    public function getNew()
+    {
+        return view('auth.new');
+    }
 
     /**
      * Reset the given user's password.
@@ -75,6 +88,48 @@ class PasswordController extends Controller {
             default:
                 return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => trans($response)]);
         }
+    }
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function postDefine(Request $request)
+    {
+
+        $v = \Validator::make($request->all(), [
+            'email'        => 'required|email',
+            'password'     => 'required|different:old_password|min:6',
+            'old_password' => 'required',
+        ],[
+            'password.different' => 'Le champ nouveau mot de passe doit être différent du mot de passe actuel',
+        ]);
+
+        if ($v->fails())
+        {
+            return redirect()->back()->withErrors($v->errors());
+        }
+
+        $email        = $request->input('email');
+        $password     = $request->input('password');
+        $old_password = $request->input('old_password');
+
+        if (\Auth::attempt(['email' => $email, 'password' => $old_password]))
+        {
+            $user = \Auth::user();
+            $user->password = bcrypt($password);
+
+            $user->save();
+
+            \Auth::login($user);
+
+            return redirect('user')->with(['status' => 'success', 'message' => trans('message.changed_password') ]);
+        }
+
+        return redirect()->back()->with(['status' => 'danger'])->withInput($request->only('email'));
+
     }
 
 }

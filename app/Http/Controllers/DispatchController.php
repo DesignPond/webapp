@@ -32,7 +32,7 @@ class DispatchController extends Controller {
     {
         $this->dispatch(new ActivateAccount($request->input('token')));
 
-        return redirect('/user')->with(array('status' => 'success', 'message' => 'Votre compte est maintenant actif!'));
+        return redirect('/user')->with(array('status' => 'success', 'message' => trans('message.profile_active') ));
     }
 
     /**
@@ -49,7 +49,7 @@ class DispatchController extends Controller {
             // Log in the user
             \Auth::loginUsingId($result['user']->id);
 
-            return redirect('user/link/'.$result['link'])->with(array('status' => 'success', 'message' => 'L\'invitation est confirmé'));
+            return redirect('user/link/'.$result['link'])->with(array('status' => 'success', 'message' => trans('message.invite_confirmed') ));
         }
         elseif($result['status'] == 'register')
         {
@@ -59,7 +59,7 @@ class DispatchController extends Controller {
         }
         else
         {
-            return redirect('/')->with(array('error' => 'Problem avec le jeton'));
+            return redirect('/')->with(array('error' => trans('message.token_mismatch') ));
         }
 
     }
@@ -93,7 +93,7 @@ class DispatchController extends Controller {
             {
                 if(in_array(\Auth::user()->email,$emails) && count($emails) == 1)
                 {
-                    return redirect('user/partage')->with(array('status' => 'danger', 'message' => 'Vous ne pouvez pas vous envoyer vous-même une invitation'));
+                    return redirect('user/partage')->with(array('status' => 'danger', 'message' => trans('message.no_self_send') ));
                 }
 
                 foreach($emails as $email)
@@ -113,11 +113,11 @@ class DispatchController extends Controller {
             }
             else
             {
-                return redirect('user/partage')->with(array('status' => 'danger', 'message' => 'Vous ne pouvez pas vous envoyer vous-même une invitation'));
+                return redirect('user/partage')->with(array('status' => 'danger', 'message' => trans('message.no_self_send') ));
             }
         }
 
-        return redirect('user/partage')->with(array('status' => 'success', 'message' => 'Votre invitation a bien été envoyé'));
+        return redirect('user/partage')->with(array('status' => 'success', 'message' => trans('message.send_invite_ok') ));
     }
 
     /**
@@ -134,7 +134,7 @@ class DispatchController extends Controller {
             $message->to($user->email)->subject('Confirmation');
         });
 
-        return redirect('auth/activate')->with(array('status' => 'success', 'message' => 'Votre lien d\'activation a bien été envoyé'));
+        return redirect('auth/activate')->with(array('status' => 'success', 'message' => trans('message.send_link_active') ));
     }
 
 }

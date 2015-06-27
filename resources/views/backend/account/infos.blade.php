@@ -28,7 +28,7 @@
         <div class="form-group">
             <label class="col-sm-4 control-label text-danger">{{ trans('menu.password') }}</label>
             <div class="col-sm-8">
-                <input value="" type="password" name="info[password]" class="form-control" placeholder="Changer le mot de passe">
+                <a href="{{ url('password/new') }}" class="btn btn-default btn-sm">{{ trans('message.newpassword') }}</a>
             </div>
         </div>
 
