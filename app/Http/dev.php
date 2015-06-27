@@ -173,10 +173,17 @@ echo '</pre>';exit;*/
 
 });
 
-Route::get('sendEmail', function()
+Route::get('findLink', function()
 {
-    $send = new App\Commands\SendEmail(1,3);
-    $send->handle();
+
+    $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+
+    $link =  $riiinglink->findLinkByEmailAndUserId('cindy.leschaud@gmail.com',4);
+
+    echo '<pre>';
+    print_r($link);
+    echo '</pre>';exit;
+
 });
 
 Route::get('sendEmail', function()
