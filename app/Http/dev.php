@@ -192,11 +192,17 @@ Route::get('sendEmail', function()
     $user = \App::make('App\Riiingme\User\Repo\UserInterface');
 
     $host    = $user->find(1);
-    $invited = $user->find(3);
+    $invited = $user->find(4);
 
-    return View::make('emails.welcome', array('invited' => $invited));
+    $user_name  = $invited->name;
+    $user_photo = $invited->user_photo;
 
-    $send = new App\Commands\SendEmail(1,3);
+    $host_email = $host->email;
+    $host_name  = $host->name;
+
+    return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
+
+    $send = new App\Commands\SendEmail(1,4);
     $send->handle();
 
 });
