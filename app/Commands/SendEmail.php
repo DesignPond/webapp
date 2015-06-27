@@ -45,10 +45,11 @@ class SendEmail extends Command implements SelfHandling, ShouldBeQueued {
         $host_email = $host->email;
         $host_name  = $host->name;
 
-/*       \Mail::later(3600, 'emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name], function($message) use ($host_email,$host_name)
+       \Mail::later(3600, 'emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name], function($message) use ($host_email,$host_name)
         {
-            $message->to($host_email, $host_name)->subject('RiiingMe!');
-        });*/
+            //$message->to($host_email, $host_name)->subject('RiiingMe!');
+            $message->to('cindy.leschaud@gmail.com', $host_name)->subject('RiiingMe!');
+        });
 
 	}
 
