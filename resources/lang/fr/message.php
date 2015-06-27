@@ -45,4 +45,5 @@ return [
     'send_invite_ok'      => 'Votre invitation a bien été envoyé',
     'send_link_active'    => 'Votre lien d\'activation a bien été envoyé',
     'changed_password'    => 'Votre mot de passe a bien été changé',
+    'wrong_credentials'   => 'Les identifiants email / mot de passe ne correspondent pas',
 ];

@@ -128,7 +128,7 @@ class PasswordController extends Controller {
             return redirect('user')->with(['status' => 'success', 'message' => trans('message.changed_password') ]);
         }
 
-        return redirect()->back()->with(['status' => 'danger'])->withInput($request->only('email'));
+        return redirect()->back()->with(['status' => 'danger', 'message' => trans('message.wrong_credentials')])->withInput($request->only('email'));
 
     }
 
