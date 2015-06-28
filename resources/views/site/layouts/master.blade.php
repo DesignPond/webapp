@@ -17,21 +17,27 @@
 
     <!-- fav icon -->
     <link href="<?php echo asset('frontend/images/favicon.png');?>" rel="shortcut icon">
+    <link href="{{ asset('backend/vendor/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700,800,800italic,300italic,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- css => style sheet -->
     <link href="<?php echo asset('frontend/css/main.css');?>" media="screen" rel="stylesheet" type="text/css">
-
+    <link href="<?php echo asset('frontend/css/footer.css');?>" media="screen" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body class="Site">
 
     <!-- Navigation -->
     @include('site.partials.navigation')
 
-    <!-- Contenu -->
-    @yield('content')
-    <!-- Fin contenu -->
+    <!-- Begin page content -->
+    <div class="container Site-content">
+
+        <!-- Contenu -->
+        @yield('content')
+        <!-- Fin contenu -->
+
+    </div>
 
     <!-- Footer -->
     @include('partials.footer')

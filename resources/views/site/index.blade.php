@@ -4,40 +4,30 @@
 <div class="container">
     <section class="row">
         <div class="col-md-6">
-            <p class="text-center"><img src="<?php echo asset('frontend/images/illustration-web.svg');?>" alt="illustration"></p>
+            <h3>{{ trans('text.secure') }}</h3>
+            <p>{{ trans('text.texte_annuaire') }}</p>
+            <p class="text-center" id="illustration">
+                <img src="<?php echo asset('frontend/images/illustration.svg');?>" alt="illustration">
+            </p>
         </div>
         <div class="col-md-6 ">
-            <div class="text-center intro parent">
-                <div class="child">
-                    <h3 class="serviceName">{{ trans('text.secure') }}</h3>
-                    <p>
-                        {{ trans('text.texte_annuaire') }}
-                    </p>
-                        <a class="btn btn-info btn-blue btn-xl" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
-                        <a class="btn btn-default btn-xl" href="{{ url('auth/login') }}">{{ trans('action.login') }}</a>
+            <h4 class="text-center">Créer un compte :</h4>
+            <section id="register" class="center-block auth-login row">
+                <div class="col-md-12">
+                    <a href="{{ url('auth/register_private') }}" class="btn btn-block btn-cyan mt-lg">
+                        <i class="fa fa-user"></i><br/>
+                        {{ trans('action.create') }} <span>{{ trans('menu.prive') }}</span>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-</div>
-<div class="line-divider"></div>
-<div class="container">
-    <section class="row">
-        <div class="col-md-6 ">
-            <div class="text-center intro parent">
-                <div class="child">
-                    <h3 class="serviceName">{{ trans('text.accessible') }}</h3>
-                    <p>
-                        {{ trans('text.texte_monde') }}
+                <strong class="col-md-12 text-center">{{ trans('action.ou') }}</strong>
+                <div class="col-md-12">
+                    <a href="{{ url('auth/register_company') }}" class="btn btn-block btn-primary mt-lg">
+                        <i class="fa fa-users"></i><br/>
+                        {{ trans('action.create') }} <span>{{ trans('menu.company') }}</span>
+                    </a>
+                </div>
+            </section>
 
-                    </p>
-                        <a class="btn btn-info btn-blue btn-xl" href="{{ url('auth/register') }}">{{ trans('action.inscription') }}</a>
-                        <a class="btn btn-default btn-xl" href="{{ url('auth/login') }}">{{ trans('action.login') }}</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <p class="text-center"><img src="<?php echo asset('frontend/images/world.svg');?>" alt="illustration"></p>
         </div>
     </section>
 </div>

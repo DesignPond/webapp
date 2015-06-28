@@ -1,21 +1,41 @@
-<div class="container">
-    <nav class="navbar">
+<nav class="navbar">
+    <div class="container">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img style="display: block;width: 120px;" alt="Riiingme" src="{{ asset('frontend/images/logo.svg') }}">
-                </a>
-                <ul class="nav navbar-nav">
-                    <?php $locale = \Session::get('locale'); ?>
-                    <li class="<?php echo (!isset($locale) || $locale == 'fr' ? 'active' : ''); ?>">
-                        <a href="{{ url('setlang/fr') }}"><img src="{{ asset('backend/images/flags/France.png') }}"></a>
-                    </li>
-                    <li class="<?php echo ($locale == 'en' ? 'active' : ''); ?>">
-                        <a href="{{ url('setlang/en') }}"><img src="{{ asset('backend/images/flags/United-kingdom.png') }}"></a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#"><img style="display: block;width: 200px;" alt="Riiingme" src="{{ asset('frontend/images/logo.svg') }}"></a>
+                    </div>
+                </div>
+                <div class="col-md-7">
+
+                    {!! Form::open(array( 'method' => 'POST', 'id'  => 'homeLogin', 'url'  => array('auth/login'))) !!}
+
+                    <div class="col-md-5">
+                        <div class="form-group has-feedback">
+                            <input required type="email" name="email" placeholder="{{ trans('message.youremail') }}" autocomplete="off" class="form-control" />
+                            <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                        </div>
+                        <input type="checkbox" name="cookie" value="1" /> &nbsp;{{ trans('message.rememberme') }}
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group has-feedback">
+                            <input required type="password" name="password" placeholder="{{ trans('message.yourpassword') }}" class="form-control" />
+                            <span class="fa fa-lock form-control-feedback text-muted"></span>
+                        </div>
+                        <a href="{{ url('password/email') }}" class="text-muted">{{ trans('message.lostpassword') }}?</a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group has-feedback">
+                            <button type="submit" class="btn btn-primary">Go!</button>
+                        </div>
+                    </div>
+
+                    {!! Form::close() !!}
+
+                </div>
             </div>
-            <p class="navbar-text navbar-right">{{ trans('menu.deja_inscrit') }} &nbsp;&nbsp; <a href="{{ url('auth/login') }}" class="navbar-link btn btn-sm btn-default">{{ trans('action.login') }}</a></p>
+
         </div>
-    </nav>
-</div><!-- end of all wrapper -->
+    </div><!-- end of all wrapper -->
+</nav>

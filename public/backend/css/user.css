@@ -855,6 +855,7 @@ fieldset.border {
     font-size: 13px;
 }
 
+
 /*
 * Media
 */
@@ -902,16 +903,6 @@ fieldset.border {
 /*
 * Footer
 */
-
-#footer{
-  margin-top: 30px;
-}
-
-#footer p{
-    margin-bottom: 0;
-    padding: 10px 0;
-    color: #333;
-}
 
 #copyright{
     position: absolute;;

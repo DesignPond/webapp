@@ -18,32 +18,27 @@
     <link href="{{ asset('backend/vendor/feather/webfont/feather-webfont/feather.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/user.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/css/media.css') }}">
-
+    <link href="<?php echo asset('frontend/css/footer.css');?>" media="screen" rel="stylesheet" type="text/css">
 </head>
 
-<body>
-    <div class="container">
-        <section>
-            <div>
+<body class="Site">
+    <div class="container Site-content">
 
-                <div class="center-block mt-xl wd-xl">
-                    @include('partials.message')
-                </div>
+        <div class="center-block mt-xl wd-xl">
+            @include('partials.message')
+        </div>
 
-                <div class="center-block mt-xl wd-xl">
-                    <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="RiiingMe" class="center-block img-rounded" /></a>
-                </div>
+        <div class="center-block mt-xl wd-xl">
+            <a href="{{ url('/') }}"><img style="width: 70%;" src="{{ asset('frontend/images/logo.svg') }}" alt="RiiingMe" class="center-block img-rounded" /></a>
+        </div>
 
-                <!-- Contenu -->
-                @yield('content')
-                <!-- Fin contenu -->
-
-            </div>
-        </section>
-
-        @include('partials.footer')
+        <!-- Contenu -->
+        @yield('content')
+        <!-- Fin contenu -->
 
     </div>
+
+    @include('partials.footer')
 
 </body>
 
