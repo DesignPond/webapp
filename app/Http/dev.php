@@ -124,16 +124,16 @@ Route::get('changement', function()
     $groupes  = $groupe->getGroupes();
     unset($groupes[1]);
 
-    $send1->setInterval('week')->getUsers();
+    $send1->setInterval('day')->getUsers();
     $all_changes = $send1->send();
 
     echo '<pre>';
-    echo 'Week';
+    echo 'Day';
     print_r($all_changes);
     echo '</pre>';
 
 
-    if(!empty($all_changes))
+/*    if(!empty($all_changes))
     {
         foreach ($all_changes as $user)
         {
@@ -142,7 +142,7 @@ Route::get('changement', function()
                 $message->to($user['email'])->subject('Notification de changement du partage');
             });
         }
-    }
+    }*/
 
 
 /*    $changes = [
