@@ -20,43 +20,42 @@ trait RecordsChanges
 
     public function recordChange($event)
     {
-        if( \Auth::check())
+
+        $riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+        $link = $riiinglink->find($this->riiinglink_id);
+        $host = (!$link->isEmpty() ? $link->first()->host_id : \Auth::user()->id);
+
+        $exist  = $this->itExist($this,$host);
+        $helper = new \App\Riiingme\Helpers\Helper;
+
+        if (!$exist)
         {
-            $exist      = $this->itExist($this);
-            $riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-            $helper     = new \App\Riiingme\Helpers\Helper;
-            $link       = $riiinglink->find($this->riiinglink_id);
+            $change = Change::create([
+                'meta_id'       => $this->id,
+                'riiinglink_id' => $this->riiinglink_id,
+                'name'          => $this->getChangeName($this, $event),
+                'labels'        => $helper->addTempLabelsForChanges($this->labels),
+                'user_id'       => $host,
+                'changed_at'    => date('Y-m-d')
+            ]);
 
-            $host = (!$link->isEmpty() ? $link->first()->host_id : 0);
-
-            if (!$exist)
-            {
-                $change = Change::create([
-                    'meta_id'       => $this->id,
-                    'riiinglink_id' => $this->riiinglink_id,
-                    'name'          => $this->getChangeName($this, $event),
-                    'labels'        => $helper->addTempLabelsForChanges($this->labels),
-                    'user_id'       => ($host ? $host : \Auth::user()->id),
-                    'changed_at'    => date('Y-m-d')
-                ]);
-
-                $new = Change::find($change->id);
-                $new->labels = $helper->addTempLabelsForChanges($this->labels);
-                $new->save();
-            }
-            else
-            {
-                $change = Change::find($exist->id);
-
-                $change->labels  = $helper->addTempLabelsForChanges($this->labels);
-                $change->save();
-            }
+            $new = Change::find($change->id);
+            $new->labels = $helper->addTempLabelsForChanges($this->labels);
+            $new->save();
         }
+        else
+        {
+            $change = Change::find($exist->id);
+
+            $change->labels  = $helper->addTempLabelsForChanges($this->labels);
+            $change->save();
+        }
+
     }
 
-    protected function itExist($model)
+    protected function itExist($model,$user_id)
     {
-        $exist = Change::where('changed_at','=',date('Y-m-d'))->where('meta_id','=',$model->id)->where('user_id','=',\Auth::user()->id)->get();
+        $exist = Change::where('changed_at','=',date('Y-m-d'))->where('meta_id','=',$model->id)->where('user_id','=',$user_id)->get();
 
         return (!$exist->isEmpty() ? $exist->first() : false);
     }
