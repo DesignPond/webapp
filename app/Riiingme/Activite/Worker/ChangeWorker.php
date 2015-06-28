@@ -183,18 +183,6 @@ class ChangeWorker{
 
         if( $this->updates->count() > 1)
         {
-
-/*            if( $this->riiinglink->id == 2)
-            {
-                echo '<pre>';
-                echo $this->riiinglink->id.'<br/>';
-                print_r($last->first()->toArray());
-                print_r($this->updates->first()->toArray());
-                $diff =  $this->calculDiff([], unserialize($metas));
-                print_r($diff);
-                echo '</pre>';
-            }*/
-
             return $this->calculDiff(unserialize($this->updates->last()->labels), unserialize($this->updates->first()->labels));
         }
         elseif( $this->updates->count() == 1)

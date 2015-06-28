@@ -22,15 +22,12 @@ trait RecordsChanges
     {
         if( \Auth::check())
         {
-            $host       = 0;
             $exist      = $this->itExist($this);
             $riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
+            $helper     = new \App\Riiingme\Helpers\Helper;
             $link       = $riiinglink->find($this->riiinglink_id);
 
-            if(!$link->isEmpty())
-            {
-                $host = $link->first()->host_id;
-            }
+            $host = (!$link->isEmpty() ? $link->first()->host_id : 0);
 
             if (!$exist)
             {
@@ -38,20 +35,20 @@ trait RecordsChanges
                     'meta_id'       => $this->id,
                     'riiinglink_id' => $this->riiinglink_id,
                     'name'          => $this->getChangeName($this, $event),
-                    'labels'        => $this->labels,
+                    'labels'        => $helper->addTempLabelsForChanges($this->labels),
                     'user_id'       => ($host ? $host : \Auth::user()->id),
                     'changed_at'    => date('Y-m-d')
                 ]);
 
                 $new = Change::find($change->id);
-                $new->labels = $this->labels;
+                $new->labels = $helper->addTempLabelsForChanges($this->labels);
                 $new->save();
             }
             else
             {
                 $change = Change::find($exist->id);
 
-                $change->labels  = $this->labels;
+                $change->labels  = $helper->addTempLabelsForChanges($this->labels);
                 $change->save();
             }
         }

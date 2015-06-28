@@ -276,6 +276,65 @@ class HelperTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
+    public function testAddTempLabel(){
+
+        $labels = [
+            2 => [1 => 2, 4 => 3, 5 => 4],
+            3 => [1 => 11, 6 => 16,]
+        ];
+
+        $labels = serialize($labels);
+        $actual = $this->helper->addTempLabelsForChanges($labels);
+
+        $expected = [
+            2 => [1 => 2, 4 => 3, 5 => 4],
+            3 => [1 => 11, 6 => 16,],
+            4 => [1 => 2, 4 => 3, 5 => 4],
+            5 => [1 => 11, 6 => 16,]
+        ];
+
+        $expected = serialize($expected);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    public function testAddTempLabelOneGroupe(){
+
+        $labels = [
+            3 => [1 => 11, 6 => 16,]
+        ];
+
+        $labels = serialize($labels);
+        $actual = $this->helper->addTempLabelsForChanges($labels);
+
+        $expected = [
+            3 => [1 => 11, 6 => 16,],
+            5 => [1 => 11, 6 => 16,]
+        ];
+
+        $expected = serialize($expected);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testAddTempLabelWithCompany(){
+
+        $labels = [
+            6 => [1 => 2, 4 => 3, 5 => 4]
+        ];
+
+        $labels = serialize($labels);
+        $actual = $this->helper->addTempLabelsForChanges($labels);
+
+        $expected = [
+            6 => [1 => 2, 4 => 3, 5 => 4]
+        ];
+
+        $expected = serialize($expected);
+
+        $this->assertEquals($expected, $actual);
+    }
 
     public function testMetaCompareSecond(){
 

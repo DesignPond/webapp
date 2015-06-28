@@ -2,6 +2,11 @@
     @if(isset($groupes_titres[$groupe_id] ))
         <h4 style="color: #000; margin: 5px 0 10px 0; line-height: 18px; font-size: 13px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
             {{ trans('label.title_'.$groupe_id) }}
+
+            @if($revision && in_array($groupe_id,[2,4]))
+                &nbsp;temporaires
+            @endif
+
         </h4>
         <ul style="margin-left: 5px;padding-left: 5px;margin-right: 30px;">
             @foreach($groupe as $type_id => $label)

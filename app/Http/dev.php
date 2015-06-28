@@ -116,48 +116,32 @@ Route::get('test', function()
 Route::get('changement', function()
 {
 
-    $users  = \App::make('App\Riiingme\User\Repo\UserInterface');
     $type   = \App::make('App\Riiingme\Type\Repo\TypeInterface');
     $groupe = \App::make('App\Riiingme\Groupe\Worker\GroupeWorker');
-    $change = \App::make('App\Riiingme\Activite\Worker\ChangeWorker');
+    $send1  = \App::make('App\Riiingme\Activite\Worker\SendWorker');
 
-    $types  = $type->getAll()->lists('titre','id');
-    $user   = $users->find(1);
-
-    $groupes = $groupe->getGroupes();
+    $types    = $type->getAll()->lists('titre','id');
+    $groupes  = $groupe->getGroupes();
     unset($groupes[1]);
-    
-    $change->setUser($user->id)->setPeriod($user->notification_interval);
-    $data = $change->setUser(1)->setPeriod('week')->allChanges();
 
-    $send = \App::make('App\Riiingme\Activite\Worker\SendWorker');
+    $send1->setInterval('week')->getUsers();
+    $all_changes = $send1->send();
 
-    $send->setInterval('week')->getUsers();
-    $all_changes = $send->send();
-   
-/*echo '<pre>';
-print_r($data);
-echo '</pre>';exit;*/
+    echo '<pre>';
+    echo 'Week';
+    print_r($all_changes);
+    echo '</pre>';
 
-    // Load user riiinglinks to get all invited
-    $invited = $user->load('riiinglinks')->riiinglinks->lists('invited_id');
 
-    if(!empty($invited))
+    if(!empty($all_changes))
     {
-        $data = [];
-
-        foreach ($invited as $invite)
+        foreach ($all_changes as $user)
         {
-            $changes = $change->setUser($invite)->setPeriod($user->notification_interval)->allChanges();
-
-            if (!empty($changes))
+            \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
             {
-                $data[$invite] = $changes;
-                $data[$invite]['user'] = $users->simpleFind($invite);
-            }
+                $message->to($user['email'])->subject('Notification de changement du partage');
+            });
         }
-
-        return View::make('emails.changement', array('types' => $types , 'groupes_titres' => $groupes, 'data' => $data));
     }
 
 
@@ -200,7 +184,7 @@ Route::get('sendEmail', function()
     $host_email = $host->email;
     $host_name  = $host->name;
 
-    //return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
+    return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
 
     $send = new App\Commands\SendEmail(1,4);
     $send->handle();
@@ -217,8 +201,7 @@ Route::get('changes', function()
     print_r($changes->toArray());
     echo '</pre>';*/
 
-    $change = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
-
+    $change  = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
     $changes = $change->getUserLastUpdates(1,1009);
 
     echo '<pre>';

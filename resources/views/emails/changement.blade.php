@@ -68,14 +68,14 @@
                             @if(isset($datauser['changes']) && !empty($datauser['changes']))
                                 <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">{{ trans('text.info_ajoute') }}</h3>
 
-                                @include('emails.partials.changes', ['changes' => $datauser['changes']])
+                                @include('emails.partials.changes', ['changes' => $datauser['changes'], 'revision' => false])
 
                             @endif
 
                             @if(isset($datauser['revision']) && !empty($datauser['revision']))
                                 <h3 style="color:#82858f;font-size:16px;margin-bottom: 10px;">{{ trans('text.info_edit') }}</h3>
 
-                                @include('emails.partials.changes', ['changes' => $datauser['revision']])
+                                @include('emails.partials.changes', ['changes' => $datauser['revision'], 'revision' => true ])
 
                             @endif
                         </td>

@@ -302,6 +302,30 @@ class Helper{
         return '';
     }
 
+
+    public function addTempLabelsForChanges($labels)
+    {
+        $changes = unserialize($labels);
+
+        if(!empty($changes))
+        {
+            $metas = array_keys($changes);
+
+            if(in_array(2,$metas))
+            {
+                $changes[4] = (isset($changes[2]) && !empty($changes[2]) ? $changes[2] : []);
+            }
+            if(in_array(3,$metas))
+            {
+                $changes[5] = (isset($changes[3]) && !empty($changes[3]) ? $changes[3] : []);
+            }
+
+            return serialize($changes);
+        }
+
+        return $labels;
+    }
+
 }
 
 
