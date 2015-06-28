@@ -83,7 +83,7 @@ class DispatchController extends Controller {
      */
     public function send(SendInviteRequest $request)
     {
-        $multiple = $request->multiple;
+        $multiple  = $request->multiple;
 
         if(!empty($multiple))
         {

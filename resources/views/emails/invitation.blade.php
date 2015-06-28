@@ -15,7 +15,13 @@
     <td class="highlight pdTp32" style="{{$marginReset}}padding-top: 32px;padding-bottom: 0;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;text-align: center;background-color: #f6f6f7;">
         <h1 style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 5px;padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 24px;line-height: 36px;font-weight: bold;color: #465059;">
             <a href="#" style="padding-top: 0;padding-bottom: 0;padding-left: 0;padding-right: 0;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #235daa;">
-                <span style="text-decoration: none;color: #465059;">{{ trans('text.demande') }}</span>
+                <span style="text-decoration: none;color: #465059;">
+                    @if($exist_already)
+                        {{ trans('text.partage_already') }}
+                    @else
+                        {{ trans('text.demande') }}
+                    @endif
+                </span>
             </a>
         </h1><br/>
     </td>
@@ -76,7 +82,14 @@
                             ?>
                             <br/>
                             <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">
-                                {{ $invite->user->first_name }} {{ trans('text.obtenir') }}
+                                {{ $invite->user->first_name }}
+
+                                @if($exist_already)
+                                    {{ trans('text.exist_already') }}
+                                @else
+                                    {{ trans('text.obtenir') }}
+                                @endif
+
                             </p>
 
                             @foreach($partage as $groupes => $groupe)
@@ -97,7 +110,14 @@
            {{ trans('text.confirmer') }}
         </p>
         <?php  $url = url('invite?token='.$invite->token.'&ref='.base64_encode($invite->email).''); ?>
-        @include('emails.partials.button', ['url' => $url, 'titre' => trans('text.accepter') ])
+
+        @if($exist_already)
+            <?php $btn = trans('text.btn_already'); ?>
+        @else
+            <?php $btn = trans('text.accepter'); ?>
+        @endif
+
+        @include('emails.partials.button', ['url' => $url, 'titre' => $btn ])
 
     </td>
     <td class="eBody_stretch" style="{{ $reset }}min-width: 16px;background-color: #ffffff;">&nbsp;</td>

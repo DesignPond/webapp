@@ -37,7 +37,7 @@ class InviteEloquent implements InviteInterface {
 
     public function exist($user_id,$email)
     {
-        $invite =  $this->invite->with(array('user'))->where('user_id','=',$user_id)->where('email','=',$email)->get();
+        $invite =  $this->invite->with(array('user'))->where('user_id','=',$user_id)->where('email','=',$email)->whereNull('invited_id')->get();
 
         if(!$invite->isEmpty())
         {

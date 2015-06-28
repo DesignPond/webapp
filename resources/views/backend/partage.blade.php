@@ -13,7 +13,7 @@
                 {!! Form::open(array( 'url' => 'send' , 'id' => 'sendInvites' , 'class' => 'form-horizontal')) !!}
 
                 <?php
-                    $old   = old('email'); $value = '';
+                    $old = old('email'); $value = '';
                     if(isset($email)){$value = $email;}
                     if($old){$value = $old;}
                 ?>
@@ -34,6 +34,9 @@
                                         <input type="text" id="searchEmail" class="form-control send_input" value="{{ $value }}" placeholder="{{ trans('menu.search') }}">
                                         <input type="hidden" id="inputEmail" class="form-control send_input" name="email" value="{{ $value }}">
                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        @if(isset($email))
+                                            <input type="hidden" name="exist_partage" value="1">
+                                        @endif
                                         <span class="input-group-btn"><button class="btn btn-primary" type="submit">{{ trans('menu.envoyer') }}</button></span>
                                     </div><!-- /input-group -->
                                 </div>

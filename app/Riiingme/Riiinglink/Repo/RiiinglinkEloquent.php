@@ -122,6 +122,22 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         return $results->paginate(9);
     }
 
+    public function findLinkByEmailAndUserId($email,$user_id){
+
+        $riiinglink = $this->riiinglink->where('host_id','=',$user_id)->whereHas('invite', function($q) use($email)
+        {
+            $q->where('email', '=', $email);
+        })->get();
+
+        if($riiinglink->isEmpty())
+        {
+            return false;
+        }
+
+        return $riiinglink->first();
+
+    }
+
     /**
      * Riiinglink current user and invited switching places here
      */
