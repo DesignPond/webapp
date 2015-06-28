@@ -26,9 +26,9 @@
         @endif
 
         <div class="form-group">
-            <label class="col-sm-4 control-label text-danger">{{ trans('menu.password') }}</label>
+            <label class="col-sm-4 control-label text-danger">&nbsp;</label>
             <div class="col-sm-8">
-                <a href="{{ url('password/new') }}" class="btn btn-default btn-sm">{{ trans('message.newpassword') }}</a>
+                <a href="{{ url('password/new') }}" class="btn btn-success btn-sm">{{ trans('message.newpassword') }}</a>
             </div>
         </div>
 
