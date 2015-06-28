@@ -152,6 +152,7 @@ h4 {
     border-radius: 2px;
     font-size: 13px;
     height: 30px;
+    border: 1px solid #e1e1e1;
     padding: 2px 7px;
 }
 
@@ -163,6 +164,7 @@ h4 {
 .form-control-feedback{
     height: 30px;
     line-height: 30px;
+    font-size: 11px;
 }
 
 @media screen and (min-width: 1024px) {
