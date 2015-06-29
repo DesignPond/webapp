@@ -16,7 +16,7 @@
                     <input required type="email" name="email" placeholder="{{ trans('message.youremail') }}" autocomplete="off" class="form-control" />
                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
                 </div>
-                <button type="submit" class="btn btn-danger btn-block">{{ trans('menu.envoyer') }}</button>
+                <button type="submit" class="btn btn-primary btn-block">{{ trans('menu.envoyer') }}</button>
 
                 {!! Form::close() !!}
 

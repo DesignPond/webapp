@@ -11,7 +11,7 @@ return [
     'activation'          => 'Activation!',
     'confirmer'           => 'Afin d\'activer votre compte RiiingMe, veuillez confirmer votre adresse e-mail à l\'aide du lien qui vous a été envoyé.',
     'renvoyer'            => 'Renvoyer le lien',
-    'createcompany'       => 'Création du compte Entreprise/Association/Ecole',
+    'createcompany'       => 'Création du compte <br/>Entreprise/Association/Ecole',
     'already'             => 'Déjà inscrit?',
     'namecompany'         => 'Nom de l\'entreprise/association/école',
     'password'            => 'Mot de passe',

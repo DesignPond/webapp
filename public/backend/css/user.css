@@ -1,4 +1,33 @@
 /*
+* Languages
+*/
+
+.bg-white  .nav-language li > a{
+    display: inline-block;
+    color: #43a8eb;
+}
+
+
+.bg-white  .nav-language li.active > a{
+    color: #43a8eb;
+    text-decoration: none;
+}
+
+.nav-language li.active{
+    background: #eee;
+}
+
+/*.bg-navbar{
+    background: #f1f2f3;
+    -webkit-box-shadow: 1px 0 1px -1px #d1d1d1;
+    box-shadow: 1px 0 1px -1px #d1d1d1;
+}
+
+/*.sidebar > .sidebar-nav > .nav > li > a{
+    color: #6a6a6a;
+}*/
+
+/*
 * Latests riiinglinks on activity page
 */
 

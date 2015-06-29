@@ -2,13 +2,13 @@
 @section('content')
 
     <div class="center-block mt-xl wd-xl">
-        <a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;{{ trans('action.backto') }}</a>
+        <a href="{{ url('/') }}"><i class="icon-arrow-left"></i> &nbsp;{{ trans('action.backto') }}</a>
     </div>
 
     <section class="center-block mt-xl wd-xl">
         <div class="panel panel-grey">
             <div class="panel-body">
-                <p class="text-center pv text-bold">{{ trans('message.createcompany') }}</p>
+                <p class="text-center pv text-bold">{!! trans('message.createcompany') !!}</p>
                 <form class="mb-lg" role="form" method="POST" action="/auth/register">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -21,8 +21,6 @@
                     @include('auth.form')
 
                 </form>
-                <p class="pt-lg text-center">{{ trans('message.already') }}</p>
-                <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>{{ trans('action.login') }}</strong></a>
             </div>
         </div>
     </section>

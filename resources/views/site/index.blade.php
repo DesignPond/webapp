@@ -4,7 +4,7 @@
 <div class="container">
     <section class="row">
         <div class="col-md-6">
-            <h3>{{ trans('text.secure') }}</h3>
+            <h3>{{ trans('text.titre_principal') }}</h3>
             <p>{{ trans('text.texte_annuaire') }}</p>
             <p class="text-center" id="illustration">
                 <img src="<?php echo asset('frontend/images/illustration.svg');?>" alt="illustration">
@@ -19,7 +19,7 @@
                         {{ trans('action.create') }} <span>{{ trans('menu.prive') }}</span>
                     </a>
                 </div>
-                <strong class="col-md-12 text-center">{{ trans('action.ou') }}</strong>
+                <span class="col-md-12 text-center">{{ trans('action.ou') }}</span>
                 <div class="col-md-12">
                     <a href="{{ url('auth/register_company') }}" class="btn btn-block btn-primary mt-lg">
                         <i class="fa fa-users"></i><br/>

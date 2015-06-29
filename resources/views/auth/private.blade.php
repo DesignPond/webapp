@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="center-block mt-xl wd-xl">
-        <a href="{{ url('auth/register') }}"><i class="icon-arrow-left"></i> &nbsp;{{ trans('action.backto') }}</a>
+        <a href="{{ url('/') }}"><i class="icon-arrow-left"></i> &nbsp;{{ trans('action.backto') }}</a>
     </div>
 
     <section class="center-block mt-xl wd-xl">
@@ -22,8 +22,6 @@
                     <input type="hidden" value="1" name="user_type" id="user_type">
                     @include('auth.form')
                 </form>
-                <p class="pt-lg text-center">{{ trans('message.already') }}</p>
-                <a href="{{ url('auth/login') }}" class="btn btn-block btn-info"><strong>{{ trans('action.login') }}</strong></a>
             </div>
         </div>
     </section>

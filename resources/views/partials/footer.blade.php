@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-xs-12">
-                <ul class="nav nav-footer">
+                <ul class="nav nav-language">
                     <?php $locale = \Session::get('locale'); ?>
                     <li class="<?php echo (!isset($locale) || $locale == 'fr' ? 'active' : ''); ?>">
                         <a href="{{ url('setlang/fr') }}">Français</a>
@@ -14,7 +14,7 @@
                 </ul>
             </div><!-- end of copyrights -->
             <div class="col-md-6 col-xs-12 text-right">
-                <ul class="nav nav-footer">
+                <ul class="nav nav-language">
                     <li><a href="#" title="Terms of Use">{{ trans('menu.conditions') }}</a></li>
                     <li><a href="#" title="Privacy Policy">{{ trans('menu.confiential') }}</a></li>
                 </ul><!-- end of terms -->

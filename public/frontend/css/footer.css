@@ -37,6 +37,7 @@ footer p{
     line-height: 30px;
     margin-right: 15px;
     padding: 10px 0;
+    color: #43a8eb;
 }
 
 footer a {
@@ -49,14 +50,19 @@ footer hr{
 }
 
 footer p strong{
-    color:#2d2c7d;
     font-weight: 500;
+    color: #43a8eb;
 }
 
-footer .nav-footer li{
+.nav-language li{
     display: inline-block;
 }
 
-footer .nav-footer li.active{
+.nav-language li a{
+    color: #43a8eb;
+    text-decoration: none;
+}
+
+.nav-language li.active{
     background: #eee;
 }

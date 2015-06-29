@@ -37,6 +37,10 @@ return [
     'accepted'      => 'a accepté votre demande de partage de données sur RiiingMe',
     'seeprofile'    => 'Vers votre compte',
     // Textes de la page d'accueil
-    'texte_annuaire'  => 'RiiingMe permet de faire ce que vous ne faites pas sur un réseau social ordinaire: partager vos données de contact personnelles et professionnelles; plus besoin d\'être inscrit dans un annuaire public à la merci du démarchage téléphonique.',
+    'texte_annuaire'  => 'Avec RiiingMe, vous choisissez individuellement quelles données personnelles ou professionnelles vous partagez avec qui ; plus besoin d\'être inscrit dans un annuaire consultable par tous, incomplet ou obsolète. Et lorsque vous modifiez vos données, RiiingMe informe individuellement vos amis et contacts professionnels. RiiingMe permet de rester en contact avec les personnes qui comptent dans votre vie, mais pour de vrai.',
     'texte_monde'     => 'Lorsque vous éditez vos données, les amis et contacts professionnels en sont immédiatement informés: plus de carnets d\'adresses obsolètes.',
+    'titre_principal' => 'L’annuaire téléphonique 2.0'
 ];
+
+
+
