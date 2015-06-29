@@ -145,7 +145,10 @@ class ConvertWorker{
 
                 foreach($types as $type => $label)
                 {
-                    $changes[4][$type] = (isset($temp[$type]) && !empty($temp[$type]) ? $temp[$type] : $used[$type]);
+                    if(isset($used[$type]))
+                    {
+                        $changes[4][$type] = (isset($temp[$type]) && !empty($temp[$type]) && isset($used[$type]) ? $temp[$type] : $used[$type]);
+                    }
                 }
             }
 
@@ -156,7 +159,10 @@ class ConvertWorker{
 
                 foreach($types as $type => $label)
                 {
-                    $changes[5][$type] = (isset($temp[$type]) && !empty($temp[$type]) ? $temp[$type] : $used[$type]);
+                    if(isset($used[$type]))
+                    {
+                        $changes[5][$type] = (isset($temp[$type]) && !empty($temp[$type]) ? $temp[$type] : $used[$type]);
+                    }
                 }
             }
         }
