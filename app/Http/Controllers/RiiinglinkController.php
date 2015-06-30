@@ -82,8 +82,8 @@ class RiiinglinkController extends Controller {
 
         $invited_user = $this->user->find($riiinglink->invited_id);
 
-        $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect()->convertPeriodRange()->labelsToShow();
-
+        $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect(true)->convertPeriodRange()->labelsToShow();
+        
         return view('backend.link')
             ->with( $depedencies + ['ringlink_id' => $id, 'user' => $this->auth, 'invited_user' => $invited_user->user_groups, 'ringlink' => $ringlink, 'metas' => $metas ,'labels' => $this->converter->labels]);
     }

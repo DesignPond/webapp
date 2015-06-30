@@ -26,7 +26,6 @@ trait RecordsChanges
         $host = (!$link->isEmpty() ? $link->first()->host_id : \Auth::user()->id);
 
         $exist  = $this->itExist($this,$host);
-        $helper = new \App\Riiingme\Helpers\Helper;
 
         if (!$exist)
         {
@@ -34,20 +33,20 @@ trait RecordsChanges
                 'meta_id'       => $this->id,
                 'riiinglink_id' => $this->riiinglink_id,
                 'name'          => $this->getChangeName($this, $event),
-                'labels'        => $helper->addTempLabelsForChanges($this->labels),
+                'labels'        => $this->labels,
                 'user_id'       => $host,
                 'changed_at'    => date('Y-m-d')
             ]);
 
             $new = Change::find($change->id);
-            $new->labels = $helper->addTempLabelsForChanges($this->labels);
+            $new->labels = $this->labels;
             $new->save();
         }
         else
         {
             $change = Change::find($exist->id);
 
-            $change->labels  = $helper->addTempLabelsForChanges($this->labels);
+            $change->labels  = $this->labels;
             $change->save();
         }
 

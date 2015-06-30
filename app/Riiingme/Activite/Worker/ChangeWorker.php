@@ -86,9 +86,9 @@ class ChangeWorker{
             {
                 $this->converter1->loadUserLabels($this->riiinglink,true)->prepareLabels();
                 $this->converter1->metas = $changes;
-                $this->converter1->convertChanges($changes);
+                //$this->converter1->convertChanges($changes);
                 $this->converter1->metasInEffect();
-                $this->converter1->convertPeriodRange();
+                //$this->converter1->convertPeriodRange();
                 $this->converter1->labelsToShow();
 
                 if(!empty($this->converter1->labels))

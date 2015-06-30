@@ -113,9 +113,9 @@ class RiiinglinkWorker{
         if(!$meta->isEMpty())
         {
             $meta     = $meta->first();
-            $newmetas = $this->updateMetas($meta,$metas);
+            //$newmetas = $this->updateMetas($meta,$metas);
 
-            $meta->labels = serialize($newmetas);
+            $meta->labels = serialize($metas);
             $meta->save();
         }
         else

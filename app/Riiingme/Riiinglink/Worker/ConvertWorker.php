@@ -49,13 +49,13 @@ class ConvertWorker{
         return $this;
     }
 
-    public function metasInEffect()
+    public function metasInEffect($toshow = null)
     {
         if(!empty($this->metas))
         {
             $metas = array_map("array_keys", $this->metas);
 
-            if($this->userType == 1)
+            if($this->userType == 1 && $toshow)
             {
                 // Duplicate temp groups
                 $metas[4] = (isset($metas[2]) && !empty($metas[2]) ? $metas[2] : []);
