@@ -15,8 +15,10 @@
 
                 <?php
                     $alllabels = [];
-                    if(!empty( $ringlink['invited_labels'] ) && !empty($labels)){
-                        $alllabels = $ringlink['invited_labels'] + $labels;
+                    $other     = (!empty($labels) ? $labels : []);
+                    if(!empty( $ringlink['invited_labels'] ))
+                    {
+                        $alllabels = $ringlink['invited_labels'] + $other;
                     }
                 ?>
                 @if(!empty($alllabels))
