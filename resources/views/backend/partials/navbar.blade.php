@@ -1,4 +1,4 @@
-<aside id="collapseSidebar" class="bg-inverse collapse navbar-collapse"><!-- START Sidebar-->
+<aside id="collapseSidebar" class="bg-navbar collapse navbar-collapse"><!-- START Sidebar-->
     <!-- START Sidebar-->
     <div class="sidebar-wrapper">
         <div class="sidebar">

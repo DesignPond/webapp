@@ -1,7 +1,7 @@
 <header class="bg-white"><!-- START Top Navbar-->
     <nav class="navbar topnavbar" role="navigation">
         <!-- START navbar header-->
-        <div class="navbar-header bg-inverse">
+        <div class="navbar-header bg-navbar">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img class="brand-logo" alt="App Logo" src="{{ asset('backend/images/logo-riiingme.svg') }}">
             </a>

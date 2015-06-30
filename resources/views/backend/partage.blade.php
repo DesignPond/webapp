@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12">
 
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="panel-title">{{ trans('action.send') }}</div>
             </div>

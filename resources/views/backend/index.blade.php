@@ -6,7 +6,7 @@
 
         @if(!$latest->isEmpty())
 
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading"><div class="panel-title">{{ trans('menu.lastcontact') }}</div></div>
             <!-- List group -->
             <div class="panel-body">
@@ -38,7 +38,7 @@
 
         @else
 
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading"><div class="panel-title">{{ trans('menu.welcome') }} {{ $user->name }}!</div></div>
                 <ul class="list-group">
                     @if($user->labels->isEmpty())
@@ -73,9 +73,9 @@
     </div>
 
     <div class="col-md-5">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
-                <div class="panel-title bg-info"><em class="icon-clock fa-lg pull-right text-muted"></em>{{ trans('menu.activites') }}</div>
+                <div class="panel-title"><em class="icon-clock fa-lg pull-right"></em>{{ trans('menu.activites') }}</div>
             </div>
                 <!-- START Activites-->
 

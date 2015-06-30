@@ -17,15 +17,31 @@
     background: #eee;
 }
 
-/*.bg-navbar{
-    background: #f1f2f3;
-    -webkit-box-shadow: 1px 0 1px -1px #d1d1d1;
-    box-shadow: 1px 0 1px -1px #d1d1d1;
+.bg-navbar{
+    background: #c0c0c0;
+    -webkit-box-shadow: 1px 0 1px -1px #717171;
+    box-shadow: 1px 0 1px -1px #717171;
 }
 
-/*.sidebar > .sidebar-nav > .nav > li > a{
-    color: #6a6a6a;
-}*/
+.bg-navbar .nav > li.active > a,
+.bg-navbar .nav > li > a:hover {
+    background-color: #42a7eb;
+}
+
+.bg-navbar .nav > li > a,
+.bg-navbar .nav > li:hover > a,
+.bg-navbar .nav > li.active > a,
+.sidebar-buttons h4{
+    color: #fff;
+}
+.sidebar-wrapper hr {
+    border-top-color: #dfdfdf;
+    margin:  0;
+}
+
+.topnavbar > .navbar-header > .navbar-brand img {
+    margin-top: 3px;
+}
 
 /*
 * Latests riiinglinks on activity page

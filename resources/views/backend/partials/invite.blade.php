@@ -37,7 +37,7 @@
                             ?>
 
                             <div class="chat-msg">
-                                <div class="panel bg-info panel-small">
+                                <div class="panel bg-primary panel-small">
                                     <div class="panel-body text-left">{{ trans('label.title_'.$group) }}</div>
                                 </div>
                                 <dl class="dl-horizontal">
