@@ -41,20 +41,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/backend/css/user.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="25575">
-              <caret line="47" column="23" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.7248428" vertical-offset="4189" max-vertical-offset="25750">
+              <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partage.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="partage.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/partage.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1065574" vertical-offset="2625" max-vertical-offset="3350">
+            <state vertical-scroll-proportion="25.961538" vertical-offset="2625" max-vertical-offset="3350">
               <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
               <folding />
             </state>
@@ -111,12 +111,12 @@
         <option value="$PROJECT_DIR$/app/Console/Commands/SendChange.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/partials/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/index.blade.php" />
-        <option value="$PROJECT_DIR$/public/backend/css/user.css" />
         <option value="$PROJECT_DIR$/resources/views/backend/partials/invite.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/partage.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/partials/host.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/export/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/public/backend/css/user.css" />
       </list>
     </option>
   </component>
@@ -431,11 +431,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="995" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28293738" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28293738" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -809,14 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/backend/css/user.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="25575">
-          <caret line="47" column="23" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/layouts/notification.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8122743" vertical-offset="546" max-vertical-offset="5200">
@@ -888,8 +880,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/partage.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1065574" vertical-offset="2625" max-vertical-offset="3350">
+        <state vertical-scroll-proportion="25.961538" vertical-offset="2625" max-vertical-offset="3350">
           <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/backend/css/user.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7248428" vertical-offset="4189" max-vertical-offset="25750">
+          <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
           <folding />
         </state>
       </provider>

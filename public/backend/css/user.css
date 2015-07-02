@@ -169,6 +169,11 @@
 
 .riiinglink-card{
     padding: 10px;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative;
+    display: table;
 }
 
 .riiinglink-card span{
@@ -176,10 +181,12 @@
 }
 
 .riiinglink-card strong.title{
-    line-height: 30px;
-    padding-top: 10px;
-    display: block;
+    line-height: 20px;
     color: #363c47;
+    position: relative;
+    height: 45px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .chat-msg-content.chat-msg-host{
