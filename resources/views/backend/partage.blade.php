@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12">
 
-        <div class="panel panel-primary">
+        <div class="panel panel-medium-grey">
             <div class="panel-heading">
                 <div class="panel-title">{{ trans('action.send') }}</div>
             </div>
@@ -76,7 +76,7 @@
 <div class="row">
 
     <div class="col-md-6">
-        <div class="panel panel-primary">
+        <div class="panel panel-medium-grey">
             <div class="panel-heading">
                 <h4 class="panel-title"><i class="icon-star"></i> &nbsp;{{ trans('menu.demandes') }}</h4>
             </div>

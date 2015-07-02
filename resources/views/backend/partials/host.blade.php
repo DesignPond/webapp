@@ -21,7 +21,7 @@
                                     @if(isset($host[$items['id']]) && isset($groupes_user[$items['id']]))
 
                                         @if(in_array($items['id'],$visible))
-                                            <div class="panel bg-gray panel-small">
+                                            <div class="panel bg-medium-grey panel-small">
                                                 <div class="panel-body text-left">
                                                     {{ trans('label.title_'.$items['id']) }}
                                                 </div>

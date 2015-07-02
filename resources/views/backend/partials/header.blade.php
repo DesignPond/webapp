@@ -3,7 +3,7 @@
         <!-- START navbar header-->
         <div class="navbar-header bg-navbar">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img class="brand-logo" alt="App Logo" src="{{ asset('backend/images/logo-riiingme.svg') }}">
+                <img class="brand-logo" alt="App Logo" src="{{ asset('frontend/images/logo.svg') }}">
             </a>
 
             <!-- Mobile buttons-->

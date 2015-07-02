@@ -41,6 +41,12 @@
 
 .topnavbar > .navbar-header > .navbar-brand img {
     margin-top: 3px;
+    max-height: 90%;
+}
+
+.bg-medium-grey, .panel-medium-grey .panel-heading{
+    background: #818181;
+    color: #fff;
 }
 
 /*

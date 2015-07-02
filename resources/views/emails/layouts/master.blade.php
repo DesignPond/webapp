@@ -769,7 +769,7 @@
         }
         /* Text Colors */
         a, a span, .tableBtn a span, .priceColumn td a span {
-            color: #454d59;
+            color: #c0c0c0;
         }
         .entryBox p, .eBody, .invoiceTable td, .invoiceTable p, .invoiceTable2 th, .invoiceTable2 td, .invoiceTable2 p, .priceTable td, .priceTable th, .priceTable p, h4, .subTotal .amount, .invoiceHead .amount, .twcoList strong, .eBody .twcoList strong, .priceColumn td span {
             color: #54565c;
@@ -800,7 +800,7 @@
         }
         /* Background Colors */
         .eHeader, .btnLfTp, .btnLfBt, .btnRgTp, .btnRgBt, .defaultBtn td, .priceColumn.recommend th, .eHeader_stretch {
-            background-color: #454d59;
+            background-color: #c0c0c0;
         }
         .bottomCorners, .ReadMsgBody, .ExternalClass, .eBody, .invoiceTable2, .invoiceTable2 td, .invoiceTable2 th, .priceColumn.recommend .tableBtn, .eBody_stretch {
             background-color: #ffffff;
@@ -861,7 +861,7 @@
             border-bottom: 1px solid #cacaca;
         }
         .priceColumn.recommend th {
-            border-bottom: 1px solid #454d59;
+            border-bottom: 1px solid #c0c0c0;
         }
         @media only screen {
             td[class=topCorners] img, td[class=bottomCorners] img, td[class=btnLfTp] img, td[class=btnRgTp] img, td[class=btnLfBt] img, td[class=btnRgBt] img {
@@ -1222,8 +1222,8 @@
         <td align="center" valign="top" class="emailBodyCell" style="{{ $marginReset }}padding-top: 0;padding-bottom: 32px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;background-color: #ebebeb;">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="eBox" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 100%;min-width: 576px;">
                 <tr>
-                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #454d59;">&nbsp;</td>
-                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #454d59;">
+                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #c0c0c0;">&nbsp;</td>
+                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #c0c0c0;">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">
                             <tr>
                                 <td class="eHeaderLogo" style="{{ $reset }}height: 48px;text-align: center;font-size: 0 !important;font-weight: bold;color: #ffffff;">
@@ -1233,7 +1233,7 @@
                                 </td>
                             </tr>
                         </table></td>
-                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #454d59;">&nbsp;</td>
+                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #c0c0c0;">&nbsp;</td>
                 </tr>
                     <!-- Contenu -->
                     @yield('content')
