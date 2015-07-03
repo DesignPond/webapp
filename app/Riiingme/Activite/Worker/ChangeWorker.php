@@ -142,7 +142,7 @@ class ChangeWorker{
         {
             if(isset($changes[$group_id]))
             {
-                $diff = array_diff($revisions[$group_id], $changes[$group_id]);
+                $diff = array_diff_key($revisions[$group_id], $changes[$group_id]);
 
                 if(!empty($diff))
                 {
