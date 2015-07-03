@@ -1227,7 +1227,7 @@
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">
                             <tr>
                                 <td class="eHeaderLogo" style="{{ $reset }}height: 48px;text-align: center;font-size: 0 !important;font-weight: bold;color: #ffffff;">
-                                    <a href="#" style="{{ $paddingReset }}display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;height: 48px;text-align: center;font-size: 18px;font-weight: bold;line-height: 0;">
+                                    <a href="{{ url('/') }}" style="{{ $paddingReset }}display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;color: #ffffff;height: 48px;text-align: center;font-size: 18px;font-weight: bold;line-height: 0;">
                                         <img class="imageFix" src="<?php echo asset('emails/images/logo.png');?>" width="200" height="48" alt="RiiingMe" style="{{ $marginReset }}{{ $paddingReset }}height: auto;width: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;border: none;display: block;vertical-align: top;">
                                     </a>
                                 </td>

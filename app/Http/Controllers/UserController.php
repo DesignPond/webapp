@@ -97,7 +97,7 @@ class UserController extends Controller {
 
         if($status != 'danger')
         {
-            $this->worker->proceesPendingInvites(\Auth::user()->id);
+            //$this->worker->proceesPendingInvites(\Auth::user()->id);
 
             return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mis à jour') );
         }

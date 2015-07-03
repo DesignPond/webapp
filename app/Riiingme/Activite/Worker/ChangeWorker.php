@@ -82,6 +82,8 @@ class ChangeWorker{
 
         if(!empty($changes) || !$revisions->isEmpty())
         {
+            $showChanges = [];
+
             if(!empty($changes))
             {
                 $this->converter1->loadUserLabels($this->riiinglink,true)->prepareLabels();
@@ -91,6 +93,7 @@ class ChangeWorker{
 
                 if(!empty($this->converter1->labels))
                 {
+                    $showChanges     = $this->converter1->labels;
                     $data['changes'] = $this->converter1->labels;
                 }
             }
@@ -113,7 +116,13 @@ class ChangeWorker{
 
                 if(!empty($this->converter2->labels))
                 {
-                    $data['revision'] = $this->converter2->labels;
+                    // Remove duplicates
+                    $showRevisions = $this->removeDuplicates($showChanges, $this->converter2->labels);
+
+                    if(!empty($showRevisions))
+                    {
+                        $data['revision'] = $showRevisions;
+                    }
                 }
 
             }
@@ -122,23 +131,31 @@ class ChangeWorker{
         return $data;
     }
 
-    public function removeDuplicates($changes, $revisions){
-
-        $difference = [];
+    /* *
+     * Remove duplicates from revisions if we just shared the types in changes
+     * */
+    public function removeDuplicates($changes, $revisions)
+    {
+        $showRevisions = [];
 
         foreach($revisions as $group_id => $labels)
         {
             if(isset($changes[$group_id]))
             {
-                $difference[$group_id] = array_diff($revisions[$group_id], $changes[$group_id]);
+                $diff = array_diff($revisions[$group_id], $changes[$group_id]);
+
+                if(!empty($diff))
+                {
+                    $showRevisions[$group_id] = $diff;
+                }
             }
             else
             {
-                $difference[$group_id] = $revisions[$group_id];
+                $showRevisions[$group_id] = $revisions[$group_id];
             }
         }
 
-        return $difference;
+        return $showRevisions;
     }
 
     /* *

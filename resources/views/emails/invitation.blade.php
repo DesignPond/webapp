@@ -55,7 +55,13 @@
                             <td style="{{ $marginReset }}{{ $paddingReset }}border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;line-height: 0 !important;font-size: 0 !important;" class="emptyCell">&nbsp;</td>
                             <td valign="middle" align="left" style="{{ $marginReset }}padding-top: 12px;padding-bottom: 0;padding-left: 12px;padding-right: 12px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;background-color: #f6f6f7;" class="bubbleContent">
                                 <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 14px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;color: #54565c;">
-                                    <strong>{{ $user->name }}</strong> <br/>{{ trans('text.souhaite') }}
+                                    <strong>{{ $user->name }}</strong> <br/>
+
+                                    @if($exist_already)
+                                        {{ trans('text.souhaite') }}
+                                    @else
+                                        {{ trans('text.souhaite_first') }}
+                                    @endif
                                 </p>
                             </td>
                         </tr>
@@ -82,7 +88,7 @@
                             ?>
                             <br/>
                             <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;">
-                                {{ $invite->user->first_name }}
+                                {{ $invite->user->name }}
 
                                 @if($exist_already)
                                     {{ trans('text.exist_already') }}
@@ -107,7 +113,13 @@
         @endif
         <br/>
         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 16px;line-height: 22px;">
-           {{ trans('text.confirmer') }}
+
+            @if($exist_already)
+                {{ trans('text.confirmer') }}
+            @else
+                {{ trans('text.confirmer_first') }} {{ $invite->user->name }}{{ trans('text.confirmer_first_suite') }}
+            @endif
+
         </p>
         <?php  $url = url('invite?token='.$invite->token.'&ref='.base64_encode($invite->email).''); ?>
 
