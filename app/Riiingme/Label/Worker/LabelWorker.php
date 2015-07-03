@@ -190,7 +190,9 @@ class LabelWorker{
 
     public function updatePhoto($user_id,$label,$id){
 
-        if($id)
+        $exist = $this->label->findPhotoByUser($user_id);
+
+        if($exist)
         {
             return $this->label->update(array('id' => $id, 'label' => $label));
         }

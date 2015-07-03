@@ -35,7 +35,7 @@ class LabelEloquent implements LabelInterface {
 
         $photo  = $this->label->where('user_id','=',$user)->where('type_id','=',12)->get();
 
-        if(!$photo)
+        if($photo->isEmpty())
         {
             return false;
         }

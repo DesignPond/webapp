@@ -15,8 +15,6 @@
                     $image_id = $labels[$image_label['pivot']['groupe_id']][$image_label['pivot']['type_id']]['id'];
                 ?>
                 <input type="hidden" name="edit[{{$image_id}}]" id="flow-img" data-label_id="{{$image_id}}" value="{{$image}}">
-            @else
-                <input type="hidden" name="label[1][12]" id="flow-img">
             @endif
         @endif
 
