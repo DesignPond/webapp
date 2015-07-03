@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="panel panel-medium-grey">
+            <div class="panel panel-primary">
                 <div class="panel-heading panel-small">
                     <div class="panel-title">
                         {{ trans('menu.export') }}

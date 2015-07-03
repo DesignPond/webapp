@@ -10,7 +10,7 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
 
         $date  = \Carbon\Carbon::now();
 
-/*        App\Riiingme\User\Entities\User::create([
+       App\Riiingme\User\Entities\User::create([
             'email'      => 'cindy.leschaud@gmail.com',
             'first_name' => 'Cindy',
             'last_name'  => 'Leschaud',
@@ -44,7 +44,7 @@ class UsersTableSeeder extends \Illuminate\Database\Seeder  {
             'user_type'  => 1,
             'password'   => Hash::make('cindy2'),
             'activation_token' => md5('cyrilus1987@live.fr'.$date)
-        ]);*/
+        ]);
 
         for( $x = 1 ; $x < 11; $x++ )
         {

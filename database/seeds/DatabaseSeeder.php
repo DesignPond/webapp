@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-        $this->call('TypesTableSeeder');
+       $this->call('TypesTableSeeder');
         $this->call('GroupesTableSeeder');
 		$this->call('GroupeTypeTableSeeder');
         $this->call('UserTypesGroupesTableSeeder');
@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder {
 
         if (app()->environment('local'))
         {
-           // $this->call('UsersTableSeeder');
-           // $this->call('LabelsTableSeeder');
-           // $this->call('RiiinglinksTableSeeder');
-           // $this->call('MetasTableSeeder');
+            $this->call('UsersTableSeeder');
+            $this->call('LabelsTableSeeder');
+            $this->call('RiiinglinksTableSeeder');
+            $this->call('MetasTableSeeder');
         }
 	}
 

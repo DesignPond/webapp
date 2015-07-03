@@ -30,5 +30,23 @@ return array(
         'blocheight' => '38mm',
         'width'      => '50%'
     ],
+    'zweckform14' => [
+        'code'       => 'zweckform14',
+        'etiquettes' => '14',
+        'margin'     => '5mm 0mm 0mm 0mm',
+        'cols'       => '2',
+        'height'     => '41mm',
+        'blocheight' => '24mm',
+        'width'      => '50%'
+    ],
+    'zweckform142' => [
+        'code'       => 'zweckform12',
+        'etiquettes' => '12',
+        'margin'     => '5mm 0mm 0mm 0mm',
+        'cols'       => '2',
+        'height'     => '48mm',
+        'blocheight' => '26mm',
+        'width'      => '50%'
+    ],
 
 );

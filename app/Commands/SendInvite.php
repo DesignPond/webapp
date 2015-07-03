@@ -48,9 +48,15 @@ class SendInvite extends Command implements SelfHandling {
         $send_invite = $this->processInvite($data);
         $user = $this->user->find($this->user_id);
 
+        $invited_exist = $this->user->findByEmail($this->email);
+        if($invited_exist)
+        {
+            $invited_exist = true;
+        }
+
         $link = $this->riiinglink->findLinkByEmailAndUserId($this->email, $this->user_id);
 
-        \Mail::send('emails.invitation', array('invite' => $send_invite, 'user' => $user, 'types' => $types, 'partage' => $this->partage_invited, 'exist_already' => $link), function($message) use ($send_invite)
+        \Mail::send('emails.invitation', ['invite' => $send_invite, 'user' => $user, 'types' => $types, 'partage' => $this->partage_invited, 'exist_already' => $link, 'invited_exist' => $invited_exist], function($message) use ($send_invite)
         {
             $message->to($send_invite->email, $send_invite->email)->subject('Demande de partage');
         });

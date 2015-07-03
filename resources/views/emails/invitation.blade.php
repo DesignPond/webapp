@@ -57,7 +57,7 @@
                                 <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 14px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 22px;text-align: left;color: #54565c;">
                                     <strong>{{ $user->name }}</strong> <br/>
 
-                                    @if($exist_already)
+                                    @if($exist_already || $invited_exist)
                                         {{ trans('text.souhaite') }}
                                     @else
                                         {{ trans('text.souhaite_first') }}
@@ -114,7 +114,7 @@
         <br/>
         <p style="margin-top: 0;margin-left: 0;margin-right: 0;margin-bottom: 24px;{{ $paddingReset }}-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;text-align: center;font-size: 16px;line-height: 22px;">
 
-            @if($exist_already)
+            @if($exist_already || $invited_exist)
                 {{ trans('text.confirmer') }}
             @else
                 {{ trans('text.confirmer_first') }} {{ $invite->user->name }}{{ trans('text.confirmer_first_suite') }}
@@ -123,7 +123,7 @@
         </p>
         <?php  $url = url('invite?token='.$invite->token.'&ref='.base64_encode($invite->email).''); ?>
 
-        @if($exist_already)
+        @if($exist_already || $invited_exist)
             <?php $btn = trans('text.btn_already'); ?>
         @else
             <?php $btn = trans('text.accepter'); ?>
