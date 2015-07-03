@@ -86,9 +86,7 @@ class ChangeWorker{
             {
                 $this->converter1->loadUserLabels($this->riiinglink,true)->prepareLabels();
                 $this->converter1->metas = $changes;
-                //$this->converter1->convertChanges($changes);
                 $this->converter1->metasInEffect();
-                //$this->converter1->convertPeriodRange();
                 $this->converter1->labelsToShow();
 
                 if(!empty($this->converter1->labels))
@@ -109,11 +107,9 @@ class ChangeWorker{
                     }
                 }
 
-                //$items = $this->worker->periodIsInEffect($this->invited->users_groups, $items);
                 $this->converter2->loadUserLabels($this->riiinglink,true)->prepareLabels()->metasInEffect();
                 $this->converter2->labels = $items;
                 $this->converter2->labelsToShow();
-                //$this->converter2->convertPeriodRange()->labelsToShow();
 
                 if(!empty($this->converter2->labels))
                 {
@@ -124,6 +120,25 @@ class ChangeWorker{
         }
 
         return $data;
+    }
+
+    public function removeDuplicates($changes, $revisions){
+
+        $difference = [];
+
+        foreach($revisions as $group_id => $labels)
+        {
+            if(isset($changes[$group_id]))
+            {
+                $difference[$group_id] = array_diff($revisions[$group_id], $changes[$group_id]);
+            }
+            else
+            {
+                $difference[$group_id] = $revisions[$group_id];
+            }
+        }
+
+        return $difference;
     }
 
     /* *
@@ -199,7 +214,6 @@ class ChangeWorker{
                     {
                         return $this->calculDiff(unserialize($last->first()->labels),unserialize($metas));
                     }
-
                 }
             }
 

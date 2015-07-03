@@ -1,6 +1,6 @@
 @include('backend.partials.tags')
 
-<div class="panel panel-medium-grey">
+<div class="panel panel-primary">
     <div class="panel-body">
         <ul class="chat">
             <li>
@@ -37,7 +37,7 @@
                             ?>
 
                             <div class="chat-msg">
-                                <div class="panel bg-medium-grey panel-small">
+                                <div class="panel bg-primary panel-small">
                                     <div class="panel-body text-left">{{ trans('label.title_'.$group) }}</div>
                                 </div>
                                 <dl class="dl-horizontal">

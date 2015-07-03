@@ -3,7 +3,7 @@
         <!-- START navbar header-->
         <div class="navbar-header bg-navbar">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img class="brand-logo" alt="App Logo" src="{{ asset('frontend/images/logo.svg') }}">
+                <img class="brand-logo" alt="App Logo" src="{{ asset('backend/images/logo-riiingme.svg') }}">
             </a>
 
             <!-- Mobile buttons-->
@@ -19,16 +19,19 @@
 
         <!-- START Nav wrapper-->
         <div class="nav-wrapper collapse navbar-collapse" id="collapseAlertes" style="height: 0px;">
-            <ul class="nav navbar-nav navbar-left nav-language">
-                <?php $locale = \Session::get('locale'); ?>
-                <li class="<?php echo (!isset($locale) || $locale == 'fr' ? 'active' : ''); ?>">
-                    <a href="{{ url('setlang/fr') }}">Français</a>
-                </li>
-                <li class="<?php echo ($locale == 'en' ? 'active' : ''); ?>">
-                    <a href="{{ url('setlang/en') }}">English</a>
-                </li>
-            </ul>
-            @include('backend.partials.alertes')
+            <div class="nav-shadow">
+                <ul class="nav navbar-nav navbar-left nav-language">
+                    <?php $locale = \Session::get('locale'); ?>
+                    <li class="<?php echo (!isset($locale) || $locale == 'fr' ? 'active' : ''); ?>">
+                        <a href="{{ url('setlang/fr') }}">Français</a>
+                    </li>
+                    <li class="<?php echo ($locale == 'en' ? 'active' : ''); ?>">
+                        <a href="{{ url('setlang/en') }}">English</a>
+                    </li>
+                </ul>
+                @include('backend.partials.alertes')
+                <span class="clearfix"></span>
+            </div>
         </div>
         <!-- END Nav wrapper-->
 

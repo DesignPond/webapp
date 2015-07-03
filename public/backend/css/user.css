@@ -49,6 +49,23 @@
     color: #fff;
 }
 
+.sidebar > .sidebar-nav > .nav, .sidebar > .sidebar-nav .nav-slide {
+    float: left;
+    width: 170px;
+}
+
+.sidebar > .sidebar-nav {
+    width: 170px;
+}
+
+.navbar-header.bg-navbar{
+    border-bottom: 1px inset #e4e4e4;
+}
+
+.nav-wrapper {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
 /*
 * Latests riiinglinks on activity page
 */
@@ -174,16 +191,19 @@
     transform-style: preserve-3d;
     position: relative;
     display: table;
+    width: 100%;
 }
 
 .riiinglink-card span{
     margin-right: 15px;
+    text-align: left;
 }
 
 .riiinglink-card strong.title{
     line-height: 20px;
     color: #363c47;
     position: relative;
+    width: 220px;
     height: 45px;
     display: table-cell;
     vertical-align: middle;
