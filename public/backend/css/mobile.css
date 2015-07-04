@@ -1,0 +1,136 @@
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .nav-language > li {
+        display: block;
+        float: left;
+        position: relative;
+        width: 50%;
+    }
+
+    .bg-white .nav-language li > a{
+        padding: 10px 5px;
+        display: block;
+        text-align: center;
+    }
+
+
+    .bg-white a:focus, .bg-white a:hover
+    .bg-white a.menu-toggle:hover,
+    .bg-white a.menu-toggle:focus{
+        color: #bdcdd7;
+    }
+
+    .nav-wrapper .navbar-nav .open .dropdown-menu {
+        left: 0;
+        margin-left: -50%;
+    }
+
+    .navbar-nav.nav-alertes{
+        width: 40%;
+        float: left;
+        margin: 0
+    }
+
+    .navbar-nav.nav-language{
+        width: 60%;
+        float: left;
+        margin: 0 0 0 -15px;
+    }
+
+    .navbar-nav.nav-alertes li > a{
+        padding: 10px 5px 10px 5px;
+        display: block;
+        font-size: 13px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+
+
+
+    #filters .btn-success{
+        margin-top: 15px;
+    }
+
+    .panel .dl-horizontal dt, .panel .dl-horizontal dd {
+        padding: 0;
+        margin: 0;
+    }
+
+    .chat .dl-horizontal dd{
+        padding: 0 !important;
+        margin: 0 0 5px 0;
+    }
+
+    .btn-action-link{
+        margin-bottom: 10px;
+        padding: 8px 0;
+    }
+
+    .btn-action-link.pull-right{
+        margin-bottom: 0px;
+        padding: 2px 0;
+    }
+
+    .btn-action-link, .btn-action-link.pull-right{
+        display: block;
+        clear: both !important;
+        float: none !important;
+    }
+
+    .nav-tabs > li {
+        float: none;
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs > li.active + li {
+        padding-left: 0px;
+    }
+
+    form .nav-tabs > li > a,
+    form .nav-tabs > li.active > a {
+        padding: 8px 15px;
+    }
+
+    #simple .input-group .btn, #multiple .input-group .btn{
+        padding: 8px 5px 7px;
+    }
+
+    .list-partages .label{
+        display: block;
+        padding: 4px 0;
+    }
+
+    /*
+    * Frontend
+    */
+
+    .navbar.nav-frontend {
+        height: auto;
+        min-height: 290px;
+    }
+
+    #register {
+        margin-top: 25px;
+        max-width: 400px;
+        width: 90%;
+    }
+    .auth-login {
+        padding: 5px;
+    }
+
+    #illustration img {
+        width: auto;
+    }
+
+    .wd-xl {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1140px) {
+    .navbar.nav-frontend {
+        height: auto;
+        min-height: 90px;
+    }
+}
