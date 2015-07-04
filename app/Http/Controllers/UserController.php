@@ -99,10 +99,10 @@ class UserController extends Controller {
         {
             //$this->worker->proceesPendingInvites(\Auth::user()->id);
 
-            return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => 'Vos informations ont été mises à jour') );
+            return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'success' , 'message' => trans('message.info_maj') ) );
         }
 
-        return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'danger' , 'message' => 'Problème avec la mise à jour') );
+        return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'danger' , 'message' =>  trans('message.info_problem_maj') ) );
     }
 
 	/**

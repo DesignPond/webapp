@@ -18,7 +18,7 @@
 }
 
 .bg-navbar{
-    background: #c0c0c0;
+    background: #245575;
     -webkit-box-shadow: 1px 0 1px -1px #717171;
     box-shadow: 1px 0 1px -1px #717171;
 }
@@ -35,8 +35,12 @@
     color: #fff;
 }
 .sidebar-wrapper hr {
-    border-top-color: #dfdfdf;
+    border-top-color: #fff;
     margin:  0;
+}
+
+.bg-navbar .img-circle {
+    border: 2px solid #fff;
 }
 
 .topnavbar > .navbar-header > .navbar-brand img {

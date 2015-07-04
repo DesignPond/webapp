@@ -46,4 +46,6 @@ return [
     'send_link_active'    => 'Votre lien d\'activation a bien été envoyé',
     'changed_password'    => 'Votre mot de passe a bien été changé',
     'wrong_credentials'   => 'Les identifiants email / mot de passe ne correspondent pas',
+    'info_maj'            => 'Vos informations ont été mises à jour',
+    'info_problem_maj'    => 'Problème avec la mise à jour',
 ];
