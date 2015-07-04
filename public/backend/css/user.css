@@ -993,6 +993,7 @@ fieldset.border {
     position: absolute;;
     bottom: 5px;
     width: 100%;
+    color: #fff;
     text-align: center;
 }
 
