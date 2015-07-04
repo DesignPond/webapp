@@ -123,8 +123,10 @@
         </p>
         <?php  $url = url('invite?token='.$invite->token.'&ref='.base64_encode($invite->email).''); ?>
 
-        @if($exist_already || $invited_exist)
+        @if($exist_already)
             <?php $btn = trans('text.btn_already'); ?>
+        @elseif($invited_exist)
+            <?php $btn = trans('text.btn_invite'); ?>
         @else
             <?php $btn = trans('text.accepter'); ?>
         @endif

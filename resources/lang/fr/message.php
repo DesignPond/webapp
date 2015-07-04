@@ -42,7 +42,7 @@ return [
     'invite_confirmed'    => 'Le partage est confirmé',
     'token_mismatch'      => 'Problem avec le jeton',
     'no_self_send'        => 'Vous ne pouvez pas vous envoyer vous-même une invitation',
-    'send_invite_ok'      => 'Votre invitation a bien été envoyé',
+    'send_invite_ok'      => 'Votre invitation a bien été envoyée',
     'send_link_active'    => 'Votre lien d\'activation a bien été envoyé',
     'changed_password'    => 'Votre mot de passe a bien été changé',
     'wrong_credentials'   => 'Les identifiants email / mot de passe ne correspondent pas',
