@@ -2,12 +2,12 @@
     <div class="container">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-5 col-xs-12">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#"><img style="display: block;width: 200px;" alt="Riiingme" src="{{ asset('frontend/images/logo.svg') }}"></a>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-xs-12">
 
                     {!! Form::open(array( 'method' => 'POST', 'id'  => 'homeLogin', 'url'  => array('auth/login'))) !!}
 
