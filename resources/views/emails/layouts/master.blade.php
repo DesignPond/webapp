@@ -1222,8 +1222,8 @@
         <td align="center" valign="top" class="emailBodyCell" style="{{ $marginReset }}padding-top: 0;padding-bottom: 32px;padding-left: 0;padding-right: 0;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;height: 100%;width: 100%;background-color: #ebebeb;">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="eBox" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;width: 100%;min-width: 576px;">
                 <tr>
-                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #c0c0c0;">&nbsp;</td>
-                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #c0c0c0;">
+                    <td class="eHeader_stretch" style="{{ $reset }} min-width: 16px;background-color: #245575;">&nbsp;</td>
+                    <td class="eHeader" style="{{ $marginReset }} padding-top: 16px;padding-bottom: 16px;padding-left: 16px;padding-right: 16px;border-collapse: collapse;border-spacing: 0;-webkit-text-size-adjust: none;font-family: Arial, Helvetica, sans-serif;width: 512px;background-color: #245575;">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" style="{{ $marginReset }}{{ $paddingReset }}mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0;">
                             <tr>
                                 <td class="eHeaderLogo" style="{{ $reset }}height: 48px;text-align: center;font-size: 0 !important;font-weight: bold;color: #ffffff;">
@@ -1233,7 +1233,7 @@
                                 </td>
                             </tr>
                         </table></td>
-                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #c0c0c0;">&nbsp;</td>
+                    <td class="eHeader_stretch" style="{{ $reset }}min-width: 16px;background-color: #245575;">&nbsp;</td>
                 </tr>
                     <!-- Contenu -->
                     @yield('content')
