@@ -2,7 +2,7 @@
 <footer id="footer" class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs12">
                 <ul class="nav nav-language">
                     <?php $locale = \Session::get('locale'); ?>
                     <li class="<?php echo (!isset($locale) || $locale == 'fr' ? 'active' : ''); ?>">

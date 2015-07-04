@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/user.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/css/media.css') }}">
     <link href="<?php echo asset('frontend/css/footer.css');?>" media="screen" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('backend/css/mobile.css') }}">
 </head>
 
 <body class="Site">

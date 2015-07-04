@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar nav-frontend">
     <div class="container">
         <div class="container-fluid">
             <div class="row">

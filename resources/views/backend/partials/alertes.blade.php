@@ -1,6 +1,6 @@
 
 <!-- START Right Navbar-->
-<ul class="nav navbar-nav navbar-right">
+<ul class="nav navbar-nav navbar-right nav-alertes">
     <!-- START Alert menu-->
     <li class="dropdown dropdown-list">
         <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">

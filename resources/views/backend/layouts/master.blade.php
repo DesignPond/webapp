@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/user.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/timeline.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/mobile.css') }}">
     <link href="{{ asset('backend/css/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/the-modal.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/daterangepicker-bs3.css') }}" rel="stylesheet">

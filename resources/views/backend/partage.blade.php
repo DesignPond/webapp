@@ -110,7 +110,7 @@
                     <!-- List group -->
                     <ul class="list-group">
                         @foreach($invites as $invite)
-                            <li class="list-group-item">
+                            <li class="list-group-item list-partages">
                                 <small class="label label-warning" title="{{ $invite->created_at->format('Y-m-d H:i:s') }}">
                                     <i class="fa fa-clock-o"></i> &nbsp;{{ $invite->created_at->format('Y-m-d') }}
                                 </small> &nbsp;

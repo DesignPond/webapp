@@ -38,6 +38,7 @@ footer p{
     font-size: 13px;
     line-height: 30px;
     margin-right: 15px;
+    font-weight: normal;
     padding: 10px 0;
     color: #43a8eb;
 }
@@ -52,7 +53,6 @@ footer hr{
 }
 
 footer p strong{
-    font-weight: 500;
     color: #43a8eb;
 }
 
