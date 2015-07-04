@@ -120,9 +120,6 @@
         width: auto;
     }
 
-    .wd-xl {
-        width: 90%;
-    }
 }
 
 @media screen and (min-width: 990px) and (max-width: 1025px) {
