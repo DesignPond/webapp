@@ -567,7 +567,7 @@ p {
   font-weight: 300;
   line-height: 1.4;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .lead {
     font-size: 19.5px;
   }
@@ -713,7 +713,7 @@ dt {
 dd {
   margin-left: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -847,7 +847,7 @@ pre code {
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .container {
     width: 750px;
   }
@@ -1034,7 +1034,7 @@ pre code {
 .col-xs-offset-0 {
   margin-left: 0%;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
@@ -2148,7 +2148,7 @@ select[multiple].form-group-lg .form-control {
   margin-bottom: 10px;
   color: #989fa9;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -2214,7 +2214,7 @@ select[multiple].form-group-lg .form-control {
   margin-left: -15px;
   margin-right: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .form-horizontal .control-label {
     text-align: right;
     margin-bottom: 0;
@@ -2224,12 +2224,12 @@ select[multiple].form-group-lg .form-control {
 .form-horizontal .has-feedback .form-control-feedback {
   right: 15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .form-horizontal .form-group-lg .control-label {
     padding-top: 19.62px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .form-horizontal .form-group-sm .control-label {
     padding-top: 6px;
   }
@@ -2786,7 +2786,7 @@ tbody.collapse.in {
   bottom: 100%;
   margin-bottom: 1px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-right .dropdown-menu {
     left: auto;
     right: 0;
@@ -3207,7 +3207,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   top: auto;
   left: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .nav-tabs.nav-justified > li {
     display: table-cell;
     width: 1%;
@@ -3225,7 +3225,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.nav-justified > .active > a:focus {
   border: 1px solid #dddddd;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .nav-tabs.nav-justified > li > a {
     border-bottom: 1px solid #dddddd;
     border-radius: 3px 3px 0 0;
@@ -3272,7 +3272,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   top: auto;
   left: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .nav-justified > li {
     display: table-cell;
     width: 1%;
@@ -3293,7 +3293,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs-justified > .active > a:focus {
   border: 1px solid #dddddd;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .nav-tabs-justified > li > a {
     border-bottom: 1px solid #dddddd;
     border-radius: 3px 3px 0 0;
@@ -3323,12 +3323,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 19px;
   border: 1px solid transparent;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar {
     border-radius: 3px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-header {
     float: left;
   }
@@ -3344,7 +3344,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -3384,7 +3384,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .container > .navbar-header,
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
@@ -3397,7 +3397,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 1000;
   border-width: 0 0 1px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-static-top {
     border-radius: 0;
   }
@@ -3409,7 +3409,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   left: 0;
   z-index: 1030;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     border-radius: 0;
@@ -3438,7 +3438,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand > img {
   display: block;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -3468,7 +3468,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-toggle {
     display: none;
   }
@@ -3503,7 +3503,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -3527,7 +3527,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 11.5px;
   margin-bottom: 11.5px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-form .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -3585,7 +3585,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-bottom: 0;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-form {
     width: auto;
     border: 0;
@@ -3622,14 +3622,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 20.5px;
   margin-bottom: 20.5px;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-text {
     float: left;
     margin-left: 15px;
     margin-right: 15px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .navbar-left {
     float: left !important;
     float: left;
@@ -4121,7 +4121,7 @@ a.list-group-item.active > .badge,
 .jumbotron .container {
   max-width: 100%;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 772px) {
   .jumbotron {
     padding: 48px 0;
   }
@@ -5043,7 +5043,7 @@ button.close {
   height: 50px;
   overflow: scroll;
 }
-@media (min-width: 768px) {
+@media (min-width: 772px) {
   .modal-dialog {
     width: 600px;
     margin: 30px auto;
@@ -5464,7 +5464,7 @@ button.close {
 .carousel-caption .btn {
   text-shadow: none;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 772px) {
   .carousel-control .glyphicon-chevron-left,
   .carousel-control .glyphicon-chevron-right,
   .carousel-control .icon-prev,
@@ -5628,7 +5628,7 @@ button.close {
     display: inline-block !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 772px) and (max-width: 991px) {
   .visible-sm {
     display: block !important;
   }
@@ -5643,17 +5643,17 @@ button.close {
     display: table-cell !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 772px) and (max-width: 991px) {
   .visible-sm-block {
     display: block !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 772px) and (max-width: 991px) {
   .visible-sm-inline {
     display: inline !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 772px) and (max-width: 991px) {
   .visible-sm-inline-block {
     display: inline-block !important;
   }
@@ -5723,7 +5723,7 @@ button.close {
     display: none !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 772px) and (max-width: 991px) {
   .hidden-sm {
     display: none !important;
   }
@@ -6099,7 +6099,7 @@ body {
 .app-container > footer > p {
   margin: 0;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .app-container > section,
   .app-container > footer {
     margin-left: 170px;
@@ -6146,7 +6146,7 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .app > button,
   .app > .btn {
     margin: 0;
@@ -6202,7 +6202,7 @@ body {
 .aside-collapsed .hidden-collapsed {
   display: none;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .aside-collapsed .app-container > aside {
     width: 65px;
   }
@@ -6274,7 +6274,7 @@ body {
 .topnavbar > .navbar-header {
   position: relative;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .topnavbar > .navbar-header {
     width: 170px;
     background-image: none;
@@ -6297,7 +6297,7 @@ body {
 .topnavbar > .navbar-header .brand-logo-collapsed {
   display: none;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .aside-collapsed .topnavbar > .navbar-header {
     width: 65px;
   }
@@ -6341,7 +6341,7 @@ body {
 .topnavbar .mobile-toggles:after {
   clear: both;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .topnavbar .mobile-toggles {
     display: none;
   }
@@ -6358,7 +6358,7 @@ body {
 .topnavbar .menu-toggle {
   float: right;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .topnavbar .nav > li > a:hover,
   .topnavbar .nav > li > a:focus {
     background-color: rgba(54, 60, 71, 0.05);
@@ -6387,7 +6387,7 @@ body {
   border-top: 1px solid #e1e1e1;
   border-bottom: 1px solid #e1e1e1;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .nav-wrapper {
     position: relative;
   }
@@ -6589,7 +6589,7 @@ body {
   float: right;
   margin-right: 17px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .sidebar > .sidebar-nav > .nav {
     padding-right: 0;
   }
@@ -7593,7 +7593,7 @@ fieldset[disabled] .btn-orange.active {
   right: 10px;
   padding: 2px 5px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .dropdown > a > .label {
     right: 0;
   }
@@ -7956,7 +7956,7 @@ fieldset[disabled] .btn-orange.active {
     width: 7%;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .row-masonry-md-1 {
     -moz-column-count: 1;
     -webkit-column-count: 1;
@@ -9133,7 +9133,7 @@ fieldset[disabled] .btn-orange.active {
    Component: form-validation.less
    (http://mdo.github.io/table-grid)
  ========================================================================== */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .table-grid {
     display: table;
     width: 100%;
@@ -9958,13 +9958,13 @@ fieldset[disabled] .calendar-app .fc-button.active {
   left: 100%;
   right: 0;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .mb-panel > .mb-panel-inner > .mb-panel-content {
     position: static;
     padding-left: 15px;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .mb-panel > .mb-panel-inner > .mb-panel-list {
     border-right: 1px solid #e6e9ee;
     padding-right: 15px;
@@ -9977,7 +9977,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   float: left;
   width: 100%;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .mb-panel > .mb-panel-inner > .mb-panel-list {
     width: 40%;
   }
@@ -9997,7 +9997,7 @@ fieldset[disabled] .calendar-app .fc-button.active {
   cursor: pointer;
   color: #8394a9;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   .mb-panel .mb-panel-back {
     display: none;
   }
@@ -12835,7 +12835,7 @@ flatdoc {
   width: 100%;
   height: 100%;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   [role~="flatdoc"]:before,
   [role~="flatdoc"]:after {
     content: " ";
@@ -12904,7 +12904,7 @@ flatdoc {
 [role~="flatdoc-menu"] ul a.active:hover {
   color: #505050 !important;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   [role~="flatdoc-menu"] {
     float: left;
     width: 180px;
@@ -12927,7 +12927,7 @@ flatdoc {
   padding-bottom: 50px;
   background-color: #fff;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 772px) {
   [role~="flatdoc-content"] {
     padding-left: 200px;
     height: 100%;
