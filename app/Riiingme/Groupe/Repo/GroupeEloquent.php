@@ -31,7 +31,11 @@ class GroupeEloquent implements GroupeInterface {
 
     public function find($id){
 
-        return $this->groupe->findOrFail($id);
+        return $this->groupe->with(['groupe_type' => function($query){
+
+            $query->orderBy('rang', 'asc');
+
+        }])->findOrFail($id);
     }
 
 }

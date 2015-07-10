@@ -42,10 +42,6 @@ class ConvertWorker{
         $metas  = $this->meta->findByRiiinglink($this->link->id);
 
         $this->metas     = (!$metas->isEmpty() ? unserialize($metas->first()->labels) : '');
-        
-        echo '<pre>';
-        print_r( $this->metas );
-        echo '</pre>';exit;
         $this->labels    = $labels->labels;
         $this->userGroup = $labels->users_groups;
         $this->userType  = $labels->user_type;
@@ -76,11 +72,14 @@ class ConvertWorker{
     {
         $labels = [];
 
+
         if(!empty($this->labels))
         {
+            $this->labels = $this->sortTypesByRang($this->labels);
+
             foreach($this->labels as $groupe => $types)
             {
-                if(isset($this->metas[$groupe]))
+                if(isset($this->metas[$groupe]) && $groupe > 1)
                 {
                     foreach($types as $type => $label)
                     {
@@ -94,9 +93,32 @@ class ConvertWorker{
         }
 
         ksort($labels);
+
         $this->labels = $labels;
 
         return $this;
+    }
+
+    public function sortTypesByRang($labels){
+
+        $data = [];
+        $groupeToShow = [2,3,6];
+
+        if(!empty($labels))
+        {
+            foreach($this->labels as $groupe_id => $types)
+            {
+                if(in_array($groupe_id,$groupeToShow))
+                {
+                    $groupes = $this->groupe->find($groupe_id);
+                    $sort    = $groupes->groupe_type->lists('id');
+
+                    $data[$groupe_id] = $this->helper->sortArrayByArray($types,$sort);
+                }
+            }
+        }
+
+        return $data;
     }
 
     public function addName(){
@@ -144,7 +166,6 @@ class ConvertWorker{
 
         foreach($changes as $groupe => $types)
         {
-
             if($groupe == 2 && isset($this->labels[4]))
             {
                 $used = $this->labels[2];

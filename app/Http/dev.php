@@ -193,20 +193,19 @@ Route::get('sendEmail', function()
 
 Route::get('changes', function()
 {
-/*    $change = \App::make('App\Riiingme\Activite\Repo\RevisionInterface');
-
-    $changes = $change->changes(1, 'day');
+    $change  = \App::make('App\Riiingme\Activite\Repo\RevisionInterface');
+    $changes = $change->changes(14, 'day');
 
     echo '<pre>';
-    print_r($changes->toArray());
-    echo '</pre>';*/
+    print_r($changes);
+    echo '</pre>';
 
-    $change  = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
+/*    $change  = \App::make('App\Riiingme\Activite\Repo\ChangeInterface');
     $changes = $change->getUserLastUpdates(1,1009);
 
     echo '<pre>';
     print_r($changes->toArray());
-    echo '</pre>';
+    echo '</pre>';*/
 
 
 });

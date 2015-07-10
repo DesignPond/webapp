@@ -46,7 +46,11 @@ class Activite extends Model {
         }
         else
         {
-            return ['quoi' => 'invite_from', 'qui' => $this->host->name];
+            if($this->name == 'created_riiinglink')
+            {
+                return ['quoi' => 'invite_from', 'qui' => $this->host->name];
+            }
+            //return ['quoi' => 'invite_from', 'qui' => $this->host->name];
         }
     }
 

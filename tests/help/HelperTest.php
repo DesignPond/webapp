@@ -400,6 +400,38 @@ class HelperTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
+
+    public function testOrderTypesByRang()
+    {
+        $labels = [
+            4  => 'label4',
+            5  => 'label5',
+            11 => 'label11',
+            13 => 'label13'
+        ];
+
+        $sort = [
+            2,
+            4,
+            5,
+            6,
+            7,
+            13,
+            11,
+        ];
+
+        $actual = $this->helper->sortArrayByArray($labels,$sort);
+
+        $expected = [
+            4  => 'label4',
+            5  => 'label5',
+            13 => 'label13',
+            11 => 'label11'
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testConvertAutoComplete()
     {
         $faker = Faker::create();
@@ -470,5 +502,7 @@ class HelperTest extends TestCase {
         $this->assertEquals($expect[0],$actual[0]);
         $this->assertEquals($expect[1],$actual[1]);
     }
+
+
 
 }

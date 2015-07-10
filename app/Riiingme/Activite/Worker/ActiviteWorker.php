@@ -36,6 +36,15 @@ class ActiviteWorker{
             return true;
         });
 
+        $activites = $activites->filter(function($invite) use ($user_id)
+        {
+            if ( $invite->user_id != $user_id) {
+                return false;
+            }
+
+            return true;
+        });
+
         $result = $activites->merge($invites);
         $result->sortByDesc('created_at');
         

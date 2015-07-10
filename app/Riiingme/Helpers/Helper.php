@@ -327,6 +327,21 @@ class Helper{
         return $labels;
     }
 
+    public function sortArrayByArray(Array $array, Array $orderArray) {
+
+        $ordered = array();
+
+        foreach($orderArray as $key)
+        {
+            if(array_key_exists($key,$array))
+            {
+                $ordered[$key] = $array[$key];
+            }
+        }
+
+        return $ordered;
+    }
+
 }
 
 
