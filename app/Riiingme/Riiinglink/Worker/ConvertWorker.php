@@ -42,6 +42,10 @@ class ConvertWorker{
         $metas  = $this->meta->findByRiiinglink($this->link->id);
 
         $this->metas     = (!$metas->isEmpty() ? unserialize($metas->first()->labels) : '');
+        
+        echo '<pre>';
+        print_r( $this->metas );
+        echo '</pre>';exit;
         $this->labels    = $labels->labels;
         $this->userGroup = $labels->users_groups;
         $this->userType  = $labels->user_type;
@@ -121,7 +125,10 @@ class ConvertWorker{
         {
             foreach($this->labels as $label)
             {
-                $labels[$label->groupe_id][$label->type_id] = $label->label_text;
+                if($label->groupe_id > 1)
+                {
+                    $labels[$label->groupe_id][$label->type_id] = $label->label_text;
+                }
             }
         }
 

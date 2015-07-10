@@ -55,6 +55,7 @@ class Helper{
                 break;
             case 8:
             case 9:
+            case 13:
                 $class = 'mask_tel';
                 $placeholder = '032 555 55 55';
                 break;

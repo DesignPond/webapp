@@ -2,6 +2,9 @@
 @section('content')
 
 <div class="container">
+
+    @include('partials.message')
+
     <section class="row">
         <div class="col-md-6">
             <h3>{{ trans('text.titre_principal') }}</h3>

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Groupe_type extends Model{
 
-	protected $fillable = array('groupe_id', 'type_id');
+	protected $fillable = array('groupe_id', 'type_id','rang');
 
 	/**
 	 * No timestamps

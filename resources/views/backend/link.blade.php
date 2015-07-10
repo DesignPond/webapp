@@ -13,7 +13,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6 col-xs-12">
-                        <a href="{{ url('user/'.$user->id) }}" class="btn btn-xs btn-primary btn-action-link">{{ trans('action.back') }}</a>
+                        <a href="{{ url('user') }}" class="btn btn-xs btn-primary btn-action-link">{{ trans('action.back') }}</a>
                     </div>
                     <div class="col-md-6 col-xs-12">
                         <a href="{{ url('destroyLink/'.$ringlink_id) }}" data-action="{{ $ringlink['invited_name'] }}" class="btn btn-danger btn-xs btn-action-link pull-right deleteAction">{{ trans('action.destroy') }}</a>

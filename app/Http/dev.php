@@ -124,25 +124,25 @@ Route::get('changement', function()
     $groupes  = $groupe->getGroupes();
     unset($groupes[1]);
 
-    $send1->setInterval('day')->getUsers();
+    $send1->setInterval('week')->getUsers();
     $all_changes = $send1->send();
 
     echo '<pre>';
-    echo 'Day';
+    echo 'week';
     print_r($all_changes);
     echo '</pre>';
 
 
-/*    if(!empty($all_changes))
+    if(!empty($all_changes))
     {
         foreach ($all_changes as $user)
         {
             \Mail::send('emails.changement', array('types' => $types, 'groupes_titres' => $groupes, 'data' => $user['invite']) , function($message) use ($user)
             {
-                $message->to($user['email'])->subject('Notification de changement du partage');
+                $message->to('cindy.leschaud@gmail.com')->subject('Notification de changement du partage');
             });
         }
-    }*/
+    }
 
 
 /*    $changes = [
@@ -226,7 +226,10 @@ Route::get('accepted', function()
     $host    = $user->find(1);
     $invited = $user->find(2);
 
-    return View::make('emails.welcome', array('invited' => $invited));
+    $user_name  = $invited->name;
+    $user_photo = $invited->user_photo;
+
+    return View::make('emails.welcome', array('user_photo' => $user_photo, 'user_name' => $user_name));
 
 });
 

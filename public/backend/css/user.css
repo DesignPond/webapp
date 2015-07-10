@@ -31,15 +31,15 @@
 .bg-navbar .nav > li:hover > a,
 .bg-navbar .nav > li.active > a,
 .sidebar-buttons h4{
-    color: #fff;
+    color: #e3edf4;
 }
 .sidebar-wrapper hr {
-    border-top-color: #fff;
+    border-top-color: #e3edf4;
     margin:  0;
 }
 
 .bg-navbar .img-circle {
-    border: 2px solid #fff;
+    border: 2px solid #e3edf4;
 }
 
 .topnavbar > .navbar-header > .navbar-brand img {

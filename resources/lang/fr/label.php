@@ -13,6 +13,7 @@ return [
     'label_10' => 'Date de naissance',
     'label_11' => 'Site web',
     'label_12' => 'Photo',
+    'label_13' => 'Fax',
     'title_1'  => 'Données de base',
     'title_2'  => 'Données privées',
     'title_3'  => 'Données professionnelles',

@@ -11,7 +11,11 @@ class GroupeEloquent implements GroupeInterface {
 
     public function getAll($type = null){
 
-        $groupe = $this->groupe->with(['groupe_type']);
+        $groupe = $this->groupe->with(['groupe_type' => function($query){
+
+            $query->orderBy('rang', 'asc');
+
+        }]);
 
         if($type){
 

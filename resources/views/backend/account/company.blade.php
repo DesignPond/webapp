@@ -16,8 +16,8 @@
         @foreach($view['groupe_type'] as $types)
 
             <?php
-            $type  = $types['pivot']['type_id'];
-            $group = $types['pivot']['groupe_id'];
+                $type  = $types['pivot']['type_id'];
+                $group = $types['pivot']['groupe_id'];
             ?>
 
             <div class="form-group">

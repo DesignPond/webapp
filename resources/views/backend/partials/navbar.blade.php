@@ -21,8 +21,8 @@
                             <span>{{ trans('menu.mesdonnes') }}</span>
                         </a>
                     </li>
-                    <li class="<?php echo ( Request::is('user/'.$user->id) ||  Request::is('user/link/*') ? 'active' : '' ); ?>">
-                        <a href="{{ url('/user/'.$user->id) }}">
+                    <li class="<?php echo ( Request::is('user') ||  Request::is('user/link/*') ? 'active' : '' ); ?>">
+                        <a href="{{ url('/user') }}">
                             <em class="sidebar-item-icon icon-book"></em>
                             <span>{{ trans('menu.contacts') }}</span>
                         </a>
@@ -33,8 +33,8 @@
                             <span>{{ trans('menu.partages') }}</span>
                         </a>
                     </li>
-                    <li class="<?php echo (Request::is('user') ? 'active' : '' ); ?>">
-                        <a href="{{ url('/user') }}">
+                    <li class="<?php echo (Request::is('user/activites') ? 'active' : '' ); ?>">
+                        <a href="{{ url('/user/activites') }}">
                             <em class="sidebar-item-icon icon-head"></em>
                             <span>{{ trans('menu.activites') }}</span>
                         </a>

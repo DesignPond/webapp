@@ -3,7 +3,7 @@
         <div class="panel-body">
             <div class="col-md-5 col-xs-12">
 
-                <form id="filterChange" action="{{ Request::url() }}" method="post">
+                <form id="filterChange" action="{{ url('user') }}" method="post">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -26,7 +26,7 @@
 
             </div><!-- /.col-lg-6 -->
             <div class="col-md-4 col-xs-12">
-                <form id="filterSearch" action="{{ Request::url() }}" method="post">
+                <form id="filterSearch" action="{{ url('user') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control search-input" placeholder="{{ trans('action.search') }}...">

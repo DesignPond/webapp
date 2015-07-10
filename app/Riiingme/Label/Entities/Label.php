@@ -34,6 +34,7 @@ class Label extends Model{
         switch ($this->type_id) {
             case 8:
             case 9:
+            case 13:
                 $label = $this->format_phone($this->label);
                 break;
             case 10:

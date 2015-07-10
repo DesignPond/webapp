@@ -29,7 +29,7 @@ class Groupe extends Model{
      */
     public function groupe_type()
     {
-        return $this->belongsToMany('App\Riiingme\Type\Entities\Type', 'groupe_type', 'groupe_id', 'type_id');
+        return $this->belongsToMany('App\Riiingme\Type\Entities\Type', 'groupe_type', 'groupe_id', 'type_id')->withPivot('rang');
     }
 
     /**

@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <a href="{{ url('/user/'.$user->id) }}" class="btn btn-sm btn-info pull-right"><small>{{ trans('action.seeall') }}</small></a><span class="clearfix"></span>
+                <a href="{{ url('/user') }}" class="btn btn-sm btn-info pull-right"><small>{{ trans('action.seeall') }}</small></a><span class="clearfix"></span>
             </div>
         </div>
 

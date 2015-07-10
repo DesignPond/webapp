@@ -40,7 +40,6 @@ class ExportController extends Controller {
 
     public function setConfig($type)
     {
-
         $all = config('badge');
 
         if(isset($all[$type]))

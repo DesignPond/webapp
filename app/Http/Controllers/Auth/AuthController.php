@@ -29,6 +29,8 @@ class AuthController extends Controller {
 
     protected $redirectTo = '/user';
 
+    protected $loginPath = '/';
+
     /**
      * Get the failed login message.
      *

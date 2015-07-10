@@ -92,10 +92,6 @@ class ExportWorker{
 
                 $this->converter->loadUserLabels($riiinglink)->prepareLabels()->metasInEffect()->convertPeriodRange()->labelsToShow()->addName();
 
-                //$invite = $this->loadLabelsAndGroupes($riiinglink);
-                //$data   = $this->userLabelsInGroupes($invite);
-                //$user = $this->label->periodIsInEffect($invite->invite->users_groups,$data);
-
                 $user = $this->dataLabelsInGroupes($this->converter->labels);
 
                 if(!empty($user))
@@ -192,7 +188,8 @@ class ExportWorker{
         return $lines;
     }
 
-    public function unsetHiddenTypes(){
+    public function unsetHiddenTypes()
+    {
 
         // Remove hidden from list
         if(!empty($this->hiddenTypes))

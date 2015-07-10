@@ -34,13 +34,21 @@ Route::group(['middleware' => ['auth','activate']], function()
     Route::get('search', array('as' => 'search', 'uses' => 'SearchController@search'));
 
     // User
+    Route::match(['get', 'post'],'user', array('as' => 'show', 'uses' => 'UserController@index'));
+    Route::get('user/{id}/edit', array('as' => 'edit', 'uses' => 'UserController@edit'));
+    Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
+    Route::get('user/activites', array('as' => 'lastactivites', 'uses' => 'UserController@activites'));
+    Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
+    Route::post('user/destroy', array('as' => 'destroy', 'uses' => 'UserController@destroy'));
+
+    //Route::resource('user', 'UserController');
+
+    // Riiinglinks
     Route::get('user/link/{id}', array('as' => 'show', 'uses' => 'RiiinglinkController@show'));
+
+    // Activites
     Route::get('user/partage/{with?}', array('as' => 'partage', 'uses' => 'ActiviteController@partage'));
     Route::get('user/timeline', array('as' => 'timeline', 'uses' => 'ActiviteController@index'));
-    Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
-    Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
-    Route::match(['get', 'post'],'user/{id}', array('as' => 'show', 'uses' => 'UserController@show'));
-    Route::resource('user', 'UserController');
 
     // Tags, Ajax routes
     Route::get('tags', 'TagController@tags');

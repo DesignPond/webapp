@@ -49,37 +49,24 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-
-        $latest    = $this->riiinglink->getLatest($this->auth->id);
-		$activity  = $this->activity->getPaginate($this->auth->id, 0, 8);
-
-		return view('backend.index')->with(array( 'activity' => $activity, 'latest' => $latest));
-
-	}
-
-    /**
-	 * Display the specified resource.
-	 * GET /user/{id}
-	 *
-	 * @param  int  $id, $request
-	 * @return Response
-	 */
-	public function show($id, Request $request)
-	{
-
-        if($id != \Auth::user()->id)
-        {
-            throw new \App\Exceptions\UserException('False user');
-        }
 
         $tags = $this->auth->user_tags->lists('title','id');
 
-        $riiinglinks = $this->riiinglink->getRiiinglinkWithParams($id,$request);
+        $riiinglinks = $this->riiinglink->getRiiinglinkWithParams($this->auth->id,$request);
 
-		return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'tags' => $tags, 'filtres' => $request->all()));
+        return view('backend.show')->with(array('riiinglinks' => $riiinglinks, 'tags' => $tags, 'filtres' => $request->all()));
+
 	}
+
+    public function activites()
+    {
+        $latest    = $this->riiinglink->getLatest($this->auth->id);
+        $activity  = $this->activity->getPaginate($this->auth->id, 0, 8);
+
+        return view('backend.index')->with(array( 'activity' => $activity, 'latest' => $latest));
+    }
 
     /**
      * Update labels
@@ -104,17 +91,6 @@ class UserController extends Controller {
 
         return redirect('user/'.$this->auth->id.'/edit')->with( array('status' => 'danger' , 'message' =>  trans('message.info_problem_maj') ) );
     }
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /user/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return view('backend.create');
-	}
 
 	/**
 	 * Show the form for editing the specified resource.

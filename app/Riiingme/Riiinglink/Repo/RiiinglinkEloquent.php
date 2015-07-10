@@ -116,10 +116,10 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         }
         else
         {
-            $results->orderBy('created_at', 'asc');
+            $results->orderBy('created_at', 'desc');
         }
 
-        return $results->paginate(9);
+        return $results->paginate(18);
     }
 
     public function findLinkByEmailAndUserId($email,$user_id){
