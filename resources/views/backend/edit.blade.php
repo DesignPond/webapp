@@ -17,6 +17,8 @@
         <div class="row">
             <div class="col-md-12">
 
+                <p class="text-right"><a data-toggle="modal" data-target="#confirmProfileDestroy" class="btn btn-xs btn-danger btnDeleteProfile">Supprimer mon compte</a></p>
+
                 {!! Form::open(array( 'url' => 'user/labels' , 'id' => 'editForm',  'class' => 'form-horizontal form-edit')) !!}
 
                 <div class="panel panel-default">
@@ -44,6 +46,5 @@
 
             </div>
         </div>
-
 
 @stop

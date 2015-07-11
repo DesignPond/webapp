@@ -117,7 +117,7 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		echo 'hello';
 	}
 
 }

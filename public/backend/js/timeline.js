@@ -57,4 +57,10 @@
         return false;
     }
 
+    $('.modalDeleteProfile').on('click', function (event) {
+
+        console.log('heiqow');
+
+    });
+
 })(jQuery);

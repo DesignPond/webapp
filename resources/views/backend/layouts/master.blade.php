@@ -53,6 +53,31 @@
         </section>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirmProfileDestroy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Suppression de votre compte</h4>
+                </div>
+                <div class="modal-body">
+                    <h4><strong>Souhaitez-vous vraiment supprimer votre compte?</strong></h4>
+                    <p>Toutes vos <strong>données</strong> ainsi que tous les partages avec vos <strong>contacts</strong> seront supprimés.</p>
+                    <p class="text-danger">Attention cette action est irréversible!</p>
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(array( 'url' => 'user/'.$user->id , 'id' => 'deleteAllProfile')) !!}
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="button" class="btn  btn-sm btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-sm btn-danger modalDeleteProfile">Oui</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="<?php echo asset('backend/js/bootstrap/bootstrap.min.js');?>"></script>

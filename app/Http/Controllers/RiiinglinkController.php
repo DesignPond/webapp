@@ -99,7 +99,7 @@ class RiiinglinkController extends Controller {
     {
         $this->riiinglink->destroy($id);
 
-        return redirect('user/'.$this->auth->id)->with(array('status' => 'success' , 'message' =>  trans('message.delete_partage') ));
+        return redirect('user')->with(array('status' => 'success' , 'message' =>  trans('message.delete_partage') ));
     }
 
 }

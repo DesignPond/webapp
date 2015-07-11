@@ -22,6 +22,7 @@ return [
     'title_6'  => 'Données entreprise',
     'invite_send'     => 'Invitation envoyée à',
     'invite_accepted' => 'Invitation acceptée par',
+    'you_accepted'    => 'Vous avez accepté l\'Invitation de',
     'invite_from'     => 'Invitation de',
     'share_with'      => 'Vous partagez vos données avec',
     'share_new'       => 'Nouveau partage',

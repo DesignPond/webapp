@@ -24,20 +24,17 @@ class ActiviteWorker{
         $activites   = $user->invitations()->with('host')->orderBy('id', 'desc')->get();
         $invitations = $user->activites()->with('invited','invite')->orderBy('id', 'desc')->get();
 
+        
+
         // Filter invite activity because we update token after creation
         // and wee dont need the activity twice
         // We only keep the update for the invite sent
-        $invites = $invitations->filter(function($invite)
+        $invites = $invitations->filter(function($invite) use ($user_id)
         {
             if ( $invite->name == 'created_invite' && $invite->token == null) {
                 return false;
             }
 
-            return true;
-        });
-
-        $activites = $activites->filter(function($invite) use ($user_id)
-        {
             if ( $invite->user_id != $user_id) {
                 return false;
             }
@@ -45,7 +42,17 @@ class ActiviteWorker{
             return true;
         });
 
+       $activites = $activites->filter(function($invite) use ($user_id)
+       {
+            if ( $invite->name == 'updated_invite' && $invite->invited_id != $user_id) {
+                return false;
+            }
+
+            return true;
+        });
+
         $result = $activites->merge($invites);
+        
         $result->sortByDesc('created_at');
         
         return $result;

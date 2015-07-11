@@ -32,6 +32,7 @@ return [
     'nocontact'           => 'Vous n\'avez encore aucun contact',
     'delete_partage'      => 'Le partage avec ce contact a été supprimé',
     'delete_link'         => 'Voulez-vous vraiment supprimer le partage avec',
+    'delete_profile'      => 'Voulez-vous vraiment supprimer votre compte? Toutes vos informations ainsi que tous les partages seront supprimés avec vos contacts',
     'sentinvites'         => 'Envoyer des invitations',
     'nocorrespondfilter'  => 'Aucun contact ne correspond au filtre',
     'nocorrespondsearch'  => 'Aucun contact ne correspond à votre recherche',

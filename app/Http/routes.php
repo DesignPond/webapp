@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth','activate']], function()
     Route::get('user/message', array('as' => 'message', 'uses' => 'UserController@message'));
     Route::get('user/activites', array('as' => 'lastactivites', 'uses' => 'UserController@activites'));
     Route::post('user/labels', array('as' => 'labels', 'uses' => 'UserController@labels'));
-    Route::post('user/destroy', array('as' => 'destroy', 'uses' => 'UserController@destroy'));
+    Route::delete('user/{id}', array('as' => 'destroy', 'uses' => 'UserController@destroy'));
 
     //Route::resource('user', 'UserController');
 

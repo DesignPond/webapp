@@ -15,16 +15,26 @@ class Activite extends Model {
     {
         if($this->user_id == \Auth::user()->id)
         {
+            if($this->name == 'created_invite')
+            {
+                return 'warning';
+            }
+
             if($this->name == 'updated_invite')
             {
                 return ($this->invited_id == null ? 'warning' : 'success');
             }
 
-            return 'primary';
+            return 'success';
         }
         else
         {
-            return 'primary';
+            if($this->name == 'updated_invite')
+            {
+                return 'primary';
+            }
+
+            return 'warning';
         }
     }
 
@@ -54,6 +64,11 @@ class Activite extends Model {
             if($this->name == 'created_riiinglink')
             {
                 return ['quoi' => 'invite_from', 'qui' => $this->host->name];
+            }
+
+            if($this->name == 'updated_invite')
+            {
+                return ['quoi' => 'you_accepted', 'qui' => $this->host->name];
             }
             //return ['quoi' => 'invite_from', 'qui' => $this->host->name];
         }
