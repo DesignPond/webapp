@@ -21,8 +21,8 @@ class ActiviteWorker{
 
         $user = $this->user->find($user_id);
 
-        $activites   = $user->invitations()->with('host')->orderBy('created_at', 'desc')->get();
-        $invitations = $user->activites()->with('invited','invite')->orderBy('created_at', 'desc')->get();
+        $activites   = $user->invitations()->with('host')->orderBy('id', 'desc')->get();
+        $invitations = $user->activites()->with('invited','invite')->orderBy('id', 'desc')->get();
 
         // Filter invite activity because we update token after creation
         // and wee dont need the activity twice

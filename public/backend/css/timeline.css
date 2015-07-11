@@ -157,6 +157,10 @@
     line-height: 20px;
 }
 
+.timeline-heading h4 a small {
+    display: block;
+}
+
 .timeline-body > p + p {
     margin-top: 5px;
 }

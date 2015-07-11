@@ -228,7 +228,7 @@ Route::get('accepted', function()
     $user_name  = $invited->name;
     $user_photo = $invited->user_photo;
 
-    return View::make('emails.welcome', array('user_photo' => $user_photo, 'user_name' => $user_name));
+    return View::make('emails.welcome', ['user_photo' => $user_photo, 'user_name' => $user_name]);
 
 });
 

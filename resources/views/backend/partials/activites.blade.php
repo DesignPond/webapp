@@ -11,7 +11,7 @@
                             <div class="timeline-badge timeline-badge-sm thumb-32 bg-{{ $event->couleur_activite }}"><em class="fa fa-link"></em></div>
                             <div class="timeline-panel">
                                 <strong>{{ trans('label.'.$event->user_activite['quoi']) }}</strong>
-                                <div class="text-muted"><a href="">{{ $event->user_activite['qui'] }}</a></div>
+                                <div class="text-muted"><a href="">{!! $event->user_activite['qui'] !!}</a></div>
                             </div>
                         </li>
 

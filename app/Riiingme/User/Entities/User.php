@@ -34,6 +34,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = array('password', 'remember_token');
 
+
+    public function getSendTokenAttribute()
+    {
+
+        return bcrypt($this->email.$this->id);
+
+    }
+
     public function getUserPhotoAttribute()
     {
 

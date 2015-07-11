@@ -41,10 +41,6 @@ class ActiviteController extends Controller {
     {
         $activity = $this->activity->getPaginate($this->auth->id, 0, 6);
         $total    = $this->activity->getTotal($this->auth->id);
-        
-        echo '<pre>';
-        print_r($activity->toArray());
-        echo '</pre>';exit;
 
         return view('backend.timeline.timeline')->with(array('activity' => $activity, 'total' => $total));
     }
@@ -79,7 +75,6 @@ class ActiviteController extends Controller {
 
         echo view('backend.timeline.activite', ['activity' => $activity]);
     }
-
 
     /**
      * Prepare the partage

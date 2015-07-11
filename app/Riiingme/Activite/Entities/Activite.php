@@ -15,7 +15,12 @@ class Activite extends Model {
     {
         if($this->user_id == \Auth::user()->id)
         {
-            return ($this->invited_id == null ? 'warning' : 'success');
+            if($this->name == 'updated_invite')
+            {
+                return ($this->invited_id == null ? 'warning' : 'success');
+            }
+
+            return 'primary';
         }
         else
         {
@@ -35,7 +40,7 @@ class Activite extends Model {
                 }
                 else
                 {
-                    return ['quoi' => 'invite_accepted', 'qui' => $this->invited->name];
+                    return ['quoi' => 'invite_accepted', 'qui' => $this->invited->name.' <small>'.$this->invite->email.'</small>'];
                 }
             }
 
