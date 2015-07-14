@@ -188,4 +188,9 @@ class RiiinglinkEloquent implements RiiinglinkInterface {
         return $riiinglink->delete($id);
     }
 
+    public function deleteAll($ids){
+
+        return $this->riiinglink->whereIn('id',$ids)->delete();
+    }
+
 }

@@ -137,6 +137,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Link belongs to user
+     *
+     * @var query
+     */
+    public function riiinglinks_inverse(){
+
+        return $this->hasMany('App\Riiingme\Riiinglink\Entities\Riiinglink', 'invited_id', 'id');
+    }
+
+    /**
      * Group belongs to user
      *
      * @var query

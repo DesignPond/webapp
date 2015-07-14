@@ -62,4 +62,9 @@ class ActiviteEloquent implements ActiviteInterface {
 
         return $activite->delete($id);
     }
+
+    public function deleteAll($ids){
+
+        return $this->activite->whereIn('id',$ids)->delete();
+    }
 }

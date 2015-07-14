@@ -14,5 +14,6 @@ interface RiiinglinkInterface {
     public function latest($user_id);
     public function create(array $data);
     public function delete($id);
+    public function deleteAll($ids);
 
 }

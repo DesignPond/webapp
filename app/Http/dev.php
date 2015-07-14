@@ -159,15 +159,20 @@ Route::get('changement', function()
 
 Route::get('findLink', function()
 {
-
     $riiinglink  = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
-
     $link =  $riiinglink->findLinkByEmailAndUserId('cindy.leschaud@gmail.com',4);
-
     echo '<pre>';
     print_r($link);
     echo '</pre>';exit;
+});
 
+Route::get('deleteUser', function()
+{
+    $user  = new App\Commands\DestroyProfile(13);
+
+    echo '<pre>';
+    print_r($user->handle());
+    echo '</pre>';exit;
 });
 
 Route::get('sendEmail', function()

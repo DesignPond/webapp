@@ -20,6 +20,16 @@ class MetaEloquent implements MetaInterface {
         return $this->meta->find($id);
     }
 
+    public function findAll($ids){
+
+        return $this->meta->whereIn('riiinglink_id',$ids)->get();
+    }
+
+    public function deleteAll($ids){
+
+        return $this->meta->whereIn('riiinglink_id',$ids)->delete();
+    }
+
     public function findByRiiinglink($id){
 
         return $this->meta->where('riiinglink_id','=',$id)->get();

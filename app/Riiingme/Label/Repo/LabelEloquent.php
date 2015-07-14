@@ -97,4 +97,9 @@ class LabelEloquent implements LabelInterface {
         return $label->delete($id);
     }
 
+    public function deleteAll($ids){
+
+        return $this->label->whereIn('id',$ids)->delete();
+    }
+
 }
