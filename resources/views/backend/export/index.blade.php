@@ -71,7 +71,9 @@
                                     <?php unset($groupes[1],$groupes[4],$groupes[5]); ?>
                                     @foreach($groupes as $groupe_id => $groupe)
                                         <div class="checkbox">
-                                            <label><input value="{{ $groupe_id }}" name="groupes[]" type="checkbox">
+                                            <label>
+                                                <?php $checked = ($groupe_id == 2 || $groupe_id == 6 ? 'checked' : ''); ?>
+                                                <input {{ $checked }} value="{{ $groupe_id }}" name="groupes[]" type="checkbox">
                                                 {{ trans('label.title_'.$groupe_id) }}
                                             </label>
                                         </div>

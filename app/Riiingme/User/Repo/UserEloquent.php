@@ -157,6 +157,11 @@ class UserEloquent implements UserInterface {
 
         $user = $this->user->find($id);
 
+        if( ! $user )
+        {
+            return false;
+        }
+
         return $user->delete($id);
 
     }

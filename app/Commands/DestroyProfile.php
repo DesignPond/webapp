@@ -2,9 +2,14 @@
 
 use App\Commands\Command;
 
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldBeQueued;
 
-class DestroyProfile extends Command implements SelfHandling {
+class DestroyProfile extends Command implements SelfHandling, ShouldBeQueued {
+
+    use InteractsWithQueue, SerializesModels;
 
     protected $user_id;
     protected $riiinglink;
@@ -12,6 +17,7 @@ class DestroyProfile extends Command implements SelfHandling {
     protected $label;
     protected $activity;
     protected $metas;
+    protected $id;
 
 	/**
 	 * Create a new command instance.
@@ -20,7 +26,7 @@ class DestroyProfile extends Command implements SelfHandling {
 	 */
 	public function __construct($user_id)
 	{
-        $this->riiinglink = \App::make('App\Riiingme\Riiinglink\Worker\RiiinglinkWorker');
+        $this->riiinglink = \App::make('App\Riiingme\Riiinglink\Repo\RiiinglinkInterface');
         $this->user       = \App::make('App\Riiingme\User\Repo\UserInterface');
         $this->label      = \App::make('App\Riiingme\Label\Repo\LabelInterface');
         $this->activity   = \App::make('App\Riiingme\Activite\Repo\ActiviteInterface');
@@ -37,6 +43,7 @@ class DestroyProfile extends Command implements SelfHandling {
 	public function handle()
 	{
         $user = $this->user->find($this->id);
+
         $user->load('labels','invitations','activites','riiinglinks','riiinglinks_inverse');
 
         $labels       = $user->labels->lists('id');
@@ -50,17 +57,15 @@ class DestroyProfile extends Command implements SelfHandling {
 
         $riiinglinks = array_merge($hosted,$inverse);
 
-        $metas = $this->metas->findAll($riiinglinks);
-
         // Delete
-/*        $this->activity->deleteAll($allActivites);
+
+        $this->activity->deleteAll($allActivites);
         $this->label->deleteAll($labels);
         $this->metas->deleteAll($riiinglinks);
-        $this->riiinglink->deleteAll($riiinglinks);*/
+        $this->riiinglink->deleteAll($riiinglinks);
+        $this->user->delete($this->id);
 
-        echo '<pre>';
-        print_r($allActivites);
-        echo '</pre>';exit;
+        \Log::info('Everything Destroyed for user');
 		
 	}
 

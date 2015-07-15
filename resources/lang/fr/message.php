@@ -49,4 +49,5 @@ return [
     'wrong_credentials'   => 'Les identifiants email / mot de passe ne correspondent pas',
     'info_maj'            => 'Vos informations ont été mises à jour',
     'info_problem_maj'    => 'Problème avec la mise à jour',
+    'destroy'             => 'Votre compte a bien été supprimé',
 ];

@@ -11,8 +11,10 @@ use App\Riiingme\Activite\Worker\ActiviteWorker;
 use App\Http\Requests\UpdateUserRequest;
 use App\Commands\UpdateUser;
 use App\Commands\UpdateLabelUser;
+use App\Commands\DestroyProfile;
 
 use Illuminate\Http\Request;
+use Queue;
 
 class UserController extends Controller {
 
@@ -117,7 +119,12 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		echo 'hello';
+        $date = \Carbon\Carbon::now()->addMinutes(2);
+
+        \Queue::later($date, new DestroyProfile($id));
+
+        return redirect('/')->with( array('status' => 'warning' , 'message' =>  trans('message.destroy') ) );
+
 	}
 
 }
